@@ -1,0 +1,25 @@
+﻿/******************************************************************************/
+/*
+  Project   - MudBun
+  Publisher - Long Bunny Labs
+              http://LongBunnyLabs.com
+  Author    - Ming-Lun "Allen" Chou
+              http://AllenChou.net
+*/
+/******************************************************************************/
+
+// https://github.com/SebLague/Clouds/blob/fcc997c40d36c7bedf95a294cd2136b8c5127009/Assets/Scripts/Clouds/Noise/Save/Slicer.compute
+
+#pragma kernel CSMain
+
+Texture3D<float4> volumeTexture;
+RWTexture2D<float4> slice;
+int layer;
+
+[numthreads(32, 32, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+  uint3 pos = uint3(id.x, id.y, layer);
+  slice[id.xy] = volumeTexture[pos];
+}
+

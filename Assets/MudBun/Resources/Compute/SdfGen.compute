@@ -1,0 +1,46 @@
+﻿/******************************************************************************/
+/*
+  Project   - MudBun
+  Publisher - Long Bunny Labs
+              http://LongBunnyLabs.com
+  Author    - Ming-Lun "Allen" Chou
+              http://AllenChou.net
+*/
+/******************************************************************************/
+
+#pragma kernel generate_sdf
+
+#include "../../Shader/ComputeCommon.cginc"
+
+#include "../../Shader/AabbTreeFuncs.cginc"
+#include "../../Shader/BrushFuncs.cginc"
+#include "../../Shader/Math/MathConst.cginc"
+#include "../../Shader/SDF/Util.cginc"
+
+RWTexture3D<half> sdfOutput;
+int3 sdfOutputSize;  // size of SDF texture
+float4 sdfCenter;    // point in SDF mapped to center of SDF texture
+float4 sdfDimension; // dimension in SDF mapped to size of SDF texture
+
+[numthreads(kThreadGroupExtent, kThreadGroupExtent, kThreadGroupExtent)]
+void generate_sdf(int3 id : SV_DispatchThreadID)
+{
+  if (any(id > sdfOutputSize.xyz))
+    return;
+
+  float3 p = sdfCenter.xyz + sdfDimension.xyz * (((float3) id) / max(1, sdfOutputSize.xyz - 1) - 0.5f);
+
+  BRUSH_MASK(brushMask);
+  BRUSH_MASK_CLEAR_ALL(brushMask);
+
+  AABB_TREE_QUERY_POINT(aabbTree, aabbRoot, p,
+    BRUSH_MASK_SET(brushMask, iData);
+  );
+
+  SdfBrushMaterial mat;
+  float d = kInfinity;
+  SDF_SAMPLE_MASKED_BRUSHES(d, p, brushMask, mat);
+
+  sdfOutput[id] = d;
+}
+
