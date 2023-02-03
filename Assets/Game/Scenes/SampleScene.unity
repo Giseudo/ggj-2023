@@ -795,7 +795,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 45, y: 188.309, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -1223,7 +1223,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 58.6, y: -198.9, z: 0}
 --- !u!114 &410087042
 MonoBehaviour:
@@ -1248,43 +1248,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!21 &420399344
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Sphere Transparent (instance)
-  m_Shader: {fileID: 4800000, guid: 8f06c6ff4ecce6f4cb5ef031a19bdde5, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _StencilComp: 8
-    - _StencilID: 0
-    - _StencilOp: 0
-    - _StencilOpPass: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _ZOffsetFactor: 0
-    - _ZOffsetUnits: 0
-    - _ZTest: 8
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1001 &421952762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1601,7 +1564,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 420399344}
+  - {fileID: 958616867}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2191,7 +2154,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &836268491
 GameObject:
@@ -2415,7 +2378,7 @@ Transform:
   - {fileID: 1929903813}
   - {fileID: 160189528}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &843495356
 MonoBehaviour:
@@ -2646,7 +2609,7 @@ MonoBehaviour:
     spacing: 0.5
     offset: 0
     shapeModifier: 1
---- !u!21 &975775354
+--- !u!21 &958616867
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -2871,6 +2834,43 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!21 &1064158813
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sphere Transparent (instance)
+  m_Shader: {fileID: 4800000, guid: 8f06c6ff4ecce6f4cb5ef031a19bdde5, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _StencilComp: 8
+    - _StencilID: 0
+    - _StencilOp: 0
+    - _StencilOpPass: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _ZOffsetFactor: 0
+    - _ZOffsetUnits: 0
+    - _ZTest: 8
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &1084073782
 GameObject:
   m_ObjectHideFlags: 0
@@ -3155,7 +3155,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1155694507
 GameObject:
@@ -3385,6 +3385,12 @@ Transform:
   m_Father: {fileID: 836268492}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1219919216 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5392702569759707036, guid: 7e29f20a85eee2f4cb57b315d4218686,
+    type: 3}
+  m_PrefabInstance: {fileID: 4513458755949615330}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1220625696
 GameObject:
   m_ObjectHideFlags: 0
@@ -3994,7 +4000,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 975775354}
+  - {fileID: 1064158813}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4257,12 +4263,13 @@ Transform:
   - {fileID: 693479523}
   - {fileID: 881605308}
   - {fileID: 2146871753}
+  - {fileID: 1219919216}
   - {fileID: 1467181967}
   - {fileID: 1698580530}
   - {fileID: 690268231}
   - {fileID: 1831073531}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1891063370
 GameObject:
@@ -4493,7 +4500,7 @@ PrefabInstance:
     - target: {fileID: 192760989407497852, guid: 35457f1929fceb743a53b53c1c9974a2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 192760989407497852, guid: 35457f1929fceb743a53b53c1c9974a2,
         type: 3}
@@ -4578,7 +4585,7 @@ PrefabInstance:
     - target: {fileID: 1920047248414679479, guid: 5d0a6cd8799fd23498d34ec9e4bb67d8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1920047248414679479, guid: 5d0a6cd8799fd23498d34ec9e4bb67d8,
         type: 3}
@@ -4724,7 +4731,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1863122690}
     m_Modifications:
     - target: {fileID: 4728052585723680038, guid: 7e29f20a85eee2f4cb57b315d4218686,
         type: 3}
@@ -4734,7 +4741,7 @@ PrefabInstance:
     - target: {fileID: 5392702569759707036, guid: 7e29f20a85eee2f4cb57b315d4218686,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5392702569759707036, guid: 7e29f20a85eee2f4cb57b315d4218686,
         type: 3}
@@ -4744,7 +4751,7 @@ PrefabInstance:
     - target: {fileID: 5392702569759707036, guid: 7e29f20a85eee2f4cb57b315d4218686,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000019073486
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5392702569759707036, guid: 7e29f20a85eee2f4cb57b315d4218686,
         type: 3}
@@ -4812,7 +4819,7 @@ PrefabInstance:
     - target: {fileID: 5288666936674880629, guid: 82c5401e716e07f489ed69cfdd23923e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5288666936674880629, guid: 82c5401e716e07f489ed69cfdd23923e,
         type: 3}
@@ -4953,7 +4960,7 @@ PrefabInstance:
     - target: {fileID: 7871860206123841448, guid: c9e8ca62f92ef284197fa4d457fa36a7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7871860206123841448, guid: c9e8ca62f92ef284197fa4d457fa36a7,
         type: 3}
@@ -5014,7 +5021,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _prefab
       value: 
-      objectReference: {fileID: 9157656403792661534, guid: 3c1059b07e5ed3546b93eb08ce01123a,
+      objectReference: {fileID: 4597658904802370319, guid: 40aebff1ff89a51438c2f8db37668268,
         type: 3}
     - target: {fileID: 7871860206123841455, guid: c9e8ca62f92ef284197fa4d457fa36a7,
         type: 3}
