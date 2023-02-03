@@ -10,20 +10,35 @@ namespace Game.Combat
         [SerializeField]
         private int _health = 10;
 
+        private bool _isDead = false;
+
         public void SetHealth(int value) => _health = value;
         public int Health => _health;
+        public bool IsDead => _isDead;
 
         public Action hurted = delegate { };
-        public Action died = delegate { };
+        public Action<Damageable> died = delegate { };
+
 
         public void Hurt(int damage)
         {
+            if (_isDead) return;
+
             _health -= damage;
+
             hurted.Invoke();
 
+            if (_health < 0) _health = 0;
             if (_health > 0) return;
 
-            died.Invoke();
+            Die();
+        }
+
+        public void Die()
+        {
+            if (_isDead) return;
+
+            died.Invoke(this);
         }
     }
 }

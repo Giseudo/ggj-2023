@@ -52,15 +52,16 @@ public class UnitIdleState : State
                 _closestTarget = collider;
             }
         }
-
     }
 
     private void Attack()
     {
         if (_closestTarget == null) return;
         if (!_closestTarget.TryGetComponent<Damageable>(out Damageable damageable)) return;
+        if (damageable.IsDead) return;
 
         _attacker.Attack(damageable);
+        _attacker.transform.LookAt(damageable.transform.position);
         _isAttacking = true;
     }
 }

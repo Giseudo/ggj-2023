@@ -5,6 +5,8 @@ public class HasDiedCondition : Condition
 {
     private Damageable _damageable;
 
+    private void Trigger(Damageable damageable) => Trigger();
+
     public override void OnStart()
     {
         _damageable = StateMachine.GetComponent<Damageable>();

@@ -16,8 +16,6 @@ public class DieState : State
 
     protected override void OnEnter()
     {
-        _animator.SetBool("Died", true);
-
-        _animator.gameObject.SetActive(false);
+        _animator.SetBool("IsDead", true);
     }
 }
