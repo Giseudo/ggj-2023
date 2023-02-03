@@ -11,10 +11,14 @@ namespace Game.Combat
         [SerializeField]
         private float _fovRadius;
 
+        [SerializeField]
+        private float _attackSpeed = 1;
+
         private Damageable _currentTarget;
 
         public int AttackDamage => _attackDamage;
         public float FovRadius => _fovRadius;
+        public float AttackSpeed => _attackSpeed;
 
         public Action<Damageable> attacked = delegate { };
         public Action finishedAttack = delegate { };

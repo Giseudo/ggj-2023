@@ -40,8 +40,10 @@ public class Spawner : MonoBehaviour
                 splineAnimate.MaxSpeed = 4f;
                 splineAnimate.Restart(true);
 
-                instance.transform.localScale = Vector3.one;
+                if (instance.TryGetComponent<Damageable>(out Damageable damageable))
+                    damageable.Revive();
 
+                instance.transform.localScale = Vector3.one;
                 instance.gameObject.SetActive(true);
             },
             (instance) => {

@@ -37,7 +37,7 @@ public class MarchState : State
     protected override void OnUpdate()
     { }
 
-    private void OnHurt()
+    private void OnHurt(Damageable damageable)
     {
         _splineAnimate.Pause();
 

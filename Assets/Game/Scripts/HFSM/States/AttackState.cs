@@ -19,8 +19,11 @@ public class AttackState : State
     protected override void OnEnter()
     {
         _animator.SetTrigger("Attacked");
+        _animator.speed = _attacker.AttackSpeed;
     }
 
     protected override void OnExit()
-    { }
+    {
+        _animator.speed = 1f;
+    }
 }
