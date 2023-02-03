@@ -45,11 +45,11 @@ namespace Game.Input
         public void Update()
         {
             _character.Move(transform.rotation * _moveDirection);
+            transform.position = _character.transform.position + _character.transform.rotation * _offset;
         }
 
         public void FixedUpdate()
         {
-            transform.position = _character.transform.position + _character.transform.rotation * _offset;
             transform.rotation = Quaternion.Euler(_lookDirection);
         }
     }

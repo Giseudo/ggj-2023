@@ -25,12 +25,14 @@ namespace Game.Navigation
 
         public void FixedUpdate()
         {
+            /*
             _velocity = _rigidbody.velocity;
 
             AdjustVelocity();
 
             _rigidbody.velocity = _velocity;
             transform.eulerAngles = _lookDirection;
+            */
         }
 
         public void AdjustVelocity()

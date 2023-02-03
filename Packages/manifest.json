@@ -7,6 +7,7 @@
     "com.unity.inputsystem": "1.4.4",
     "com.unity.polybrush": "1.1.3",
     "com.unity.render-pipelines.universal": "14.0.4",
+    "com.unity.splines": "2.1.0",
     "com.unity.test-framework": "1.1.33",
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.7.2",
@@ -42,6 +43,17 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0"
-  }
+    "com.unity.modules.xr": "1.0.0",
+    "com.acegikmo.mathfs": "0.1.0"
+  },
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.acegikmo.mathfs",
+        "com.openupm"
+      ]
+    }
+  ]
 }
