@@ -19,16 +19,20 @@ public class Spawner : MonoBehaviour
     public void Start()
     {
         StartCoroutine(Spawn());
+            GameObject instance = GameObject.Instantiate(_prefab);
     }
 
     public IEnumerator Spawn()
     {
         while (_count < 20)
         {
-            GameObject instance = GameObject.Instantiate(_prefab);
 
-            instance.TryGetComponent<SplineAnimate>(out SplineAnimate splineAnimate);
+/*
+            if (!instance.TryGetComponent<SplineAnimate>(out SplineAnimate splineAnimate))
+                splineAnimate = instance.AddComponent<SplineAnimate>();
+
             splineAnimate.Container = _spline;
+            */
 
             _count++;
 

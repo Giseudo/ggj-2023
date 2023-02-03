@@ -7,6 +7,13 @@
       "dependencies": {},
       "url": "https://package.openupm.com"
     },
+    "com.gigi.hfsm": {
+      "version": "https://github.com/Giseudo/hfsm.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "16e0ece539c18f9a74bcb8a8cf9e0bf63e620c38"
+    },
     "com.unity.burst": {
       "version": "1.7.4",
       "depth": 1,
