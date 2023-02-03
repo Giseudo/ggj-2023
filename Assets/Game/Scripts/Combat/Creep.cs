@@ -5,5 +5,8 @@ using UnityEngine;
 namespace Game.Combat
 {
     public class Creep : MonoBehaviour
-    { }
+    {
+        [SerializeField]
+        private CreepData _data;
+    }
 }
