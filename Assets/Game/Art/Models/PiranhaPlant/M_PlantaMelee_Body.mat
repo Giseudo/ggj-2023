@@ -111,9 +111,11 @@ Material:
     - _EmissionEnabled: 1
     - _EnvironmentReflections: 1
     - _FlipbookMode: 0
+    - _Frequency: 0.09
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _Intensity: 0.289
     - _LightingEnabled: 0
     - _Metallic: 0
     - _Mode: 0
