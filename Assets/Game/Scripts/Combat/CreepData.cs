@@ -11,7 +11,11 @@ namespace Game.Combat
         [SerializeField]
         private GameObject _prefab;
 
+        [SerializeField]
+        public float _walkSpeed = 3f;
+
         public string Name => _name;
         public GameObject Prefab => _prefab;
+        public float WalkSpeed => _walkSpeed;
     }
 }

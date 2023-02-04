@@ -37,7 +37,6 @@ public class Spawner : MonoBehaviour
 
                 splineAnimate.Container = _spline;
                 splineAnimate.AnimationMethod = SplineAnimate.Method.Speed;
-                splineAnimate.MaxSpeed = 4f;
                 splineAnimate.Restart(true);
 
                 if (instance.TryGetComponent<Damageable>(out Damageable damageable))

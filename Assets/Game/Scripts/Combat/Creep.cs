@@ -8,5 +8,17 @@ namespace Game.Combat
     {
         [SerializeField]
         private CreepData _data;
+
+        public CreepData Data => _data;
+
+        public float MaxSpeed => _maxSpeed;
+
+        [SerializeField]
+        private float _maxSpeed;
+
+        public void OnEnable()
+        {
+            _maxSpeed = Data.WalkSpeed;
+        }
     }
 }

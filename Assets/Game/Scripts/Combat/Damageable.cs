@@ -20,6 +20,7 @@ namespace Game.Combat
         public float LastHurtTime => _lastHurtTime;
         public void SetHealth(int value) => _health = value;
         public int Health => _health;
+        public int MaxHealth => _maxHealth;
         public bool IsDead => _isDead;
 
         public Action<Damageable> hurted = delegate { };
@@ -42,7 +43,6 @@ namespace Game.Combat
 
         public void Hurt(int damage)
         {
-            // if (_lastHurtTime + _hurtTime > Time.time) return;
             if (_isDead) return;
 
             _health -= damage;

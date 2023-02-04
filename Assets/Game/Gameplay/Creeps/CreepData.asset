@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Creep
   _prefab: {fileID: 3989175949894268773, guid: 51832b05656d9c8468e4f3d1ed8a63dd, type: 3}
+  _walkSpeed: 3
