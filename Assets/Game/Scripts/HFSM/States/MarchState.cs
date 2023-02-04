@@ -20,16 +20,14 @@ public class MarchState : State
 
     protected override void OnEnter()
     {
-        if (_splineAnimate == null) return;
-
+        _splineAnimate?.Play();
         _animator.SetBool("IsMoving", true);
         _damageable.hurted += OnHurt;
     }
 
     protected override void OnExit()
     {
-        if (_splineAnimate == null) return;
-
+        _splineAnimate?.Pause();
         _animator.SetBool("IsMoving", false);
         _damageable.hurted -= OnHurt;
     }
@@ -39,9 +37,9 @@ public class MarchState : State
 
     private void OnHurt(Damageable damageable)
     {
-        _splineAnimate.Pause();
+        _splineAnimate?.Pause();
 
         DOTween.To(() => 0f, x => {}, 1f, 1f)
-            .OnComplete(() => _splineAnimate.Play());
+            .OnComplete(() => _splineAnimate?.Play());
     }
 }
