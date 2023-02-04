@@ -15,6 +15,12 @@ namespace Game.UI
         private UIUnitSelection _unitSelection;
 
         [SerializeField]
+        private RectTransform _mainCanvasRect;
+
+        [SerializeField]
+        private RectTransform _actionsRect;
+
+        [SerializeField]
         private RootSelectionShape _rootSelectionShape;
 
         private RootNode _activeNode;
@@ -46,8 +52,6 @@ namespace Game.UI
 
             if (!Physics.Raycast(ray, out RaycastHit groundHit, 100f, 1 << LayerMask.NameToLayer("Ground")))
                 return;
-            
-            Debug.Log("oi");
 
             Collider[] colliders = Physics.OverlapSphere(groundHit.point, 5f, 1 << LayerMask.NameToLayer("RootNode"));
             GameObject closestNode = null;
@@ -91,9 +95,9 @@ namespace Game.UI
         {
             if (_activeNode == null) return;
 
-            Ray ray = GameManager.MainCamera.ScreenPointToRay(evt.position);
+            Ray ray = evt.enterEventCamera.ScreenPointToRay(evt.position);
 
-            if (!Physics.Raycast(ray, out RaycastHit hit, 100f, 1 << LayerMask.NameToLayer("Default")))
+            if (!Physics.Raycast(ray, out RaycastHit hit, 100f, 1 << LayerMask.NameToLayer("Ground")))
                 return;
 
             _draggingPosition = hit.point;
@@ -116,6 +120,9 @@ namespace Game.UI
         {
             if (_activeNode == null) return;
             if (_isDragging) return;
+
+            _actionsRect.localScale = Vector3.one;
+            _actionsRect.anchoredPosition = GetScreenPosition(_activeNode.transform.position);
 
             // TODO Select unit if is not empty
             if (_activeNode.Unit != null) return;
@@ -167,6 +174,17 @@ namespace Game.UI
             if (!instance.TryGetComponent<Unit>(out Unit unit)) return;
 
             _activeNode.SetUnit(unit);
+        }
+
+        private Vector2 GetScreenPosition(Vector3 worldPosition)
+        {
+            Camera camera = GameManager.MainCamera;
+            Vector2 adjustedPosition = camera.WorldToScreenPoint(worldPosition);
+
+            adjustedPosition.x *= _mainCanvasRect.rect.width / (float) camera.pixelWidth;
+            adjustedPosition.y *= _mainCanvasRect.rect.height / (float) camera.pixelHeight;
+
+            return adjustedPosition - _mainCanvasRect.sizeDelta / 2f;
         }
     }
 }

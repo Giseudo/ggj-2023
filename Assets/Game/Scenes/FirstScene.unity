@@ -316,7 +316,9 @@ MonoBehaviour:
   _rootPrefab: {fileID: 1677633249960956306, guid: 1baedb0fc8fd92b41b07a0b08a30f743,
     type: 3}
   _unitSelection: {fileID: 839471457}
+  _actionsRect: {fileID: 339246440}
   _rootSelectionShape: {fileID: 696494429}
+  _mainCanvasRect: {fileID: 1167102118}
 --- !u!4 &65483090 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8994432523201696789, guid: 6c97a6aca20778943bb70be6bfa37385,
@@ -1133,6 +1135,43 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 190, y: 80}
   m_Pivot: {x: 0, y: 0}
+--- !u!21 &308909643
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sphere Transparent (instance)
+  m_Shader: {fileID: 4800000, guid: 8f06c6ff4ecce6f4cb5ef031a19bdde5, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _StencilComp: 8
+    - _StencilID: 0
+    - _StencilOp: 0
+    - _StencilOpPass: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _ZOffsetFactor: 0
+    - _ZOffsetUnits: 0
+    - _ZTest: 8
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &322605350
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,7 +1323,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 100
   field of view: 35.1
-  orthographic: 1
+  orthographic: 0
   orthographic size: 22.6
   m_Depth: -1
   m_CullingMask:
@@ -1529,7 +1568,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &339246440
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1539,7 +1578,7 @@ RectTransform:
   m_GameObject: {fileID: 339246439}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1598259169}
@@ -4356,7 +4395,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 330585545}
-  m_PlaneDistance: 1
+  m_PlaneDistance: 25
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -5664,43 +5703,6 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!21 &1490966533
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Sphere Transparent (instance)
-  m_Shader: {fileID: 4800000, guid: 8f06c6ff4ecce6f4cb5ef031a19bdde5, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _StencilComp: 8
-    - _StencilID: 0
-    - _StencilOp: 0
-    - _StencilOpPass: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _ZOffsetFactor: 0
-    - _ZOffsetUnits: 0
-    - _ZTest: 8
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &1520787484
 GameObject:
   m_ObjectHideFlags: 0
@@ -5755,7 +5757,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1490966533}
+  - {fileID: 308909643}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7314,7 +7316,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 11.036213
+      value: 10.720725
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
