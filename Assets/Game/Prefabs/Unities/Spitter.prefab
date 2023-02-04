@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7259266667388551588}
   - component: {fileID: -8289212991549611212}
   - component: {fileID: -2891027167631608788}
+  - component: {fileID: 329328761155782420}
   m_Layer: 0
   m_Name: Spitter
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   - {fileID: 5312598368743338845}
   - {fileID: 5634176224217133588}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &402094629708774163
 Animator:
@@ -48,7 +49,7 @@ Animator:
   m_GameObject: {fileID: 5634176223657473883}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: a5530f89a45df214ea2094af06a38277, type: 3}
-  m_Controller: {fileID: 9100000, guid: f5ebc8f6f1fd02a48a16b8d66c8ed24d, type: 2}
+  m_Controller: {fileID: 22100000, guid: 64c21a9ff3b6412429396bb355bcbdfb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -84,11 +85,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackDamage: 1
-  _fovRadius: 10
+  _fovRadius: 30
   _attackSpeed: 1
+  _attackWaitTime: 0
   _vfxEventName: OnSpit
   _soundEffectClip: {fileID: 0}
-  _attackWaitTime: 0
 --- !u!114 &-8289212991549611212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +116,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 2
+  _hurtTime: 1
+--- !u!114 &329328761155782420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5634176223657473883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b870cf0bea64943bb4f87aa0049083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3687635261570001115, guid: 5414cc12cdae3fd49a0f4ffaeccede13, type: 3}
+  _offset: {x: 0, y: 3.5, z: 0.5}
 --- !u!1 &5634176224217133591
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,14 +16,15 @@ namespace Game.Combat
         private float _attackSpeed = 1;
 
         [SerializeField]
+        private float _attackWaitTime;
+
+        [SerializeField]
         private string _vfxEventName = "OnAttack";
 
         [SerializeField]
         private AudioClip _soundEffectClip;
 
-        [SerializeField]
-        private float _attackWaitTime = 0f;
-
+        private float _lastAttackTime;
         private Damageable _currentTarget;
 
         public int AttackDamage => _attackDamage;
@@ -50,20 +51,29 @@ namespace Game.Combat
             GameManager.RemoveAttacker(this);
         }
 
-        public void Attack(Damageable damageable)
+        public bool Attack(Damageable damageable)
         {
+            if (_lastAttackTime + _attackWaitTime >= Time.time)
+                return false;
+
+            _lastAttackTime = Time.time;
+
             _currentTarget = damageable;
             attacked.Invoke(damageable);
+
+            return true;
         }
 
         public void FinishAttack()
         {
             finishedAttack.Invoke();
+        }
 
-            if (!_currentTarget) return;
+        public void DamageTarget()
+        {
+            if (_currentTarget == null) return;
 
             _currentTarget.Hurt(_attackDamage);
-            _currentTarget = null;
         }
 
         public void OnDrawGizmos()

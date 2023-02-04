@@ -143,10 +143,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackDamage: 1
   _fovRadius: 10
-  _attackSpeed: 1
+  _attackSpeed: 3
   _vfxEventName: OnBite
   _soundEffectClip: {fileID: 0}
-  _attackWaitTime: 0
+  _attackWaitTime: 0.5
 --- !u!114 &4041170387506462993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,3 +173,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 2
+  _hurtTime: 1
