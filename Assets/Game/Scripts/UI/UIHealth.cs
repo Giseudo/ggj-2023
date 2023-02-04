@@ -6,7 +6,7 @@ using TMPro;
 public class UIHealth : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshPro _text;
+    private TextMeshProUGUI _text;
 
     private Damageable _damageable;
 
