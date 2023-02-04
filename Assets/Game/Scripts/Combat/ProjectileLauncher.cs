@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -20,20 +21,36 @@ namespace Game.Combat
                     Vector3 position = transform.position + (transform.rotation * _offset);
                     GameObject instance = GameObject.Instantiate(_prefab, position, Quaternion.identity);
 
+                    if (instance.TryGetComponent<Projectile>(out Projectile projectile))
+                        projectile.died += OnProjetileDeath;
+
                     return instance;
                 },
                 (instance) => {
+                    Vector3 position = transform.position + (transform.rotation * _offset);
+
+                    instance.transform.position = position;
+                    instance.transform.rotation = transform.rotation;
+
                     instance.gameObject.SetActive(true);
                 },
                 (instance) => {
                     instance.gameObject.SetActive(false);
                 },
                 (instance) => {
+                    if (instance.TryGetComponent<Projectile>(out Projectile projectile))
+                        projectile.died -= OnProjetileDeath;
+
                     Destroy(instance);
                 },
                 true,
                 50
             );
+        }
+
+        private void OnProjetileDeath(Projectile projectile)
+        {
+            _pool.Release(projectile.gameObject);
         }
 
         public void LaunchProjectile()

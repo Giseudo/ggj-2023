@@ -9,9 +9,15 @@ namespace Game.Combat
         [SerializeField]
         private int _health = 10;
 
+        [SerializeField]
+        private float _hurtTime = 1f;
+
         private int _maxHealth = 10;
         private bool _isDead = false;
+        private float _lastHurtTime;
 
+        public float HurtTime => _hurtTime;
+        public float LastHurtTime => _lastHurtTime;
         public void SetHealth(int value) => _health = value;
         public int Health => _health;
         public bool IsDead => _isDead;
@@ -36,9 +42,11 @@ namespace Game.Combat
 
         public void Hurt(int damage)
         {
+            // if (_lastHurtTime + _hurtTime > Time.time) return;
             if (_isDead) return;
 
             _health -= damage;
+            _lastHurtTime = Time.time;
 
             hurted.Invoke(this);
 
