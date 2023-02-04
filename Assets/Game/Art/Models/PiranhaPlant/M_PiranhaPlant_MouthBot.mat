@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_PlantaMelee_MouthBot
+  m_Name: M_PiranhaPlant_MouthBot
   m_Shader: {fileID: -6465566751694194690, guid: 57e5f3048fa9ea947ac892aa2ba40565,
     type: 3}
   m_Parent: {fileID: 0}

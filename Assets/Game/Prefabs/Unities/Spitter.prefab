@@ -86,6 +86,9 @@ MonoBehaviour:
   _attackDamage: 1
   _fovRadius: 10
   _attackSpeed: 1
+  _vfxEventName: OnSpit
+  _soundEffectClip: {fileID: 0}
+  _attackWaitTime: 0
 --- !u!114 &-8289212991549611212
 MonoBehaviour:
   m_ObjectHideFlags: 0

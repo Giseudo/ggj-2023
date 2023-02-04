@@ -87,7 +87,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: f5ebc8f6f1fd02a48a16b8d66c8ed24d, type: 2}
+      objectReference: {fileID: 22100000, guid: aadac2511bb72844882b02074d315c54,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -142,6 +143,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackDamage: 1
   _fovRadius: 10
+  _attackSpeed: 1
+  _vfxEventName: OnBite
+  _soundEffectClip: {fileID: 0}
+  _attackWaitTime: 0
 --- !u!114 &4041170387506462993
 MonoBehaviour:
   m_ObjectHideFlags: 0
