@@ -44,7 +44,28 @@ namespace Game.UI
 
             Ray ray = GameManager.MainCamera.ScreenPointToRay(evt.position);
 
-            if (!Physics.Raycast(ray, out RaycastHit hit, 100f, 1 << LayerMask.NameToLayer("RootNode")))
+            if (!Physics.Raycast(ray, out RaycastHit groundHit, 100f, 1 << LayerMask.NameToLayer("Ground")))
+                return;
+            
+            Debug.Log("oi");
+
+            Collider[] colliders = Physics.OverlapSphere(groundHit.point, 5f, 1 << LayerMask.NameToLayer("RootNode"));
+            GameObject closestNode = null;
+            float minDistance = float.MaxValue;
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                Collider collider = colliders[i];
+                float distance = (groundHit.point - collider.transform.position).sqrMagnitude;
+
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    closestNode = collider.gameObject;
+                }
+            }
+
+            if (closestNode == null)
             {
                 _activeNode = null;
                 _rootSelectionShape.Hide();
@@ -53,9 +74,9 @@ namespace Game.UI
             }
 
             _rootSelectionShape.Show();
-            _rootSelectionShape.transform.position = hit.collider.transform.position;
+            _rootSelectionShape.transform.position = closestNode.transform.position;
 
-            hit.collider.TryGetComponent<RootNode>(out _activeNode);
+            closestNode.TryGetComponent<RootNode>(out _activeNode);
         }
 
         public void OnBeginDrag(PointerEventData evt)
