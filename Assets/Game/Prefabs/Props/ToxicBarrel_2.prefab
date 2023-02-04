@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2770139332762978995}
   m_Layer: 0
-  m_Name: ToxicBarrel_02
+  m_Name: ToxicBarrel_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
