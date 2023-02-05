@@ -1,0 +1,79 @@
+﻿/******************************************************************************/
+/*
+  Project   - MudBun
+  Publisher - Long Bunny Labs
+              http://LongBunnyLabs.com
+  Author    - Ming-Lun "Allen" Chou
+              http://AllenChou.net
+*/
+/******************************************************************************/
+
+#pragma kernel update_ray_traced_voxel_indirect_dispatch_args
+#pragma kernel compute_ray_traced_voxel_gen_points
+#pragma kernel compute_ray_traced_voxel_gen_points_with_normals
+
+#include "../../Shader/ComputeCommon.cginc"
+
+#include "../../Shader/AabbTreeFuncs.cginc"
+#include "../../Shader/AutoSmoothDefs.cginc"
+#include "../../Shader/BrushFuncs.cginc"
+#include "../../Shader/GenPointDefs.cginc"
+#include "../../Shader/IndirectArgsDefs.cginc"
+#include "../../Shader/Math/MathConst.cginc"
+#include "../../Shader/VoxelFuncs.cginc"
+
+[numthreads(1, 1, 1)]
+void update_ray_traced_voxel_indirect_dispatch_args(int3 id : SV_DispatchThreadID)
+{
+  indirectDispatchArgs[0] = 
+    max
+    (
+      1, 
+      uint
+      (
+        aNumNodesAllocated[0] 
+        + kThreadGroupSize - 1
+      ) / kThreadGroupSize
+    );
+}
+
+void fill_gen_points_basic(int iNode)
+{
+  int iBrushMask = get_brush_mask_index(iNode);
+
+  SdfBrushMaterial mat;
+  sdf_masked_brushes(nodePool[iNode].center, iBrushMask, mat);
+
+  aGenPoint[iNode].material = pack_material(mat);
+  aGenPoint[iNode].iBrushMask = iBrushMask;
+}
+
+void fill_gen_points_normal(int iNode)
+{
+  float3 n;
+  SDF_NORMAL(n, nodePool[iNode].center, sdf_masked_brushes, nodePool[iNode].iBrushMask, 1e-2f * voxelNodeSizes[3]);
+
+  aGenPoint[iNode].posNorm.w = pack_normal(n);
+}
+
+[numthreads(kThreadGroupSize, 1, 1)]
+void compute_ray_traced_voxel_gen_points(uint3 id : SV_DispatchThreadID)
+{
+  int iNode = id.x;
+  if (iNode >= aNumNodesAllocated[0])
+    return;
+
+  fill_gen_points_basic(iNode);
+}
+
+[numthreads(kThreadGroupSize, 1, 1)]
+void compute_ray_traced_voxel_gen_points_with_normals(uint3 id : SV_DispatchThreadID)
+{
+  int iNode = id.x;
+  if (iNode >= aNumNodesAllocated[0])
+    return;
+
+  fill_gen_points_basic(iNode);
+  fill_gen_points_normal(iNode);
+}
+

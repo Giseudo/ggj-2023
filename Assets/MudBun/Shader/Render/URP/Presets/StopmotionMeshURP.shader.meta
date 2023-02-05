@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3fdefd74327d3ea48a7a4ca10ca76197
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _DisplacementMap: {fileID: 2800000, guid: 679204acdc00b564398a68f691979695, type: 3}
+  - _NormalMap: {fileID: 2800000, guid: 8fb1a6acf59188448bca62119afcccde, type: 3}
+  - _RoughnessMap: {fileID: 2800000, guid: 5b4f3b34a6be3bd4585c339dff8d1a37, type: 3}
+  - _DitherTexture: {fileID: 2800000, guid: f240bbb7854046345b218811e5681a54, type: 3}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

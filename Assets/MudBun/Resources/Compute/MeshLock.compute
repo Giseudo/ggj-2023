@@ -1,0 +1,71 @@
+﻿/******************************************************************************/
+/*
+  Project   - MudBun
+  Publisher - Long Bunny Labs
+              http://LongBunnyLabs.com
+  Author    - Ming-Lun "Allen" Chou
+              http://AllenChou.net
+*/
+/******************************************************************************/
+
+#pragma kernel bake_splat_verts
+#pragma kernel rig_bones
+
+#define kThreadGroupExtent (4)
+#define kThreadGroupSize (kThreadGroupExtent * kThreadGroupExtent * kThreadGroupExtent)
+
+#define MUDBUN_IS_COMPUTE_SHADER (1)
+
+#include "../../Shader/BoneFuncs.cginc"
+#include "../../Shader/GenPointDefs.cginc"
+#include "../../Shader/Render/MeshCommon.cginc"
+#include "../../Shader/Render/SplatCommon.cginc"
+
+RWStructuredBuffer<int> indirectDrawArgs;
+
+[numthreads(kThreadGroupSize, 1, 1)]
+void bake_splat_verts(uint3 id : SV_DispatchThreadID)
+{
+  if (int(id.x) >= indirectDrawArgs[0])
+    return;
+
+  uint iGenPoint = id.x;
+
+  float4 vertexWs;
+  float3 vertexLs;
+  float3 normalWs;
+  float3 normalLs;
+  float3 tangentWs;
+  float3 tangentLs;
+  float3 centerWs;
+  float3 centerLs;
+  float4 color;
+  float4 emissionHash;
+  float2 metallicSmoothness;
+  float2 tex;
+  float4 textureWeight;
+  float sdfValue;
+  float3 normal2dLs;
+  float3 normal2dWs;
+  mudbun_splat_vert(iGenPoint, vertexWs, vertexLs, normalWs, normalLs, tangentWs, tangentLs, centerWs, centerLs, color, emissionHash, metallicSmoothness, tex, textureWeight, sdfValue, normal2dLs, normal2dWs);
+
+  // TODO: we actually need a second gen point buffer...otherwise we'll have a race condition
+
+  aGenPoint[iGenPoint].posNorm.xyz = vertexLs;
+  aGenPoint[iGenPoint].posNorm.w = pack_normal(normalLs);
+  aGenPoint[iGenPoint].uv = tex + 0.5f;
+}
+
+[numthreads(kThreadGroupSize, 1, 1)]
+void rig_bones(uint3 id : SV_DispatchThreadID)
+{
+  if (int(id.x) >= indirectDrawArgs[0])
+    return;
+
+  uint iGenPoint = id.x;
+  
+  float4 boneWeight;
+  compute_brush_bone_weights(aGenPoint[iGenPoint].posNorm.xyz, aGenPoint[iGenPoint].boneIndex, boneWeight);
+  aGenPoint[iGenPoint].boneWeight = pack_rgba(boneWeight);
+}
+

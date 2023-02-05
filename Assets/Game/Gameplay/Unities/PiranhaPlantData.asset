@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19904848e3a1c54c830ec88e59d0318, type: 3}
+  m_Name: PiranhaPlantData
+  m_EditorClassIdentifier: 
+  _name: Mastigadora
+  _type: 0
+  _prefab: {fileID: 2554158075223536439, guid: 0292939d9cdb18946ac5c822136b9429, type: 3}
+  _thumbnail: {fileID: 21300000, guid: c1ebd5d9380e84b49812ba2ac45eec28, type: 3}
+  _rangeRadius: 20
+  _attackSpeed: 1
