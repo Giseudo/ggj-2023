@@ -57,12 +57,12 @@ namespace Game.Combat
 
             Collider collider = colliders[0];
 
+            Die();
+
             if (!collider.TryGetComponent<Damageable>(out Damageable damageable)) return;
 
             damageable.Hurt(_attackDamage);
             collided.Invoke(this, damageable);
-
-            Die();
         }
 
         public void Die()
