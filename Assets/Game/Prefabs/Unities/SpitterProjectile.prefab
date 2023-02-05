@@ -99,3 +99,4 @@ MonoBehaviour:
   _velocity: {x: 0, y: 0, z: 30}
   _hitRadius: 2
   _lifeTime: 5
+  _attackDamage: 5

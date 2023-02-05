@@ -14,6 +14,13 @@ namespace Game.Combat
         [SerializeField]
         private float _lifeTime = 5f;
 
+        [SerializeField]
+        private int _attackDamage = 1;
+
+        public int AttackDamage => _attackDamage;
+
+        public void SetAttackDamage (int damage) => _attackDamage = damage;
+
         private float _spawnTime;
 
         public Action<Projectile, Damageable> collided = delegate { };
@@ -42,7 +49,7 @@ namespace Game.Combat
 
             if (!collider.TryGetComponent<Damageable>(out Damageable damageable)) return;
 
-            damageable.Hurt(1);
+            damageable.Hurt(_attackDamage);
             collided.Invoke(this, damageable);
 
             Die();

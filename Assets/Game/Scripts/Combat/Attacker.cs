@@ -7,7 +7,7 @@ namespace Game.Combat
     public class Attacker : MonoBehaviour
     {
         [SerializeField]
-        private int _attackDamage;
+        private int _meleeDamage;
 
         [SerializeField]
         private float _fovRadius;
@@ -27,7 +27,7 @@ namespace Game.Combat
         private float _lastAttackTime;
         private Damageable _currentTarget;
 
-        public int AttackDamage => _attackDamage;
+        public int MeleeDamage => _meleeDamage;
         public float FovRadius => _fovRadius;
         public float AttackSpeed => _attackSpeed;
         public float AttackWaitTime => _attackWaitTime;
@@ -73,7 +73,7 @@ namespace Game.Combat
         {
             if (_currentTarget == null) return;
 
-            _currentTarget.Hurt(_attackDamage);
+            _currentTarget.Hurt(_meleeDamage);
         }
 
         public void OnDrawGizmos()

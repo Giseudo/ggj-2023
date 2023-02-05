@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1920047248414679498
+--- !u!1 &1788042953926898639
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,87 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1920047248414679479}
-  - component: {fileID: 1920047248414679476}
+  - component: {fileID: 2662609224044270195}
+  - component: {fileID: 8802847886752477614}
+  - component: {fileID: 8247510231295101743}
+  - component: {fileID: 2356043587787427460}
+  - component: {fileID: 1821489950432336662}
+  - component: {fileID: 1821489950432336661}
   m_Layer: 0
-  m_Name: Road
+  m_Name: WaveSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1920047248414679479
+--- !u!4 &2662609224044270195
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920047248414679498}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5833272888223956850}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1920047248414679476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920047248414679498}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef8dbc7dd9001342adf788e8e313b9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spline: {fileID: 1020471796538465455}
-  t: 21.4
---- !u!1 &7841023848641519310
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5833272888223956850}
-  - component: {fileID: 1020471796538465455}
-  - component: {fileID: 465424276857136686}
-  - component: {fileID: 6103176957199852421}
-  - component: {fileID: 7874461793570108951}
-  m_Layer: 0
-  m_Name: Spline
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5833272888223956850
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7841023848641519310}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 1788042953926898639}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1920047248414679479}
-  m_RootOrder: -1
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1020471796538465455
+--- !u!114 &8802847886752477614
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7841023848641519310}
+  m_GameObject: {fileID: 1788042953926898639}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dab5c7d4c32e743048dfca98e2d5914f, type: 3}
@@ -158,9 +112,9 @@ MonoBehaviour:
           z: 0
           w: 0.95910335
     - Position:
-        x: -1.1
+        x: -1.9
         y: 0
-        z: 4.2
+        z: 6.1
       TangentIn:
         x: -0
         y: -0
@@ -175,7 +129,7 @@ MonoBehaviour:
           y: 0.99613315
           z: 0
           w: 0.08785639
-    m_Length: 118.329384
+    m_Length: 117.12904
     m_MetaData:
     - Mode: 2
       Tension: 0.33333334
@@ -188,21 +142,21 @@ MonoBehaviour:
     m_Closed: 0
   m_Knots:
     m_KnotsLink: []
---- !u!33 &465424276857136686
+--- !u!33 &8247510231295101743
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7841023848641519310}
+  m_GameObject: {fileID: 1788042953926898639}
   m_Mesh: {fileID: 4300000, guid: db9381f17866b31428ed61a6372d8666, type: 2}
---- !u!23 &6103176957199852421
+--- !u!23 &2356043587787427460
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7841023848641519310}
+  m_GameObject: {fileID: 1788042953926898639}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -238,19 +192,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7874461793570108951
+--- !u!114 &1821489950432336662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7841023848641519310}
+  m_GameObject: {fileID: 1788042953926898639}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 222dc08d484f16869bdd89edd9d368fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Container: {fileID: 1020471796538465455}
+  m_Container: {fileID: 8802847886752477614}
   m_RebuildOnSplineChange: 1
   m_RebuildFrequency: 30
   m_UpdateColliders: 1
@@ -259,3 +213,38 @@ MonoBehaviour:
   m_Capped: 1
   m_Radius: 1.69
   m_Range: {x: 0, y: 1}
+--- !u!114 &1821489950432336661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788042953926898639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17beae5f92908274194a539a8174b802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rounds:
+  - _waves:
+    - _creepData: {fileID: 11400000, guid: 2cf5de96319af004abc3c832c2e2b4cd, type: 2}
+      _countLimit: 5
+      _spawnInterval: 1
+      _initialDelay: 0
+    - _creepData: {fileID: 11400000, guid: 184b8432e5c6a0a45b4470c655eea3c9, type: 2}
+      _countLimit: 5
+      _spawnInterval: 2
+      _initialDelay: 5
+  - _waves:
+    - _creepData: {fileID: 11400000, guid: 2cf5de96319af004abc3c832c2e2b4cd, type: 2}
+      _countLimit: 20
+      _spawnInterval: 0.5
+      _initialDelay: 0
+    - _creepData: {fileID: 11400000, guid: 184b8432e5c6a0a45b4470c655eea3c9, type: 2}
+      _countLimit: 20
+      _spawnInterval: 0.5
+      _initialDelay: 5
+  _spline: {fileID: 8802847886752477614}
+  _creepSpawnerPrefab: {fileID: 7871860206123841455, guid: c9e8ca62f92ef284197fa4d457fa36a7,
+    type: 3}
+  _currentRound: 0

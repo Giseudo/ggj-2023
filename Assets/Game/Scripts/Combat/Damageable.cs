@@ -15,6 +15,7 @@ namespace Game.Combat
         private int _maxHealth = 10;
         private bool _isDead = false;
         private float _lastHurtTime;
+        private CapsuleCollider _collider;
 
         public float HurtTime => _hurtTime;
         public float LastHurtTime => _lastHurtTime;
@@ -29,6 +30,8 @@ namespace Game.Combat
         public void Awake()
         {
             _maxHealth = _health;
+
+            TryGetComponent<CapsuleCollider>(out _collider);
         }
 
         public void Start()
@@ -63,12 +66,20 @@ namespace Game.Combat
             died.Invoke(this);
 
             _isDead = true;
+
+            if (!_collider) return;
+
+            _collider.enabled = false;
         }
 
         public void Revive()
         {
             _health = _maxHealth;
             _isDead = false;
+
+            if (!_collider) return;
+
+            _collider.enabled = true;
         }
     }
 }

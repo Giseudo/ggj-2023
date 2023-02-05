@@ -7,81 +7,119 @@ using UnityEngine.Pool;
 using UnityEngine.Splines;
 using DG.Tweening;
 
-public class CreepSpawner : MonoBehaviour
+namespace Game.Combat
 {
-    [SerializeField]
-    private GameObject _prefab;
-
-    [SerializeField]
-    private SplineContainer _spline;
-
-    [SerializeField]
-    private float _spawnInterval = 2f;
-
-    private ObjectPool<GameObject> _pool;
-
-    public void Awake()
+    public class CreepSpawner : MonoBehaviour
     {
-        _pool = new ObjectPool<GameObject>(
-            () => {
-                GameObject instance = GameObject.Instantiate(_prefab);
+        [SerializeField]
+        private GameObject _prefab;
 
-                if (instance.TryGetComponent<Damageable>(out Damageable damageable))
-                    damageable.died += OnDie;
+        [SerializeField]
+        private SplineContainer _spline;
 
-                return instance;
-            },
-            (instance) => {
-                if (!instance.TryGetComponent<SplineAnimate>(out SplineAnimate splineAnimate))
-                    splineAnimate = instance.AddComponent<SplineAnimate>();
+        [SerializeField]
+        private float _spawnInterval = 2f;
 
-                splineAnimate.Container = _spline;
-                splineAnimate.AnimationMethod = SplineAnimate.Method.Speed;
-                splineAnimate.Restart(true);
+        [SerializeField]
+        private int _limit;
 
-                if (instance.TryGetComponent<Damageable>(out Damageable damageable))
-                    damageable.Revive();
+        private int _deathCount;
+        private int _spawnedCount;
 
-                instance.transform.localScale = Vector3.one;
-                instance.gameObject.SetActive(true);
-            },
-            (instance) => {
-                instance.gameObject.SetActive(false);
-            },
-            (instance) => {
-                if (instance.TryGetComponent<Damageable>(out Damageable damageable))
-                    damageable.died -= OnDie;
+        private ObjectPool<GameObject> _pool;
 
-                Destroy(instance);
-            },
-            true,
-            30
-        );
-    }
+        public ObjectPool<GameObject> Pool => _pool;
+        public GameObject Prefab => _prefab;
+        public SplineContainer Spline => _spline;
+        public int Limit => _limit;
 
-    public void OnDestroy()
-    {
-        _pool.Dispose();
-    }
+        public Action creepsDied = delegate { };
 
-    public void Start()
-    {
-        StartCoroutine(Spawn());
-    }
+        public void SetPrefab(GameObject prefab) => _prefab = prefab;
+        public void SetInterval(float interval) => _spawnInterval = interval;
+        public void SetSpline(SplineContainer spline) => _spline = spline;
+        public void SetLimit(int limit) => _limit = limit;
 
-    private void OnDie(Damageable damageable)
-    {
-        damageable.transform.DOScale(Vector3.zero, .5f)
-            .OnComplete(() => _pool.Release(damageable.gameObject));
-    }
-
-    public IEnumerator Spawn()
-    {
-        while (_pool.CountActive < 30)
+        public void Awake()
         {
-            _pool.Get();
+            _pool = new ObjectPool<GameObject>(
+                () => {
+                    GameObject instance = GameObject.Instantiate(_prefab);
 
-            yield return new WaitForSeconds(_spawnInterval);
+                    if (instance.TryGetComponent<Damageable>(out Damageable damageable))
+                        damageable.died += OnDie;
+
+                    return instance;
+                },
+                (instance) => {
+                    if (!instance.TryGetComponent<SplineAnimate>(out SplineAnimate splineAnimate))
+                        splineAnimate = instance.AddComponent<SplineAnimate>();
+
+                    splineAnimate.Container = _spline;
+                    splineAnimate.AnimationMethod = SplineAnimate.Method.Speed;
+                    splineAnimate.Restart(true);
+
+                    if (instance.TryGetComponent<Damageable>(out Damageable damageable))
+                        damageable.Revive();
+
+                    instance.transform.localScale = Vector3.one;
+                    instance.gameObject.SetActive(true);
+
+                    _spawnedCount++;
+                },
+                (instance) => {
+                    instance.gameObject.SetActive(false);
+                },
+                (instance) => {
+                    if (instance.TryGetComponent<Damageable>(out Damageable damageable))
+                        damageable.died -= OnDie;
+
+                    Destroy(instance);
+                },
+                true,
+                100
+            );
+        }
+
+        public void OnDestroy()
+        {
+            _pool.Dispose();
+        }
+
+        private void OnDie(Damageable damageable)
+        {
+            damageable.transform.DOScale(Vector3.zero, .5f)
+                .OnComplete(() => _pool.Release(damageable.gameObject));
+            
+            _deathCount++;
+
+            Debug.Log($"{_deathCount} / {_limit}");
+
+            if (_deathCount >= _limit)
+                creepsDied.Invoke();
+        }
+
+        public void Play(float delay)
+        {
+            _deathCount = 0;
+            _spawnedCount = 0;
+
+            StartCoroutine(Spawn(delay));
+        }
+
+        public void Stop()
+        { }
+
+        public IEnumerator Spawn(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            while (_spawnedCount < _limit)
+            {
+                _pool.Get();
+
+                yield return new WaitForSeconds(_spawnInterval);
+            }
         }
     }
 }

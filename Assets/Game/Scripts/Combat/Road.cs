@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Splines;
 
-namespace Game.Navigation
+namespace Game.Combat
 {
     [RequireComponent(typeof(Spline))]
     public class Road : MonoBehaviour
