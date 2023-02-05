@@ -34,6 +34,7 @@ namespace Game.UI
 
             _unitSelection.selectedUnit += OnSelectUnit;
             _unitSelection.opened += OnUnitSelectionOpen;
+            _rootActions.opened += OnActionsOpen;
         }
 
         public override void OnDisable()
@@ -42,6 +43,7 @@ namespace Game.UI
 
             _unitSelection.selectedUnit -= OnSelectUnit;
             _unitSelection.opened -= OnUnitSelectionOpen;
+            _rootActions.opened += OnActionsOpen;
         }
 
         public void OnPointerMove(PointerEventData evt)
@@ -150,6 +152,11 @@ namespace Game.UI
             _unitSelection.Rect.anchoredPosition = _rootActions.Rect.anchoredPosition + Vector2.up * 55f;
             _rootActions.Hide();
             _rootPoint.Hide();
+        }
+
+        public void OnActionsOpen()
+        {
+            _rootActions.AddButton.interactable = _activeNode.Unit == null;
         }
 
         private void CreateNode()
