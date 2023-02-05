@@ -10,8 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9159bae764d2224484d19c98b5d11ab, type: 3}
-  m_Name: CreepData
+  m_Name: "Ax\xE9zin"
   m_EditorClassIdentifier: 
-  _name: Creep
-  _prefab: {fileID: 3989175949894268773, guid: 51832b05656d9c8468e4f3d1ed8a63dd, type: 3}
-  _walkSpeed: 3
+  _name: "Ax\xE9zin"
+  _prefab: {fileID: 4597658904802370319, guid: 40aebff1ff89a51438c2f8db37668268, type: 3}

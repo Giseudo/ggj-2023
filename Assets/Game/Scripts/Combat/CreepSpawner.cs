@@ -7,7 +7,7 @@ using UnityEngine.Pool;
 using UnityEngine.Splines;
 using DG.Tweening;
 
-public class Spawner : MonoBehaviour
+public class CreepSpawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject _prefab;

@@ -15,10 +15,5 @@ namespace Game.Combat
 
         [SerializeField]
         private float _maxSpeed;
-
-        public void OnEnable()
-        {
-            _maxSpeed = Data.WalkSpeed;
-        }
     }
 }
