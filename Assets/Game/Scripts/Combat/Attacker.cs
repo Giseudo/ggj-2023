@@ -41,12 +41,12 @@ namespace Game.Combat
         public void PlayAttackVFX() => playedVfx.Invoke(this, _vfxEventName);
         public void PlayAttackSound() => playedSound.Invoke(this, _soundEffectClip);
 
-        public void OnEnable()
+        public void Start()
         {
             GameManager.AddAttacker(this);
         }
 
-        public void OnDisable()
+        public void OnDestroy()
         {
             GameManager.RemoveAttacker(this);
         }
