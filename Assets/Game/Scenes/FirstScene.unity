@@ -1484,7 +1484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blendMode: 1
   scaleMode: 0
-  color: {r: 0.3764706, g: 0.105882354, b: 0.1150524, a: 1}
+  color: {r: 0.18039216, g: 0.7254902, b: 0.5176471, a: 1}
   detailLevel: 2
   renderQueue: -1
   zTest: 4
@@ -1593,9 +1593,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d188384118d74814085b0aae67a78f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _addButton: {fileID: 0}
-  _killButton: {fileID: 0}
-  _splitButton: {fileID: 0}
+  _addButton: {fileID: 1435457080}
+  _killButton: {fileID: 1598259170}
+  _splitButton: {fileID: 66260508}
 --- !u!1 &356983159
 GameObject:
   m_ObjectHideFlags: 0
@@ -2833,7 +2833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blendMode: 1
   scaleMode: 0
-  color: {r: 1, g: 0.17699999, b: 0.17699999, a: 0.54509807}
+  color: {r: 0, g: 0.17065556, b: 0.24705882, a: 0.8039216}
   detailLevel: 2
   renderQueue: -1
   zTest: 4
@@ -5218,7 +5218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blendMode: 1
   scaleMode: 0
-  color: {r: 0.3764706, g: 0.105882354, b: 0.1150524, a: 1}
+  color: {r: 0.18039216, g: 0.7254902, b: 0.5176471, a: 1}
   detailLevel: 2
   renderQueue: -1
   zTest: 4
@@ -6122,7 +6122,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 339246441}
         m_TargetAssemblyTypeName: UIRootActions, Assembly-CSharp
-        m_MethodName: Show
+        m_MethodName: Toggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6134,7 +6134,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1620859812}
         m_TargetAssemblyTypeName: UIRootPoint, Assembly-CSharp
-        m_MethodName: Show
+        m_MethodName: Toggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7551,7 +7551,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 7.592865
+      value: 11.190907
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

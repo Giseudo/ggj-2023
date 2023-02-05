@@ -40,6 +40,12 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         _isOpened = false;
     }
 
+    public void Toggle()
+    {
+        if (_isOpened) Hide();
+        else Show();
+    }
+
     public Tween ShowInner() => _innerRect.DOScale(Vector3.one, .3f);
     public Tween ShowOuter() => _outerRect.DOScale(Vector3.one, .3f);
     public Tween HideInner() => _innerRect.DOScale(Vector3.zero, .3f);

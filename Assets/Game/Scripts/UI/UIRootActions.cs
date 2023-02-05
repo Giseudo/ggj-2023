@@ -23,9 +23,9 @@ public class UIRootActions : MonoBehaviour
     public Action opened = delegate { };
     public Action closed = delegate { };
 
-    public Button AddRect => _addButton;
-    public Button KillRect => _killButton;
-    public Button SplitRect => _splitButton;
+    public Button AddButton => _addButton;
+    public Button KillButton => _killButton;
+    public Button SplitButton => _splitButton;
 
     public void Awake()
     {
@@ -56,5 +56,11 @@ public class UIRootActions : MonoBehaviour
                 _isOpened = false;
                 closed.Invoke();
             });
+    }
+
+    public void Toggle()
+    {
+        if (_isOpened) Hide();
+        else Show();
     }
 }
