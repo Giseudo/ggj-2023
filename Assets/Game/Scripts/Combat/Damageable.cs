@@ -31,12 +31,12 @@ namespace Game.Combat
             _maxHealth = _health;
         }
 
-        public void OnEnable()
+        public void Start()
         {
             GameManager.AddDamageable(this);
         }
 
-        public void OnDisable()
+        public void OnDestroy()
         {
             GameManager.RemoveDamageable(this);
         }

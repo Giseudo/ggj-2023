@@ -59,7 +59,6 @@ public class UnitIdleState : State
         if (_closestTarget == null) return;
         if (!_closestTarget.TryGetComponent<Damageable>(out Damageable damageable)) return;
         if (damageable.IsDead) return;
-        if (damageable.LastHurtTime + damageable.HurtTime > Time.time) return;
         if (!_attacker.Attack(damageable)) return;
 
         _attacker.transform.LookAt(damageable.transform.position);
