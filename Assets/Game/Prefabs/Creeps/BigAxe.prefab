@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2534417883579263037}
   - component: {fileID: 2534417883579263036}
   - component: {fileID: 2534417883579263039}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BigAxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -675,7 +675,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 11.069662
+      value: 10.809999
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4317,6 +4317,51 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802847886752477614, guid: f3bf8c51b76e6564c89d64c4504fd02c,
+        type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Length
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802847886752477614, guid: f3bf8c51b76e6564c89d64c4504fd02c,
+        type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].Position.x
+      value: -21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802847886752477614, guid: f3bf8c51b76e6564c89d64c4504fd02c,
+        type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].Position.z
+      value: 9.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802847886752477614, guid: f3bf8c51b76e6564c89d64c4504fd02c,
+        type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].TangentIn.z
+      value: -24.433697
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802847886752477614, guid: f3bf8c51b76e6564c89d64c4504fd02c,
+        type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].TangentOut.z
+      value: 24.433697
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802847886752477614, guid: f3bf8c51b76e6564c89d64c4504fd02c,
+        type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].Rotation.value.w
+      value: 0.79046035
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802847886752477614, guid: f3bf8c51b76e6564c89d64c4504fd02c,
+        type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].Rotation.value.x
+      value: -0.00025834542
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802847886752477614, guid: f3bf8c51b76e6564c89d64c4504fd02c,
+        type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].Rotation.value.y
+      value: 0.6125132
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802847886752477614, guid: f3bf8c51b76e6564c89d64c4504fd02c,
+        type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].Rotation.value.z
+      value: -0.00033339986
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

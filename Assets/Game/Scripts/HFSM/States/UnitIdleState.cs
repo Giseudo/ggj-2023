@@ -17,8 +17,6 @@ public class UnitIdleState : State
 
     protected override void OnUpdate()
     {
-        if (_isAttacking) return;
-
         CheckColliders();
 
         if (_closestTarget == null) return;
@@ -33,6 +31,14 @@ public class UnitIdleState : State
 
     private void CheckColliders()
     {
+        if (_closestTarget != null && _closestTarget.gameObject.activeInHierarchy)
+        {
+            if ((_attacker.transform.position - _closestTarget.transform.position).magnitude < _attacker.FovRadius)
+                return;
+        }
+
+        if (_isAttacking) return;
+
         _closestTarget = null;
 
         Collider[] colliders = Physics.OverlapSphere(_attacker.transform.position, _attacker.FovRadius, 1 << LayerMask.NameToLayer("Creep"));

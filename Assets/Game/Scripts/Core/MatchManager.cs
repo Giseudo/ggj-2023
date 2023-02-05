@@ -51,7 +51,8 @@ namespace Game.Combat
 }
 
 // TODO
-// [ ] Wave system
+// [x] Wave system
+// [ ] Build github
 // [ ] Blurp
 // [ ] Seed hole
 // [ ] Unit selection description

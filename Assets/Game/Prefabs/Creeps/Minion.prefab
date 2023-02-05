@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 184b8432e5c6a0a45b4470c655eea3c9, type: 2}
-  _maxSpeed: 1
+  _maxSpeed: 3
 --- !u!1001 &9157656403167186645
 PrefabInstance:
   m_ObjectHideFlags: 0
