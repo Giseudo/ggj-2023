@@ -42,7 +42,7 @@ namespace Game.Combat
             if (_spawnTime + _lifeTime < Time.time)
                 Die();
 
-            if (_followTarget != null)
+            if (_followTarget != null && _followTarget.gameObject.activeInHierarchy)
             {
                 Vector3 desiredPosition = _followTarget.position;
                 desiredPosition.y = transform.position.y;
