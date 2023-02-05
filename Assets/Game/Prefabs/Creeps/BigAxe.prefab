@@ -133,7 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7944f7d695cda7f4f879f672729a4c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 2
+  _health: 10
+  _hurtTime: 1
 --- !u!114 &2534417883579263039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b7dfba006ecd740921b195c5d5fb13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: {fileID: 11400000, guid: 0e9f537b7db1c3a42b9aca59c1eda34b, type: 2}
+  _data: {fileID: 11400000, guid: a798b282128fb3042b39c5246ab5f94e, type: 2}
+  _maxSpeed: 1
 --- !u!1001 &2534417883504426971
 PrefabInstance:
   m_ObjectHideFlags: 0
