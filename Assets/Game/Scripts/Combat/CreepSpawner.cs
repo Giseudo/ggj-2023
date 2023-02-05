@@ -59,15 +59,15 @@ namespace Game.Combat
                     splineAnimate.AnimationMethod = SplineAnimate.Method.Speed;
                     splineAnimate.Restart(true);
 
-                    if (instance.TryGetComponent<Damageable>(out Damageable damageable))
-                        damageable.Revive();
-
                     instance.transform.localScale = Vector3.one;
                     instance.gameObject.SetActive(true);
 
                     _spawnedCount++;
                 },
                 (instance) => {
+                    if (instance.TryGetComponent<Damageable>(out Damageable damageable))
+                        damageable.Revive();
+
                     instance.gameObject.SetActive(false);
                 },
                 (instance) => {

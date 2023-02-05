@@ -12,7 +12,7 @@ namespace Game.Combat
         [SerializeField]
         private float _hurtTime = 1f;
 
-        private int _maxHealth = 10;
+        private int _maxHealth;
         private bool _isDead = false;
         private float _lastHurtTime;
         private CapsuleCollider _collider;
