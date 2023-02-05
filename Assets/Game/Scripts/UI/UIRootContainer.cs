@@ -15,18 +15,17 @@ namespace Game.UI
         private UIUnitSelection _unitSelection;
 
         [SerializeField]
+        private UIRootActions _rootActions;
+
+        [SerializeField]
+        private UIRootPoint _rootPoint;
+
+        [SerializeField]
         private RectTransform _mainCanvasRect;
-
-        [SerializeField]
-        private RectTransform _actionsRect;
-
-        [SerializeField]
-        private RootSelectionShape _rootSelectionShape;
 
         private RootNode _activeNode;
         private Vector3 _draggingPosition;
         private bool _isDragging = false;
-        private bool _isSelectingUnit = false;
         private bool _isValidPlacement = false;
 
         public override void OnEnable()
@@ -34,6 +33,7 @@ namespace Game.UI
             base.OnEnable();
 
             _unitSelection.selectedUnit += OnSelectUnit;
+            _unitSelection.opened += OnUnitSelectionOpen;
         }
 
         public override void OnDisable()
@@ -41,19 +41,27 @@ namespace Game.UI
             base.OnDisable();
 
             _unitSelection.selectedUnit -= OnSelectUnit;
+            _unitSelection.opened -= OnUnitSelectionOpen;
         }
 
         public void OnPointerMove(PointerEventData evt)
         {
-            if (_isDragging) return;
-            if (_isSelectingUnit) return;
-
             Ray ray = GameManager.MainCamera.ScreenPointToRay(evt.position);
 
             if (!Physics.Raycast(ray, out RaycastHit groundHit, 100f, 1 << LayerMask.NameToLayer("Ground")))
                 return;
+            
+            _draggingPosition = groundHit.point;
 
-            Collider[] colliders = Physics.OverlapSphere(groundHit.point, 5f, 1 << LayerMask.NameToLayer("RootNode"));
+            if (_rootActions.IsOpened) return;
+            if (_unitSelection.IsOpened) return;
+
+            if (_isDragging) {
+                DragRoot(evt);
+                return;
+            }
+
+            Collider[] colliders = Physics.OverlapSphere(groundHit.point, 3f, 1 << LayerMask.NameToLayer("RootNode"));
             GameObject closestNode = null;
             float minDistance = float.MaxValue;
 
@@ -72,13 +80,15 @@ namespace Game.UI
             if (closestNode == null)
             {
                 _activeNode = null;
-                _rootSelectionShape.Hide();
+                _rootPoint.Hide();
 
                 return;
             }
 
-            _rootSelectionShape.Show();
-            _rootSelectionShape.transform.position = closestNode.transform.position;
+            _rootPoint.Rect.anchoredPosition = GetScreenPosition(closestNode.transform.position);
+            _rootPoint.ShowInner();
+
+            _rootActions.Rect.anchoredPosition = GetScreenPosition(closestNode.transform.position);
 
             closestNode.TryGetComponent<RootNode>(out _activeNode);
         }
@@ -86,21 +96,23 @@ namespace Game.UI
         public void OnBeginDrag(PointerEventData evt)
         {
             if (_activeNode == null) return;
-            if (_isSelectingUnit) return;
+            if (_rootActions.IsOpened) return;
+            if (_unitSelection.IsOpened) return;
 
             _isDragging = true;
         }
 
         public void OnDrag(PointerEventData evt)
         {
+            DragRoot(evt);
+        }
+
+        private void DragRoot(PointerEventData evt)
+        {
             if (_activeNode == null) return;
+            if (_rootActions.IsOpened) return;
+            if (_unitSelection.IsOpened) return;
 
-            Ray ray = evt.enterEventCamera.ScreenPointToRay(evt.position);
-
-            if (!Physics.Raycast(ray, out RaycastHit hit, 100f, 1 << LayerMask.NameToLayer("Ground")))
-                return;
-
-            _draggingPosition = hit.point;
             _isValidPlacement = Vector3.Distance(_activeNode.transform.position, _draggingPosition) < _activeNode.Tree.RootMaxDistance;
         }
 
@@ -109,30 +121,41 @@ namespace Game.UI
             if (_activeNode == null) return;
 
             _isDragging = false;
-
-
-            if (!_isValidPlacement) return;
-
             CreateNode();
         }
 
         public void OnPointerClick(PointerEventData evt)
         {
-            if (_activeNode == null) return;
-            if (_isDragging) return;
+            if (_rootActions.IsOpened)
+                _rootActions.Hide();
 
-            _actionsRect.localScale = Vector3.one;
-            _actionsRect.anchoredPosition = GetScreenPosition(_activeNode.transform.position);
+            if (_unitSelection.IsOpened)
+                _unitSelection.Hide();
+
+            if (_activeNode == null) return;
+
+            if (_isDragging)
+            {
+                _isDragging = false;
+                CreateNode();
+                return;
+            }
 
             // TODO Select unit if is not empty
             if (_activeNode.Unit != null) return;
+        }
 
-            _isSelectingUnit = true;
-            _unitSelection.Show();
+        public void OnUnitSelectionOpen()
+        {
+            _unitSelection.Rect.anchoredPosition = _rootActions.Rect.anchoredPosition + Vector2.up * 55f;
+            _rootActions.Hide();
+            _rootPoint.Hide();
         }
 
         private void CreateNode()
         {
+            if (!_isValidPlacement) return;
+
             GameObject instance = GameObject.Instantiate(_rootPrefab, _activeNode.transform);
 
             instance.TryGetComponent<RootNode>(out RootNode node);
@@ -164,9 +187,13 @@ namespace Game.UI
             Draw.Line(_activeNode.transform.position, _draggingPosition, _isValidPlacement ? Color.green : Color.red);
         }
 
+        public void SplitRoot()
+        {
+            _isDragging = true;
+        }
+
         public void OnSelectUnit(UnitData data)
         {
-            _isSelectingUnit = false;
             _unitSelection.Hide();
 
             GameObject instance = GameObject.Instantiate(data.Prefab, _activeNode.transform);

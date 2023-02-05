@@ -10,8 +10,14 @@ namespace Game.UI
     {
         private RectTransform _rect;
         private List<UIUnitCard> _cards = new List<UIUnitCard>();
+        private bool _isOpened = false;
 
-        public Action<UnitData> selectedUnit;
+        public bool IsOpened => _isOpened;
+        public RectTransform Rect => _rect;
+
+        public Action<UnitData> selectedUnit = delegate { };
+        public Action opened = delegate { };
+        public Action closed = delegate { };
 
         public void Awake()
         {
@@ -29,12 +35,17 @@ namespace Game.UI
 
         public void Show()
         {
-            _rect.DOScale(Vector3.one, 1f);
+            _rect.DOScale(Vector3.one, .5f)
+                .SetEase(Ease.OutExpo);
+            _isOpened = true;
+            opened.Invoke();
         }
 
         public void Hide()
         {
-            _rect.DOScale(Vector3.zero, 1f);
+            _rect.DOScale(Vector3.zero, .2f);
+            _isOpened = false;
+            closed.Invoke();
         }
 
         public void AddCard(UIUnitCard card)
