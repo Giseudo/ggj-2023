@@ -39,6 +39,17 @@ namespace Game.Combat
 
                     projectile.gameObject.SetActive(true);
                     projectile.SetFollowTarget(_followTarget);
+
+                    if (!_followTarget.TryGetComponent<Damageable>(out Damageable damageable))
+                        return;
+
+                    void OnTargetDeath(Damageable damageable)
+                    {
+                        projectile.SetFollowTarget(null);
+                        damageable.died -= OnTargetDeath;
+                    }
+ 
+                    damageable.died += OnTargetDeath;
                 },
                 (projectile) => {
                     projectile.gameObject.SetActive(false);

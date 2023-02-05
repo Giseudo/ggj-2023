@@ -42,8 +42,14 @@ namespace Game.Combat
             if (_spawnTime + _lifeTime < Time.time)
                 Die();
 
-            if (_followTarget != null && _followTarget.gameObject.activeInHierarchy)
+            if (_followTarget != null)
             {
+                if (!_followTarget.gameObject.activeInHierarchy)
+                {
+                    _followTarget = null;
+                    return;
+                }
+
                 Vector3 desiredPosition = _followTarget.position;
                 desiredPosition.y = transform.position.y;
                 transform.LookAt(desiredPosition);
@@ -67,6 +73,7 @@ namespace Game.Combat
 
         public void Die()
         {
+            _followTarget = null;
             gameObject.SetActive(false);
             died.Invoke(this);
         }

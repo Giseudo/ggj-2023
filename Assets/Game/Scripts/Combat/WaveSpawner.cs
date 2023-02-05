@@ -9,6 +9,9 @@ namespace Game.Combat
     public class Round
     {
         [SerializeField]
+        private string _name;
+
+        [SerializeField]
         private List<Wave> _waves = new List<Wave>();
 
         private int _endedWavesCount = 0;
