@@ -52,7 +52,7 @@ namespace Game.Combat
 
 // TODO
 // [x] Wave system
-// [ ] Build github
+// [x] Build github
 // [ ] Blurp
 // [ ] Seed hole
 // [ ] Unit selection description

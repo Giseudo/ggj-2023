@@ -7,41 +7,46 @@ namespace Game.Combat
     public class ProjectileLauncher : MonoBehaviour
     {
         [SerializeField]
-        GameObject _prefab;
+        Projectile _prefab;
 
         [SerializeField]
         public Vector3 _offset;
 
-        private ObjectPool<GameObject> _pool;
+        public Transform _followTarget;
+
+        public void SetFollowTarget(Transform target) => _followTarget = target;
+
+        public Transform FollowTarget => _followTarget;
+
+        private ObjectPool<Projectile> _pool;
 
         public void Awake()
         {
-            _pool = new ObjectPool<GameObject>(
+            _pool = new ObjectPool<Projectile>(
                 () => {
                     Vector3 position = transform.position + (transform.rotation * _offset);
-                    GameObject instance = GameObject.Instantiate(_prefab, position, Quaternion.identity);
+                    Projectile projectile = GameObject.Instantiate<Projectile>(_prefab, position, Quaternion.identity);
 
-                    if (instance.TryGetComponent<Projectile>(out Projectile projectile))
-                        projectile.died += OnProjetileDeath;
+                    projectile.died += OnProjetileDeath;
 
-                    return instance;
+                    return projectile;
                 },
-                (instance) => {
+                (projectile) => {
                     Vector3 position = transform.position + (transform.rotation * _offset);
 
-                    instance.transform.position = position;
-                    instance.transform.rotation = transform.rotation;
+                    projectile.transform.position = position;
+                    projectile.transform.rotation = transform.rotation;
 
-                    instance.gameObject.SetActive(true);
+                    projectile.gameObject.SetActive(true);
+                    projectile.SetFollowTarget(_followTarget);
                 },
-                (instance) => {
-                    instance.gameObject.SetActive(false);
+                (projectile) => {
+                    projectile.gameObject.SetActive(false);
                 },
-                (instance) => {
-                    if (instance.TryGetComponent<Projectile>(out Projectile projectile))
-                        projectile.died -= OnProjetileDeath;
+                (projectile) => {
+                    projectile.died -= OnProjetileDeath;
 
-                    Destroy(instance);
+                    Destroy(projectile);
                 },
                 true,
                 50
@@ -50,12 +55,12 @@ namespace Game.Combat
 
         private void OnProjetileDeath(Projectile projectile)
         {
-            _pool.Release(projectile.gameObject);
+            _pool.Release(projectile);
         }
 
-        public void LaunchProjectile()
+        public Projectile LaunchProjectile()
         {
-            _pool.Get();
+            return _pool.Get();
         }
     }
 }

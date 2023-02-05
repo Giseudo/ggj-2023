@@ -1,4 +1,5 @@
 using System;
+using Freya;
 using UnityEngine;
 
 namespace Game.Combat
@@ -17,11 +18,13 @@ namespace Game.Combat
         [SerializeField]
         private int _attackDamage = 1;
 
-        public int AttackDamage => _attackDamage;
-
-        public void SetAttackDamage (int damage) => _attackDamage = damage;
-
         private float _spawnTime;
+        public Transform _followTarget;
+
+        public Transform FollowTarget => _followTarget;
+        public int AttackDamage => _attackDamage;
+        public void SetAttackDamage (int damage) => _attackDamage = damage;
+        public void SetFollowTarget(Transform target) => _followTarget = target;
 
         public Action<Projectile, Damageable> collided = delegate { };
         public Action<Projectile> died = delegate { };
@@ -38,6 +41,13 @@ namespace Game.Combat
         {
             if (_spawnTime + _lifeTime < Time.time)
                 Die();
+
+            if (_followTarget != null)
+            {
+                Vector3 desiredPosition = _followTarget.position;
+                desiredPosition.y = transform.position.y;
+                transform.LookAt(desiredPosition);
+            }
 
             transform.position += transform.rotation * _velocity * Time.deltaTime;
 

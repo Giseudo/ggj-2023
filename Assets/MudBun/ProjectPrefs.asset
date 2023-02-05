@@ -22,7 +22,4 @@ MonoBehaviour:
   - Key: LastLoadedRequiredPackagesRevision
     Type: 1
     Value: 37
-  - Key: RequiredPacakgesLoaded
-    Type: 4
-    Value: mudbun-urp-shaders
   m_revision: 37

@@ -9,10 +9,12 @@ public class UnitIdleState : State
     private bool _isAttacking;
     private Attacker _attacker;
     private Collider _closestTarget;
+    private ProjectileLauncher _projectileLauncher;
 
     protected override void OnStart()
     {
         _attacker = StateMachine.GetComponent<Attacker>();
+        _projectileLauncher = StateMachine.GetComponent<ProjectileLauncher>();
     }
 
     protected override void OnUpdate()
@@ -65,6 +67,8 @@ public class UnitIdleState : State
         if (_closestTarget == null) return;
         if (!_closestTarget.TryGetComponent<Damageable>(out Damageable damageable)) return;
         if (!_attacker.Attack(damageable)) return;
+
+        _projectileLauncher?.SetFollowTarget(_closestTarget?.transform);
 
         _attacker.transform.LookAt(damageable.transform.position);
         _isAttacking = true;
