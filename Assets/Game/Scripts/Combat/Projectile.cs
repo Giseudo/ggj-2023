@@ -1,6 +1,7 @@
 using System;
 using Freya;
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace Game.Combat
 {
@@ -17,6 +18,9 @@ namespace Game.Combat
 
         [SerializeField]
         private int _attackDamage = 1;
+
+        [SerializeField]
+        private VisualEffect _vfxGraph;
 
         private float _spawnTime;
         public Transform _followTarget;
@@ -41,6 +45,9 @@ namespace Game.Combat
         {
             if (_spawnTime + _lifeTime < Time.time)
                 Die();
+
+            if (_spawnTime + _lifeTime - 2f < Time.time)
+                _vfxGraph?.Stop();
 
             if (_followTarget != null)
             {

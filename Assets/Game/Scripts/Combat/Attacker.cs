@@ -24,7 +24,7 @@ namespace Game.Combat
         [SerializeField]
         private AudioClip _soundEffectClip;
 
-        private float _lastAttackTime;
+        private float _lastAttackTime = float.MinValue;
         private Damageable _currentTarget;
 
         public int MeleeDamage => _meleeDamage;
