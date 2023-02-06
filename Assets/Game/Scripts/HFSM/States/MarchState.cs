@@ -4,6 +4,7 @@ using Game.Core;
 using UnityEngine;
 using UnityEngine.Splines;
 using DG.Tweening;
+using System;
 
 public class MarchState : State
 {
@@ -11,15 +12,14 @@ public class MarchState : State
     private Animator _animator;
     private Damageable _damageable;
     private Damageable _treeDamageable;
-    private SplineAnimate _splineAnimate;
     private Creep _creep;
     private bool _hasReachedTree;
+    public float t = 0;
 
     protected override void OnStart()
     {
         _animator = StateMachine.GetComponent<Animator>();
         _damageable = StateMachine.GetComponent<Damageable>();
-        _splineAnimate = StateMachine.GetComponent<SplineAnimate>();
         _creep = StateMachine.GetComponent<Creep>();
     }
 
@@ -29,31 +29,24 @@ public class MarchState : State
 
         _hasReachedTree = false;
         _animator.SetBool("IsMoving", true);
+        _creep.Move();
     }
 
     protected override void OnExit()
     {
         _animator.SetBool("IsMoving", false);
+        _creep.Stop();
     }
 
-    float t = 0;
     protected override void OnUpdate()
     {
+        if (_damageable.IsDead) return;
         if (_hasReachedTree) return;
-        if (_splineAnimate == null) return;
 
-        t += _creep.MaxSpeed * _creep.SpeedMultiplier * Time.deltaTime * Time.deltaTime;
-
-        Vector3 position = _splineAnimate.Container.EvaluatePosition(t);
-        Vector3 tangent = _splineAnimate.Container.EvaluateTangent(t);
-
-        _creep.transform.LookAt(_creep.transform.position + tangent);
-        _creep.transform.position = position;
-
-        if ((position - _treeDamageable.transform.position).magnitude < 2f)
+        if ((_creep.transform.position - _treeDamageable.transform.position).magnitude < 2f)
         {
             _hasReachedTree = true;
-            _treeDamageable.Hurt(1); // TODO per creep value
+            _treeDamageable.Hurt(1);
             _damageable.Die();
         }
     }
