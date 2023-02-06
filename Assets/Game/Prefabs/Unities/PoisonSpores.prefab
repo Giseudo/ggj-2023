@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageAmount: 1
-  _timeInterval: 5
-  _walkSpeedMultiplier: 0.1
+  _timeInterval: 2
+  _walkSpeedMultiplier: 0.5
   _radius: 10
 --- !u!114 &5963900956835209686
 MonoBehaviour:
@@ -145,4 +145,5 @@ MonoBehaviour:
   _hitRadius: 0
   _lifeTime: 5
   _attackDamage: 0
+  _vfxGraph: {fileID: 5963900956835209681}
   _followTarget: {fileID: 0}

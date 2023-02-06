@@ -24,9 +24,15 @@ namespace Game.Combat
         private float _initialSpeed;
         private float _speedMultiplier = 1f;
         private bool _isMoving = false;
-        public float t = 0f;
+        private float _displacement = 0f;
+        private float _curveLength;
 
-        public void SetSpline(SplineContainer spline) => _spline = spline;
+        public void SetSpline(SplineContainer spline)
+        {
+            _spline = spline;
+            _curveLength = spline.Splines[0].GetLength();
+            _displacement = 0f;
+        }
 
         public void Awake()
         {
@@ -43,6 +49,8 @@ namespace Game.Combat
 
         public void Update()
         {
+            UpdatePosition();
+
             if (!_isSlowedDown) return;
 
             if (_lastSlowDownTime + _slowDownDuration > Time.time) return;
@@ -52,12 +60,13 @@ namespace Game.Combat
             _speedMultiplier = 1f;
         }
 
-        public void FixedUpdate()
+        public void UpdatePosition()
         {
             if (_spline == null) return;
             if (!_isMoving) return;
 
-            t += MaxSpeed * SpeedMultiplier * Time.deltaTime * Time.deltaTime;
+            _displacement += (MaxSpeed * SpeedMultiplier) * Time.deltaTime;
+            float t = Mathf.InverseLerp(0f, _curveLength, _displacement);
 
             Vector3 position = Spline.EvaluatePosition(t);
             Vector3 tangent = Spline.EvaluateTangent(t);

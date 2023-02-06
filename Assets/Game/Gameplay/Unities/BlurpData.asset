@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19904848e3a1c54c830ec88e59d0318, type: 3}
+  m_Name: BlurpData
+  m_EditorClassIdentifier: 
+  _name: Blurp
+  _type: 1
+  _prefab: {fileID: 5992220320425356417, guid: 187cb8cd222027b45a9a2870a68b70e6, type: 3}
+  _thumbnail: {fileID: 21300000, guid: 0471415b7e3c318498b22e1fa0b6fcfe, type: 3}
+  _rangeRadius: 10

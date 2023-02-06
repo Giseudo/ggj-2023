@@ -46,7 +46,7 @@ namespace Game.Combat
             if (_spawnTime + _lifeTime < Time.time)
                 Die();
 
-            if (_spawnTime + _lifeTime - 2f < Time.time)
+            if (_spawnTime + _lifeTime - 2.5f < Time.time && _vfxGraph != null)
                 _vfxGraph?.Stop();
 
             if (_followTarget != null)
