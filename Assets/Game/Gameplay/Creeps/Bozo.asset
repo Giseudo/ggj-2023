@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Bozo
   m_EditorClassIdentifier: 
   _name: Bozo
-  _prefab: {fileID: 6990047929245070001, guid: b85bd60151b64da4bb4550bfca6c1e08, type: 3}
+  _prefab: {fileID: 2146907836897720715, guid: b85bd60151b64da4bb4550bfca6c1e08, type: 3}

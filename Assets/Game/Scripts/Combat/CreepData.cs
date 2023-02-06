@@ -9,9 +9,9 @@ namespace Game.Combat
         private string _name = "Creep Name";
 
         [SerializeField]
-        private GameObject _prefab;
+        private Creep _prefab;
 
         public string Name => _name;
-        public GameObject Prefab => _prefab;
+        public Creep Prefab => _prefab;
     }
 }

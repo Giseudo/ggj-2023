@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Praga
   m_EditorClassIdentifier: 
   _name: Praga
-  _prefab: {fileID: 9157656403792661534, guid: 3c1059b07e5ed3546b93eb08ce01123a, type: 3}
+  _prefab: {fileID: -8945137072516790492, guid: 3c1059b07e5ed3546b93eb08ce01123a,
+    type: 3}

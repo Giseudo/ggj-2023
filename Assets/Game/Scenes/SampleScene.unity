@@ -845,7 +845,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 8.793955
+      value: 10.210941
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2038,6 +2038,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WaveSpawner_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788042953926898639, guid: f3bf8c51b76e6564c89d64c4504fd02c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
@@ -3419,7 +3424,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 8.793955
+      value: 10.210941
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6096,6 +6101,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
+      propertyPath: _rounds.Array.data[0]._waves.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
+        type: 3}
       propertyPath: _rounds.Array.data[0]._waves.Array.data[0]._creepData
       value: 
       objectReference: {fileID: 11400000, guid: a798b282128fb3042b39c5246ab5f94e,
@@ -6106,6 +6116,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 5a20aecab6bcc80499f890f0010ba1e8,
         type: 2}
+    - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
+        type: 3}
+      propertyPath: _rounds.Array.data[0]._waves.Array.data[0]._countLimit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2662609224044270195, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
       propertyPath: m_RootOrder

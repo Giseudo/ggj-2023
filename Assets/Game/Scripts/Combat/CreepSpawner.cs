@@ -12,7 +12,7 @@ namespace Game.Combat
     public class CreepSpawner : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _prefab;
+        private Creep _prefab;
 
         [SerializeField]
         private SplineContainer _spline;
@@ -26,25 +26,25 @@ namespace Game.Combat
         private int _deathCount;
         private int _spawnedCount;
 
-        private ObjectPool<GameObject> _pool;
+        private ObjectPool<Creep> _pool;
 
-        public ObjectPool<GameObject> Pool => _pool;
-        public GameObject Prefab => _prefab;
+        public ObjectPool<Creep> Pool => _pool;
+        public Creep Prefab => _prefab;
         public SplineContainer Spline => _spline;
         public int Limit => _limit;
 
         public Action creepsDied = delegate { };
 
-        public void SetPrefab(GameObject prefab) => _prefab = prefab;
+        public void SetPrefab(Creep prefab) => _prefab = prefab;
         public void SetInterval(float interval) => _spawnInterval = interval;
         public void SetSpline(SplineContainer spline) => _spline = spline;
         public void SetLimit(int limit) => _limit = limit;
 
         public void Awake()
         {
-            _pool = new ObjectPool<GameObject>(
+            _pool = new ObjectPool<Creep>(
                 () => {
-                    GameObject instance = GameObject.Instantiate(_prefab);
+                    Creep instance = GameObject.Instantiate<Creep>(_prefab);
 
                     if (instance.TryGetComponent<Damageable>(out Damageable damageable))
                         damageable.died += OnDie;
@@ -52,20 +52,17 @@ namespace Game.Combat
                     return instance;
                 },
                 (instance) => {
-                    if (!instance.TryGetComponent<SplineAnimate>(out SplineAnimate splineAnimate))
-                        splineAnimate = instance.AddComponent<SplineAnimate>();
+                    instance.transform.position = _spline.EvaluatePosition(0f);
 
-                    splineAnimate.PlayOnAwake = false;
-                    splineAnimate.Container = _spline;
-                    splineAnimate.AnimationMethod = SplineAnimate.Method.Speed;
-                    splineAnimate.Restart(true);
-
+                    instance.SetSpline(_spline);
                     instance.transform.localScale = Vector3.one;
                     instance.gameObject.SetActive(true);
 
                     _spawnedCount++;
                 },
                 (instance) => {
+                    instance.t = 0f;
+
                     if (instance.TryGetComponent<Damageable>(out Damageable damageable))
                         damageable.Revive();
 
@@ -89,12 +86,11 @@ namespace Game.Combat
 
         private void OnDie(Damageable damageable)
         {
+            damageable.TryGetComponent<Creep>(out Creep creep);
             damageable.transform.DOScale(Vector3.zero, .5f)
-                .OnComplete(() => _pool.Release(damageable.gameObject));
+                .OnComplete(() => _pool.Release(creep));
             
             _deathCount++;
-
-            Debug.Log($"{_deathCount} / {_limit}");
 
             if (_deathCount >= _limit)
                 creepsDied.Invoke();
