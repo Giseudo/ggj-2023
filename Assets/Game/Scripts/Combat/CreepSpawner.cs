@@ -61,6 +61,8 @@ namespace Game.Combat
                     _spawnedCount++;
                 },
                 (instance) => {
+                    instance.transform.position = _spline.EvaluatePosition(0f);
+
                     if (instance.TryGetComponent<Damageable>(out Damageable damageable))
                         damageable.Revive();
 

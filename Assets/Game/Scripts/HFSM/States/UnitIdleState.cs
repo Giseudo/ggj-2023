@@ -8,7 +8,7 @@ public class UnitIdleState : State
 
     private bool _isAttacking;
     private Attacker _attacker;
-    private Collider _closestTarget;
+    private Damageable _closestTarget;
     private ProjectileLauncher _projectileLauncher;
 
     protected override void OnStart()
@@ -33,7 +33,7 @@ public class UnitIdleState : State
 
     private void CheckColliders()
     {
-        if (_closestTarget != null && _closestTarget.gameObject.activeInHierarchy)
+        if (_closestTarget != null && !_closestTarget.IsDead)
         {
             if ((_attacker.transform.position - _closestTarget.transform.position).magnitude < _attacker.FovRadius)
                 return;
@@ -43,6 +43,7 @@ public class UnitIdleState : State
 
         _closestTarget = null;
 
+        Collider closestCollider = null;
         Collider[] colliders = Physics.OverlapSphere(_attacker.transform.position, _attacker.FovRadius, 1 << LayerMask.NameToLayer("Creep"));
 
         if (colliders.Length == 0) return;
@@ -57,9 +58,16 @@ public class UnitIdleState : State
             if (distance < minDistance)
             {
                 minDistance = distance;
-                _closestTarget = collider;
+                closestCollider = collider;
             }
         }
+
+        if (closestCollider == null) return;
+
+        closestCollider.TryGetComponent<Damageable>(out Damageable damageable);
+
+        if (!damageable.IsDead)
+            _closestTarget = damageable;
     }
 
     private void Attack()
@@ -67,6 +75,7 @@ public class UnitIdleState : State
         if (_closestTarget == null) return;
         if (!_closestTarget.TryGetComponent<Damageable>(out Damageable damageable)) return;
         if (!_attacker.Attack(damageable)) return;
+        if (damageable.IsDead) return;
 
         _projectileLauncher?.SetFollowTarget(_closestTarget?.transform);
 
