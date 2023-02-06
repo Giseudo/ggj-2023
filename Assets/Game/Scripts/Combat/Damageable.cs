@@ -14,11 +14,9 @@ namespace Game.Combat
 
         private int _maxHealth;
         private bool _isDead = false;
-        private float _lastHurtTime;
         private CapsuleCollider _collider;
 
         public float HurtTime => _hurtTime;
-        public float LastHurtTime => _lastHurtTime;
         public void SetHealth(int value) => _health = value;
         public int Health => _health;
         public int MaxHealth => _maxHealth;
@@ -49,7 +47,6 @@ namespace Game.Combat
             if (_isDead) return;
 
             _health -= damage;
-            _lastHurtTime = Time.time;
 
             hurted.Invoke(this);
 

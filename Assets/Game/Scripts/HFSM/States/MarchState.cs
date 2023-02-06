@@ -28,38 +28,33 @@ public class MarchState : State
         GameManager.MainTree.TryGetComponent<Damageable>(out _treeDamageable);
 
         _hasReachedTree = false;
-        _splineAnimate?.Play();
         _animator.SetBool("IsMoving", true);
-        _damageable.hurted += OnHurt;
     }
 
     protected override void OnExit()
     {
-        _splineAnimate?.Pause();
         _animator.SetBool("IsMoving", false);
-        _damageable.hurted -= OnHurt;
     }
 
+    float t = 0;
     protected override void OnUpdate()
     {
         if (_hasReachedTree) return;
         if (_splineAnimate == null) return;
-        
-        _splineAnimate.MaxSpeed = _creep.MaxSpeed;
 
-        if (_splineAnimate.NormalizedTime >= .99f)
+        t += _creep.MaxSpeed * _creep.SpeedMultiplier * Time.deltaTime * Time.deltaTime;
+
+        Vector3 position = _splineAnimate.Container.EvaluatePosition(t);
+        Vector3 tangent = _splineAnimate.Container.EvaluateTangent(t);
+
+        _creep.transform.LookAt(_creep.transform.position + tangent);
+        _creep.transform.position = position;
+
+        if ((position - _treeDamageable.transform.position).magnitude < 2f)
         {
             _hasReachedTree = true;
             _treeDamageable.Hurt(1); // TODO per creep value
             _damageable.Die();
         }
-    }
-
-    private void OnHurt(Damageable damageable)
-    {
-        _splineAnimate?.Pause();
-
-        DOTween.To(() => 0f, x => {}, 1f, _damageable.HurtTime)
-            .OnComplete(() => _splineAnimate?.Play());
     }
 }

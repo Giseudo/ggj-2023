@@ -55,6 +55,7 @@ namespace Game.Combat
                     if (!instance.TryGetComponent<SplineAnimate>(out SplineAnimate splineAnimate))
                         splineAnimate = instance.AddComponent<SplineAnimate>();
 
+                    splineAnimate.PlayOnAwake = false;
                     splineAnimate.Container = _spline;
                     splineAnimate.AnimationMethod = SplineAnimate.Method.Speed;
                     splineAnimate.Restart(true);
