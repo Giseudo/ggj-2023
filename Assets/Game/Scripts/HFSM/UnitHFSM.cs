@@ -4,7 +4,7 @@ using HFSM;
 [CreateAssetMenu(menuName = "Game/State Machines/Unit")]
 public class UnitHFSM : StateMachineAsset
 {
-    private UnitIdleState _idle = new UnitIdleState();
+    private DetectTargetState _idle = new DetectTargetState();
     private AttackState _attack = new AttackState();
 
     public override State Init(StateMachine context)

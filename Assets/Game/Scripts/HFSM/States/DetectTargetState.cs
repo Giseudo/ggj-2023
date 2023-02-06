@@ -2,9 +2,9 @@ using HFSM;
 using UnityEngine;
 using Game.Combat;
 
-public class UnitIdleState : State
+public class DetectTargetState : State
 {
-    public override string Name => "Idle";
+    public override string Name => "Detect Target";
 
     private bool _isAttacking;
     private Attacker _attacker;

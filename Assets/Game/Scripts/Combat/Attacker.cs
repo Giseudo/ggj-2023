@@ -76,7 +76,7 @@ namespace Game.Combat
             _currentTarget.Hurt(_meleeDamage);
         }
 
-        public void OnDrawGizmos()
+        public void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, _fovRadius);
