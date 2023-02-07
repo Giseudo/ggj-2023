@@ -5,7 +5,7 @@ using UnityEngine.VFX;
 
 namespace Game.Combat
 {
-    public class Projectile : MonoBehaviour
+    public class Projectile : MonoBehaviour, IProjectile
     {
         [SerializeField]
         private Vector3 _velocity = Vector3.forward;
@@ -28,10 +28,13 @@ namespace Game.Combat
         public Transform FollowTarget => _followTarget;
         public int AttackDamage => _attackDamage;
         public void SetAttackDamage (int damage) => _attackDamage = damage;
-        public void SetFollowTarget(Transform target) => _followTarget = target;
+        public void SetTarget(Transform target) => _followTarget = target;
 
-        public Action<Projectile, Damageable> collided = delegate { };
-        public Action<Projectile> died = delegate { };
+        public Action<IProjectile, Damageable> collided = delegate { };
+        public Action<IProjectile, Damageable> Collided { get => collided; set => collided = value; }
+        public Action<IProjectile> died = delegate { };
+        public Action<IProjectile> Died { get => died; set => died = value; }
+        public GameObject GameObject => gameObject;
 
         public void OnEnable()
         {

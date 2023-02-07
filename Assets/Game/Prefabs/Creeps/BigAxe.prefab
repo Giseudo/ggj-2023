@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2534417883579263037}
   - component: {fileID: 2534417883579263036}
   - component: {fileID: 2534417883579263039}
+  - component: {fileID: 4029478741272738399}
   m_Layer: 7
   m_Name: BigAxe
   m_TagString: Untagged
@@ -149,7 +150,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: a798b282128fb3042b39c5246ab5f94e, type: 2}
   _maxSpeed: 3
-  t: 0
+--- !u!114 &4029478741272738399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2534417883579263025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1382796ffcef8e34381cb8ee18863a1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _meleeDamage: 0
+  _fovRadius: 0
+  _attackSpeed: 1
+  _attackWaitTime: 0
+  _vfxEventName: OnAttack
+  _soundEffectClip: {fileID: 0}
 --- !u!1001 &2534417883504426971
 PrefabInstance:
   m_ObjectHideFlags: 0

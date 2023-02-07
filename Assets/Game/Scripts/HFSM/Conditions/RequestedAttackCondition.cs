@@ -14,11 +14,15 @@ public class RequestedAttackCondition : Condition
 
     public override void OnEnter()
     {
+        if (_attacker == null) return;
+
         _attacker.attacked += Trigger;
     }
 
     public override void OnExit()
     {
+        if (_attacker == null) return;
+
         _attacker.attacked -= Trigger;
     }
 }

@@ -26,6 +26,7 @@ namespace Game.Combat
 
         private float _lastAttackTime = float.MinValue;
         private Damageable _currentTarget;
+        private bool _isAttacking;
 
         public int MeleeDamage => _meleeDamage;
         public float FovRadius => _fovRadius;
@@ -59,6 +60,7 @@ namespace Game.Combat
             _lastAttackTime = Time.time;
 
             _currentTarget = damageable;
+            _isAttacking = true;
             attacked.Invoke(damageable);
 
             return true;
@@ -66,7 +68,11 @@ namespace Game.Combat
 
         public void FinishAttack()
         {
+            if (!_isAttacking) return;
+
             finishedAttack.Invoke();
+
+            _isAttacking = false;
         }
 
         public void DamageTarget()

@@ -24,6 +24,7 @@ public class AttackState : State
 
     protected override void OnExit()
     {
+        _attacker.FinishAttack();
         _animator.speed = 1f;
     }
 }

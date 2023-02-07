@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: A_Unit@Die
+  m_Name: A_Die@UnitBase
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0

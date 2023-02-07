@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b870cf0bea64943bb4f87aa0049083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 5963900956835209686, guid: d362591ccf556f24991da9d769c23ebe, type: 3}
+  _prefab: {fileID: 5963900956835209682, guid: d362591ccf556f24991da9d769c23ebe, type: 3}
   _offset: {x: 0, y: 0, z: 0}
   _followTarget: {fileID: 0}
 --- !u!1001 &5992220321047095517

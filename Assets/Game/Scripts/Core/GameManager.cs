@@ -28,6 +28,7 @@ namespace Game.Core
             Instance = this;
             MainCamera = Camera.main;
             MainTree = _mainTree;
+            Debug.Log("First");
         }
 
         public static void AddDamageable(Damageable damageable)

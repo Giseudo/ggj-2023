@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b870cf0bea64943bb4f87aa0049083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 1447307402845202432, guid: 5414cc12cdae3fd49a0f4ffaeccede13, type: 3}
+  _prefab: {fileID: 3687635261570001115, guid: 5414cc12cdae3fd49a0f4ffaeccede13, type: 3}
   _offset: {x: 0, y: 3.5, z: 0.5}
   _followTarget: {fileID: 0}
 --- !u!1 &5634176224217133591

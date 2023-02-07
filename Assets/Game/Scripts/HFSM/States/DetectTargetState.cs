@@ -10,11 +10,16 @@ public class DetectTargetState : State
     private Attacker _attacker;
     private Damageable _closestTarget;
     private ProjectileLauncher _projectileLauncher;
+    private LayerMask _enemyLayer;
 
     protected override void OnStart()
     {
         _attacker = StateMachine.GetComponent<Attacker>();
         _projectileLauncher = StateMachine.GetComponent<ProjectileLauncher>();
+
+        _enemyLayer = 1 << (StateMachine.gameObject.layer == LayerMask.NameToLayer("Creep")
+            ? LayerMask.NameToLayer("GroundUnit")
+            : LayerMask.NameToLayer("Creep"));
     }
 
     protected override void OnUpdate()
@@ -33,6 +38,8 @@ public class DetectTargetState : State
 
     private void CheckColliders()
     {
+        if (_attacker == null) return;
+
         if (_closestTarget != null && !_closestTarget.IsDead)
         {
             if ((_attacker.transform.position - _closestTarget.transform.position).magnitude < _attacker.FovRadius)
@@ -44,7 +51,7 @@ public class DetectTargetState : State
         _closestTarget = null;
 
         Collider closestCollider = null;
-        Collider[] colliders = Physics.OverlapSphere(_attacker.transform.position, _attacker.FovRadius, 1 << LayerMask.NameToLayer("Creep"));
+        Collider[] colliders = Physics.OverlapSphere(_attacker.transform.position, _attacker.FovRadius, _enemyLayer);
 
         if (colliders.Length == 0) return;
 
@@ -66,6 +73,8 @@ public class DetectTargetState : State
 
         closestCollider.TryGetComponent<Damageable>(out Damageable damageable);
 
+        if (damageable == null) return;
+
         if (!damageable.IsDead)
             _closestTarget = damageable;
     }
@@ -77,7 +86,7 @@ public class DetectTargetState : State
         if (!_attacker.Attack(damageable)) return;
         if (damageable.IsDead) return;
 
-        _projectileLauncher?.SetFollowTarget(_closestTarget?.transform);
+        _projectileLauncher?.SetTarget(_closestTarget?.transform);
 
         _attacker.transform.LookAt(damageable.transform.position);
         _isAttacking = true;

@@ -7,6 +7,7 @@ public class CreepHFSM : StateMachineAsset
     private MarchState _march = new MarchState();
     private HurtState _hurt = new HurtState();
     private DieState _die = new DieState();
+    private AttackState _attack = new AttackState();
 
     public override State Init(StateMachine context)
     {
@@ -15,6 +16,7 @@ public class CreepHFSM : StateMachineAsset
         root.LoadSubState(_march);
         root.LoadSubState(_hurt);
         root.LoadSubState(_die);
+        root.LoadSubState(_attack);
 
         LoadTransitions(root);
 
@@ -28,6 +30,9 @@ public class CreepHFSM : StateMachineAsset
         root.AddTransition(_march, _die, new Condition[] { new HasDiedCondition { } });
         root.AddTransition(_march, _hurt, new Condition[] { new WasAttackedCondition { } });
         root.AddTransition(_hurt, _die, new Condition[] { new HasDiedCondition { } });
+        root.AddTransition(_march, _attack, new Condition[] { new RequestedAttackCondition { } });
+        root.AddTransition(_attack, _march, new Condition[] { new FinishedAttackCondition { } });
+        root.AddTransition(_attack, _hurt, new Condition[] { new WasAttackedCondition { } });
 
         _hurt.finished += () => root.ChangeSubState(_march);
     }

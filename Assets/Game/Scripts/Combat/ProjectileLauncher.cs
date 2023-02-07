@@ -4,72 +4,82 @@ using UnityEngine.Pool;
 
 namespace Game.Combat
 {
+    public interface IProjectile
+    {
+        public GameObject GameObject { get; }
+        public void SetTarget(Transform target);
+        public Action<IProjectile> Died { get; set; }
+        public Action<IProjectile, Damageable> Collided { get; set; }
+    }
+
     public class ProjectileLauncher : MonoBehaviour
     {
         [SerializeField]
-        Projectile _prefab;
+        GameObject _prefab;
 
         [SerializeField]
         public Vector3 _offset;
 
-        public Transform _followTarget;
+        public Transform _target;
 
-        public void SetFollowTarget(Transform target) => _followTarget = target;
+        public void SetTarget(Transform target) => _target = target;
 
-        public Transform FollowTarget => _followTarget;
+        public Transform Target => _target;
 
-        private ObjectPool<Projectile> _pool;
+        private ObjectPool<IProjectile> _pool;
 
         public void Awake()
         {
-            _pool = new ObjectPool<Projectile>(
+            _pool = new ObjectPool<IProjectile>(
                 () => {
                     Vector3 position = transform.position + (transform.rotation * _offset);
-                    Projectile projectile = GameObject.Instantiate<Projectile>(_prefab, position, Quaternion.identity);
+                    GameObject instance = GameObject.Instantiate(_prefab, position, Quaternion.identity);
 
-                    projectile.died += OnProjetileDeath;
+                    instance.TryGetComponent<IProjectile>(out IProjectile projectile);
+
+                    projectile.Died += OnProjetileDeath;
 
                     return projectile;
                 },
                 (projectile) => {
                     Vector3 position = transform.position + (transform.rotation * _offset);
 
-                    projectile.transform.position = position;
-                    projectile.transform.rotation = transform.rotation;
+                    projectile.GameObject.transform.position = position;
+                    projectile.GameObject.transform.rotation = transform.rotation;
 
-                    projectile.gameObject.SetActive(true);
-                    projectile.SetFollowTarget(_followTarget);
+                    projectile.GameObject.SetActive(true);
+                    projectile.SetTarget(_target);
 
-                    if (!_followTarget.TryGetComponent<Damageable>(out Damageable damageable))
+                    if (!_target.TryGetComponent<Damageable>(out Damageable damageable))
                         return;
 
                     void OnTargetDeath(Damageable damageable)
                     {
-                        projectile.SetFollowTarget(null);
+                        projectile.SetTarget(null);
                         damageable.died -= OnTargetDeath;
                     }
  
                     damageable.died += OnTargetDeath;
                 },
                 (projectile) => {
-                    projectile.gameObject.SetActive(false);
+                    projectile.GameObject.SetActive(false);
                 },
                 (projectile) => {
-                    projectile.died -= OnProjetileDeath;
+                    projectile.Died -= OnProjetileDeath;
 
-                    Destroy(projectile);
+                    Destroy(projectile.GameObject);
                 },
                 true,
                 50
             );
         }
 
-        private void OnProjetileDeath(Projectile projectile)
+        private void OnProjetileDeath(IProjectile projectile)
         {
             _pool.Release(projectile);
         }
 
-        public Projectile LaunchProjectile()
+        public IProjectile LaunchProjectile()
         {
             return _pool.Get();
         }

@@ -15,17 +15,22 @@ public class MarchState : State
     private Creep _creep;
     private bool _hasReachedTree;
     public float t = 0;
+    private DetectTargetState _detectTarget = new DetectTargetState();
 
     protected override void OnStart()
     {
+        GameManager.MainTree.TryGetComponent<Damageable>(out _treeDamageable);
+
         _animator = StateMachine.GetComponent<Animator>();
         _damageable = StateMachine.GetComponent<Damageable>();
         _creep = StateMachine.GetComponent<Creep>();
+
+        LoadSubState(_detectTarget);
     }
 
     protected override void OnEnter()
     {
-        GameManager.MainTree.TryGetComponent<Damageable>(out _treeDamageable);
+        if (_creep == null) return;
 
         _hasReachedTree = false;
         _animator.SetBool("IsMoving", true);
@@ -34,12 +39,16 @@ public class MarchState : State
 
     protected override void OnExit()
     {
+        if (_creep == null) return;
+
         _animator.SetBool("IsMoving", false);
         _creep.Stop();
     }
 
     protected override void OnUpdate()
     {
+        if (_creep == null) return;
+        if (_treeDamageable == null) return;
         if (_damageable.IsDead) return;
         if (_hasReachedTree) return;
 
