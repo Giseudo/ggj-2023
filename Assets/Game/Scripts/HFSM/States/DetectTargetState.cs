@@ -88,7 +88,11 @@ public class DetectTargetState : State
 
         _projectileLauncher?.SetTarget(_closestTarget?.transform);
 
-        _attacker.transform.LookAt(damageable.transform.position);
+        Vector3 targetPosition = damageable.transform.position;
+
+        targetPosition.y = _attacker.transform.position.y;
+
+        _attacker.transform.LookAt(targetPosition);
         _isAttacking = true;
     }
 }

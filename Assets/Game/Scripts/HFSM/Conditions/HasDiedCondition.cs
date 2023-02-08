@@ -15,6 +15,9 @@ public class HasDiedCondition : Condition
     public override void OnEnter()
     {
         _damageable.died += Trigger;
+
+        if (_damageable.IsDead)
+            Trigger();
     }
 
     public override void OnExit()

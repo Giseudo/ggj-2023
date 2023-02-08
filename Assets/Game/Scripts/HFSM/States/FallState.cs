@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.Splines;
 using DG.Tweening;
 
-public class DieState : State
+public class FallState : State
 {
-    public override string Name => "Die";
+    public override string Name => "Fall";
     private Animator _animator;
 
     protected override void OnStart()
@@ -16,7 +16,11 @@ public class DieState : State
 
     protected override void OnEnter()
     {
-        _animator.SetBool("IsDead", true);
-        Finish();
+        _animator.SetBool("IsFalling", true);
+    }
+
+    protected override void OnExit()
+    {
+        _animator.SetBool("IsFalling", false);
     }
 }

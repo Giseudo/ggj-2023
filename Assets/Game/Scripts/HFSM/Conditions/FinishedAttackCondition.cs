@@ -13,6 +13,9 @@ public class FinishedAttackCondition : Condition
     public override void OnEnter()
     {
         _attacker.finishedAttack += Trigger;
+
+        if (!_attacker.IsAttacking)
+            Trigger();
     }
 
     public override void OnExit()

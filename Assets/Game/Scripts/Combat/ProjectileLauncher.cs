@@ -10,6 +10,7 @@ namespace Game.Combat
         public void SetTarget(Transform target);
         public Action<IProjectile> Died { get; set; }
         public Action<IProjectile, Damageable> Collided { get; set; }
+        public void Fire();
     }
 
     public class ProjectileLauncher : MonoBehaviour
@@ -49,6 +50,7 @@ namespace Game.Combat
 
                     projectile.GameObject.SetActive(true);
                     projectile.SetTarget(_target);
+                    projectile.Fire();
 
                     if (!_target.TryGetComponent<Damageable>(out Damageable damageable))
                         return;

@@ -36,16 +36,26 @@ namespace Game.Combat
         public Action<IProjectile> Died { get => died; set => died = value; }
         public GameObject GameObject => gameObject;
 
+        private bool _wasFired;
+
         public void OnEnable()
-        {
-            _spawnTime = Time.time;
-        }
+        { }
 
         public void OnDisable()
-        { }
+        {
+            _wasFired = false;
+        }
+
+        public void Fire()
+        {
+            _spawnTime = Time.time;
+            _wasFired = true;
+        }
 
         public void Update()
         {
+            if (!_wasFired) return;
+
             if (_spawnTime + _lifeTime < Time.time)
                 Die();
 

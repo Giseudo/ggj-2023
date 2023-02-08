@@ -32,6 +32,11 @@ namespace Game.Combat
             TryGetComponent<CapsuleCollider>(out _collider);
         }
 
+        public void OnDisable()
+        {
+            Revive();
+        }
+
         public void Start()
         {
             GameManager.AddDamageable(this);

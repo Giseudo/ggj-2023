@@ -15,7 +15,9 @@ GameObject:
   - component: {fileID: -861516239472095692}
   - component: {fileID: -6145832290578634484}
   - component: {fileID: -3205043633477395473}
-  m_Layer: 0
+  - component: {fileID: 6439674651205656991}
+  - component: {fileID: 1520723989899463769}
+  m_Layer: 9
   m_Name: Seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +38,7 @@ Transform:
   m_Children:
   - {fileID: 4677069153094554271}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 75.477, z: 0}
 --- !u!95 &-2072530963042216318
 Animator:
@@ -47,8 +49,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5143938570676501285}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a5530f89a45df214ea2094af06a38277, type: 3}
-  m_Controller: {fileID: 9100000, guid: f5ebc8f6f1fd02a48a16b8d66c8ed24d, type: 2}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: f6c5cbef0d5f7f642adb16806f87d1f0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -83,8 +85,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1382796ffcef8e34381cb8ee18863a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meleeDamage: 0
-  _fovRadius: 10
+  _meleeDamage: 1
+  _fovRadius: 3
   _attackSpeed: 1
   _attackWaitTime: 0
   _vfxEventName: OnAttack
@@ -101,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a63dec08798064549a5d087c26f70aac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _asset: {fileID: 11400000, guid: 7deed2eb538a04d46bcafe20493145e4, type: 2}
+  _asset: {fileID: 11400000, guid: 536ef8251db5a9a4eacfffdb3c9bd471, type: 2}
 --- !u!114 &-6145832290578634484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,8 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7944f7d695cda7f4f879f672729a4c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 2
-  _hurtTime: 1
+  _health: 4
+  _hurtTime: 0.2
 --- !u!114 &-3205043633477395473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +130,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54cfd8536d09e547b552bd0957d8228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _target: {fileID: 0}
+  _height: 10
+  _hitTime: 2
+  _hitRadius: 2
+  _attackDamage: 1
+--- !u!136 &6439674651205656991
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143938570676501285}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &1520723989899463769
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143938570676501285}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &5143938569988879732
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -47,8 +47,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4961941754361416317}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a5530f89a45df214ea2094af06a38277, type: 3}
-  m_Controller: {fileID: 9100000, guid: f5ebc8f6f1fd02a48a16b8d66c8ed24d, type: 2}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 15846ca2324cad747890162c12dbc514, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 5143938570676501285, guid: 34f9d40aeecfb424ab2dc6b4aabfdb31, type: 3}
   _offset: {x: 0, y: 0, z: 0}
-  _followTarget: {fileID: 0}
+  _target: {fileID: 0}
 --- !u!1001 &4961941753029002173
 PrefabInstance:
   m_ObjectHideFlags: 0

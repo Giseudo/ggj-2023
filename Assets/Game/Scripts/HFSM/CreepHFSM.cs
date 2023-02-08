@@ -31,8 +31,9 @@ public class CreepHFSM : StateMachineAsset
         root.AddTransition(_march, _hurt, new Condition[] { new WasAttackedCondition { } });
         root.AddTransition(_hurt, _die, new Condition[] { new HasDiedCondition { } });
         root.AddTransition(_march, _attack, new Condition[] { new RequestedAttackCondition { } });
-        root.AddTransition(_attack, _march, new Condition[] { new FinishedAttackCondition { } });
+        root.AddTransition(_attack, _march, new Condition[] { new FinishedAttackCondition { }, new WaitCondition { Seconds = 3f } }, Operator.Or);
         root.AddTransition(_attack, _hurt, new Condition[] { new WasAttackedCondition { } });
+        root.AddTransition(_attack, _die, new Condition[] { new HasDiedCondition { } });
 
         _hurt.finished += () => root.ChangeSubState(_march);
     }

@@ -65,7 +65,7 @@ Transform:
   m_GameObject: {fileID: 4597658904802370319}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2964472323150126969}
@@ -198,7 +198,7 @@ MonoBehaviour:
   _meleeDamage: 1
   _fovRadius: 3
   _attackSpeed: 1
-  _attackWaitTime: 0
+  _attackWaitTime: 1
   _vfxEventName: OnAttack
   _soundEffectClip: {fileID: 0}
 --- !u!1001 &4597658904962367697

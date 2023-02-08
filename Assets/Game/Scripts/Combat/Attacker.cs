@@ -32,6 +32,7 @@ namespace Game.Combat
         public float FovRadius => _fovRadius;
         public float AttackSpeed => _attackSpeed;
         public float AttackWaitTime => _attackWaitTime;
+        public bool IsAttacking => _isAttacking;
         public Damageable CurrentTarget => _currentTarget;
 
         public Action<Damageable> attacked = delegate { };
@@ -78,6 +79,7 @@ namespace Game.Combat
         public void DamageTarget()
         {
             if (_currentTarget == null) return;
+            if (!_currentTarget.gameObject.activeInHierarchy) return;
 
             _currentTarget.Hurt(_meleeDamage);
         }
