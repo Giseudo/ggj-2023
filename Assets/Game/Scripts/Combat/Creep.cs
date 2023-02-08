@@ -15,6 +15,9 @@ namespace Game.Combat
         public float MaxSpeed => _maxSpeed;
         public float SpeedMultiplier => _speedMultiplier;
         public SplineContainer Spline => _spline;
+        public float Displacement => _displacement;
+        public float CurveLength => _curveLength;
+        public bool IsMoving => _isMoving;
 
         private bool _isSlowedDown;
         private float _lastSlowDownTime;

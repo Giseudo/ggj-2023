@@ -1,5 +1,6 @@
 using UnityEngine;
 using HFSM;
+using DG.Tweening;
 
 [CreateAssetMenu(menuName = "Game/State Machines/Ground Unit")]
 public class GroundUnitHFSM : StateMachineAsset
@@ -40,6 +41,11 @@ public class GroundUnitHFSM : StateMachineAsset
         root.AddTransition(_hurt, _die, new Condition[] { new HasDiedCondition { } });
 
         _hurt.finished += () => root.ChangeSubState(_detectAttack);
-        _die.finished += () => root.StateMachine.gameObject.SetActive(false);
+        _die.finished += () =>
+            root.StateMachine.transform.DOScale(Vector3.zero, 0.5f)
+                .OnComplete(() => {
+                    root.StateMachine.gameObject.SetActive(false);
+                    root.StateMachine.transform.localScale = Vector3.one;
+                });
     }
 }

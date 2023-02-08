@@ -821,7 +821,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 11.243313
+      value: 7.861217
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3546,7 +3546,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 11.243313
+      value: 7.861217
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5054,7 +5054,7 @@ PrefabInstance:
     - target: {fileID: 1130611220318009936, guid: a09112da17894a3428e2303761fefd10,
         type: 3}
       propertyPath: _attackWaitTime
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4961941754361416317, guid: a09112da17894a3428e2303761fefd10,
         type: 3}

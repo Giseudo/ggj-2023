@@ -135,6 +135,7 @@ MonoBehaviour:
   _hitTime: 2
   _hitRadius: 2
   _attackDamage: 1
+  _targetAheadDistance: 15
 --- !u!136 &6439674651205656991
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -23,6 +23,9 @@ namespace Game.Combat
         [SerializeField]
         private int _attackDamage = 1;
 
+        [SerializeField]
+        private float _targetAheadDistance = 5f;
+
         private float t;
 
         private Vector3 _initialPosition;
@@ -50,6 +53,14 @@ namespace Game.Combat
         {
             _initialPosition = transform.position;
             _targetPosition = _target.position;
+
+            if (_target.TryGetComponent<Creep>(out Creep creep))
+            {
+                float t = Mathf.InverseLerp(0f, creep.CurveLength, creep.Displacement + _targetAheadDistance);
+
+                if (creep.IsMoving)
+                    _targetPosition = creep.Spline.EvaluatePosition(t);
+            }
 
             t = 0f;
 
@@ -81,17 +92,5 @@ namespace Game.Combat
                     }
                 });
         }
-
-        /*  public void OnDrawGizmosSelected()
-        {
-            float distance = (_target.position - transform.position).magnitude;
-            float speed = distance / t;
-            float time = distance / speed;
-
-            Vector3 p = Vector3.Lerp(transform.position, _target.position, time);
-            Vector3 h = Vector3.Lerp(Vector3.zero, Vector3.up * _height, Mathf.Pow(((Mathf.Cos((time + 0.5f) * Mathfs.TAU)) + 1f) * 0.5f, 0.3f));
-
-            Gizmos.DrawSphere(p + h, 1f);
-        } */
     }
 }
