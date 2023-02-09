@@ -26,10 +26,14 @@ namespace Game.Combat
         [SerializeField]
         public float _rangeRadius = 20f;
 
+        [SerializeField]
+        public int _requiredEnergy = 200;
+
         public string Name => _name;
         public UnitType Type => _type;
         public GameObject Prefab => _prefab;
         public Sprite Thumbnail => _thumbnail;
         public float RangeRadius => _rangeRadius;
+        public int RequiredEnergy => _requiredEnergy;
     }
 }

@@ -201,6 +201,9 @@ namespace Game.UI
 
         public void OnSelectUnit(UnitData data)
         {
+            if (data.RequiredEnergy >= GameManager.MainTree.EnergyAmount)
+                return;
+
             _unitSelection.Hide();
 
             GameObject instance = GameObject.Instantiate(data.Prefab, _activeNode.transform);
@@ -208,6 +211,7 @@ namespace Game.UI
             if (!instance.TryGetComponent<Unit>(out Unit unit)) return;
 
             _activeNode.SetUnit(unit);
+            GameManager.MainTree.ConsumeEnergy(data.RequiredEnergy, _activeNode.transform.position);
         }
 
         private Vector2 GetScreenPosition(Vector3 worldPosition)

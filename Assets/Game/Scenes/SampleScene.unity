@@ -821,7 +821,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 11.219844
+      value: 10.800264
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2308,7 +2308,7 @@ GameObject:
   - component: {fileID: 624772453}
   - component: {fileID: 624772455}
   - component: {fileID: 624772454}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Attacks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3546,7 +3546,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 11.219844
+      value: 10.800264
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7825,6 +7825,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MataPauTree
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
+        type: 3}
+      propertyPath: _energyAmount
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

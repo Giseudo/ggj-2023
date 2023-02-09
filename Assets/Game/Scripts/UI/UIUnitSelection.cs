@@ -53,6 +53,7 @@ namespace Game.UI
             _cards.Add(card);
 
             card.clicked += OnCardClick;
+            card.selected += OnCardSelect;
         }
 
         public void RemoveCard(UIUnitCard card)
@@ -60,11 +61,25 @@ namespace Game.UI
             _cards.Remove(card);
 
             card.clicked -= OnCardClick;
+            card.selected -= OnCardSelect;
         }
 
         public void OnCardClick(UIUnitCard card)
         {
             selectedUnit.Invoke(card.Data);
+        }
+
+        public void OnCardSelect(UIUnitCard card)
+        {
+            for (int i = 0; i < _cards.Count; i++)
+            {
+                UIUnitCard currentCard = _cards[i];
+
+                if (card == currentCard)
+                    continue;
+                
+                currentCard.Deselect();
+            }
         }
     }
 }

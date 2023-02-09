@@ -52,7 +52,7 @@ namespace Game.UI
             _text.text = $"{_tree.EnergyAmount}";
 
             _tree.collectedEnergy += OnEnergyChange;
-            // _tree.consumedEnergy += OnEnergyChange;
+            _tree.consumedEnergy += OnConsumeEnergy;
         }
 
         public void OnDestroy()
@@ -60,7 +60,7 @@ namespace Game.UI
             if (_tree == null) return;
 
             _tree.collectedEnergy -= OnEnergyChange;
-            // _tree.consumedEnergy -= OnEnergyChange;
+            _tree.consumedEnergy -= OnConsumeEnergy;
         }
 
         private void OnEnergyChange(int amount, Vector3 position)
@@ -83,6 +83,11 @@ namespace Game.UI
                         .OnComplete(() => _image.sprite = _neutralSprite);
                 });
 
+        }
+
+        private void OnConsumeEnergy(int amount, Vector3 position)
+        {
+            _text.text = $"{_tree.EnergyAmount}";
         }
 
         private Vector2 GetScreenPosition(Vector3 worldPosition)
