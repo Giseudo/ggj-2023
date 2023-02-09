@@ -62,16 +62,16 @@ namespace Game.Combat
 // [x] Wave system
 // [x] Build github
 // [x] Blurp
-// [ ] Seed hole
+// [x] Seed hole
 // [ ] Energy system
-// [ ] Unities upgrade
 // [ ] Unit selection description
-// [ ] Pause / play / fast forward
+// [ ] Absorb tree
 // [ ] Root split obstacle
+// [ ] Unities upgrade
+// [ ] Pause / play / fast forward
 // [ ] Sell unit
 // [ ] Wave timer
 // [ ] Unit construction time
-// [ ] Absorb tree
 // [ ] SFX
 // [ ] Main menu
 // [ ] Build & upload
