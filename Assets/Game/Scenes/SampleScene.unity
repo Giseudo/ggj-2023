@@ -821,7 +821,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 7.861217
+      value: 8.892592
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3546,7 +3546,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 7.861217
+      value: 8.892592
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5046,16 +5046,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1130611220318009936, guid: a09112da17894a3428e2303761fefd10,
-        type: 3}
-      propertyPath: _fovRadius
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1130611220318009936, guid: a09112da17894a3428e2303761fefd10,
-        type: 3}
-      propertyPath: _attackWaitTime
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 4961941754361416317, guid: a09112da17894a3428e2303761fefd10,
         type: 3}
       propertyPath: m_Name
@@ -5121,11 +5111,6 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 896047244}
-    - target: {fileID: 5864095549019770344, guid: a09112da17894a3428e2303761fefd10,
-        type: 3}
-      propertyPath: _offset.y
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
