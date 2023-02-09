@@ -35,11 +35,13 @@ namespace Game.Combat
             node.SetParent(this);
 
             _children.Add(node);
+            _tree.AddNode(node);
         }
 
         public void RemoveNode(RootNode node)
         {
             _children.Remove(node);
+            _tree.RemoveNode(node);
         }
 
         public void SetParent(RootNode node)

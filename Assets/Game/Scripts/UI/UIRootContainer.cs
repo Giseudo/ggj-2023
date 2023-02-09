@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Splines;
+using Unity.Mathematics;
 using Game.Core;
 using Game.Combat;
 using Shapes;
@@ -115,7 +117,34 @@ namespace Game.UI
             if (_rootActions.IsOpened) return;
             if (_unitSelection.IsOpened) return;
 
+            // Max distance
             _isValidPlacement = Vector3.Distance(_activeNode.transform.position, _draggingPosition) < _activeNode.Tree.RootMaxDistance;
+
+            // Obstacles
+            Collider[] colliders = Physics.OverlapSphere(_draggingPosition, 2f, 1 << LayerMask.NameToLayer("Obstacle"));
+
+            if (colliders.Length > 0)
+                _isValidPlacement = false;
+
+            // Root nodes
+            for (int i = 0; i < GameManager.MainTree.NodeList.Count; i++)
+            {
+                RootNode node = GameManager.MainTree.NodeList[i];
+
+                if (Vector3.Distance(_draggingPosition, node.transform.position) < 5f)
+                    _isValidPlacement = false;
+            }
+
+            // Lanes
+            for (int i = 0; i < MatchManager.WaveSpawners.Count; i++)
+            {
+                WaveSpawner spawner = MatchManager.WaveSpawners[i];
+
+                SplineUtility.GetNearestPoint(spawner.Spline.Spline, _draggingPosition, out float3 closest, out float t);
+
+                if (Vector3.Distance(_draggingPosition, closest) < 3f)
+                    _isValidPlacement = false;
+            }
         }
 
         public void OnEndDrag(PointerEventData evt)

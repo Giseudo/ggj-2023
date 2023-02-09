@@ -14,6 +14,8 @@ namespace Game.Combat
 
         public static MatchManager Instance { get; private set; }
         public static int RoundNumbers { get; private set; }
+        public static List<WaveSpawner> WaveSpawners => _waveSpawners;
+
         public static Action<WaveSpawner> WaveSpawnerAdded = delegate { };
         public static Action<WaveSpawner> WaveSpawnerRemoved = delegate { };
         private static List<WaveSpawner> _waveSpawners = new List<WaveSpawner>();
