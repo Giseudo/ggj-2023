@@ -63,10 +63,10 @@ namespace Game.Combat
 // [x] Build github
 // [x] Blurp
 // [x] Seed hole
-// [ ] Energy system
-// [ ] Unit selection description
+// [x] Energy system
+// [x] Unit selection
+// [ ] Root split obstacle & snap
 // [ ] Absorb tree
-// [ ] Root split obstacle
 // [ ] Unities upgrade
 // [ ] Pause / play / fast forward
 // [ ] Sell unit
