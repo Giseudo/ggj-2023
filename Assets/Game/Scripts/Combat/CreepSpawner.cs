@@ -33,6 +33,7 @@ namespace Game.Combat
         public SplineContainer Spline => _spline;
         public int Limit => _limit;
 
+        public Action<Creep> creepDied = delegate { };
         public Action creepsDied = delegate { };
 
         public void SetPrefab(Creep prefab) => _prefab = prefab;
@@ -88,6 +89,8 @@ namespace Game.Combat
                 .OnComplete(() => _pool.Release(creep));
             
             _deathCount++;
+
+            creepDied.Invoke(creep);
 
             if (_deathCount >= _limit)
                 creepsDied.Invoke();

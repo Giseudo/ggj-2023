@@ -19,6 +19,9 @@ namespace Game.Combat
         private WaveSpawner _waveSpawner;
 
         public Action over = delegate { };
+        public Action<Creep> creepDied = delegate { };
+
+        private void OnCreepDeath(Creep creep) => creepDied.Invoke(creep);
 
         public void Awake(WaveSpawner waveSpawner)
         {
@@ -50,14 +53,13 @@ namespace Game.Combat
                 if (!_waveSpawner.Spawners.TryGetValue(wave.CreepData, out CreepSpawner spawner))
                     continue;
 
+                spawner.creepDied -= OnCreepDeath;
                 spawner.creepsDied -= OnCreepsDeath;
             }
         }
 
         public void Start()
         {
-            Debug.Log("Round start");
-
             for (int i = 0; i < _waves.Count; i++)
             {
                 Wave wave = _waves[i];
@@ -68,6 +70,7 @@ namespace Game.Combat
                 spawner.SetInterval(wave.SpawnInterval);
                 spawner.SetLimit(wave.CountLimit);
 
+                spawner.creepDied += OnCreepDeath;
                 spawner.creepsDied += OnCreepsDeath;
  
                 spawner.Play(wave.InitialDelay);
@@ -138,6 +141,9 @@ namespace Game.Combat
         public SplineContainer Spline => _spline;
 
         public Action finished = delegate { };
+        public Action<Creep> creepDied = delegate { };
+
+        public void OnCreepDeath(Creep creep) => creepDied.Invoke(creep);
 
         public void OnDestroy()
         {
@@ -146,6 +152,8 @@ namespace Game.Combat
             for (int i = 0; i < _rounds.Count; i++)
             {
                 Round round = _rounds[i];
+
+                round.creepDied -= OnCreepDeath;
 
                 round.Destroy();
             }
@@ -158,6 +166,8 @@ namespace Game.Combat
             for (int i = 0; i < _rounds.Count; i++)
             {
                 Round round = _rounds[i];
+
+                round.creepDied += OnCreepDeath;
 
                 round.Awake(this);
             }

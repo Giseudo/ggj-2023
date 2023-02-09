@@ -821,7 +821,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 8.892592
+      value: 11.219844
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3546,7 +3546,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 8.892592
+      value: 11.219844
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

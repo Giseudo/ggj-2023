@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Core;
 
 namespace Game.Combat
 {
@@ -30,6 +31,7 @@ namespace Game.Combat
             WaveSpawnerAdded.Invoke(waveSpawner);
 
             waveSpawner.finished += Instance.OnWaveFinish;
+            waveSpawner.creepDied += Instance.OnCreepDeath;
         }
 
         public static void RemoveWaveSpawner(WaveSpawner waveSpawner)
@@ -38,6 +40,7 @@ namespace Game.Combat
             WaveSpawnerRemoved.Invoke(waveSpawner);
 
             waveSpawner.finished -= Instance.OnWaveFinish;
+            waveSpawner.creepDied -= Instance.OnCreepDeath;
         }
 
         private void OnWaveFinish()
@@ -46,6 +49,11 @@ namespace Game.Combat
 
             if (_endedWavesCount >= _waveSpawners.Count)
                 LevelCompleted.Invoke();
+        }
+
+        public void OnCreepDeath(Creep creep)
+        {
+            GameManager.MainTree.CollectEnergy(creep.EnergyDropAmount, creep.transform.position);
         }
     }
 }

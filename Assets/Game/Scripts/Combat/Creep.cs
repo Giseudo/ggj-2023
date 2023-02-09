@@ -11,6 +11,9 @@ namespace Game.Combat
         [SerializeField]
         private float _maxSpeed;
 
+        [SerializeField]
+        private int _energyDropAmount = 50;
+
         public CreepData Data => _data;
         public float MaxSpeed => _maxSpeed;
         public float SpeedMultiplier => _speedMultiplier;
@@ -18,6 +21,7 @@ namespace Game.Combat
         public float Displacement => _displacement;
         public float CurveLength => _curveLength;
         public bool IsMoving => _isMoving;
+        public int EnergyDropAmount => _energyDropAmount;
 
         private bool _isSlowedDown;
         private float _lastSlowDownTime;
