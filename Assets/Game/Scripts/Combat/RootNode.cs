@@ -9,13 +9,16 @@ namespace Game.Combat
     public class RootNode : MonoBehaviour
     {
         [SerializeField]
+        private RootNode _parent;
+
+        [SerializeField]
         private Transform _branch;
 
         [SerializeField]
         private Unit _unit;
 
         private Tree _tree;
-        private RootNode _parent;
+
         private List<RootNode> _children = new List<RootNode>();
 
         public Unit Unit => _unit;

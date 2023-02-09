@@ -131,7 +131,9 @@ namespace Game.UI
             {
                 RootNode node = GameManager.MainTree.NodeList[i];
 
-                if (Vector3.Distance(_draggingPosition, node.transform.position) < 5f)
+                if (node.Parent == null) continue;
+
+                if (Vector3.Distance(_draggingPosition, FindNearestPointOnLine(node.transform.position, node.Parent.transform.position, _draggingPosition)) < 5f)
                     _isValidPlacement = false;
             }
 
@@ -145,6 +147,18 @@ namespace Game.UI
                 if (Vector3.Distance(_draggingPosition, closest) < 3f)
                     _isValidPlacement = false;
             }
+        }
+
+        public Vector3 FindNearestPointOnLine(Vector3 origin, Vector3 end, Vector3 point)
+        {
+            Vector3 heading = (end - origin);
+            float magnitudeMax = heading.magnitude;
+            heading.Normalize();
+
+            Vector3 lhs = point - origin;
+            float dotP = Vector3.Dot(lhs, heading);
+            dotP = Mathf.Clamp(dotP, 0f, magnitudeMax);
+            return origin + heading * dotP;
         }
 
         public void OnEndDrag(PointerEventData evt)
