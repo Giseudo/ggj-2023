@@ -733,7 +733,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 7.5395575
+      value: 10.939572
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6873,11 +6873,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768975702826178255, guid: 82c5401e716e07f489ed69cfdd23923e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5288666936674880629, guid: 82c5401e716e07f489ed69cfdd23923e,
         type: 3}

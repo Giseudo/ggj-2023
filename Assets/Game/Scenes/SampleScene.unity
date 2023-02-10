@@ -821,7 +821,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 8.365092
+      value: 11.103529
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4094,7 +4094,7 @@ PrefabInstance:
     - target: {fileID: 5461920184191671804, guid: ef135556b9bd6c844b45288d53300d5b,
         type: 3}
       propertyPath: m_Intensity
-      value: 8.365092
+      value: 11.103529
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7250,18 +7250,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 261273288}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1820801158 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2093543465, guid: 35457f1929fceb743a53b53c1c9974a2,
-    type: 3}
-  m_PrefabInstance: {fileID: 371100998142007796}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07afd1d7203f8bd4fbffd906e3c785a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1863122689
 GameObject:
   m_ObjectHideFlags: 0
@@ -8434,22 +8422,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: MaxVoxelsK
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 578515359, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: _parent
-      value: 
-      objectReference: {fileID: 1820801158}
-    - target: {fileID: 1646224122, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: _parent
-      value: 
-      objectReference: {fileID: 1820801158}
-    - target: {fileID: 2093543466, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 192760989407497852, guid: 35457f1929fceb743a53b53c1c9974a2,
         type: 3}
       propertyPath: m_RootOrder
@@ -8509,11 +8481,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MataPauTree
-      objectReference: {fileID: 0}
-    - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
-        type: 3}
-      propertyPath: _energyAmount
-      value: 400
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
