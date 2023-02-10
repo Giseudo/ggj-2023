@@ -779,7 +779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _energyAmount: 400
-  _rootEnergyCost: 50
+  _rootEnergyCost: 20
   _rootMaxDistance: 20
 --- !u!114 &927881622995399481
 MonoBehaviour:
