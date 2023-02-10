@@ -258,7 +258,12 @@ namespace Game.UI
 
         public void OnActionsOpen()
         {
-            _rootActions.AddButton.interactable = _activeNode.Unit == null;
+            bool canAdd = _activeNode.Unit == null;
+
+            if (_activeNode.Parent == null)
+                canAdd = false;
+
+            _rootActions.AddButton.interactable = canAdd;
         }
 
         private void CreateNode()
