@@ -66,10 +66,17 @@ namespace Game.Combat
 
         public void OnCreepDeath(Creep creep)
         {
-            DroppedEnergy.Invoke(creep.EnergyDropAmount, creep.transform.position);
-
-            StartCoroutine(CollectEnergy(creep.EnergyDropAmount));
+            InternalDropEnergy(creep.EnergyDropAmount, creep.transform.position);
         }
+
+        private void InternalDropEnergy(int amount, Vector3 position)
+        {
+            DroppedEnergy.Invoke(amount, position);
+
+            StartCoroutine(CollectEnergy(amount));
+        }
+
+        public static void DropEnergy(int amount, Vector3 position) => Instance.InternalDropEnergy(amount, position);
 
         private IEnumerator CollectEnergy(int amount)
         {

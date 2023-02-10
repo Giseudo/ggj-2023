@@ -17,19 +17,24 @@ namespace Game.Combat
         private float _rootMaxDistance = 20f;
 
         private List<RootNode> _nodeList;
+        private List<Tree> _absorvedTrees = new List<Tree>();
+        private Tree _parentTree;
 
         public Action<int> collectedEnergy = delegate { };
         public Action<int> consumedEnergy = delegate { };
+        public Action<Tree> absorvedTree = delegate { };
 
         public float RootMaxDistance => _rootMaxDistance;
         public int RootEnergyCost => _rootEnergyCost;
         public int EnergyAmount => _energyAmount;
         public bool HasEnergy(int value) => value >= _energyAmount;
         public List<RootNode> NodeList => _nodeList;
+        public List<Tree> AbsorvedTrees => _absorvedTrees;
+        public Tree ParentTree => _parentTree;
 
         public void Awake()
         {
-            _nodeList = GetComponentsInChildren<RootNode>().ToList();
+            _nodeList = GetComponentsInChildren<RootNode>(true).ToList();
         }
 
         public void CollectEnergy(int value)
@@ -57,6 +62,25 @@ namespace Game.Combat
         public void RemoveNode(RootNode node)
         {
             _nodeList.Remove(node);
+        }
+
+        public void SetParentTree(Tree tree)
+        {
+            _parentTree = tree;
+        }
+
+        public void AbsorbTree(Tree tree)
+        {
+            _absorvedTrees.Add(tree);
+            absorvedTree.Invoke(tree);
+            tree.SetParentTree(this);
+            
+            for (int i = 0; i < tree.NodeList.Count; i++)
+            {
+                RootNode node = tree.NodeList[i];
+
+                node.gameObject.SetActive(true);
+            }
         }
     }
 }

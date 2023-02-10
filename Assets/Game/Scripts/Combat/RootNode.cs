@@ -17,6 +17,7 @@ namespace Game.Combat
         [SerializeField]
         private Unit _unit;
 
+        private SphereCollider _collider;
         private Tree _tree;
 
         private List<RootNode> _children = new List<RootNode>();
@@ -29,6 +30,8 @@ namespace Game.Combat
         public void Awake()
         {
             _tree = GetComponentInParent<Tree>();
+
+            TryGetComponent<SphereCollider>(out _collider);
         }
 
         public void AddNode(RootNode node)
@@ -76,5 +79,8 @@ namespace Game.Combat
             _branch.DOScaleY(0f, 1f);
             _branch.DOMove(_parent.transform.position, 1f);
         }
+
+        public void Disable() => _collider.enabled = false;
+        public void Enable() => _collider.enabled = true;
     }
 }

@@ -3,11 +3,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.Splines;
 using Unity.Mathematics;
 using Game.Core;
-using Game.Combat;
 using Shapes;
 
 namespace Game.UI
 {
+    using Game.Combat;
+
     public class UIRootContainer : ImmediateModeShapeDrawer, IPointerMoveHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         [SerializeField]
@@ -29,6 +30,7 @@ namespace Game.UI
         private Vector3 _draggingPosition;
         private bool _isDragging = false;
         private bool _isValidPlacement = false;
+        private Tree _activeTree;
 
         public override void OnEnable()
         {
@@ -72,6 +74,13 @@ namespace Game.UI
             for (int i = 0; i < colliders.Length; i++)
             {
                 Collider collider = colliders[i];
+
+                if (collider.TryGetComponent<RootNode>(out RootNode node))
+                {
+                    if (node.Tree != GameManager.MainTree && node.Tree.ParentTree != GameManager.MainTree)
+                        continue;
+                }
+
                 float distance = (groundHit.point - collider.transform.position).sqrMagnitude;
 
                 if (distance < minDistance)
@@ -117,17 +126,52 @@ namespace Game.UI
             if (_rootActions.IsOpened) return;
             if (_unitSelection.IsOpened) return;
 
-            // Max distance
-            _isValidPlacement = Vector3.Distance(_activeNode.transform.position, _draggingPosition) < _activeNode.Tree.RootMaxDistance;
+            _isValidPlacement = true;
+            _activeTree = null;
 
-            if (GameManager.MainTree.EnergyAmount < GameManager.MainTree.RootEnergyCost)
+            // Tree
+            Collider[] treeColliders = Physics.OverlapSphere(_draggingPosition, 2f, 1 << LayerMask.NameToLayer("RootNode"));
+
+            for (int i = 0; i < treeColliders.Length; i++)
+            {
+                Collider collider = treeColliders[i];
+
+                if (collider.TryGetComponent<RootNode>(out RootNode node))
+                {
+                    if (node.Parent)
+                        continue;
+                    
+                    if (node.Tree.ParentTree != null)
+                        continue;
+
+                    _activeTree = node.Tree;
+
+                    return;
+                }
+            }
+
+            // Max distance
+            if (Vector3.Distance(_activeNode.transform.position, _draggingPosition) > _activeNode.Tree.RootMaxDistance)
+            {
                 _isValidPlacement = false;
+                return;
+            }
+
+            // Not enough energy
+            if (GameManager.MainTree.EnergyAmount < GameManager.MainTree.RootEnergyCost)
+            {
+                _isValidPlacement = false;
+                return;
+            }
 
             // Obstacles
-            Collider[] colliders = Physics.OverlapSphere(_draggingPosition, 2f, 1 << LayerMask.NameToLayer("Obstacle"));
+            Collider[] obstaclesColliders = Physics.OverlapSphere(_draggingPosition, 2f, 1 << LayerMask.NameToLayer("Obstacle"));
 
-            if (colliders.Length > 0)
+            if (obstaclesColliders.Length > 0)
+            {
                 _isValidPlacement = false;
+                return;
+            }
 
             // Root nodes
             for (int i = 0; i < GameManager.MainTree.NodeList.Count; i++)
@@ -137,7 +181,16 @@ namespace Game.UI
                 if (node.Parent == null) continue;
 
                 if (Vector3.Distance(_draggingPosition, FindNearestPointOnLine(node.transform.position, node.Parent.transform.position, _draggingPosition)) < 5f)
+                {
                     _isValidPlacement = false;
+                    return;
+                }
+                
+                if (Vector3.Distance(_draggingPosition, node.transform.position) < 5f)
+                {
+                    _isValidPlacement = false;
+                    return;
+                }
             }
 
             // Lanes
@@ -148,7 +201,10 @@ namespace Game.UI
                 SplineUtility.GetNearestPoint(spawner.Spline.Spline, _draggingPosition, out float3 closest, out float t);
 
                 if (Vector3.Distance(_draggingPosition, closest) < 3f)
+                {
                     _isValidPlacement = false;
+                    return;
+                }
             }
         }
 
@@ -218,6 +274,18 @@ namespace Game.UI
             _activeNode.AddNode(node);
 
             node.transform.position = _draggingPosition;
+
+            if (_activeTree != null)
+            {
+                GameManager.MainTree.AbsorbTree(_activeTree);
+                MatchManager.DropEnergy(_activeTree.EnergyAmount, _activeTree.transform.position);
+
+                node.transform.position = _activeTree.transform.position;
+                node.Disable();
+
+                _activeTree = null;
+            }
+
             node.GrowBranch();
 
             _activeNode = node;
