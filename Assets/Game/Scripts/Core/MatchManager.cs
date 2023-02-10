@@ -95,7 +95,7 @@ namespace Game.Combat
 // [x] Energy system
 // [x] Unit selection
 // [x] Root split obstacle
-// [ ] Absorb tree
+// [x] Absorb tree
 // [ ] Unities upgrade
 // [ ] Pause / play / fast forward
 // [ ] Sell unit
