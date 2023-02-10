@@ -70,14 +70,14 @@ namespace Game.Combat
             _branch.localScale = new Vector3(1f, 1f, 1f);
             _branch.eulerAngles = new Vector3(0f, -angle, 90f);
 
-            _branch.DOScaleY(length, 1f);
-            _branch.DOMove(transform.position, 1f);
+            _branch.DOScaleY(length, 1f).SetUpdate(true);
+            _branch.DOMove(transform.position, 1f).SetUpdate(true);
         }
 
         public void ShrinkBranch()
         {
-            _branch.DOScaleY(0f, 1f);
-            _branch.DOMove(_parent.transform.position, 1f);
+            _branch.DOScaleY(0f, 1f).SetUpdate(true);
+            _branch.DOMove(_parent.transform.position, 1f).SetUpdate(true);
         }
 
         public void Disable() => _collider.enabled = false;

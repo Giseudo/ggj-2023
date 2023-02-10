@@ -41,6 +41,7 @@ public class UIRootActions : MonoBehaviour
         if (_rect == null) return;
 
         _rect.DOScale(Vector3.one, .5f)
+            .SetUpdate(true)
             .SetEase(Ease.OutExpo);
 
         _isOpened = true;
@@ -52,6 +53,7 @@ public class UIRootActions : MonoBehaviour
         if (_rect == null) return;
 
         _rect.DOScale(Vector3.zero, .2f)
+            .SetUpdate(true)
             .OnComplete(() => {
                 _isOpened = false;
                 closed.Invoke();

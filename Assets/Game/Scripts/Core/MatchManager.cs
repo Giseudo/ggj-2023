@@ -96,8 +96,8 @@ namespace Game.Combat
 // [x] Unit selection
 // [x] Root split obstacle
 // [x] Absorb tree
-// [ ] Unities upgrade
 // [ ] Pause / play / fast forward
+// [ ] Unities upgrade
 // [ ] Sell unit
 // [ ] Wave timer
 // [ ] Unit construction time

@@ -36,14 +36,18 @@ namespace Game.UI
         public void Show()
         {
             _rect.DOScale(Vector3.one, .5f)
+                .SetUpdate(true)
                 .SetEase(Ease.OutExpo);
+
             _isOpened = true;
             opened.Invoke();
         }
 
         public void Hide()
         {
-            _rect.DOScale(Vector3.zero, .2f);
+            _rect.DOScale(Vector3.zero, .2f)
+                .SetUpdate(true);
+
             _isOpened = false;
             closed.Invoke();
         }

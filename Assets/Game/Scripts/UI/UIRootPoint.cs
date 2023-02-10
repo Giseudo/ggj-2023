@@ -46,10 +46,10 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         else Show();
     }
 
-    public Tween ShowInner() => _innerRect.DOScale(Vector3.one, .3f);
-    public Tween ShowOuter() => _outerRect.DOScale(Vector3.one, .3f);
-    public Tween HideInner() => _innerRect.DOScale(Vector3.zero, .3f);
-    public Tween HideOuter() => _outerRect.DOScale(Vector3.zero, .3f);
+    public Tween ShowInner() => _innerRect.DOScale(Vector3.one, .3f).SetUpdate(true);
+    public Tween ShowOuter() => _outerRect.DOScale(Vector3.one, .3f).SetUpdate(true);
+    public Tween HideInner() => _innerRect.DOScale(Vector3.zero, .3f).SetUpdate(true);
+    public Tween HideOuter() => _outerRect.DOScale(Vector3.zero, .3f).SetUpdate(true);
 
     public void OnPointerEnter(PointerEventData evt)
     {
