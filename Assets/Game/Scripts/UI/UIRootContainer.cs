@@ -244,7 +244,9 @@ namespace Game.UI
 
         public void OnSelectUnit(UnitData data)
         {
-            if (data.RequiredEnergy >= GameManager.MainTree.EnergyAmount)
+            Debug.Log(GameManager.MainTree.EnergyAmount);
+
+            if (data.RequiredEnergy > GameManager.MainTree.EnergyAmount)
                 return;
 
             _unitSelection.Hide();
@@ -254,7 +256,8 @@ namespace Game.UI
             if (!instance.TryGetComponent<Unit>(out Unit unit)) return;
 
             _activeNode.SetUnit(unit);
-            GameManager.MainTree.ConsumeEnergy(data.RequiredEnergy, _activeNode.transform.position);
+
+            GameManager.MainTree.ConsumeEnergy(data.RequiredEnergy);
         }
 
         private Vector2 GetScreenPosition(Vector3 worldPosition)

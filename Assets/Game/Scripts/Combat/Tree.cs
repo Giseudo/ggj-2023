@@ -15,8 +15,8 @@ namespace Game.Combat
 
         private List<RootNode> _nodeList;
 
-        public Action<int, Vector3> collectedEnergy = delegate { };
-        public Action<int, Vector3> consumedEnergy = delegate { };
+        public Action<int> collectedEnergy = delegate { };
+        public Action<int> consumedEnergy = delegate { };
 
         public float RootMaxDistance => _rootMaxDistance;
         public int EnergyAmount => _energyAmount;
@@ -28,21 +28,21 @@ namespace Game.Combat
             _nodeList = GetComponentsInChildren<RootNode>().ToList();
         }
 
-        public void CollectEnergy(int value, Vector3 position)
+        public void CollectEnergy(int value)
         {
             _energyAmount += value;
 
-            collectedEnergy.Invoke(value, position);
+            collectedEnergy.Invoke(value);
         }
 
-        public void ConsumeEnergy(int value, Vector3 position)
+        public void ConsumeEnergy(int value)
         {
             _energyAmount -= value;
 
             if (_energyAmount < 0)
                 _energyAmount = 0;
             
-            consumedEnergy.Invoke(value, position);
+            consumedEnergy.Invoke(value);
         }
 
         public void AddNode(RootNode node)

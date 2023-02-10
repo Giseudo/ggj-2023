@@ -103,7 +103,7 @@ namespace Game.UI
             DOTween.To(() => _disc.Color, x => _disc.Color = x, _isSelected ? new Color32(46, 185, 132, 255) : new Color32(46, 185, 132, 50), .3f);
         }
 
-        private void OnEnergyChange(int amount, Vector3 position)
+        private void OnEnergyChange(int amount)
         {
             if (GameManager.MainTree.EnergyAmount >= _data.RequiredEnergy)
                 Enable();

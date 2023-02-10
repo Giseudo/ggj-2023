@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Core;
+using DG.Tweening;
 
 namespace Game.Combat
 {
@@ -12,19 +14,28 @@ namespace Game.Combat
 
         private int _endedWavesCount = 0;
 
+        private static List<WaveSpawner> _waveSpawners;
+
         public static MatchManager Instance { get; private set; }
         public static int RoundNumbers { get; private set; }
         public static List<WaveSpawner> WaveSpawners => _waveSpawners;
 
-        public static Action<WaveSpawner> WaveSpawnerAdded = delegate { };
-        public static Action<WaveSpawner> WaveSpawnerRemoved = delegate { };
-        private static List<WaveSpawner> _waveSpawners = new List<WaveSpawner>();
-        public static Action LevelCompleted = delegate { };
+        public static Action<WaveSpawner> WaveSpawnerAdded;
+        public static Action<WaveSpawner> WaveSpawnerRemoved;
+        public static Action<int, Vector3> DroppedEnergy;
+        public static Action LevelCompleted;
 
         public void Awake()
         {
             Instance = this;
             RoundNumbers = _roundNumbers;
+
+            WaveSpawnerAdded = delegate { };
+            WaveSpawnerRemoved = delegate { };
+            DroppedEnergy = delegate { };
+            LevelCompleted = delegate { };
+
+            _waveSpawners = new List<WaveSpawner>();
         }
 
         public static void AddWaveSpawner(WaveSpawner waveSpawner)
@@ -55,7 +66,16 @@ namespace Game.Combat
 
         public void OnCreepDeath(Creep creep)
         {
-            GameManager.MainTree.CollectEnergy(creep.EnergyDropAmount, creep.transform.position);
+            DroppedEnergy.Invoke(creep.EnergyDropAmount, creep.transform.position);
+
+            StartCoroutine(CollectEnergy(creep.EnergyDropAmount));
+        }
+
+        private IEnumerator CollectEnergy(int amount)
+        {
+            yield return new WaitForSeconds(1.5f);
+
+            GameManager.MainTree.CollectEnergy(amount);
         }
     }
 }
@@ -67,7 +87,7 @@ namespace Game.Combat
 // [x] Seed hole
 // [x] Energy system
 // [x] Unit selection
-// [ ] Root split obstacle & snap
+// [x] Root split obstacle
 // [ ] Absorb tree
 // [ ] Unities upgrade
 // [ ] Pause / play / fast forward

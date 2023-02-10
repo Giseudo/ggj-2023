@@ -67,6 +67,8 @@ namespace Game.Combat
                     instance.gameObject.SetActive(false);
                 },
                 (instance) => {
+                    if (instance == null) return;
+
                     if (instance.TryGetComponent<Damageable>(out Damageable damageable))
                         damageable.died -= OnDie;
 

@@ -51,7 +51,8 @@ namespace Game.UI
 
             _text.text = $"{_tree.EnergyAmount}";
 
-            _tree.collectedEnergy += OnEnergyChange;
+            MatchManager.DroppedEnergy += OnDropEnergy;
+            _tree.collectedEnergy += OnCollectEnergy;
             _tree.consumedEnergy += OnConsumeEnergy;
         }
 
@@ -59,20 +60,23 @@ namespace Game.UI
         {
             if (_tree == null) return;
 
-            _tree.collectedEnergy -= OnEnergyChange;
+            MatchManager.DroppedEnergy -= OnDropEnergy;
+            _tree.collectedEnergy -= OnCollectEnergy;
             _tree.consumedEnergy -= OnConsumeEnergy;
         }
 
-        private void OnEnergyChange(int amount, Vector3 position)
+        private void OnDropEnergy(int amount, Vector3 position)
         {
             Vector3 targetPosition = GetScreenPosition(position);
 
             _sparksVfx.SetVector3("TargetPosition_position", position);
             _eventAttribute.SetVector3("TargetPosition_position", position);
             _sparksVfx.SendEvent("OnSpark", _eventAttribute);
+        }
 
+        private void OnCollectEnergy(int amount)
+        {
             _wrapperRect.DOScale(Vector3.one * 1.2f, .2f)
-                .SetDelay(1.5f)
                 .OnStart(() => {
                     _image.sprite = _happySprite;
                     _text.text = $"{_tree.EnergyAmount}";
@@ -82,10 +86,9 @@ namespace Game.UI
                         .SetDelay(.5f)
                         .OnComplete(() => _image.sprite = _neutralSprite);
                 });
-
         }
 
-        private void OnConsumeEnergy(int amount, Vector3 position)
+        private void OnConsumeEnergy(int amount)
         {
             _text.text = $"{_tree.EnergyAmount}";
         }
