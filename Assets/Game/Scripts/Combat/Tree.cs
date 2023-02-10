@@ -8,10 +8,13 @@ namespace Game.Combat
     public class Tree : MonoBehaviour
     {
         [SerializeField]
-        private float _rootMaxDistance = 20f;
+        private int _energyAmount = 400;
 
         [SerializeField]
-        private int _energyAmount = 400;
+        private int _rootEnergyCost = 50;
+
+        [SerializeField]
+        private float _rootMaxDistance = 20f;
 
         private List<RootNode> _nodeList;
 
@@ -19,6 +22,7 @@ namespace Game.Combat
         public Action<int> consumedEnergy = delegate { };
 
         public float RootMaxDistance => _rootMaxDistance;
+        public int RootEnergyCost => _rootEnergyCost;
         public int EnergyAmount => _energyAmount;
         public bool HasEnergy(int value) => value >= _energyAmount;
         public List<RootNode> NodeList => _nodeList;

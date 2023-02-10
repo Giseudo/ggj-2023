@@ -120,6 +120,9 @@ namespace Game.UI
             // Max distance
             _isValidPlacement = Vector3.Distance(_activeNode.transform.position, _draggingPosition) < _activeNode.Tree.RootMaxDistance;
 
+            if (GameManager.MainTree.EnergyAmount < GameManager.MainTree.RootEnergyCost)
+                _isValidPlacement = false;
+
             // Obstacles
             Collider[] colliders = Physics.OverlapSphere(_draggingPosition, 2f, 1 << LayerMask.NameToLayer("Obstacle"));
 
@@ -218,6 +221,8 @@ namespace Game.UI
             node.GrowBranch();
 
             _activeNode = node;
+
+            GameManager.MainTree.ConsumeEnergy(GameManager.MainTree.RootEnergyCost);
         }
 
         public override void DrawShapes(Camera cam){
