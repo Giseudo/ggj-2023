@@ -317,8 +317,6 @@ namespace Game.UI
 
         public void OnSelectUnit(UnitData data)
         {
-            Debug.Log(GameManager.MainTree.EnergyAmount);
-
             if (data.RequiredEnergy > GameManager.MainTree.EnergyAmount)
                 return;
 
