@@ -774,7 +774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _energyAmount: 400
-  _rootEnergyCost: 50
+  _rootEnergyCost: 20
   _rootMaxDistance: 20
 --- !u!4 &5288666936674880629 stripped
 Transform:
