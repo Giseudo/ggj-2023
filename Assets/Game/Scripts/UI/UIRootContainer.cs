@@ -4,6 +4,7 @@ using UnityEngine.Splines;
 using Unity.Mathematics;
 using Game.Core;
 using Shapes;
+using DG.Tweening;
 
 namespace Game.UI
 {
@@ -22,6 +23,15 @@ namespace Game.UI
 
         [SerializeField]
         private UIRootPoint _rootPoint;
+
+        [SerializeField]
+        private AudioClip _unitCreationSound;
+
+        [SerializeField]
+        private AudioClip _rootCreationSound;
+
+        [SerializeField]
+        private AudioClip _errorSound;
 
         [SerializeField]
         private RectTransform _mainCanvasRect;
@@ -296,6 +306,7 @@ namespace Game.UI
             _activeNode = node;
 
             GameManager.MainTree.ConsumeEnergy(GameManager.MainTree.RootEnergyCost);
+            SoundManager.PlaySound(_rootCreationSound);
         }
 
         public override void DrawShapes(Camera cam){
@@ -328,6 +339,12 @@ namespace Game.UI
             _unitSelection.Hide();
 
             GameObject instance = GameObject.Instantiate(data.Prefab, _activeNode.transform);
+
+            instance.transform.localScale = Vector3.zero;
+            instance.transform.DOScale(Vector3.one, 1f)
+                .SetEase(Ease.OutElastic);
+
+            SoundManager.PlaySound(_unitCreationSound);
 
             if (!instance.TryGetComponent<Unit>(out Unit unit)) return;
 

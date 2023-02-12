@@ -12,6 +12,13 @@ namespace Game.Combat
         [SerializeField]
         private float _hurtTime = 1f;
 
+        [SerializeField]
+        private AudioClip _hitSound;
+
+        [SerializeField]
+        private AudioClip _deathSound;
+
+
         private int _maxHealth;
         private bool _isDead = false;
         private CapsuleCollider _collider;
@@ -55,6 +62,8 @@ namespace Game.Combat
 
             hurted.Invoke(this);
 
+            SoundManager.PlaySound(_hitSound);
+
             if (_health < 0) _health = 0;
             if (_health > 0) return;
 
@@ -68,6 +77,8 @@ namespace Game.Combat
             died.Invoke(this);
 
             _isDead = true;
+
+            SoundManager.PlaySound(_deathSound);
 
             if (!_collider) return;
 

@@ -169,6 +169,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 3
   _hurtTime: 1
+  _hitSound: {fileID: 0}
+  _deathSound: {fileID: 0}
 --- !u!114 &8240838129491688173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 2cf5de96319af004abc3c832c2e2b4cd, type: 2}
   _maxSpeed: 8
+  _energyDropAmount: 50
 --- !u!114 &5838779266844648510
 MonoBehaviour:
   m_ObjectHideFlags: 0

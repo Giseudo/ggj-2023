@@ -22,7 +22,7 @@ namespace Game.Combat
         private string _vfxEventName = "OnAttack";
 
         [SerializeField]
-        private AudioClip _soundEffectClip;
+        private AudioClip _attackSound;
 
         private float _lastAttackTime = float.MinValue;
         private Damageable _currentTarget;
@@ -41,7 +41,11 @@ namespace Game.Combat
         public Action<Attacker, AudioClip> playedSound = delegate { };
 
         public void PlayAttackVFX() => playedVfx.Invoke(this, _vfxEventName);
-        public void PlayAttackSound() => playedSound.Invoke(this, _soundEffectClip);
+        public void PlayAttackSound()
+        {
+            SoundManager.PlaySound(_attackSound);
+            playedSound.Invoke(this, _attackSound);
+        }
 
         public void Start()
         {

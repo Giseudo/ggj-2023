@@ -146,7 +146,7 @@ MonoBehaviour:
   _attackSpeed: 4
   _attackWaitTime: 0
   _vfxEventName: OnBite
-  _soundEffectClip: {fileID: 0}
+  _attackSound: {fileID: 8300000, guid: 02e01c0dbaef0a64eb7de1a782feb1ee, type: 3}
 --- !u!114 &4041170387506462993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,3 +174,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 2
   _hurtTime: 1
+  _hitSound: {fileID: 0}
+  _deathSound: {fileID: 0}
