@@ -141,9 +141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1382796ffcef8e34381cb8ee18863a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meleeDamage: 4
+  _meleeDamage: 2
   _fovRadius: 10
-  _attackSpeed: 4
+  _attackSpeed: 2
   _attackWaitTime: 0
   _vfxEventName: OnBite
   _attackSound: {fileID: 8300000, guid: 02e01c0dbaef0a64eb7de1a782feb1ee, type: 3}

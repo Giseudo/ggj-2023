@@ -2185,6 +2185,9 @@ MonoBehaviour:
   _unitSelection: {fileID: 881227646753339850}
   _rootActions: {fileID: 881227646246933954}
   _rootPoint: {fileID: 881227647515456271}
+  _unitCreationSound: {fileID: 8300000, guid: 8a57689f6af189c4f86c40921af49eb0, type: 3}
+  _rootCreationSound: {fileID: 8300000, guid: 377841a747eb1a842892e76ee276f0a9, type: 3}
+  _errorSound: {fileID: 0}
   _mainCanvasRect: {fileID: 881227647062226957}
 --- !u!1 &881227646041296836
 GameObject:
