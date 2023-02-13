@@ -60,6 +60,12 @@ namespace Game.Combat
 
         public void Start()
         {
+            if (_waves.Count <= 0)
+            {
+                over.Invoke();
+                return;
+            }
+
             for (int i = 0; i < _waves.Count; i++)
             {
                 Wave wave = _waves[i];
@@ -131,8 +137,7 @@ namespace Game.Combat
         [SerializeField]
         private CreepSpawner _creepSpawnerPrefab;
 
-        [SerializeField]
-        private int _currentRound;
+        private int _currentRound = 0;
 
         private Dictionary<CreepData, CreepSpawner> _spawners = new Dictionary<CreepData, CreepSpawner>();
 
@@ -141,23 +146,10 @@ namespace Game.Combat
         public SplineContainer Spline => _spline;
 
         public Action finished = delegate { };
+        public Action roundOver = delegate { };
         public Action<Creep> creepDied = delegate { };
 
         public void OnCreepDeath(Creep creep) => creepDied.Invoke(creep);
-
-        public void OnDestroy()
-        {
-            MatchManager.RemoveWaveSpawner(this);
-
-            for (int i = 0; i < _rounds.Count; i++)
-            {
-                Round round = _rounds[i];
-
-                round.creepDied -= OnCreepDeath;
-
-                round.Destroy();
-            }
-        }
 
         public void Start()
         {
@@ -168,11 +160,25 @@ namespace Game.Combat
                 Round round = _rounds[i];
 
                 round.creepDied += OnCreepDeath;
+                round.over += OnRoundOver;
 
                 round.Awake(this);
             }
+        }
 
-            StartRound();
+        public void OnDestroy()
+        {
+            MatchManager.RemoveWaveSpawner(this);
+
+            for (int i = 0; i < _rounds.Count; i++)
+            {
+                Round round = _rounds[i];
+
+                round.creepDied -= OnCreepDeath;
+                round.over -= OnRoundOver;
+
+                round.Destroy();
+            }
         }
 
         public void StartRound()
@@ -182,21 +188,18 @@ namespace Game.Combat
             if (round == null) return;
 
             round.Start();
-
-            round.over += OnRoundOver;
         }
 
         public void OnRoundOver()
         {
-            _currentRound++;
-
-            if (_currentRound >= _rounds.Count)
+            if (_currentRound >= _rounds.Count - 1)
             {
                 finished.Invoke();
                 return;
             }
 
-            StartRound();
+            _currentRound++;
+            roundOver.Invoke();
         }
     }
 }

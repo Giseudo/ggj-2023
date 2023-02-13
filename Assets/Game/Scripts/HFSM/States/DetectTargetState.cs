@@ -27,6 +27,11 @@ public class DetectTargetState : State
         CheckColliders();
 
         if (_closestTarget == null) return;
+        if (!_closestTarget.gameObject.activeInHierarchy)
+        {
+            _closestTarget = null;
+            return;
+        }
 
         Attack();
     }

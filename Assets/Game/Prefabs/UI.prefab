@@ -2329,7 +2329,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 881227645964655435}
         m_TargetAssemblyTypeName: Game.UI.UIRootContainer, Assembly-CSharp
-        m_MethodName: SplitRoot
+        m_MethodName: StartDrag
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

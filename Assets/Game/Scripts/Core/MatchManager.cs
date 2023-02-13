@@ -13,6 +13,7 @@ namespace Game.Combat
         private int _roundNumbers = 3;
 
         private int _endedWavesCount = 0;
+        private int _roundOverCount = 0;
 
         private static List<WaveSpawner> _waveSpawners;
 
@@ -38,6 +39,23 @@ namespace Game.Combat
             _waveSpawners = new List<WaveSpawner>();
         }
 
+        public void Start()
+        {
+            StartCoroutine(StartRound());
+        }
+
+        public IEnumerator StartRound()
+        {
+            yield return new WaitForSeconds(1f);
+
+            for (int i = 0; i < _waveSpawners.Count; i++)
+            {
+                WaveSpawner waveSpawner = _waveSpawners[i];
+
+                waveSpawner.StartRound();
+            }
+        }
+
         public static void AddWaveSpawner(WaveSpawner waveSpawner)
         {
             _waveSpawners.Add(waveSpawner);
@@ -45,6 +63,7 @@ namespace Game.Combat
 
             waveSpawner.finished += Instance.OnWaveFinish;
             waveSpawner.creepDied += Instance.OnCreepDeath;
+            waveSpawner.roundOver += Instance.OnRoundOver;
         }
 
         public static void RemoveWaveSpawner(WaveSpawner waveSpawner)
@@ -54,6 +73,7 @@ namespace Game.Combat
 
             waveSpawner.finished -= Instance.OnWaveFinish;
             waveSpawner.creepDied -= Instance.OnCreepDeath;
+            waveSpawner.roundOver -= Instance.OnRoundOver;
         }
 
         private void OnWaveFinish()
@@ -64,8 +84,22 @@ namespace Game.Combat
                 LevelCompleted.Invoke();
         }
 
+        private void OnRoundOver()
+        {
+            _roundOverCount++;
+
+            if (_roundOverCount >= _waveSpawners.Count)
+            {
+                _roundOverCount = 0;
+
+                StartCoroutine(StartRound());
+            }
+        }
+
         public void OnCreepDeath(Creep creep)
         {
+            if (creep == null) return;
+
             InternalDropEnergy(creep.EnergyDropAmount, creep.transform.position);
         }
 

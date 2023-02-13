@@ -778,9 +778,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b81a274880046745a64a305f273220b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _energyAmount: 400
-  _rootEnergyCost: 20
+  _energyAmount: 1100
+  _rootEnergyCost: 200
   _rootMaxDistance: 20
+  _rootSplitLimit: 5
 --- !u!114 &927881622995399481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -795,3 +796,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 10
   _hurtTime: 1
+  _hitSound: {fileID: 0}
+  _deathSound: {fileID: 0}

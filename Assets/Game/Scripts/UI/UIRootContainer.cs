@@ -176,7 +176,7 @@ namespace Game.UI
             }
 
             // Tree
-            Collider[] treeColliders = Physics.OverlapSphere(_draggingPosition, 2f, 1 << LayerMask.NameToLayer("RootNode"));
+            Collider[] treeColliders = Physics.OverlapSphere(_draggingPosition, 1f, 1 << LayerMask.NameToLayer("RootNode"));
 
             for (int i = 0; i < treeColliders.Length; i++)
             {
@@ -385,6 +385,7 @@ namespace Game.UI
 
             instance.transform.localScale = Vector3.zero;
             instance.transform.DOScale(Vector3.one, 1f)
+                .SetUpdate(true)
                 .SetEase(Ease.OutElastic);
 
             SoundManager.PlaySound(_unitCreationSound);
