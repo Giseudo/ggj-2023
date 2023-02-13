@@ -25,6 +25,9 @@ namespace Game.UI
         private UIRootPoint _rootPoint;
 
         [SerializeField]
+        private UIRootLimit _rootLimit;
+
+        [SerializeField]
         private AudioClip _unitCreationSound;
 
         [SerializeField]
@@ -34,13 +37,32 @@ namespace Game.UI
         private AudioClip _errorSound;
 
         [SerializeField]
-        private RectTransform _mainCanvasRect;
+        private Canvas _mainCanvas;
 
+
+        private Tree _mainTree;
+        private RectTransform _mainCanvasRect;
         private RootNode _activeNode;
         private Vector3 _draggingPosition;
         private bool _isDragging = false;
         private bool _isValidPlacement = false;
         private Tree _activeTree;
+
+        public void Awake()
+        {
+            _mainCanvas.TryGetComponent<RectTransform>(out _mainCanvasRect);
+        }
+
+        public void Start()
+        {
+            _mainTree = GameManager.MainTree;
+            _mainTree.rootSplitted += OnRootSplit;
+        }
+
+        public void OnDestroy()
+        {
+            _mainTree.rootSplitted += OnRootSplit;
+        }
 
         public override void OnEnable()
         {
@@ -68,6 +90,7 @@ namespace Game.UI
                 return;
             
             _draggingPosition = groundHit.point;
+            _rootLimit.Rect.anchoredPosition = (evt.position / _mainCanvas.scaleFactor) + new Vector2(-20f, 20f);
 
             if (_rootActions.IsOpened) return;
             if (_unitSelection.IsOpened) return;
@@ -122,7 +145,13 @@ namespace Game.UI
             if (_rootActions.IsOpened) return;
             if (_unitSelection.IsOpened) return;
 
+            StartDrag();
+        }
+
+        public void StartDrag()
+        {
             _isDragging = true;
+            _rootLimit.Show();
         }
 
         public void OnDrag(PointerEventData evt)
@@ -138,6 +167,13 @@ namespace Game.UI
 
             _isValidPlacement = true;
             _activeTree = null;
+
+            // Max root split
+            if (_mainTree.RootSplitLimit == 0)
+            {
+                _isValidPlacement = false;
+                return;
+            }
 
             // Tree
             Collider[] treeColliders = Physics.OverlapSphere(_draggingPosition, 2f, 1 << LayerMask.NameToLayer("RootNode"));
@@ -234,7 +270,22 @@ namespace Game.UI
         {
             if (_activeNode == null) return;
 
+            SplitRoot();
+        }
+
+        private void SplitRoot()
+        {
             _isDragging = false;
+            _rootLimit.Hide();
+
+            if (!_isValidPlacement) return;
+
+            _mainTree.SplitRoot();
+        }
+
+        private void OnRootSplit()
+        {
+            _rootLimit.SetText($"{_mainTree.RootSplitLimit}");
             CreateNode();
         }
 
@@ -246,14 +297,11 @@ namespace Game.UI
             if (_unitSelection.IsOpened)
                 _unitSelection.Hide();
 
-            if (_activeNode == null) return;
+            if (_activeNode == null)
+                return;
 
             if (_isDragging)
-            {
-                _isDragging = false;
-                CreateNode();
-                return;
-            }
+                SplitRoot();
 
             // TODO Select unit if is not empty
             if (_activeNode.Unit != null) return;
@@ -324,11 +372,6 @@ namespace Game.UI
             Draw.ThicknessSpace = ThicknessSpace.Pixels;
             Draw.Thickness = 20;
             Draw.Line(_activeNode.transform.position, _draggingPosition, _isValidPlacement ? Color.green : Color.red);
-        }
-
-        public void SplitRoot()
-        {
-            _isDragging = true;
         }
 
         public void OnSelectUnit(UnitData data)

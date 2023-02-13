@@ -92,10 +92,12 @@ namespace Game.Combat
             
             _deathCount++;
 
-            creepDied.Invoke(creep);
-
             if (_deathCount >= _limit)
                 creepsDied.Invoke();
+            
+            if (damageable.Health > 0) return;
+
+            creepDied.Invoke(creep);
         }
 
         public void Play(float delay)

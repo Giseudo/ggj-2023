@@ -16,6 +16,11 @@ namespace Game.Combat
         [SerializeField]
         private float _rootMaxDistance = 20f;
 
+        [SerializeField]
+        private int _rootSplitLimit = 5;
+
+        private int _maxRootSplit;
+
         private List<RootNode> _nodeList;
         private List<Tree> _absorvedTrees = new List<Tree>();
         private Tree _parentTree;
@@ -23,6 +28,7 @@ namespace Game.Combat
         public Action<int> collectedEnergy = delegate { };
         public Action<int> consumedEnergy = delegate { };
         public Action<Tree> absorvedTree = delegate { };
+        public Action rootSplitted = delegate { };
 
         public float RootMaxDistance => _rootMaxDistance;
         public int RootEnergyCost => _rootEnergyCost;
@@ -31,9 +37,11 @@ namespace Game.Combat
         public List<RootNode> NodeList => _nodeList;
         public List<Tree> AbsorvedTrees => _absorvedTrees;
         public Tree ParentTree => _parentTree;
+        public int RootSplitLimit => _rootSplitLimit;
 
         public void Awake()
         {
+            _maxRootSplit = _rootEnergyCost;
             _nodeList = GetComponentsInChildren<RootNode>(true).ToList();
         }
 
@@ -81,6 +89,14 @@ namespace Game.Combat
 
                 node.gameObject.SetActive(true);
             }
+        }
+
+        public void SplitRoot()
+        {
+            if (_rootSplitLimit <= 0) return;
+
+            _rootSplitLimit -= 1;
+            rootSplitted.Invoke();
         }
     }
 }
