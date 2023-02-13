@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
-  _hurtTime: 1
+  _hurtTime: 2
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
 --- !u!114 &8240838129491688173

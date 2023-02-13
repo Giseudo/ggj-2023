@@ -86,9 +86,9 @@ MonoBehaviour:
   _meleeDamage: 0
   _fovRadius: 10
   _attackSpeed: 1
-  _attackWaitTime: 8
+  _attackWaitTime: 6
   _vfxEventName: OnAttack
-  _soundEffectClip: {fileID: 0}
+  _attackSound: {fileID: 0}
 --- !u!114 &6484948780894355959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +116,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 2
   _hurtTime: 1
+  _hitSound: {fileID: 0}
+  _deathSound: {fileID: 0}
 --- !u!114 &3400517888550662400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 5963900956835209682, guid: d362591ccf556f24991da9d769c23ebe, type: 3}
   _offset: {x: 0, y: 0, z: 0}
-  _followTarget: {fileID: 0}
+  _target: {fileID: 0}
 --- !u!1001 &5992220321047095517
 PrefabInstance:
   m_ObjectHideFlags: 0
