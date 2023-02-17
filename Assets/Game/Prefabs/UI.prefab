@@ -1111,7 +1111,10 @@ GameObject:
   - component: {fileID: 608979400}
   - component: {fileID: 608979399}
   - component: {fileID: 608979398}
+<<<<<<< HEAD
   - component: {fileID: 1458027370}
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
   - component: {fileID: 8598820980217154480}
   m_Layer: 5
   m_Name: Upgrade
@@ -1224,6 +1227,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< HEAD
 --- !u!114 &1458027370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1237,6 +1241,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _energyButton: {fileID: 517784835}
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
 --- !u!114 &8598820980217154480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1249,7 +1255,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0df66bbf84fbf4794eed37cc1ea2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   _hoverScale: 1.2
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
 --- !u!1 &623989731
 GameObject:
   m_ObjectHideFlags: 0
@@ -2950,6 +2959,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+<<<<<<< HEAD
 --- !u!1 &1207601399
 GameObject:
   m_ObjectHideFlags: 0
@@ -3026,6 +3036,8 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
 --- !u!1 &1212229420
 GameObject:
   m_ObjectHideFlags: 0
@@ -3321,7 +3333,10 @@ GameObject:
   - component: {fileID: 1230456404}
   - component: {fileID: 1230456403}
   - component: {fileID: 1230456402}
+<<<<<<< HEAD
   - component: {fileID: 607647169}
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
   - component: {fileID: 2114543672414801620}
   m_Layer: 5
   m_Name: Target
@@ -3433,6 +3448,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< HEAD
 --- !u!114 &607647169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3446,6 +3462,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _energyButton: {fileID: 0}
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
 --- !u!114 &2114543672414801620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3458,7 +3476,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0df66bbf84fbf4794eed37cc1ea2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   _hoverScale: 1.2
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
 --- !u!1 &1261056115
 GameObject:
   m_ObjectHideFlags: 0
@@ -5327,7 +5348,10 @@ GameObject:
   - component: {fileID: 881227645948667573}
   - component: {fileID: 881227645948667574}
   - component: {fileID: 881227645948667575}
+<<<<<<< HEAD
   - component: {fileID: 1563222650}
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
   - component: {fileID: 7486428886287511017}
   m_Layer: 5
   m_Name: Split
@@ -5464,6 +5488,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+<<<<<<< HEAD
 --- !u!114 &1563222650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5477,6 +5502,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _energyButton: {fileID: 659811602}
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
 --- !u!114 &7486428886287511017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5489,7 +5516,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0df66bbf84fbf4794eed37cc1ea2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   _hoverScale: 1.2
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
 --- !u!1 &881227645964655472
 GameObject:
   m_ObjectHideFlags: 0
@@ -5583,10 +5613,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc73b45680245b14481c418194c09c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   _rootPoint: {fileID: 881227647515456271}
   _rootSelector: {fileID: 5719597355269903717}
   _rootActions: {fileID: 881227646246933954}
   _rootCreation: {fileID: 685485596}
+=======
+  useCullingMasks: 0
+  _rootPrefab: {fileID: 1677633249960956306, guid: 1baedb0fc8fd92b41b07a0b08a30f743,
+    type: 3}
+  _rootSelector: {fileID: 5719597355269903717}
+  _rootActions: {fileID: 881227646246933954}
+  _rootPoint: {fileID: 881227647515456271}
+  _rootLimit: {fileID: 943020051}
+  _rootCreationSound: {fileID: 8300000, guid: 377841a747eb1a842892e76ee276f0a9, type: 3}
+  _errorSound: {fileID: 0}
+  _mainCanvas: {fileID: 881227647062226958}
+>>>>>>> 6425a48 (Refactored RootActions class)
 --- !u!1 &881227646041296836
 GameObject:
   m_ObjectHideFlags: 0
@@ -5984,12 +6027,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitSelection: {fileID: 879850138}
   _unitRangeRadius: {fileID: 176459286}
+<<<<<<< HEAD
   _addButton: {fileID: 1298531892}
   _upgradeButton: {fileID: 1458027370}
   _killButton: {fileID: 742846061}
   _splitButton: {fileID: 1563222650}
   _targetButton: {fileID: 607647169}
   _unitCreationSound: {fileID: 8300000, guid: 8a57689f6af189c4f86c40921af49eb0, type: 3}
+=======
+  _addButton: {fileID: 881227647332023955}
+  _upgradeButton: {fileID: 608979398}
+  _killButton: {fileID: 881227647503718217}
+  _splitButton: {fileID: 881227645948667575}
+  _targetButton: {fileID: 1230456402}
+  _unitCreationSound: {fileID: 0}
+>>>>>>> 6425a48 (Refactored RootActions class)
 --- !u!1 &881227646261922268
 GameObject:
   m_ObjectHideFlags: 0
@@ -7702,7 +7754,10 @@ GameObject:
   - component: {fileID: 881227647332023953}
   - component: {fileID: 881227647332023954}
   - component: {fileID: 881227647332023955}
+<<<<<<< HEAD
   - component: {fileID: 1298531892}
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
   - component: {fileID: 131577618329147533}
   m_Layer: 5
   m_Name: Add
@@ -7826,6 +7881,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+<<<<<<< HEAD
 --- !u!114 &1298531892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7839,6 +7895,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _energyButton: {fileID: 0}
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
 --- !u!114 &131577618329147533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7851,7 +7909,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0df66bbf84fbf4794eed37cc1ea2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   _hoverScale: 1.2
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
 --- !u!1 &881227647362198787
 GameObject:
   m_ObjectHideFlags: 0
@@ -7940,7 +8001,10 @@ GameObject:
   - component: {fileID: 881227647503718223}
   - component: {fileID: 881227647503718216}
   - component: {fileID: 881227647503718217}
+<<<<<<< HEAD
   - component: {fileID: 742846061}
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
   - component: {fileID: 8760566659969157548}
   m_Layer: 5
   m_Name: Kill
@@ -8053,6 +8117,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< HEAD
 --- !u!114 &742846061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8066,6 +8131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _energyButton: {fileID: 1181266187}
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
 --- !u!114 &8760566659969157548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8078,7 +8145,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0df66bbf84fbf4794eed37cc1ea2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   _hoverScale: 1.2
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
 --- !u!1 &881227647515456308
 GameObject:
   m_ObjectHideFlags: 0
@@ -8807,6 +8877,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+<<<<<<< HEAD
 --- !u!1 &3417551767956561374
 GameObject:
   m_ObjectHideFlags: 0
@@ -8855,6 +8926,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _innerDisc: {fileID: 3003867534360721069}
   _outerDisc: {fileID: 2081200999827538697}
+=======
+>>>>>>> 6425a48 (Refactored RootActions class)
 --- !u!1 &5506049828694844537
 GameObject:
   m_ObjectHideFlags: 0
