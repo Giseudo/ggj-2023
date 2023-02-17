@@ -19,12 +19,14 @@ namespace Game.Core
 
         public static TimeManager Instance { get; private set; }
         public static TimeState State { get; private set; }
+        public static Action<TimeState> StateChanged;
 
         public void Awake()
         {
             Instance = this;
             CurrentScale = 1f;
             State = TimeState.Playing;
+            StateChanged = delegate { };
         }
 
         public static void Pause()
@@ -38,7 +40,7 @@ namespace Game.Core
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
 
-            State = TimeState.Paused;
+            SetState(TimeState.Paused);
         }
 
         public static void SlowMotion()
@@ -67,7 +69,7 @@ namespace Game.Core
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
 
-            State = TimeState.Playing;
+            SetState(TimeState.Playing);
         }
 
         public static void Resume()
@@ -87,7 +89,13 @@ namespace Game.Core
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
 
-            State = TimeState.FastForwarding;
+            SetState(TimeState.FastForwarding);
+        }
+
+        private static void SetState(TimeState state)
+        {
+            State = state;
+            StateChanged.Invoke(State);
         }
     }
 }

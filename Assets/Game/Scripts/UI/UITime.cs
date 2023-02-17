@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using Game.Combat;
 using Game.Core;
+using Game.Input;
 using DG.Tweening;
 
 namespace Game.UI
@@ -22,11 +24,25 @@ namespace Game.UI
         [SerializeField]
         private Button _fastForwardButton;
 
+        [SerializeField]
+        private InputReader _inputReader;
+
         public void Awake()
         {
             _pauseButton.onClick.AddListener(OnPause);
             _playButton.onClick.AddListener(OnPlay);
             _fastForwardButton.onClick.AddListener(OnFastForward);
+
+            _inputReader.paused += OnPause;
+            _inputReader.played += OnPlay;
+            _inputReader.fastForwarded += OnFastForward;
+            _inputReader.changedTime += OnChangeTime;
+            _inputReader.toggledPlay += OnTogglePlay;
+        }
+
+        public void Start()
+        {
+            TimeManager.StateChanged += OnStateChange;
         }
 
         public void OnDestroy()
@@ -34,6 +50,14 @@ namespace Game.UI
             _pauseButton.onClick.RemoveListener(OnPause);
             _playButton.onClick.RemoveListener(OnPlay);
             _fastForwardButton.onClick.RemoveListener(OnFastForward);
+
+            _inputReader.paused -= OnPause;
+            _inputReader.played -= OnPlay;
+            _inputReader.fastForwarded -= OnFastForward;
+            _inputReader.changedTime -= OnChangeTime;
+            _inputReader.toggledPlay -= OnTogglePlay;
+
+            TimeManager.StateChanged -= OnStateChange;
         }
 
         public void OnPause() {
@@ -54,5 +78,41 @@ namespace Game.UI
             _selectionRect.DOMove(_fastForwardButton.transform.position, .3f)
                 .SetUpdate(true);
         }
+
+        private void OnChangeTime(float value)
+        {
+            if (TimeManager.State == TimeState.Playing && value == -1)
+                OnPause();
+
+            else if (TimeManager.State == TimeState.FastForwarding && value == -1)
+                OnPlay();
+
+            else if (TimeManager.State == TimeState.Paused && value == 1)
+                OnPlay();
+
+            else if (TimeManager.State == TimeState.Playing && value == 1)
+                OnFastForward();
+        }
+
+        private void OnTogglePlay()
+        {
+            if (TimeManager.State == TimeState.Playing || TimeManager.State == TimeState.FastForwarding)
+                OnPause();
+
+            else if (_previousState == TimeState.FastForwarding)
+                OnFastForward();
+
+            else if (_previousState == TimeState.Playing)
+                OnPlay();
+        }
+
+        private void OnStateChange(TimeState state)
+        {
+            _previousState = _currentState;
+            _currentState = state;
+        }
+
+        private TimeState _previousState;
+        private TimeState _currentState;
     }
 }

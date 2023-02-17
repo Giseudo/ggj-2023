@@ -44,6 +44,51 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""4068f933-3f85-4cb0-9a81-a0109b83ba70"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Play"",
+                    ""type"": ""Button"",
+                    ""id"": ""67649d34-187c-41e0-92fe-02dd793d7f16"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FastForward"",
+                    ""type"": ""Button"",
+                    ""id"": ""c15b11b4-2617-410e-a718-5f5e21d2d7e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Toggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""904b7321-3cd1-4bbe-9fd3-cdc7ea62d283"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Time"",
+                    ""type"": ""Button"",
+                    ""id"": ""7f4bd551-fa75-4eae-aefe-166515e30e98"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +157,83 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b718b99-7106-4a5f-8a3d-226cbfd52521"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b3215ad5-430c-4eb6-ad46-25ddba4b7f44"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Play"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e36505d5-db95-45ef-bfe0-fae4855c55a8"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FastForward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36064e11-5f23-4de5-9358-d2e31a0dd161"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""1e5c437d-80ef-483c-997c-b3829c871911"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Time"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""e734de8b-d2af-47ce-bbfc-0ce6a2743c27"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Time"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""b5781b7c-ccd1-407f-8171-10f6379235e2"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Time"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -122,6 +244,11 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
+        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
+        m_Gameplay_Play = m_Gameplay.FindAction("Play", throwIfNotFound: true);
+        m_Gameplay_FastForward = m_Gameplay.FindAction("FastForward", throwIfNotFound: true);
+        m_Gameplay_Toggle = m_Gameplay.FindAction("Toggle", throwIfNotFound: true);
+        m_Gameplay_Time = m_Gameplay.FindAction("Time", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,12 +310,22 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Look;
+    private readonly InputAction m_Gameplay_Pause;
+    private readonly InputAction m_Gameplay_Play;
+    private readonly InputAction m_Gameplay_FastForward;
+    private readonly InputAction m_Gameplay_Toggle;
+    private readonly InputAction m_Gameplay_Time;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
         public GameplayActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @Look => m_Wrapper.m_Gameplay_Look;
+        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
+        public InputAction @Play => m_Wrapper.m_Gameplay_Play;
+        public InputAction @FastForward => m_Wrapper.m_Gameplay_FastForward;
+        public InputAction @Toggle => m_Wrapper.m_Gameplay_Toggle;
+        public InputAction @Time => m_Wrapper.m_Gameplay_Time;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -204,6 +341,21 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @Look.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLook;
+                @Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Play.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPlay;
+                @Play.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPlay;
+                @Play.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPlay;
+                @FastForward.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFastForward;
+                @FastForward.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFastForward;
+                @FastForward.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFastForward;
+                @Toggle.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggle;
+                @Toggle.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggle;
+                @Toggle.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggle;
+                @Time.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime;
+                @Time.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime;
+                @Time.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -214,6 +366,21 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+                @Play.started += instance.OnPlay;
+                @Play.performed += instance.OnPlay;
+                @Play.canceled += instance.OnPlay;
+                @FastForward.started += instance.OnFastForward;
+                @FastForward.performed += instance.OnFastForward;
+                @FastForward.canceled += instance.OnFastForward;
+                @Toggle.started += instance.OnToggle;
+                @Toggle.performed += instance.OnToggle;
+                @Toggle.canceled += instance.OnToggle;
+                @Time.started += instance.OnTime;
+                @Time.performed += instance.OnTime;
+                @Time.canceled += instance.OnTime;
             }
         }
     }
@@ -222,5 +389,10 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+        void OnPlay(InputAction.CallbackContext context);
+        void OnFastForward(InputAction.CallbackContext context);
+        void OnToggle(InputAction.CallbackContext context);
+        void OnTime(InputAction.CallbackContext context);
     }
 }
