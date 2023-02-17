@@ -11,6 +11,7 @@ namespace Game.UI
         private RectTransform _rect;
         private List<UIUnitCard> _cards = new List<UIUnitCard>();
         private bool _isOpened = false;
+        private Tween _tween;
 
         public bool IsOpened => _isOpened;
         public RectTransform Rect => _rect;
@@ -36,7 +37,8 @@ namespace Game.UI
 
         public void Show()
         {
-            _rect.DOScale(Vector3.one, .5f)
+            _tween?.Kill();
+            _tween = _rect.DOScale(Vector3.one, .5f)
                 .SetUpdate(true)
                 .SetEase(Ease.OutExpo);
 
@@ -46,7 +48,8 @@ namespace Game.UI
 
         public void Hide()
         {
-            _rect.DOScale(Vector3.zero, .2f)
+            _tween?.Kill();
+            _tween = _rect.DOScale(Vector3.zero, .2f)
                 .SetUpdate(true);
 
             _isOpened = false;

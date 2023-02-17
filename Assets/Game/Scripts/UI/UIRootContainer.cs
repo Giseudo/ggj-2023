@@ -4,23 +4,15 @@ using UnityEngine.Splines;
 using Unity.Mathematics;
 using Game.Core;
 using Shapes;
-using DG.Tweening;
 
 namespace Game.UI
 {
-    using System;
     using Game.Combat;
 
     public class UIRootContainer : ImmediateModeShapeDrawer, IPointerMoveHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         [SerializeField]
         private GameObject _rootPrefab;
-
-        [SerializeField]
-        private UIUnitSelection _unitSelection;
-
-        [SerializeField]
-        private UIRangeRadius _unitRangeRadius;
 
         [SerializeField]
         private UIRootSelector _rootSelector;
@@ -34,8 +26,6 @@ namespace Game.UI
         [SerializeField]
         private UIRootLimit _rootLimit;
 
-        [SerializeField]
-        private AudioClip _unitCreationSound;
 
         [SerializeField]
         private AudioClip _rootCreationSound;
@@ -77,10 +67,6 @@ namespace Game.UI
             base.OnEnable();
 
             _rootPoint.clicked += OnPointClick;
-            _unitSelection.clicked += OnCreateUnit;
-            _unitSelection.selected += OnSelectUnit;
-            _unitSelection.opened += OnUnitSelectionOpen;
-            _unitSelection.closed += OnUnitSelectionClose;
             _rootActions.opened += OnActionsOpen;
             _rootActions.closed += OnActionsClose;
         }
@@ -95,10 +81,6 @@ namespace Game.UI
             base.OnDisable();
 
             _rootPoint.clicked -= OnPointClick;
-            _unitSelection.clicked -= OnCreateUnit;
-            _unitSelection.selected -= OnSelectUnit;
-            _unitSelection.opened -= OnUnitSelectionOpen;
-            _unitSelection.closed -= OnUnitSelectionClose;
             _rootActions.opened -= OnActionsOpen;
             _rootActions.closed -= OnActionsClose;
         }
@@ -114,7 +96,7 @@ namespace Game.UI
             _rootLimit.Rect.anchoredPosition = (evt.position / _mainCanvas.scaleFactor) + new Vector2(-20f, 20f);
 
             if (_rootActions.IsOpened) return;
-            if (_unitSelection.IsOpened) return;
+            if (_rootActions.UnitSelection.IsOpened) return;
 
             if (_isDragging) {
                 DragRoot(evt);
@@ -164,7 +146,7 @@ namespace Game.UI
         {
             if (_activeNode == null) return;
             if (_rootActions.IsOpened) return;
-            if (_unitSelection.IsOpened) return;
+            if (_rootActions.UnitSelection.IsOpened) return;
 
             StartDrag();
         }
@@ -184,7 +166,7 @@ namespace Game.UI
         {
             if (_activeNode == null) return;
             if (_rootActions.IsOpened) return;
-            if (_unitSelection.IsOpened) return;
+            if (_rootActions.UnitSelection.IsOpened) return;
 
             _isValidPlacement = true;
             _activeTree = null;
@@ -319,8 +301,8 @@ namespace Game.UI
             if (_rootActions.IsOpened)
                 _rootActions.Hide();
             
-            if (_unitSelection.IsOpened)
-                _unitSelection.Hide();
+            if (_rootActions.UnitSelection.IsOpened)
+                _rootActions.UnitSelection.Hide();
 
             _rootSelector.Hide();
 
@@ -337,63 +319,13 @@ namespace Game.UI
             if (_activeNode.Unit != null) return;
         }
 
-        public void OnUnitSelectionOpen()
-        {
-            _unitSelection.Rect.anchoredPosition = _rootActions.Rect.anchoredPosition + Vector2.up * 55f;
-            _rootActions.Hide();
-            _rootPoint.Hide();
-
-            float direction = _activeNode.transform.position.x < GameManager.MainCamera.transform.position.x ? -1 : 1;
-
-            GameManager.MainCamera.transform.DOMoveX(_initialCameraPosition.x + (20f * direction), 1f)
-                .SetEase(Ease.OutExpo)
-                .SetUpdate(true);
-            GameManager.MainCamera.DOOrthoSize(30f, 1f)
-                .SetEase(Ease.OutExpo)
-                .SetUpdate(true);
-
-            _unitRangeRadius.transform.position = _activeNode.transform.position + Vector3.up * .2f;
-
-            TimeManager.SlowMotion();
-        }
-
-        public void OnUnitSelectionClose()
-        {
-            GameManager.MainCamera.transform.DOMoveX(_initialCameraPosition.x, 1f)
-                .SetEase(Ease.OutExpo)
-                .SetUpdate(true);
-            GameManager.MainCamera.DOOrthoSize(25f, 1f)
-                .SetEase(Ease.OutExpo)
-                .SetUpdate(true);
-            
-            OnDeselectUnit();
-
-            _rootSelector.Hide();
-
-            TimeManager.Resume();
-        }
-
-        private void OnSelectUnit(UnitData data)
-        {
-            if (!_unitSelection.IsOpened) return;
-
-            _unitRangeRadius.SetRadius(data == null ? 0f : data.RangeRadius);
-
-            if (data == null)
-                OnDeselectUnit();
-        }
-
-        public void OnDeselectUnit()
-        {
-            _unitRangeRadius.SetRadius(0f);
-        }
-
         public void OnActionsOpen()
         {
             bool canAdd = _activeNode.Unit == null;
 
             _rootPoint.Disable();
             _rootPoint.Hide();
+
             _rootSelector.transform.position = _activeNode.transform.position + Vector3.up * .2f;
             _rootSelector.Show();
 
@@ -407,7 +339,7 @@ namespace Game.UI
         {
             _rootPoint.Enable();
 
-            if (_unitSelection.IsOpened) return;
+            if (_rootActions.UnitSelection.IsOpened) return;
 
             _rootSelector.Hide();
         }
@@ -461,30 +393,6 @@ namespace Game.UI
             Draw.ThicknessSpace = ThicknessSpace.Pixels;
             Draw.Thickness = 20;
             Draw.Line(_activeNode.transform.position, _draggingPosition, _isValidPlacement ? Color.green : Color.red);
-        }
-
-        public void OnCreateUnit(UnitData data)
-        {
-            if (data.RequiredEnergy > GameManager.MainTree.EnergyAmount)
-                return;
-
-            _unitSelection.Hide();
-            _rootSelector.Hide();
-
-            GameObject instance = GameObject.Instantiate(data.Prefab, _activeNode.transform);
-
-            instance.transform.localScale = Vector3.zero;
-            instance.transform.DOScale(Vector3.one, 1f)
-                .SetUpdate(true)
-                .SetEase(Ease.OutElastic);
-
-            SoundManager.PlaySound(_unitCreationSound);
-
-            if (!instance.TryGetComponent<Unit>(out Unit unit)) return;
-
-            _activeNode.SetUnit(unit);
-
-            GameManager.MainTree.ConsumeEnergy(data.RequiredEnergy);
         }
 
         private Vector2 GetScreenPosition(Vector3 worldPosition)
