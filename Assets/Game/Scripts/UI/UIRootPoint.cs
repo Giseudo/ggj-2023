@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField]
     private RectTransform _innerRect;
@@ -19,6 +20,7 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public bool IsOpened => _isOpened;
     public bool IsEnabled => _isEnabled;
     public RectTransform Rect => _rect;
+    public Action clicked = delegate { };
 
     public void Awake()
     {
@@ -78,6 +80,8 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         ShowOuter();
     }
+
+    public void OnPointerClick(PointerEventData evt) => clicked.Invoke();
 
     public void OnPointerExit(PointerEventData evt)
     {

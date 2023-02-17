@@ -11,8 +11,9 @@ namespace Game.UI
 {
     public class UIUnitCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        const float SELECTED_DISC_RADIUS = 56.8f;
-        const float SELECTED_DISC_THICKNESS = 66f;
+        const float SELECTED_DISC_RADIUS = 63.5f;
+        const float SELECTED_DISC_THICKNESS = 44.8f;
+        const int DISABLED_ALPHA = 100;
 
         [SerializeField]
         private UnitData _data;
@@ -86,7 +87,7 @@ namespace Game.UI
             deselected.Invoke(this);
             _isSelected = false;
 
-            Color color = _isDisabled ? new Color32(185, 46, 49, 50) : new Color32(46, 185, 132, 50);
+            Color color = _isDisabled ? new Color32(185, 46, 49, DISABLED_ALPHA) : new Color32(46, 185, 132, DISABLED_ALPHA);
             
             DOTween.To(() => _disc.Radius, x => _disc.Radius = x, _initialDiscRadius, .3f).SetUpdate(true);
             DOTween.To(() => _disc.Thickness, x => _disc.Thickness = x, _initialDiscThickness, .3f).SetUpdate(true);
@@ -100,7 +101,7 @@ namespace Game.UI
             _isDisabled = true;
             _energyButton.Disable();
 
-            Color color = _isSelected ? new Color32(185, 46, 49, 255) : new Color32(185, 46, 49, 50);
+            Color color = _isSelected ? new Color32(185, 46, 49, 255) : new Color32(185, 46, 49, DISABLED_ALPHA);
 
             DOTween.To(() => _disc.Color, x => _disc.Color = x, color, .3f).SetUpdate(true);
         }
@@ -109,7 +110,7 @@ namespace Game.UI
             _isDisabled = false;
             _energyButton.Enable();
 
-            Color color = _isSelected ? new Color32(46, 185, 132, 255) : new Color32(46, 185, 132, 50);
+            Color color = _isSelected ? new Color32(46, 185, 132, 255) : new Color32(46, 185, 132, DISABLED_ALPHA);
 
             DOTween.To(() => _disc.Color, x => _disc.Color = x, color, .3f).SetUpdate(true);
         }

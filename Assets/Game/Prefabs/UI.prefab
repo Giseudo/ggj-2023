@@ -647,19 +647,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 608979399}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 881227646753339850}
-        m_TargetAssemblyTypeName: Game.UI.UIUnitSelection, Assembly-CSharp
-        m_MethodName: Show
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &703851087
 GameObject:
   m_ObjectHideFlags: 0
@@ -3405,8 +3393,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _addButton: {fileID: 881227647332023955}
+  _upgradeButton: {fileID: 608979398}
   _killButton: {fileID: 881227647503718217}
   _splitButton: {fileID: 881227645948667575}
+  _targetButton: {fileID: 1230456402}
 --- !u!1 &881227646261922268
 GameObject:
   m_ObjectHideFlags: 0
@@ -6909,31 +6899,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 881227647515456265}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 881227646246933954}
-        m_TargetAssemblyTypeName: UIRootActions, Assembly-CSharp
-        m_MethodName: Toggle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 881227647515456271}
-        m_TargetAssemblyTypeName: UIRootPoint, Assembly-CSharp
-        m_MethodName: Toggle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &881227647515925983
 GameObject:
   m_ObjectHideFlags: 0

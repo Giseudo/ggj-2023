@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using Game.Combat;
 
 public class UIRootActions : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class UIRootActions : MonoBehaviour
     public Button AddButton => _addButton;
     public Button KillButton => _killButton;
     public Button SplitButton => _splitButton;
+    public Button TargetButton => _targetButton;
+    public Button UpgradeButton => _upgradeButton;
 
     private Tween _tween;
 
@@ -44,8 +47,34 @@ public class UIRootActions : MonoBehaviour
         _rect.localScale = Vector3.zero;
     }
 
-    public void Show()
+    public void Show(RootNode node)
     {
+        if (node.Unit == null)
+        {
+            _addButton.gameObject.SetActive(true);
+            _killButton.gameObject.SetActive(false);
+            _upgradeButton.gameObject.SetActive(false);
+            _targetButton.gameObject.SetActive(false);
+        }
+
+        if (node.Unit != null)
+        {
+            _addButton.gameObject.SetActive(false);
+            _killButton.gameObject.SetActive(true);
+            _upgradeButton.gameObject.SetActive(true);
+            _targetButton.gameObject.SetActive(false);
+            // _targetButton.gameObject.SetActive(true); // TODO: only for sementinha :3
+        }
+
+        if (node.Parent == null)
+        {
+            _addButton.gameObject.SetActive(false);
+            _killButton.gameObject.SetActive(false);
+            _upgradeButton.gameObject.SetActive(true);
+            _targetButton.gameObject.SetActive(false);
+        }
+
+
         if (_rect == null) return;
 
         _tween?.Kill();
@@ -72,19 +101,7 @@ public class UIRootActions : MonoBehaviour
 
     public void Toggle()
     {
-        if (_isOpened) Hide();
-        else Show();
+        // if (_isOpened) Hide();
+        // else Show();
     }
-
-    public void ShowAddButton() { }
-    public void HideAddButton() { }
-    public void ShowUpgradeButton() { }
-    public void HideUpgradeButton() { }
-    public void ShowKillButton() { }
-    public void HideKillButton() { }
-    public void ShowTargetButton() { }
-    public void HideTargetButton() { }
-
-    public void ShowButton(Button button) { }
-    public void HideButton(Button button) { }
 }

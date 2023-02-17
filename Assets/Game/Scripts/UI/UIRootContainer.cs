@@ -8,6 +8,7 @@ using DG.Tweening;
 
 namespace Game.UI
 {
+    using System;
     using Game.Combat;
 
     public class UIRootContainer : ImmediateModeShapeDrawer, IPointerMoveHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -75,6 +76,7 @@ namespace Game.UI
         {
             base.OnEnable();
 
+            _rootPoint.clicked += OnPointClick;
             _unitSelection.clicked += OnCreateUnit;
             _unitSelection.selected += OnSelectUnit;
             _unitSelection.opened += OnUnitSelectionOpen;
@@ -83,10 +85,16 @@ namespace Game.UI
             _rootActions.closed += OnActionsClose;
         }
 
+        private void OnPointClick()
+        {
+            _rootActions.Show(_activeNode);
+        }
+
         public override void OnDisable()
         {
             base.OnDisable();
 
+            _rootPoint.clicked -= OnPointClick;
             _unitSelection.clicked -= OnCreateUnit;
             _unitSelection.selected -= OnSelectUnit;
             _unitSelection.opened -= OnUnitSelectionOpen;
@@ -201,6 +209,9 @@ namespace Game.UI
                         continue;
                     
                     if (node.Tree.ParentTree != null)
+                        continue;
+                    
+                    if (node.Tree == _mainTree)
                         continue;
 
                     _activeTree = node.Tree;
@@ -337,7 +348,7 @@ namespace Game.UI
             GameManager.MainCamera.transform.DOMoveX(_initialCameraPosition.x + (20f * direction), 1f)
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
-            GameManager.MainCamera.DOOrthoSize(23f, 1f)
+            GameManager.MainCamera.DOOrthoSize(30f, 1f)
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
 
@@ -389,18 +400,6 @@ namespace Game.UI
             if (_activeNode.Parent == null) // is tree
                 canAdd = false;
             
-            if (_activeNode.Unit) // has unit
-            {
-                _rootActions.ShowUpgradeButton();
-                _rootActions.ShowKillButton();
-            }
-
-            if (_activeNode.Unit == null) // empty slot
-            {
-                _rootActions.HideUpgradeButton();
-                _rootActions.HideKillButton();
-            }
-
             _rootActions.AddButton.interactable = canAdd;
         }
 
