@@ -131,11 +131,13 @@ namespace Game.Combat
 // [x] Root split obstacle
 // [x] Absorb tree
 // [x] Pause / play / fast forward
-// [ ] Root limit
+// [x] Keyboard commands
+// [x] Root limit
+// [ ] Tree upgrade
 // [ ] Unities upgrade
+// [ ] Seed hole improvements
 // [ ] Sell unit
 // [ ] Wave timer
-// [ ] Unit construction time
-// [ ] SFX
+// [x] SFX
 // [ ] Main menu
 // [ ] Build & upload
