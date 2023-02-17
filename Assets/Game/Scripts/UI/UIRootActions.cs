@@ -9,10 +9,16 @@ public class UIRootActions : MonoBehaviour
     public Button _addButton;
 
     [SerializeField]
+    public Button _upgradeButton;
+
+    [SerializeField]
     public Button _killButton;
 
     [SerializeField]
     public Button _splitButton;
+
+    [SerializeField]
+    public Button _targetButton;
 
     private RectTransform _rect;
     private bool _isOpened = false;
@@ -27,6 +33,8 @@ public class UIRootActions : MonoBehaviour
     public Button KillButton => _killButton;
     public Button SplitButton => _splitButton;
 
+    private Tween _tween;
+
     public void Awake()
     {
         TryGetComponent<RectTransform>(out _rect);
@@ -40,7 +48,8 @@ public class UIRootActions : MonoBehaviour
     {
         if (_rect == null) return;
 
-        _rect.DOScale(Vector3.one, .5f)
+        _tween?.Kill();
+        _tween = _rect.DOScale(Vector3.one, .5f)
             .SetUpdate(true)
             .SetEase(Ease.OutExpo);
 
@@ -52,7 +61,8 @@ public class UIRootActions : MonoBehaviour
     {
         if (_rect == null) return;
 
-        _rect.DOScale(Vector3.zero, .2f)
+        _tween?.Kill();
+        _tween = _rect.DOScale(Vector3.zero, .2f)
             .SetUpdate(true)
             .OnComplete(() => {
                 _isOpened = false;
@@ -65,4 +75,16 @@ public class UIRootActions : MonoBehaviour
         if (_isOpened) Hide();
         else Show();
     }
+
+    public void ShowAddButton() { }
+    public void HideAddButton() { }
+    public void ShowUpgradeButton() { }
+    public void HideUpgradeButton() { }
+    public void ShowKillButton() { }
+    public void HideKillButton() { }
+    public void ShowTargetButton() { }
+    public void HideTargetButton() { }
+
+    public void ShowButton(Button button) { }
+    public void HideButton(Button button) { }
 }

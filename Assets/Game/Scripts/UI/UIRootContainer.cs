@@ -19,6 +19,12 @@ namespace Game.UI
         private UIUnitSelection _unitSelection;
 
         [SerializeField]
+        private UIRangeRadius _unitRangeRadius;
+
+        [SerializeField]
+        private UIRootSelector _rootSelector;
+
+        [SerializeField]
         private UIRootActions _rootActions;
 
         [SerializeField]
@@ -39,7 +45,7 @@ namespace Game.UI
         [SerializeField]
         private Canvas _mainCanvas;
 
-
+        private Vector3 _initialCameraPosition;
         private Tree _mainTree;
         private RectTransform _mainCanvasRect;
         private RootNode _activeNode;
@@ -57,6 +63,7 @@ namespace Game.UI
         {
             _mainTree = GameManager.MainTree;
             _mainTree.rootSplitted += OnRootSplit;
+            _initialCameraPosition = GameManager.MainCamera.transform.position;
         }
 
         public void OnDestroy()
@@ -68,18 +75,24 @@ namespace Game.UI
         {
             base.OnEnable();
 
-            _unitSelection.selectedUnit += OnSelectUnit;
+            _unitSelection.clicked += OnCreateUnit;
+            _unitSelection.selected += OnSelectUnit;
             _unitSelection.opened += OnUnitSelectionOpen;
+            _unitSelection.closed += OnUnitSelectionClose;
             _rootActions.opened += OnActionsOpen;
+            _rootActions.closed += OnActionsClose;
         }
 
         public override void OnDisable()
         {
             base.OnDisable();
 
-            _unitSelection.selectedUnit -= OnSelectUnit;
+            _unitSelection.clicked -= OnCreateUnit;
+            _unitSelection.selected -= OnSelectUnit;
             _unitSelection.opened -= OnUnitSelectionOpen;
-            _rootActions.opened += OnActionsOpen;
+            _unitSelection.closed -= OnUnitSelectionClose;
+            _rootActions.opened -= OnActionsOpen;
+            _rootActions.closed -= OnActionsClose;
         }
 
         public void OnPointerMove(PointerEventData evt)
@@ -277,6 +290,7 @@ namespace Game.UI
         {
             _isDragging = false;
             _rootLimit.Hide();
+            _rootSelector.Hide();
 
             if (!_isValidPlacement) return;
 
@@ -293,15 +307,20 @@ namespace Game.UI
         {
             if (_rootActions.IsOpened)
                 _rootActions.Hide();
-
+            
             if (_unitSelection.IsOpened)
                 _unitSelection.Hide();
+
+            _rootSelector.Hide();
 
             if (_activeNode == null)
                 return;
 
-            if (_isDragging)
+            if (_isDragging && evt.button == PointerEventData.InputButton.Left)
                 SplitRoot();
+            
+            if (_isDragging && evt.button == PointerEventData.InputButton.Right)
+                _isDragging = false;
 
             // TODO Select unit if is not empty
             if (_activeNode.Unit != null) return;
@@ -312,16 +331,86 @@ namespace Game.UI
             _unitSelection.Rect.anchoredPosition = _rootActions.Rect.anchoredPosition + Vector2.up * 55f;
             _rootActions.Hide();
             _rootPoint.Hide();
+
+            float direction = _activeNode.transform.position.x < GameManager.MainCamera.transform.position.x ? -1 : 1;
+
+            GameManager.MainCamera.transform.DOMoveX(_initialCameraPosition.x + (20f * direction), 1f)
+                .SetEase(Ease.OutExpo)
+                .SetUpdate(true);
+            GameManager.MainCamera.DOOrthoSize(23f, 1f)
+                .SetEase(Ease.OutExpo)
+                .SetUpdate(true);
+
+            _unitRangeRadius.transform.position = _activeNode.transform.position + Vector3.up * .2f;
+
+            TimeManager.SlowMotion();
+        }
+
+        public void OnUnitSelectionClose()
+        {
+            GameManager.MainCamera.transform.DOMoveX(_initialCameraPosition.x, 1f)
+                .SetEase(Ease.OutExpo)
+                .SetUpdate(true);
+            GameManager.MainCamera.DOOrthoSize(25f, 1f)
+                .SetEase(Ease.OutExpo)
+                .SetUpdate(true);
+            
+            OnDeselectUnit();
+
+            _rootSelector.Hide();
+
+            TimeManager.Resume();
+        }
+
+        private void OnSelectUnit(UnitData data)
+        {
+            if (!_unitSelection.IsOpened) return;
+
+            _unitRangeRadius.SetRadius(data == null ? 0f : data.RangeRadius);
+
+            if (data == null)
+                OnDeselectUnit();
+        }
+
+        public void OnDeselectUnit()
+        {
+            _unitRangeRadius.SetRadius(0f);
         }
 
         public void OnActionsOpen()
         {
             bool canAdd = _activeNode.Unit == null;
 
-            if (_activeNode.Parent == null)
+            _rootPoint.Disable();
+            _rootPoint.Hide();
+            _rootSelector.transform.position = _activeNode.transform.position + Vector3.up * .2f;
+            _rootSelector.Show();
+
+            if (_activeNode.Parent == null) // is tree
                 canAdd = false;
+            
+            if (_activeNode.Unit) // has unit
+            {
+                _rootActions.ShowUpgradeButton();
+                _rootActions.ShowKillButton();
+            }
+
+            if (_activeNode.Unit == null) // empty slot
+            {
+                _rootActions.HideUpgradeButton();
+                _rootActions.HideKillButton();
+            }
 
             _rootActions.AddButton.interactable = canAdd;
+        }
+
+        public void OnActionsClose()
+        {
+            _rootPoint.Enable();
+
+            if (_unitSelection.IsOpened) return;
+
+            _rootSelector.Hide();
         }
 
         private void CreateNode()
@@ -350,6 +439,7 @@ namespace Game.UI
             }
 
             node.GrowBranch();
+            _rootSelector.Hide();
 
             _activeNode = node;
 
@@ -374,12 +464,13 @@ namespace Game.UI
             Draw.Line(_activeNode.transform.position, _draggingPosition, _isValidPlacement ? Color.green : Color.red);
         }
 
-        public void OnSelectUnit(UnitData data)
+        public void OnCreateUnit(UnitData data)
         {
             if (data.RequiredEnergy > GameManager.MainTree.EnergyAmount)
                 return;
 
             _unitSelection.Hide();
+            _rootSelector.Hide();
 
             GameObject instance = GameObject.Instantiate(data.Prefab, _activeNode.transform);
 

@@ -16,5 +16,5 @@ MonoBehaviour:
   _type: 1
   _prefab: {fileID: 5634176223657473883, guid: 843d0fba3d62f5840bb4f4b118037809, type: 3}
   _thumbnail: {fileID: 21300000, guid: b2a0f3973cbae9f46a1cd74ac293e018, type: 3}
-  _rangeRadius: 20
+  _rangeRadius: 30
   _requiredEnergy: 400

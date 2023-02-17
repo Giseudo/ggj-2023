@@ -15,7 +15,8 @@ namespace Game.UI
         public bool IsOpened => _isOpened;
         public RectTransform Rect => _rect;
 
-        public Action<UnitData> selectedUnit = delegate { };
+        public Action<UnitData> clicked = delegate { };
+        public Action<UnitData> selected = delegate { };
         public Action opened = delegate { };
         public Action closed = delegate { };
 
@@ -58,6 +59,7 @@ namespace Game.UI
 
             card.clicked += OnCardClick;
             card.selected += OnCardSelect;
+            card.deselected += OnCardDeselect;
         }
 
         public void RemoveCard(UIUnitCard card)
@@ -66,23 +68,29 @@ namespace Game.UI
 
             card.clicked -= OnCardClick;
             card.selected -= OnCardSelect;
+            card.deselected -= OnCardDeselect;
         }
 
         public void OnCardClick(UIUnitCard card)
         {
-            selectedUnit.Invoke(card.Data);
+            clicked.Invoke(card.Data);
+        }
+
+        private void OnCardDeselect(UIUnitCard card)
+        {
+            selected.Invoke(null);
         }
 
         public void OnCardSelect(UIUnitCard card)
         {
+            selected.Invoke(card.Data);
+
             for (int i = 0; i < _cards.Count; i++)
             {
                 UIUnitCard currentCard = _cards[i];
 
                 if (card == currentCard)
                     continue;
-                
-                currentCard.Deselect();
             }
         }
     }

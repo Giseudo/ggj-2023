@@ -14,8 +14,10 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private RectTransform _rect;
     private Button _button;
     private bool _isOpened;
+    private bool _isEnabled;
 
     public bool IsOpened => _isOpened;
+    public bool IsEnabled => _isEnabled;
     public RectTransform Rect => _rect;
 
     public void Awake()
@@ -26,10 +28,17 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void Show()
     {
+        if (!_isEnabled) return;
+
         ShowInner();
         ShowOuter();
 
         _isOpened = true;
+    }
+
+    public void OnEnable()
+    {
+        Enable();
     }
 
     public void Hide()
@@ -46,6 +55,16 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         else Show();
     }
 
+    public void Enable()
+    {
+        _isEnabled = true;
+    }
+
+    public void Disable()
+    {
+        _isEnabled = false;
+    }
+
     public Tween ShowInner() => _innerRect.DOScale(Vector3.one, .3f).SetUpdate(true);
     public Tween ShowOuter() => _outerRect.DOScale(Vector3.one, .3f).SetUpdate(true);
     public Tween HideInner() => _innerRect.DOScale(Vector3.zero, .3f).SetUpdate(true);
@@ -53,6 +72,7 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData evt)
     {
+        if (!_isEnabled) return;
         if (_innerRect.localScale == Vector3.zero) return;
         if (_isOpened) return;
 
@@ -61,6 +81,7 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerExit(PointerEventData evt)
     {
+        if (!_isEnabled) return;
         if (_isOpened) return;
 
         HideOuter();

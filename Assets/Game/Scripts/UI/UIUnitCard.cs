@@ -9,7 +9,7 @@ using Game.Core;
 
 namespace Game.UI
 {
-    public class UIUnitCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
+    public class UIUnitCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         const float SELECTED_DISC_RADIUS = 56.8f;
         const float SELECTED_DISC_THICKNESS = 66f;
@@ -64,6 +64,7 @@ namespace Game.UI
 
         public void OnPointerClick(PointerEventData evt) => Click();
         public void OnPointerEnter(PointerEventData evt) => Select();
+        public void OnPointerExit(PointerEventData evt) => Deselect();
         public void Click() => clicked.Invoke(this);
         public void Select()
         {
