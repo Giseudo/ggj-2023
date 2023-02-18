@@ -39,6 +39,7 @@ namespace Game.UI
         private Vector3 _initialCameraPosition;
         private Tween _tween;
         private Tween _cameraTween;
+        private Tween _fovTween;
 
         public UIUnitSelection UnitSelection => _unitSelection;
         public RectTransform Rect => _rect;
@@ -149,10 +150,12 @@ namespace Game.UI
             float direction = _activeNode.transform.position.x < GameManager.MainCamera.transform.position.x ? -1 : 1;
 
             _cameraTween?.Kill();
-            _cameraTween = GameManager.MainCamera.transform.DOMoveX(_initialCameraPosition.x + (20f * direction), 2f)
+            _cameraTween = GameManager.MainCamera.transform.DOMoveX(_initialCameraPosition.x + (15f * direction), 3f)
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
-            GameManager.MainCamera.DOOrthoSize(30f, 2f)
+
+            _fovTween?.Kill();
+            _fovTween = GameManager.MainCamera.DOOrthoSize(30f, 3f)
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
 
@@ -165,7 +168,9 @@ namespace Game.UI
             _cameraTween = GameManager.MainCamera.transform.DOMoveX(_initialCameraPosition.x, 1f)
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
-            GameManager.MainCamera.DOOrthoSize(25f, 1f)
+
+            _fovTween?.Kill();
+            _fovTween = GameManager.MainCamera.DOOrthoSize(25f, 1f)
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
             
