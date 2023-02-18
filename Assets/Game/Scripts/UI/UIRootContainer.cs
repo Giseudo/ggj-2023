@@ -40,8 +40,7 @@ namespace Game.UI
             _rootActions.opened += OnActionsOpen;
             _rootActions.closed += OnActionsClose;
             _rootCreation.nodeCreated += OnNodeCreation;
-
-            _rootActions.SplitButton.onClick.AddListener(OnSplitAction);
+            _rootActions.SplitButton.clicked += OnSplitAction;
         }
 
         public void OnDisable()
@@ -50,8 +49,7 @@ namespace Game.UI
             _rootActions.opened -= OnActionsOpen;
             _rootActions.closed -= OnActionsClose;
             _rootCreation.nodeCreated -= OnNodeCreation;
-
-            _rootActions.SplitButton.onClick.RemoveListener(OnSplitAction);
+            _rootActions.SplitButton.clicked -= OnSplitAction;
         }
 
         private void OnPointClick()

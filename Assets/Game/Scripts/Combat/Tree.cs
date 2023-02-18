@@ -19,6 +19,9 @@ namespace Game.Combat
         [SerializeField]
         private int _rootSplitLimit = 5;
 
+        [SerializeField]
+        private int _upgradeCost = 2000;
+
         private int _maxRootSplit;
 
         private List<RootNode> _nodeList;
@@ -38,6 +41,7 @@ namespace Game.Combat
         public List<Tree> AbsorvedTrees => _absorvedTrees;
         public Tree ParentTree => _parentTree;
         public int RootSplitLimit => _rootSplitLimit;
+        public int UpgradeCost => _upgradeCost;
 
         public void Awake()
         {

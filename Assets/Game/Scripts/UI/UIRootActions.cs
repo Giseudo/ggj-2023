@@ -16,19 +16,19 @@ namespace Game.UI
         private UIRangeRadius _unitRangeRadius;
 
         [SerializeField]
-        public Button _addButton;
+        public UIRootActionButton _addButton;
 
         [SerializeField]
-        public Button _upgradeButton;
+        public UIRootActionButton _upgradeButton;
 
         [SerializeField]
-        public Button _killButton;
+        public UIRootActionButton _killButton;
 
         [SerializeField]
-        public Button _splitButton;
+        public UIRootActionButton _splitButton;
 
         [SerializeField]
-        public Button _targetButton;
+        public UIRootActionButton _targetButton;
 
         [SerializeField]
         private AudioClip _unitCreationSound;
@@ -48,11 +48,11 @@ namespace Game.UI
         public Action opened = delegate { };
         public Action closed = delegate { };
 
-        public Button AddButton => _addButton;
-        public Button KillButton => _killButton;
-        public Button SplitButton => _splitButton;
-        public Button TargetButton => _targetButton;
-        public Button UpgradeButton => _upgradeButton;
+        public UIRootActionButton AddButton => _addButton;
+        public UIRootActionButton KillButton => _killButton;
+        public UIRootActionButton SplitButton => _splitButton;
+        public UIRootActionButton TargetButton => _targetButton;
+        public UIRootActionButton UpgradeButton => _upgradeButton;
 
         public void Awake()
         {
@@ -70,7 +70,8 @@ namespace Game.UI
 
         public void OnEnable()
         {
-            _addButton.onClick.AddListener(OnAddUnit);
+            _addButton.clicked += OnAddUnit;
+            _killButton.clicked += OnKillUnit;
 
             _unitSelection.clicked += OnCreateUnit;
             _unitSelection.selected += OnSelectUnit;
@@ -79,7 +80,8 @@ namespace Game.UI
 
         public void OnDisable()
         {
-            _addButton.onClick.RemoveListener(OnAddUnit);
+            _addButton.clicked -= OnAddUnit;
+            _killButton.clicked -= OnKillUnit;
 
             _unitSelection.clicked -= OnCreateUnit;
             _unitSelection.selected -= OnSelectUnit;
@@ -89,6 +91,8 @@ namespace Game.UI
         public void Show(RootNode node)
         {
             _activeNode = node;
+
+            _splitButton.EnergyButton.SetText($"{GameManager.MainTree.RootEnergyCost}");
 
             if (node.Unit == null)
             {
@@ -105,6 +109,9 @@ namespace Game.UI
                 _upgradeButton.gameObject.SetActive(true);
                 _targetButton.gameObject.SetActive(false);
                 // _targetButton.gameObject.SetActive(true); // TODO: only for sementinha :3
+
+                _killButton.EnergyButton.SetText($"{node.Unit.Data.SellPrice}");
+                _upgradeButton.EnergyButton.SetText($"{node.Unit.Data.UpgradeCost}");
             }
 
             if (node.Parent == null)
@@ -113,6 +120,8 @@ namespace Game.UI
                 _killButton.gameObject.SetActive(false);
                 _upgradeButton.gameObject.SetActive(true);
                 _targetButton.gameObject.SetActive(false);
+
+                _upgradeButton.EnergyButton.SetText($"{GameManager.MainTree.UpgradeCost}");
             }
 
             if (_rect == null) return;
@@ -191,12 +200,12 @@ namespace Game.UI
                 OnDeselectUnit();
         }
 
-        public void OnDeselectUnit()
+        private void OnDeselectUnit()
         {
             _unitRangeRadius.SetRadius(0f);
         }
 
-        public void OnCreateUnit(UnitData data)
+        private void OnCreateUnit(UnitData data)
         {
             if (data.RequiredEnergy > GameManager.MainTree.EnergyAmount)
                 return;
@@ -217,6 +226,18 @@ namespace Game.UI
             _activeNode.SetUnit(unit);
 
             GameManager.MainTree.ConsumeEnergy(data.RequiredEnergy);
+        }
+
+        private void OnKillUnit()
+        {
+            if (_activeNode.Unit == null) return;
+
+            GameManager.MainTree.CollectEnergy(_activeNode.Unit.Data.SellPrice);
+            GameObject.Destroy(_activeNode.Unit.gameObject);
+
+            _activeNode.SetUnit(null);
+
+            Hide();
         }
     }
 }
