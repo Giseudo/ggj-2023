@@ -133,8 +133,8 @@ namespace Game.Combat
 // [x] Pause / play / fast forward
 // [x] Keyboard commands
 // [x] Root limit
-// [ ] Tree upgrade
-// [ ] Unities upgrade
+// [x] Tree upgrade
+// [x] Unities upgrade
 // [ ] Seed hole improvements
 // [x] Sell unit
 // [ ] Wave timer
