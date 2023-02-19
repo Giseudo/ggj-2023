@@ -66,6 +66,33 @@ namespace Game.UI
         public void Start()
         {
             _initialCameraPosition = GameManager.MainCamera.transform.position;
+
+            GameManager.MainTree.collectedEnergy += OnEnergyChange;
+            GameManager.MainTree.consumedEnergy += OnEnergyChange;
+        }
+
+        public void OnDestroy()
+        {
+            GameManager.MainTree.collectedEnergy -= OnEnergyChange;
+            GameManager.MainTree.consumedEnergy -= OnEnergyChange;
+        }
+
+        private void OnEnergyChange(int amount)
+        {
+            if (_activeNode == null) return;
+
+            bool enabled = false;
+
+            if (_activeNode.Unit != null)
+                enabled =  GameManager.MainTree.EnergyAmount > _activeNode.Unit.Data.UpgradeCost;
+
+            if (_activeNode.Parent == null)
+                enabled =  GameManager.MainTree.EnergyAmount > GameManager.MainTree.UpgradeCost;
+
+            if (enabled)
+                _upgradeButton.EnergyButton.Enable();
+            else
+                _upgradeButton.EnergyButton.Disable();
         }
 
         public void OnEnable()
@@ -120,7 +147,7 @@ namespace Game.UI
             {
                 _addButton.gameObject.SetActive(false);
                 _killButton.gameObject.SetActive(false);
-                _upgradeButton.gameObject.SetActive(true);
+                _upgradeButton.gameObject.SetActive(GameManager.MainTree.CurrentLevel < GameManager.MainTree.MaxLevel);
                 _targetButton.gameObject.SetActive(false);
 
                 _upgradeButton.EnergyButton.SetText($"{GameManager.MainTree.UpgradeCost}");
@@ -253,8 +280,6 @@ namespace Game.UI
 
         private void OnUpgradeUnit()
         {
-            Hide();
-
             // Tree upgrade
             if (_activeNode.Parent == null)
             {
@@ -263,6 +288,8 @@ namespace Game.UI
                 
                 GameManager.MainTree.ConsumeEnergy(GameManager.MainTree.UpgradeCost);
                 GameManager.MainTree.Upgrade();
+
+                Hide();
             }
 
             // Unit upgrade
@@ -279,6 +306,8 @@ namespace Game.UI
                 GameManager.MainTree.ConsumeEnergy(_activeNode.Unit.Data.UpgradeCost);
 
                 _activeNode.SetUnit(unit);
+
+                Hide();
             }
         }
     }

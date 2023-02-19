@@ -18,12 +18,12 @@ namespace Game.Combat
         private int _upgradeCost = 2000;
 
         [SerializeField]
-        private int _rootSplitLimit = 5;
+        private int _rootSplitBonus = 2;
 
         public int RootEnergyCost => _rootEnergyCost;
         public float RootMaxDistance => _rootMaxDistance;
         public int UpgradeCost => _upgradeCost;
-        public int RootSplitLimit => _rootSplitLimit;
+        public int RootSplitBonus => _rootSplitBonus;
     }
 
     public class Tree : MonoBehaviour
@@ -32,14 +32,16 @@ namespace Game.Combat
         private int _energyAmount = 400;
 
         [SerializeField]
+        private int _initialRootSplitLimit = 3;
+
+        [SerializeField]
         private List<TreeLevel> _levels = new List<TreeLevel>();
 
         private int _currentLevel = 0;
-        private int _rootEnergyCost = 200;
-        private float _rootMaxDistance = 20f;
-        private int _rootSplitLimit = 5;
-        private int _upgradeCost = 2000;
-
+        private int _rootSplitLimit = 0;
+        private int _rootEnergyCost = 0;
+        private float _rootMaxDistance = 0;
+        private int _upgradeCost = 0;
         private List<RootNode> _nodeList;
         private List<Tree> _absorvedTrees = new List<Tree>();
         private Tree _parentTree;
@@ -60,9 +62,11 @@ namespace Game.Combat
         public int RootSplitLimit => _rootSplitLimit;
         public int UpgradeCost => _upgradeCost;
         public int MaxLevel => _levels.Count - 1;
+        public int CurrentLevel => _currentLevel;
 
         public void Awake()
         {
+            _rootSplitLimit = _initialRootSplitLimit;
             _nodeList = GetComponentsInChildren<RootNode>(true).ToList();
 
             UpdateStats();
@@ -140,7 +144,7 @@ namespace Game.Combat
 
             _rootEnergyCost = level.RootEnergyCost;
             _rootMaxDistance = level.RootMaxDistance;
-            _rootSplitLimit = level.RootSplitLimit;
+            _rootSplitLimit += level.RootSplitBonus;
             _upgradeCost = level.UpgradeCost;
         }
     }
