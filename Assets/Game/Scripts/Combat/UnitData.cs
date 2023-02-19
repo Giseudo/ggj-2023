@@ -21,6 +21,9 @@ namespace Game.Combat
         private GameObject _prefab;
 
         [SerializeField]
+        private GameObject _upgradePrefab;
+
+        [SerializeField]
         private Sprite _thumbnail;
 
         [SerializeField]
@@ -29,11 +32,20 @@ namespace Game.Combat
         [SerializeField]
         public int _requiredEnergy = 200;
 
+        [SerializeField]
+        public int _sellPrice = 200;
+
+        [SerializeField]
+        public int _upgradeCost = 2000;
+
         public string Name => _name;
         public UnitType Type => _type;
         public GameObject Prefab => _prefab;
+        public GameObject UpgradePrefab => _upgradePrefab;
         public Sprite Thumbnail => _thumbnail;
         public float RangeRadius => _rangeRadius;
         public int RequiredEnergy => _requiredEnergy;
+        public int SellPrice => _sellPrice;
+        public int UpgradeCost => _upgradeCost;
     }
 }

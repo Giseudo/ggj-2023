@@ -29,8 +29,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2981023404605713855}
-  m_LocalRotation: {x: -0, y: 0.51540476, z: -0, w: 0.8569468}
-  m_LocalPosition: {x: -44.5, y: 0, z: 22.9}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -39,7 +39,7 @@ Transform:
   - {fileID: 7452935746195259214}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 62.049, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7132192721024459255
 Animator:
   serializedVersion: 5
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca193edcaaeb1f45a14016b2e9f5187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: {fileID: 11400000, guid: b0b50cb3c6efa0340b8cfa74472c575f, type: 2}
+  _data: {fileID: 11400000, guid: 7f42036d41ce75645b9b706792a53038, type: 2}
 --- !u!114 &274786647616215872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,12 +85,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1382796ffcef8e34381cb8ee18863a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackDamage: 2
+  _meleeDamage: 0
   _fovRadius: 40
-  _attackSpeed: 3
-  _attackWaitTime: 0
+  _attackSpeed: 1
+  _attackWaitTime: 0.25
   _vfxEventName: OnSpit
-  _soundEffectClip: {fileID: 0}
+  _attackSound: {fileID: 0}
 --- !u!114 &7753203088014047696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 2
   _hurtTime: 1
+  _hitSound: {fileID: 0}
+  _deathSound: {fileID: 0}
 --- !u!114 &7204676736903716336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 3687635261570001115, guid: 5414cc12cdae3fd49a0f4ffaeccede13, type: 3}
   _offset: {x: 0, y: 3.5, z: 4}
+  _target: {fileID: 0}
 --- !u!1 &7452935745033073506
 GameObject:
   m_ObjectHideFlags: 0

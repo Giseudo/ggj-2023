@@ -11,8 +11,8 @@ namespace Game.UI
 {
     public class UIUnitCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        const float SELECTED_DISC_RADIUS = 63.5f;
-        const float SELECTED_DISC_THICKNESS = 44.8f;
+        const float SELECTED_DISC_RADIUS = 63.2f;
+        const float SELECTED_DISC_THICKNESS = 24.6f;
         const int DISABLED_ALPHA = 100;
 
         [SerializeField]
@@ -79,7 +79,7 @@ namespace Game.UI
             DOTween.To(() => _disc.Color, x => _disc.Color = x, color, .3f).SetUpdate(true);
 
             _thumbnail.rectTransform.DOScale(Vector3.one, .3f).SetUpdate(true);
-            _energyButton.Rect.DOScale(Vector3.one, .3f).SetUpdate(true);
+            _energyButton.Rect.DOScale(Vector3.one * .75f, .3f).SetEase(Ease.OutExpo).SetUpdate(true);
         }
 
         public void Deselect()
