@@ -16,7 +16,6 @@ namespace Game.UI
         private UIRangeRadius _unitRangeRadius;
 
         [SerializeField]
-<<<<<<< HEAD
         public UIRootActionButton _addButton;
 
         [SerializeField]
@@ -30,21 +29,6 @@ namespace Game.UI
 
         [SerializeField]
         public UIRootActionButton _targetButton;
-=======
-        public Button _addButton;
-
-        [SerializeField]
-        public Button _upgradeButton;
-
-        [SerializeField]
-        public Button _killButton;
-
-        [SerializeField]
-        public Button _splitButton;
-
-        [SerializeField]
-        public Button _targetButton;
->>>>>>> 6425a48 (Refactored RootActions class)
 
         [SerializeField]
         private AudioClip _unitCreationSound;
@@ -55,10 +39,7 @@ namespace Game.UI
         private Vector3 _initialCameraPosition;
         private Tween _tween;
         private Tween _cameraTween;
-<<<<<<< HEAD
         private Tween _fovTween;
-=======
->>>>>>> 6425a48 (Refactored RootActions class)
 
         public UIUnitSelection UnitSelection => _unitSelection;
         public RectTransform Rect => _rect;
@@ -67,19 +48,11 @@ namespace Game.UI
         public Action opened = delegate { };
         public Action closed = delegate { };
 
-<<<<<<< HEAD
         public UIRootActionButton AddButton => _addButton;
         public UIRootActionButton KillButton => _killButton;
         public UIRootActionButton SplitButton => _splitButton;
         public UIRootActionButton TargetButton => _targetButton;
         public UIRootActionButton UpgradeButton => _upgradeButton;
-=======
-        public Button AddButton => _addButton;
-        public Button KillButton => _killButton;
-        public Button SplitButton => _splitButton;
-        public Button TargetButton => _targetButton;
-        public Button UpgradeButton => _upgradeButton;
->>>>>>> 6425a48 (Refactored RootActions class)
 
         public void Awake()
         {
@@ -93,7 +66,6 @@ namespace Game.UI
         public void Start()
         {
             _initialCameraPosition = GameManager.MainCamera.transform.position;
-<<<<<<< HEAD
 
             GameManager.MainTree.collectedEnergy += OnEnergyChange;
             GameManager.MainTree.consumedEnergy += OnEnergyChange;
@@ -151,32 +123,6 @@ namespace Game.UI
 
             _splitButton.EnergyButton.SetText($"{GameManager.MainTree.RootEnergyCost}");
 
-=======
-        }
-
-        public void OnEnable()
-        {
-            _addButton.onClick.AddListener(OnAddUnit);
-
-            _unitSelection.clicked += OnCreateUnit;
-            _unitSelection.selected += OnSelectUnit;
-            _unitSelection.closed += OnUnitSelectionClose;
-        }
-
-        public void OnDisable()
-        {
-            _addButton.onClick.RemoveListener(OnAddUnit);
-
-            _unitSelection.clicked -= OnCreateUnit;
-            _unitSelection.selected -= OnSelectUnit;
-            _unitSelection.closed -= OnUnitSelectionClose;
-        }
-
-        public void Show(RootNode node)
-        {
-            _activeNode = node;
-
->>>>>>> 6425a48 (Refactored RootActions class)
             if (node.Unit == null)
             {
                 _addButton.gameObject.SetActive(true);
@@ -189,33 +135,22 @@ namespace Game.UI
             {
                 _addButton.gameObject.SetActive(false);
                 _killButton.gameObject.SetActive(true);
-<<<<<<< HEAD
                 _upgradeButton.gameObject.SetActive(node.Unit.Data.UpgradePrefab);
                 _targetButton.gameObject.SetActive(false);
                 // _targetButton.gameObject.SetActive(true); // TODO: only for sementinha :3
 
                 _killButton.EnergyButton.SetText($"{node.Unit.Data.SellPrice}");
                 _upgradeButton.EnergyButton.SetText($"{node.Unit.Data.UpgradeCost}");
-=======
-                _upgradeButton.gameObject.SetActive(true);
-                _targetButton.gameObject.SetActive(false);
-                // _targetButton.gameObject.SetActive(true); // TODO: only for sementinha :3
->>>>>>> 6425a48 (Refactored RootActions class)
             }
 
             if (node.Parent == null)
             {
                 _addButton.gameObject.SetActive(false);
                 _killButton.gameObject.SetActive(false);
-<<<<<<< HEAD
                 _upgradeButton.gameObject.SetActive(GameManager.MainTree.CurrentLevel < GameManager.MainTree.MaxLevel);
                 _targetButton.gameObject.SetActive(false);
 
                 _upgradeButton.EnergyButton.SetText($"{GameManager.MainTree.UpgradeCost}");
-=======
-                _upgradeButton.gameObject.SetActive(true);
-                _targetButton.gameObject.SetActive(false);
->>>>>>> 6425a48 (Refactored RootActions class)
             }
 
             if (_rect == null) return;
@@ -253,19 +188,12 @@ namespace Game.UI
             float direction = _activeNode.transform.position.x < GameManager.MainCamera.transform.position.x ? -1 : 1;
 
             _cameraTween?.Kill();
-<<<<<<< HEAD
             _cameraTween = GameManager.MainCamera.transform.DOMoveX(_initialCameraPosition.x + (15f * direction), 3f)
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
 
             _fovTween?.Kill();
             _fovTween = GameManager.MainCamera.DOOrthoSize(30f, 3f)
-=======
-            _cameraTween = GameManager.MainCamera.transform.DOMoveX(_initialCameraPosition.x + (20f * direction), 2f)
-                .SetEase(Ease.OutExpo)
-                .SetUpdate(true);
-            GameManager.MainCamera.DOOrthoSize(30f, 2f)
->>>>>>> 6425a48 (Refactored RootActions class)
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
 
@@ -278,13 +206,9 @@ namespace Game.UI
             _cameraTween = GameManager.MainCamera.transform.DOMoveX(_initialCameraPosition.x, 1f)
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
-<<<<<<< HEAD
 
             _fovTween?.Kill();
             _fovTween = GameManager.MainCamera.DOOrthoSize(25f, 1f)
-=======
-            GameManager.MainCamera.DOOrthoSize(25f, 1f)
->>>>>>> 6425a48 (Refactored RootActions class)
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
             
@@ -305,27 +229,18 @@ namespace Game.UI
                 OnDeselectUnit();
         }
 
-<<<<<<< HEAD
         private void OnDeselectUnit()
-=======
-        public void OnDeselectUnit()
->>>>>>> 6425a48 (Refactored RootActions class)
         {
             _unitRangeRadius.SetRadius(0f);
         }
 
-<<<<<<< HEAD
         private void OnCreateUnit(UnitData data)
-=======
-        public void OnCreateUnit(UnitData data)
->>>>>>> 6425a48 (Refactored RootActions class)
         {
             if (data.RequiredEnergy > GameManager.MainTree.EnergyAmount)
                 return;
 
             _unitSelection.Hide();
 
-<<<<<<< HEAD
             Unit unit = CreateUnit(data.Prefab);
 
             if (unit == null) return;
@@ -338,9 +253,6 @@ namespace Game.UI
         private Unit CreateUnit(GameObject prefab)
         {
             GameObject instance = GameObject.Instantiate(prefab, _activeNode.transform);
-=======
-            GameObject instance = GameObject.Instantiate(data.Prefab, _activeNode.transform);
->>>>>>> 6425a48 (Refactored RootActions class)
 
             instance.transform.localScale = Vector3.zero;
             instance.transform.DOScale(Vector3.one, 1f)
@@ -349,7 +261,6 @@ namespace Game.UI
 
             SoundManager.PlaySound(_unitCreationSound);
 
-<<<<<<< HEAD
             instance.TryGetComponent<Unit>(out Unit unit);
 
             return unit;
@@ -398,13 +309,6 @@ namespace Game.UI
 
                 Hide();
             }
-=======
-            if (!instance.TryGetComponent<Unit>(out Unit unit)) return;
-
-            _activeNode.SetUnit(unit);
-
-            GameManager.MainTree.ConsumeEnergy(data.RequiredEnergy);
->>>>>>> 6425a48 (Refactored RootActions class)
         }
     }
 }
