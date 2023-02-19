@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e19904848e3a1c54c830ec88e59d0318, type: 3}
-  m_Name: SpitterData
+  m_Name: TwinSpitterData
   m_EditorClassIdentifier: 
-  _name: Cospidora
+  _name: "Cospidora G\xEAmeas"
   _type: 1
-  _prefab: {fileID: 5634176223657473883, guid: 843d0fba3d62f5840bb4f4b118037809, type: 3}
-  _upgradePrefab: {fileID: 2981023404605713855, guid: 1501b834a1ebfca48a649ae369e2c571,
-    type: 3}
+  _prefab: {fileID: 2981023404605713855, guid: 1501b834a1ebfca48a649ae369e2c571, type: 3}
+  _upgradePrefab: {fileID: 0}
   _thumbnail: {fileID: 21300000, guid: b2a0f3973cbae9f46a1cd74ac293e018, type: 3}
   _rangeRadius: 30
-  _requiredEnergy: 1000
-  _sellPrice: 500
-  _upgradeCost: 1500
+  _requiredEnergy: 0
+  _sellPrice: 1000
+  _upgradeCost: 0

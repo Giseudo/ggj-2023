@@ -38,6 +38,7 @@ namespace Game.UI
 
         public RootNode ActiveNode => _rootContainer?.ActiveNode;
         public bool IsDragging => _isDragging;
+        private void OnTreeLevelUp(int level) => _rootLimit.SetText($"{_mainTree.RootSplitLimit}");
 
         public void Awake()
         {
@@ -48,8 +49,10 @@ namespace Game.UI
         {
             _mainTree = GameManager.MainTree;
             _mainTree.rootSplitted += OnRootSplit;
+            _mainTree.levelUp += OnTreeLevelUp;
 
             _image.enabled = false;
+            _rootLimit.SetText($"{_mainTree.RootSplitLimit}");
         }
 
         public void Init(UIRootContainer rootContainer)
@@ -59,7 +62,8 @@ namespace Game.UI
 
         public void OnDestroy()
         {
-            _mainTree.rootSplitted += OnRootSplit;
+            _mainTree.rootSplitted -= OnRootSplit;
+            _mainTree.levelUp -= OnTreeLevelUp;
         }
 
         public void OnPointerClick(PointerEventData evt)

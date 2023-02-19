@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e19904848e3a1c54c830ec88e59d0318, type: 3}
-  m_Name: PiranhaPlantData
+  m_Name: RedPiranhaData
   m_EditorClassIdentifier: 
-  _name: Mastigadora
+  _name: Mastigadora Vermelha
   _type: 0
-  _prefab: {fileID: 2554158075223536439, guid: 0292939d9cdb18946ac5c822136b9429, type: 3}
-  _upgradePrefab: {fileID: 1087548350112900233, guid: 6d937ca26120cb143965df4833636bca,
-    type: 3}
+  _prefab: {fileID: 1087548350112900233, guid: 6d937ca26120cb143965df4833636bca, type: 3}
+  _upgradePrefab: {fileID: 0}
   _thumbnail: {fileID: 21300000, guid: 2203b9781c728d0458a17ae332a0a7c9, type: 3}
-  _rangeRadius: 10
-  _requiredEnergy: 700
-  _sellPrice: 350
-  _upgradeCost: 1500
+  _rangeRadius: 15
+  _requiredEnergy: 0
+  _sellPrice: 1500
+  _upgradeCost: 0

@@ -72,6 +72,7 @@ namespace Game.UI
         {
             _addButton.clicked += OnAddUnit;
             _killButton.clicked += OnKillUnit;
+            _upgradeButton.clicked += OnUpgradeUnit;
 
             _unitSelection.clicked += OnCreateUnit;
             _unitSelection.selected += OnSelectUnit;
@@ -82,6 +83,7 @@ namespace Game.UI
         {
             _addButton.clicked -= OnAddUnit;
             _killButton.clicked -= OnKillUnit;
+            _upgradeButton.clicked -= OnUpgradeUnit;
 
             _unitSelection.clicked -= OnCreateUnit;
             _unitSelection.selected -= OnSelectUnit;
@@ -106,7 +108,7 @@ namespace Game.UI
             {
                 _addButton.gameObject.SetActive(false);
                 _killButton.gameObject.SetActive(true);
-                _upgradeButton.gameObject.SetActive(true);
+                _upgradeButton.gameObject.SetActive(node.Unit.Data.UpgradePrefab);
                 _targetButton.gameObject.SetActive(false);
                 // _targetButton.gameObject.SetActive(true); // TODO: only for sementinha :3
 
@@ -212,7 +214,18 @@ namespace Game.UI
 
             _unitSelection.Hide();
 
-            GameObject instance = GameObject.Instantiate(data.Prefab, _activeNode.transform);
+            Unit unit = CreateUnit(data.Prefab);
+
+            if (unit == null) return;
+
+            _activeNode.SetUnit(unit);
+
+            GameManager.MainTree.ConsumeEnergy(data.RequiredEnergy);
+        }
+
+        private Unit CreateUnit(GameObject prefab)
+        {
+            GameObject instance = GameObject.Instantiate(prefab, _activeNode.transform);
 
             instance.transform.localScale = Vector3.zero;
             instance.transform.DOScale(Vector3.one, 1f)
@@ -221,23 +234,52 @@ namespace Game.UI
 
             SoundManager.PlaySound(_unitCreationSound);
 
-            if (!instance.TryGetComponent<Unit>(out Unit unit)) return;
+            instance.TryGetComponent<Unit>(out Unit unit);
 
-            _activeNode.SetUnit(unit);
-
-            GameManager.MainTree.ConsumeEnergy(data.RequiredEnergy);
+            return unit;
         }
 
         private void OnKillUnit()
         {
+            Hide();
+
             if (_activeNode.Unit == null) return;
 
             GameManager.MainTree.CollectEnergy(_activeNode.Unit.Data.SellPrice);
             GameObject.Destroy(_activeNode.Unit.gameObject);
 
             _activeNode.SetUnit(null);
+        }
 
+        private void OnUpgradeUnit()
+        {
             Hide();
+
+            // Tree upgrade
+            if (_activeNode.Parent == null)
+            {
+                if (GameManager.MainTree.EnergyAmount < GameManager.MainTree.UpgradeCost)
+                    return;
+                
+                GameManager.MainTree.ConsumeEnergy(GameManager.MainTree.UpgradeCost);
+                GameManager.MainTree.Upgrade();
+            }
+
+            // Unit upgrade
+            if (_activeNode.Unit != null)
+            {
+                if (GameManager.MainTree.EnergyAmount < _activeNode.Unit.Data.UpgradeCost)
+                    return;
+                
+                Unit unit = CreateUnit(_activeNode.Unit.Data.UpgradePrefab);
+
+                if (unit == null) return;
+  
+                GameObject.Destroy(_activeNode.Unit.gameObject);
+                GameManager.MainTree.ConsumeEnergy(_activeNode.Unit.Data.UpgradeCost);
+
+                _activeNode.SetUnit(unit);
+            }
         }
     }
 }

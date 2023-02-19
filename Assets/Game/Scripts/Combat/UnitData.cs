@@ -21,6 +21,9 @@ namespace Game.Combat
         private GameObject _prefab;
 
         [SerializeField]
+        private GameObject _upgradePrefab;
+
+        [SerializeField]
         private Sprite _thumbnail;
 
         [SerializeField]
@@ -38,6 +41,7 @@ namespace Game.Combat
         public string Name => _name;
         public UnitType Type => _type;
         public GameObject Prefab => _prefab;
+        public GameObject UpgradePrefab => _upgradePrefab;
         public Sprite Thumbnail => _thumbnail;
         public float RangeRadius => _rangeRadius;
         public int RequiredEnergy => _requiredEnergy;

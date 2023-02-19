@@ -136,8 +136,7 @@ namespace Game.Combat
 // [ ] Tree upgrade
 // [ ] Unities upgrade
 // [ ] Seed hole improvements
-// [ ] Sell unit
+// [x] Sell unit
 // [ ] Wave timer
 // [x] SFX
-// [ ] Main menu
-// [ ] Build & upload
+// [ ] Main menu + credits

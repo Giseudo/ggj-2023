@@ -779,9 +779,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _energyAmount: 1100
-  _rootEnergyCost: 200
-  _rootMaxDistance: 20
-  _rootSplitLimit: 5
+  _levels:
+  - _rootEnergyCost: 200
+    _rootMaxDistance: 20
+    _upgradeCost: 2000
+    _rootSplitLimit: 3
+  - _rootEnergyCost: 200
+    _rootMaxDistance: 20
+    _upgradeCost: 2000
+    _rootSplitLimit: 5
+  - _rootEnergyCost: 200
+    _rootMaxDistance: 20
+    _upgradeCost: 2000
+    _rootSplitLimit: 7
+  - _rootEnergyCost: 200
+    _rootMaxDistance: 20
+    _upgradeCost: 2000
+    _rootSplitLimit: 9
 --- !u!114 &927881622995399481
 MonoBehaviour:
   m_ObjectHideFlags: 0

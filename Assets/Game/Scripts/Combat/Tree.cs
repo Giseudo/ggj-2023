@@ -5,24 +5,40 @@ using UnityEngine;
 
 namespace Game.Combat
 {
+    [Serializable]
+    public class TreeLevel
+    {
+        [SerializeField]
+        private int _rootEnergyCost = 200;
+
+        [SerializeField]
+        private float _rootMaxDistance = 20f;
+
+        [SerializeField]
+        private int _upgradeCost = 2000;
+
+        [SerializeField]
+        private int _rootSplitLimit = 5;
+
+        public int RootEnergyCost => _rootEnergyCost;
+        public float RootMaxDistance => _rootMaxDistance;
+        public int UpgradeCost => _upgradeCost;
+        public int RootSplitLimit => _rootSplitLimit;
+    }
+
     public class Tree : MonoBehaviour
     {
         [SerializeField]
         private int _energyAmount = 400;
 
         [SerializeField]
-        private int _rootEnergyCost = 50;
+        private List<TreeLevel> _levels = new List<TreeLevel>();
 
-        [SerializeField]
+        private int _currentLevel = 0;
+        private int _rootEnergyCost = 200;
         private float _rootMaxDistance = 20f;
-
-        [SerializeField]
         private int _rootSplitLimit = 5;
-
-        [SerializeField]
         private int _upgradeCost = 2000;
-
-        private int _maxRootSplit;
 
         private List<RootNode> _nodeList;
         private List<Tree> _absorvedTrees = new List<Tree>();
@@ -32,6 +48,7 @@ namespace Game.Combat
         public Action<int> consumedEnergy = delegate { };
         public Action<Tree> absorvedTree = delegate { };
         public Action rootSplitted = delegate { };
+        public Action<int> levelUp = delegate { };
 
         public float RootMaxDistance => _rootMaxDistance;
         public int RootEnergyCost => _rootEnergyCost;
@@ -42,11 +59,13 @@ namespace Game.Combat
         public Tree ParentTree => _parentTree;
         public int RootSplitLimit => _rootSplitLimit;
         public int UpgradeCost => _upgradeCost;
+        public int MaxLevel => _levels.Count - 1;
 
         public void Awake()
         {
-            _maxRootSplit = _rootEnergyCost;
             _nodeList = GetComponentsInChildren<RootNode>(true).ToList();
+
+            UpdateStats();
         }
 
         public void CollectEnergy(int value)
@@ -101,6 +120,28 @@ namespace Game.Combat
 
             _rootSplitLimit -= 1;
             rootSplitted.Invoke();
+        }
+
+        public void Upgrade()
+        {
+            if (_currentLevel + 1 >= _levels.Count)
+                return;
+
+            _currentLevel += 1;
+
+            UpdateStats();
+
+            levelUp.Invoke(_currentLevel);
+        }
+
+        public void UpdateStats()
+        {
+            TreeLevel level = _levels[_currentLevel];
+
+            _rootEnergyCost = level.RootEnergyCost;
+            _rootMaxDistance = level.RootMaxDistance;
+            _rootSplitLimit = level.RootSplitLimit;
+            _upgradeCost = level.UpgradeCost;
         }
     }
 }
