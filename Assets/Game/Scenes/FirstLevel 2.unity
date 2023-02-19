@@ -1441,7 +1441,7 @@ PrefabInstance:
     - target: {fileID: 1033187723024418570, guid: adacc02f196b034448c88ad2c9656e8c,
         type: 3}
       propertyPath: m_Intensity
-      value: 10.990191
+      value: 10.98452
       objectReference: {fileID: 0}
     - target: {fileID: 5015389007945671901, guid: adacc02f196b034448c88ad2c9656e8c,
         type: 3}
@@ -2778,18 +2778,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: MaxChunks
-      value: 149
-      objectReference: {fileID: 0}
-    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: MaxVoxelsK
-      value: 111
-      objectReference: {fileID: 0}
-    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: AutoAdjustBudgetsToHighWaterMarks
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 192760989407497852, guid: 35457f1929fceb743a53b53c1c9974a2,
         type: 3}
       propertyPath: m_RootOrder

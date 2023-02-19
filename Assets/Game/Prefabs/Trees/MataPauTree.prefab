@@ -120,10 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1406bb0b613343248bba1c664e68d2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxVoxelsK: 1
-  MaxChunks: 16
+  MaxVoxelsK: 111
+  MaxChunks: 149
   ShowGpuMemoryUsage: 1
-  AutoAdjustBudgetsToHighWaterMarks: 1
+  AutoAdjustBudgetsToHighWaterMarks: 0
   AutoAdjustBudgetsToHighWaterMarksMarginPercent: 15
   VoxelDensity: 2
   ForceEvaluateAllBrushes: 0
@@ -665,7 +665,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3bf38a9ef3c58b54584cd6f8967d9809,
         type: 3}
       propertyPath: m_RootOrder
-      value: 44
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3bf38a9ef3c58b54584cd6f8967d9809,
         type: 3}
@@ -782,20 +782,20 @@ MonoBehaviour:
   _initialRootSplitLimit: 3
   _levels:
   - _rootEnergyCost: 200
-    _rootMaxDistance: 20
+    _rootMaxDistance: 10
     _upgradeCost: 2000
     _rootSplitBonus: 0
   - _rootEnergyCost: 200
     _rootMaxDistance: 20
-    _upgradeCost: 2000
+    _upgradeCost: 4000
     _rootSplitBonus: 2
   - _rootEnergyCost: 200
     _rootMaxDistance: 20
-    _upgradeCost: 2000
+    _upgradeCost: 8000
     _rootSplitBonus: 2
   - _rootEnergyCost: 200
     _rootMaxDistance: 20
-    _upgradeCost: 2000
+    _upgradeCost: 16000
     _rootSplitBonus: 2
 --- !u!114 &927881622995399481
 MonoBehaviour:
