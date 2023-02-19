@@ -81,18 +81,24 @@ namespace Game.UI
         {
             if (_activeNode == null) return;
 
-            bool enabled = false;
+            bool upgradeEnabled = false;
+            bool rootEnabled = GameManager.MainTree.EnergyAmount > GameManager.MainTree.RootEnergyCost;
 
             if (_activeNode.Unit != null)
-                enabled =  GameManager.MainTree.EnergyAmount > _activeNode.Unit.Data.UpgradeCost;
+                upgradeEnabled =  GameManager.MainTree.EnergyAmount > _activeNode.Unit.Data.UpgradeCost;
 
             if (_activeNode.Parent == null)
-                enabled =  GameManager.MainTree.EnergyAmount > GameManager.MainTree.UpgradeCost;
+                upgradeEnabled =  GameManager.MainTree.EnergyAmount > GameManager.MainTree.UpgradeCost;
 
-            if (enabled)
+            if (upgradeEnabled)
                 _upgradeButton.EnergyButton.Enable();
             else
                 _upgradeButton.EnergyButton.Disable();
+
+            if (rootEnabled)
+                _splitButton.EnergyButton.Enable();
+            else
+                _splitButton.EnergyButton.Disable();
         }
 
         public void OnEnable()
@@ -136,8 +142,7 @@ namespace Game.UI
                 _addButton.gameObject.SetActive(false);
                 _killButton.gameObject.SetActive(true);
                 _upgradeButton.gameObject.SetActive(node.Unit.Data.UpgradePrefab);
-                _targetButton.gameObject.SetActive(false);
-                // _targetButton.gameObject.SetActive(true); // TODO: only for sementinha :3
+                _targetButton.gameObject.SetActive(node.Unit.Data.Type == UnitType.Spawner);
 
                 _killButton.EnergyButton.SetText($"{node.Unit.Data.SellPrice}");
                 _upgradeButton.EnergyButton.SetText($"{node.Unit.Data.UpgradeCost}");

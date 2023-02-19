@@ -21,6 +21,9 @@ public class UIRootLimit : MonoBehaviour
     {
         _lastTextChangeTime = Time.unscaledTime;
         _text.text = value;
+
+        if (!_isOpened) return;
+
         _tween = _rect.DOScale(Vector2.one * 1.5f, 1f)
             .SetUpdate(true)
             .SetEase(Ease.OutElastic)

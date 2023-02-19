@@ -290,6 +290,7 @@ namespace Game.UI
 
             GameManager.MainTree.ConsumeEnergy(GameManager.MainTree.RootEnergyCost);
             SoundManager.PlaySound(_rootCreationSound);
+            Physics.SyncTransforms();
 
             node.GrowBranch();
             nodeCreated.Invoke(node);

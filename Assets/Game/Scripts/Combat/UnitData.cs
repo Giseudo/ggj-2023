@@ -6,6 +6,7 @@ namespace Game.Combat
     {
         Melee,
         Ranged,
+        Spawner,
     }
 
     [CreateAssetMenu(fileName = "UnitData", menuName = "Game/Data/Unit Data")]
