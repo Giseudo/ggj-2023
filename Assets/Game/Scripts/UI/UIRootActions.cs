@@ -188,12 +188,12 @@ namespace Game.UI
             float direction = _activeNode.transform.position.x < GameManager.MainCamera.transform.position.x ? -1 : 1;
 
             _cameraTween?.Kill();
-            _cameraTween = GameManager.MainCamera.transform.DOMoveX(_initialCameraPosition.x + (15f * direction), 3f)
+            _cameraTween = GameManager.MainCamera.transform.DOMoveX(_initialCameraPosition.x + (20f * direction), 3f)
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
 
             _fovTween?.Kill();
-            _fovTween = GameManager.MainCamera.DOOrthoSize(30f, 3f)
+            _fovTween = GameManager.MainCamera.DOOrthoSize(27f, 3f)
                 .SetEase(Ease.OutExpo)
                 .SetUpdate(true);
 
