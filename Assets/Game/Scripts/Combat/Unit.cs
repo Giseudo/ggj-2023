@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Combat
@@ -13,7 +12,6 @@ namespace Game.Combat
 
         private Vector3 _targetPosition;
         private Unit _parent;
-        private List<Unit> _children = new List<Unit>();
 
         public Unit Parent => _parent;
         public Vector3 TargetPosition => _targetPosition;
@@ -33,17 +31,17 @@ namespace Game.Combat
             parentChanged.Invoke(parent);
 
             _parent = parent;
-            _parent?.AddChild(this);
+            //_parent?.AddChild(this);
         }
 
-        public void AddChild(Unit child)
-        {
-            _children.Add(child);
-        }
+        // public void AddChild(Unit child)
+        // {
+        //     _children.Add(child);
+        // }
 
-        public void RemoveChild(Unit child)
-        {
-            _children.Remove(child);
-        }
+        // public void RemoveChild(Unit child)
+        // {
+        //     _children.Remove(child);
+        // }
     }
 }

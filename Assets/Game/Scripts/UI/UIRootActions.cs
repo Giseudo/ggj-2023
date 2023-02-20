@@ -13,6 +13,9 @@ namespace Game.UI
         private UIUnitSelection _unitSelection;
 
         [SerializeField]
+        private UITargetSelection _targetSelection;
+
+        [SerializeField]
         private UIRangeRadius _unitRangeRadius;
 
         [SerializeField]
@@ -42,6 +45,7 @@ namespace Game.UI
         private Tween _fovTween;
 
         public UIUnitSelection UnitSelection => _unitSelection;
+        public UITargetSelection TargetSelection => _targetSelection;
         public RectTransform Rect => _rect;
         public bool IsOpened => _isOpened;
 
@@ -106,10 +110,13 @@ namespace Game.UI
             _addButton.clicked += OnAddUnit;
             _killButton.clicked += OnKillUnit;
             _upgradeButton.clicked += OnUpgradeUnit;
+            _targetButton.clicked += OnChangeTarget;
 
             _unitSelection.clicked += OnCreateUnit;
             _unitSelection.selected += OnSelectUnit;
             _unitSelection.closed += OnUnitSelectionClose;
+
+            _targetSelection.confirmed += OnConfirmTarget;
         }
 
         public void OnDisable()
@@ -117,10 +124,13 @@ namespace Game.UI
             _addButton.clicked -= OnAddUnit;
             _killButton.clicked -= OnKillUnit;
             _upgradeButton.clicked -= OnUpgradeUnit;
+            _targetButton.clicked -= OnChangeTarget;
 
             _unitSelection.clicked -= OnCreateUnit;
             _unitSelection.selected -= OnSelectUnit;
             _unitSelection.closed -= OnUnitSelectionClose;
+
+            _targetSelection.confirmed -= OnConfirmTarget;
         }
 
         public void Show(RootNode node)
@@ -253,6 +263,12 @@ namespace Game.UI
             _activeNode.SetUnit(unit);
 
             GameManager.MainTree.ConsumeEnergy(data.RequiredEnergy);
+
+            if (unit.Data.Type != UnitType.Spawner) return;
+
+            _targetSelection.Show(unit);
+
+            TimeManager.SlowMotion();
         }
 
         private Unit CreateUnit(GameObject prefab)
@@ -314,6 +330,28 @@ namespace Game.UI
 
                 Hide();
             }
+        }
+
+        private void OnChangeTarget()
+        {
+            if (_activeNode == null) return;
+            if (_activeNode.Unit == null) return;
+
+            _targetSelection.Show(_activeNode.Unit);
+
+            TimeManager.SlowMotion();
+        }
+        
+        private void OnConfirmTarget(Vector3 position)
+        {
+            TimeManager.Resume();
+
+            Hide();
+
+            if (!_activeNode.Unit.TryGetComponent<ProjectileLauncher>(out ProjectileLauncher launcher)) return;
+
+            launcher.Target.position = position;
+            _activeNode.Unit.SetTargetPosition(position);
         }
     }
 }

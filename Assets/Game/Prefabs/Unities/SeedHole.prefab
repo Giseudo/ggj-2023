@@ -118,7 +118,7 @@ MonoBehaviour:
   _meleeDamage: 0
   _fovRadius: 20
   _attackSpeed: 1
-  _attackWaitTime: 4
+  _attackWaitTime: 0
   _vfxEventName: OnAttack
   _attackSound: {fileID: 0}
 --- !u!114 &6962793757786447197
@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 5143938570676501285, guid: 34f9d40aeecfb424ab2dc6b4aabfdb31, type: 3}
   _offset: {x: 0, y: 1, z: 0}
+  _limit: 3
   _target: {fileID: 2032817985}
 --- !u!1001 &4961941753029002173
 PrefabInstance:

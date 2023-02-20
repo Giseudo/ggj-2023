@@ -20,7 +20,7 @@ public class IsAtTargetPositionCondition : Condition
     public void Validate()
     {
         float distance = (_unit.transform.position - _unit.TargetPosition).magnitude;
-        bool isValid = distance < 2f;
+        bool isValid = distance < 3f;
 
         if (isValid && !Negate) Trigger();
         if (!isValid && Negate) Trigger();

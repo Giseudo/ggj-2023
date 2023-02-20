@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meleeDamage: 1
-  _fovRadius: 3
+  _fovRadius: 5
   _attackSpeed: 1
   _attackWaitTime: 0
   _vfxEventName: OnAttack
@@ -173,9 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc046c68349a4fd4bbb0697b421b4a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 20
+  _speed: 10
   _maxAcceleration: 15
-  MoveDirection: {x: 0, y: 0, z: 0}
 --- !u!1001 &5143938569988879732
 PrefabInstance:
   m_ObjectHideFlags: 0

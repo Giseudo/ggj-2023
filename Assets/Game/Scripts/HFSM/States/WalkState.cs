@@ -30,6 +30,11 @@ public class WalkState : State
     protected override void OnUpdate()
     {
         _character.transform.position += _character.Velocity * Time.deltaTime;
-        _character.transform.LookAt(_character.Velocity.normalized);
+
+        Vector3 direction = _character.Velocity;
+        direction.y = 0f;
+        direction.Normalize();
+
+        _character.transform.LookAt(_character.transform.position + direction);
     }
 }

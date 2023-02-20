@@ -39,6 +39,10 @@ namespace Game.Combat
         public Action<IProjectile> Died { get => died; set => died = value; }
         public GameObject GameObject => gameObject;
 
+        public void Awake()
+        {
+        }
+
         public void OnEnable()
         { }
 
@@ -51,8 +55,11 @@ namespace Game.Combat
 
         public void Fire()
         {
+            Vector2 circle = (3f * UnityEngine.Random.insideUnitCircle);
+            Vector3 randomPosition = new Vector3(circle.x, 0f, circle.y);
+
             _initialPosition = transform.position;
-            _targetPosition = _target.position;
+            _targetPosition = _target.position + randomPosition;
 
             t = 0f;
 
@@ -69,6 +76,12 @@ namespace Game.Combat
                     transform.position = p + h;
                 })
                 .OnComplete(() => {
+                    Vector3 position = transform.position;
+
+                    position.y = 0f;
+
+                    transform.position = position;
+
                     Collider[] colliders = Physics.OverlapSphere(transform.position, _hitRadius, 1 << LayerMask.NameToLayer("Creep"));
 
                     for (int i = 0; i < colliders.Length; i++)
