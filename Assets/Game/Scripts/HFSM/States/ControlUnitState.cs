@@ -15,6 +15,7 @@ public class ControlUnitState : State
     private AttackState _attack = new AttackState();
     private float _startTime;
     private float _lastAttackTime;
+    private bool _changedTarget;
     private List<Unit> _children = new List<Unit>();
 
     protected override void OnStart()
@@ -48,7 +49,7 @@ public class ControlUnitState : State
 
     protected override void OnUpdate()
     {
-        if (_startTime + 1f > Time.time) return;
+        if (!_changedTarget) return;
 
         bool reachedLimit = _launcher.Pool.CountActive >= _launcher.Limit;
 
@@ -71,6 +72,8 @@ public class ControlUnitState : State
 
     private void OnTargetChange(Vector3 position)
     {
+        _changedTarget = true;
+
         for (int i = 0; i < _children.Count; i++)
         {
             Unit unit = _children[i];

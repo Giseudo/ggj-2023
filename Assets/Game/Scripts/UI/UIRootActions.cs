@@ -117,6 +117,7 @@ namespace Game.UI
             _unitSelection.closed += OnUnitSelectionClose;
 
             _targetSelection.confirmed += OnConfirmTarget;
+            _targetSelection.closed += OnTargetSelectionClose;
         }
 
         public void OnDisable()
@@ -131,6 +132,7 @@ namespace Game.UI
             _unitSelection.closed -= OnUnitSelectionClose;
 
             _targetSelection.confirmed -= OnConfirmTarget;
+            _targetSelection.closed -= OnTargetSelectionClose;
         }
 
         public void Show(RootNode node)
@@ -341,13 +343,16 @@ namespace Game.UI
 
             TimeManager.SlowMotion();
         }
-        
-        private void OnConfirmTarget(Vector3 position)
+
+        private void OnTargetSelectionClose()
         {
             TimeManager.Resume();
 
             Hide();
-
+        }
+        
+        private void OnConfirmTarget(Vector3 position)
+        {
             if (!_activeNode.Unit.TryGetComponent<ProjectileLauncher>(out ProjectileLauncher launcher)) return;
 
             launcher.Target.position = position;

@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6990047929245070002
 Transform:
   m_ObjectHideFlags: 0
@@ -135,6 +135,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 10
   _hurtTime: 1
+  _hitSound: {fileID: 0}
+  _deathSound: {fileID: 0}
 --- !u!114 &2146907836897720715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 5a20aecab6bcc80499f890f0010ba1e8, type: 2}
   _maxSpeed: 3
+  _energyDropAmount: 50
 --- !u!1001 &3820986410429191352
 PrefabInstance:
   m_ObjectHideFlags: 0
