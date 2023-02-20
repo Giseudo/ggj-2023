@@ -145,8 +145,11 @@ namespace Game.Combat
 // [x] Unities upgrade
 // [x] Seed hole improvements
 // [x] Sell unit
-// [ ] Next level
+// [x] Next level
+// [ ] Main menu
 // [ ] Wave timer
 // [ ] Day / cycle
+// [ ] Block unit creation by level
+// [ ] Absorb tree indications / transition
+// [ ] Score
 // [x] SFX
-// [ ] Main menu + credits
