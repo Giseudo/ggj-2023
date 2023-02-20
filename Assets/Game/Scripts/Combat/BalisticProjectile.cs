@@ -54,14 +54,6 @@ namespace Game.Combat
             _initialPosition = transform.position;
             _targetPosition = _target.position;
 
-            if (_target.TryGetComponent<Creep>(out Creep creep))
-            {
-                float t = Mathf.InverseLerp(0f, creep.CurveLength, creep.Displacement + _targetAheadDistance);
-
-                if (creep.IsMoving)
-                    _targetPosition = creep.Spline.EvaluatePosition(t);
-            }
-
             t = 0f;
 
             _tween?.Kill();

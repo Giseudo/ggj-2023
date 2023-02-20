@@ -21,13 +21,20 @@ namespace Game.Combat
         [SerializeField]
         public Vector3 _offset;
 
+        [SerializeField]
+        private int _limit = 5;
+
         public Transform _target;
+        private ObjectPool<IProjectile> _pool;
 
         public void SetTarget(Transform target) => _target = target;
 
+        public ObjectPool<IProjectile> Pool => _pool;
         public Transform Target => _target;
+        public int Limit => _limit;
 
-        private ObjectPool<IProjectile> _pool;
+        public Action<IProjectile> launched;
+        public Action<IProjectile> destroyed;
 
         public void Awake()
         {
@@ -78,12 +85,18 @@ namespace Game.Combat
 
         private void OnProjetileDeath(IProjectile projectile)
         {
+            destroyed.Invoke(projectile);
+
             _pool.Release(projectile);
         }
 
         public IProjectile LaunchProjectile()
         {
-            return _pool.Get();
+            IProjectile projectile = _pool.Get();
+
+            launched.Invoke(projectile);
+
+            return projectile;
         }
     }
 }

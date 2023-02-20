@@ -37,7 +37,7 @@ namespace Game.Input
 
         private void OnLook(Vector2 direction)
         {
-            _character.Rotate(new Vector3(0f, direction.x, 0f));
+            // _character.Rotate(new Vector3(0f, direction.x, 0f));
 
             _lookDirection += new Vector3(direction.y, direction.x, 0f);
         }

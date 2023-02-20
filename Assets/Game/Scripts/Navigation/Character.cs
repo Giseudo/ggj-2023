@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Game.Navigation
 {
-    [RequireComponent(typeof(Rigidbody))]
     public class Character : MonoBehaviour
     {
         [SerializeField]
@@ -13,26 +12,16 @@ namespace Game.Navigation
 
         private Vector3 _velocity;
         private Vector3 _moveDirection;
-        private Vector3 _lookDirection;
-        private Rigidbody _rigidbody; 
-
+        public Vector3 MoveDirection => _moveDirection;
+        public Vector3 Velocity => _velocity;
         public float MaxSpeedChange => _maxAcceleration * Time.deltaTime;
 
         public void Awake()
-        {
-            TryGetComponent<Rigidbody>(out _rigidbody);
-        }
+        { }
 
         public void FixedUpdate()
         {
-            /*
-            _velocity = _rigidbody.velocity;
-
             AdjustVelocity();
-
-            _rigidbody.velocity = _velocity;
-            transform.eulerAngles = _lookDirection;
-            */
         }
 
         public void AdjustVelocity()
@@ -60,11 +49,6 @@ namespace Game.Navigation
         public void Move(Vector3 direction)
         {
             _moveDirection = direction;
-        }
-
-        public void Rotate(Vector3 euler)
-        {
-            _lookDirection += euler;
         }
     }
 }
