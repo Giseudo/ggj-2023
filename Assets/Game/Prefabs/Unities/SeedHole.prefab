@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meleeDamage: 0
-  _fovRadius: 30
+  _fovRadius: 15
   _attackSpeed: 1
   _attackWaitTime: 0
   _vfxEventName: OnAttack

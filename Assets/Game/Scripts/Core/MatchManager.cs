@@ -135,8 +135,9 @@ namespace Game.Combat
 // [x] Root limit
 // [x] Tree upgrade
 // [x] Unities upgrade
-// [ ] Seed hole improvements
+// [x] Seed hole improvements
 // [x] Sell unit
 // [ ] Wave timer
+// [ ] Day / cycle
 // [x] SFX
 // [ ] Main menu + credits
