@@ -34,7 +34,7 @@ namespace Game.UI
 
         public void RestartGame()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameManager.Scenes.RestartLevel();
         }
 
         private void OnDie(Damageable damageable)

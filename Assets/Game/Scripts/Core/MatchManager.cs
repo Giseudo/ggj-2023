@@ -9,9 +9,6 @@ namespace Game.Combat
 {
     public class MatchManager : MonoBehaviour
     {
-        [SerializeField]
-        private int _roundNumbers = 3;
-
         private int _endedWavesCount = 0;
         private int _roundOverCount = 0;
 
@@ -29,7 +26,6 @@ namespace Game.Combat
         public void Awake()
         {
             Instance = this;
-            RoundNumbers = _roundNumbers;
 
             WaveSpawnerAdded = delegate { };
             WaveSpawnerRemoved = delegate { };
@@ -40,6 +36,18 @@ namespace Game.Combat
         }
 
         public void Start()
+        {
+            StartCoroutine(StartRound());
+
+            GameManager.Scenes.loadedLevel += OnLoadLevel;
+        }
+
+        public void OnDestroy()
+        {
+            GameManager.Scenes.loadedLevel -= OnLoadLevel;
+        }
+
+        private void OnLoadLevel(int level)
         {
             StartCoroutine(StartRound());
         }
@@ -137,6 +145,7 @@ namespace Game.Combat
 // [x] Unities upgrade
 // [x] Seed hole improvements
 // [x] Sell unit
+// [ ] Next level
 // [ ] Wave timer
 // [ ] Day / cycle
 // [x] SFX

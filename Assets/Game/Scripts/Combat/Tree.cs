@@ -140,6 +140,8 @@ namespace Game.Combat
 
         public void UpdateStats()
         {
+            if (_levels.Count < 1) return;
+
             TreeLevel level = _levels[_currentLevel];
 
             _rootEnergyCost = level.RootEnergyCost;

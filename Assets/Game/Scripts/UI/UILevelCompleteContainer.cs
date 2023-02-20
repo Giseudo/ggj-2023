@@ -27,7 +27,7 @@ namespace Game.UI
 
         public void RestartGame()
         {
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+            GameManager.Scenes.LoadNextLevel();
         }
 
         private void OnLevelComplete()

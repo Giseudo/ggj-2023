@@ -9,7 +9,7 @@ namespace Game.Core
     public class GameManager : MonoBehaviour
     {
         [SerializeField]
-        private Tree _mainTree;
+        private GameScenes _scenes;
 
         private static List<Damageable> _damageables;
         private static List<Attacker> _attackers;
@@ -17,22 +17,27 @@ namespace Game.Core
         public static GameManager Instance { get; private set; }
         public static Camera MainCamera { get; private set; }
         public static Tree MainTree { get; private set; }
+        public static GameScenes Scenes { get; private set; }
 
         public static Action<Damageable> DamageableAdded;
         public static Action<Damageable> DamageableRemoved;
         public static Action<Attacker> AttackerAdded;
         public static Action<Attacker> AttackerRemoved;
+        public static Action<Tree> MainTreeChanged;
+        public static Action<Camera> MainCameraChanged;
 
         public void Awake()
         {
             Instance = this;
             MainCamera = Camera.main;
-            MainTree = _mainTree;
+            Scenes = _scenes;
 
             DamageableAdded = delegate { };
             DamageableRemoved = delegate { };
             AttackerAdded = delegate { };
             AttackerRemoved = delegate { };
+            MainTreeChanged = delegate { };
+            MainCameraChanged = delegate { };
 
             _damageables = new List<Damageable>();
             _attackers = new List<Attacker>();
@@ -60,6 +65,18 @@ namespace Game.Core
         {
             _attackers.Remove(attacker);
             AttackerRemoved.Invoke(attacker);
+        }
+
+        public static void SetMainTree(Tree tree)
+        {
+            MainTree = tree;
+            MainTreeChanged.Invoke(tree);
+        }
+
+        public static void SetMainCamera(Camera camera)
+        {
+            MainCamera = camera;
+            MainCameraChanged.Invoke(camera);
         }
     }
 }

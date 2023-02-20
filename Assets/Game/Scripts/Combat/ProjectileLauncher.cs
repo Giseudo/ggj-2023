@@ -33,8 +33,8 @@ namespace Game.Combat
         public Transform Target => _target;
         public int Limit => _limit;
 
-        public Action<IProjectile> launched;
-        public Action<IProjectile> destroyed;
+        public Action<IProjectile> launched = delegate { };
+        public Action<IProjectile> destroyed = delegate { };
 
         public void Awake()
         {
