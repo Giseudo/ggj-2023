@@ -33,12 +33,13 @@ namespace Game.Combat
         private bool _isMoving = false;
         private float _displacement = 0f;
         private float _curveLength;
+        public void SetDisplacement(float value) => _displacement = value;
 
-        public void SetSpline(SplineContainer spline)
+        public void SetSpline(SplineContainer spline, float displacement = 0f)
         {
             _spline = spline;
             _curveLength = spline.Splines[0].GetLength();
-            _displacement = 0f;
+            _displacement = displacement;
         }
 
         public void Awake()

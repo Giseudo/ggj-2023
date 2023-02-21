@@ -15,13 +15,17 @@ namespace Game.Combat
         private List<Wave> _waves = new List<Wave>();
 
         private int _endedWavesCount = 0;
-
         private WaveSpawner _waveSpawner;
+
+        public List<Wave> Waves => _waves;
 
         public Action over = delegate { };
         public Action<Creep> creepDied = delegate { };
 
-        private void OnCreepDeath(Creep creep) => creepDied.Invoke(creep);
+        private void OnCreepDeath(Creep creep)
+        {
+            creepDied.Invoke(creep);
+        }
 
         public void Awake(WaveSpawner waveSpawner)
         {
@@ -75,6 +79,20 @@ namespace Game.Combat
 
                 spawner.SetInterval(wave.SpawnInterval);
                 spawner.SetLimit(wave.CountLimit);
+
+                if (wave.CreepData.CreepDeathSpawn)
+                {
+                    if (!_waveSpawner.Spawners.TryGetValue(wave.CreepData.CreepDeathSpawn, out CreepSpawner creepSpawner))
+                    {
+                        creepSpawner = GameObject.Instantiate<CreepSpawner>(_waveSpawner.CreepSpawnerPrefab, spawner.transform);
+                        creepSpawner.SetPrefab(wave.CreepData.CreepDeathSpawn.Prefab);
+                        creepSpawner.SetSpline(spawner.Spline);
+
+                        _waveSpawner.Spawners.Add(wave.CreepData.CreepDeathSpawn, creepSpawner);
+                    }
+
+                    creepSpawner.SetLimit(spawner.Limit + wave.CreepData.DeathSpawnCount);
+                }
 
                 spawner.creepDied += OnCreepDeath;
                 spawner.creepsDied += OnCreepsDeath;
@@ -144,6 +162,9 @@ namespace Game.Combat
         public CreepSpawner CreepSpawnerPrefab => _creepSpawnerPrefab;
         public Dictionary<CreepData, CreepSpawner> Spawners => _spawners;
         public SplineContainer Spline => _spline;
+        public List<Round> Rounds => _rounds;
+
+        public Round CurrentRound => _rounds[_currentRound];
 
         public Action finished = delegate { };
         public Action roundOver = delegate { };

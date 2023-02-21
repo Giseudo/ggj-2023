@@ -19,8 +19,6 @@ public class MarchState : State
 
     protected override void OnStart()
     {
-        GameManager.MainTree.TryGetComponent<Damageable>(out _treeDamageable);
-
         _animator = StateMachine.GetComponent<Animator>();
         _damageable = StateMachine.GetComponent<Damageable>();
         _creep = StateMachine.GetComponent<Creep>();
@@ -30,6 +28,8 @@ public class MarchState : State
 
     protected override void OnEnter()
     {
+        GameManager.MainTree?.TryGetComponent<Damageable>(out _treeDamageable);
+
         if (_creep == null) return;
 
         _hasReachedTree = false;

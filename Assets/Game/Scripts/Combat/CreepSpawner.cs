@@ -90,8 +90,55 @@ namespace Game.Combat
             damageable.transform.DOScale(Vector3.zero, .5f)
                 .OnComplete(() => _pool.Release(creep));
             
+            if (creep.Data.CreepDeathSpawn != null)
+            {
+                SpawnChild(creep, damageable);
+                return;
+            }
+
             _deathCount++;
 
+            CheckCreepsDeath(creep, damageable);
+        }
+
+        private void SpawnChild(Creep parentCreep, Damageable parentDamageable)
+        {
+            int childDeathCount = 0;
+
+            WaveSpawner spawner = MatchManager.WaveSpawners?.Find(spawner => spawner.Spline == Spline);
+            if (!spawner.Spawners.TryGetValue(parentCreep.Data.CreepDeathSpawn, out CreepSpawner creepSpawner)) return;
+
+            for (int i = 0; i < _prefab.Data.DeathSpawnCount; i++)
+            {
+                Creep spawnedCreep = creepSpawner.Spawn();
+                spawnedCreep.SetSpline(Spline, parentCreep.Displacement - ((i + 1) * 3));
+
+                if (!spawnedCreep.TryGetComponent<Damageable>(out Damageable damageable)) return;
+
+                void OnDie(Damageable damageable)
+                {
+                    damageable.died -= OnDie;
+                    childDeathCount++;
+
+                    if (childDeathCount >= parentCreep.Data.DeathSpawnCount)
+                    {
+                        _deathCount++;
+                        CheckCreepsDeath(parentCreep, parentDamageable);
+                    }
+
+                    if (damageable.Health > 0) return;
+
+                    spawner.OnCreepDeath(spawnedCreep);
+                }
+
+                damageable.died += OnDie;
+            }
+
+            spawner.OnCreepDeath(parentCreep);
+        }
+
+        private void CheckCreepsDeath(Creep creep, Damageable damageable)
+        {
             if (_deathCount >= _limit)
                 creepsDied.Invoke();
             
@@ -110,6 +157,11 @@ namespace Game.Combat
 
         public void Stop()
         { }
+
+        public Creep Spawn()
+        {
+            return _pool.Get();
+        }
 
         public IEnumerator Spawn(float delay)
         {

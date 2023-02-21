@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3258818763845735382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6763425512106690703}
+  m_Layer: 7
+  m_Name: SM_Minion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6763425512106690703
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3258818763845735382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3642400101898875731}
+  m_Father: {fileID: 6990047929245070002}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6990047929245070001
 GameObject:
   m_ObjectHideFlags: 0
@@ -34,9 +66,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3642400101898875731}
+  - {fileID: 6763425512106690703}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3955619325501785886
 Rigidbody:
@@ -120,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a63dec08798064549a5d087c26f70aac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _asset: {fileID: 11400000, guid: 125f57f1e5e970a4fb020d316174a9e3, type: 2}
+  _asset: {fileID: 11400000, guid: 7092a04711f658c4c849dc3c50862f5c, type: 2}
 --- !u!114 &4754083429089196699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 10
+  _hitsToStun: 1
   _hurtTime: 1
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
@@ -150,15 +183,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 5a20aecab6bcc80499f890f0010ba1e8, type: 2}
-  _maxSpeed: 3
-  _energyDropAmount: 50
+  _maxSpeed: 6
+  _energyDropAmount: 1000
 --- !u!1001 &3820986410429191352
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6990047929245070002}
+    m_TransformParent: {fileID: 6763425512106690703}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f000aca6df4d6be4e98f7e9607fa075d,
         type: 3}
@@ -168,7 +201,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f000aca6df4d6be4e98f7e9607fa075d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.66
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f000aca6df4d6be4e98f7e9607fa075d,
         type: 3}
@@ -178,7 +211,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f000aca6df4d6be4e98f7e9607fa075d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.587
+      value: -1.17
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f000aca6df4d6be4e98f7e9607fa075d,
         type: 3}

@@ -62,8 +62,6 @@ namespace Game.Combat
             if (!ignoreWaitTime && _lastAttackTime + _attackWaitTime >= Time.time)
                 return false;
 
-            Debug.Log("test");
-
             _lastAttackTime = Time.time;
 
             _currentTarget = damageable;

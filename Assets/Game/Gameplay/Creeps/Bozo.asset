@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Bozo
   _prefab: {fileID: 2146907836897720715, guid: b85bd60151b64da4bb4550bfca6c1e08, type: 3}
+  _creepDeathSpawn: {fileID: 11400000, guid: 184b8432e5c6a0a45b4470c655eea3c9, type: 2}
+  _deathSpawnCount: 5
