@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
   _height: 10
-  _hitTime: 2
+  _hitTime: 1.5
   _hitRadius: 2
   _attackDamage: 1
   _targetAheadDistance: 15

@@ -9,7 +9,7 @@ namespace Game.UI
 {
     public class UITargetSelection : MonoBehaviour, IPointerMoveHandler, IPointerClickHandler
     {
-        public const float RADIUS = 5f;
+        public const float RADIUS = 3f;
 
         [SerializeField]
         private UIRangeRadius _targetRangeRadius;
@@ -25,7 +25,6 @@ namespace Game.UI
         public Action closed = delegate { };
         public Action<Vector3> confirmed = delegate { };
         private Unit _activeUnit;
-        private bool _isValid;
 
         public void Awake()
         {
@@ -62,23 +61,17 @@ namespace Game.UI
             Ray ray = GameManager.MainCamera.ScreenPointToRay(evt.position);
 
             if (!Physics.Raycast(ray, out RaycastHit groundHit, 100f, 1 << LayerMask.NameToLayer("Ground")))
-                return;
+                return; 
+            
+            Vector3 position = groundHit.point - _activeUnit.transform.position;
+            Vector3 clampedPosition = Vector3.ClampMagnitude(position, _activeUnit.Data.RangeRadius - RADIUS);
+            Vector3 offset = Vector3.up * .5f;
 
-            _targetRangeRadius.transform.position = groundHit.point + Vector3.up * .5f;
-
-            float distance = (groundHit.point - _activeUnit.transform.position).magnitude;
-
-            _isValid = distance + RADIUS < _activeUnit.Data.RangeRadius;
-
-            if (_isValid)
-                _targetRangeRadius.SetColor(_targetRangeRadius.InitialColor);
-            else
-                _targetRangeRadius.SetColor(_invalidColor);
+            _targetRangeRadius.transform.position = _activeUnit.transform.position + clampedPosition + offset;
         }
 
         public void OnPointerClick(PointerEventData evt)
         {
-            if (!_isValid) return;
             if (evt.button != PointerEventData.InputButton.Left) return;
 
             Hide();

@@ -61,6 +61,11 @@ namespace Game.Combat
             _initialPosition = transform.position;
             _targetPosition = _target.position + randomPosition;
 
+            Vector3 direction = _targetPosition - _initialPosition;
+            direction.y = 0f;
+            direction.Normalize();
+            transform.LookAt(transform.position + direction);
+
             t = 0f;
 
             _tween?.Kill();
