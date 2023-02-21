@@ -57,10 +57,12 @@ namespace Game.Combat
             GameManager.RemoveAttacker(this);
         }
 
-        public bool Attack(Damageable damageable)
+        public bool Attack(Damageable damageable, bool ignoreWaitTime = false)
         {
-            if (_lastAttackTime + _attackWaitTime >= Time.time)
+            if (!ignoreWaitTime && _lastAttackTime + _attackWaitTime >= Time.time)
                 return false;
+
+            Debug.Log("test");
 
             _lastAttackTime = Time.time;
 

@@ -72,13 +72,27 @@ public class ControlUnitState : State
 
     private void OnTargetChange(Vector3 position)
     {
-        _changedTarget = true;
-
         for (int i = 0; i < _children.Count; i++)
         {
             Unit unit = _children[i];
             unit.SetTargetPosition(position);
         }
+
+        if (_changedTarget) return;
+
+        float timer = 0f;
+
+        DOTween.To(() => 0f, x => {
+            timer += Time.deltaTime;
+
+            if (timer > .33f)
+            {
+                _attacker.Attack(null, true);
+                timer = 0f;
+            }
+        }, 1f, 2f);
+
+        _changedTarget = true;
     }
 
     private void OnDestroyUnit(IProjectile projectile)

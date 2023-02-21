@@ -200,8 +200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meleeDamage: 1
   _fovRadius: 5
-  _attackSpeed: 1
-  _attackWaitTime: 1
+  _attackSpeed: 2
+  _attackWaitTime: 0
   _vfxEventName: OnAttack
   _attackSound: {fileID: 0}
 --- !u!1001 &4597658904962367697

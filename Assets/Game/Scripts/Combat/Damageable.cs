@@ -10,6 +10,9 @@ namespace Game.Combat
         private int _health = 10;
 
         [SerializeField]
+        private int _hitsToStun = 1;
+
+        [SerializeField]
         private float _hurtTime = 1f;
 
         [SerializeField]
@@ -18,7 +21,7 @@ namespace Game.Combat
         [SerializeField]
         private AudioClip _deathSound;
 
-
+        private int _hitCount = 0;
         private int _maxHealth;
         private bool _isDead = false;
         private CapsuleCollider _collider;
@@ -59,8 +62,13 @@ namespace Game.Combat
             if (_isDead) return;
 
             _health -= damage;
+            _hitCount += 1;
 
-            hurted.Invoke(this);
+            if (_hitCount >= _hitsToStun)
+            {
+                hurted.Invoke(this);
+                _hitCount = 0;
+            }
 
             SoundManager.PlaySound(_hitSound);
 

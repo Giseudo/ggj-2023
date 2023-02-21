@@ -117,8 +117,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meleeDamage: 0
   _fovRadius: 15
-  _attackSpeed: 1
-  _attackWaitTime: 0
+  _attackSpeed: 2
+  _attackWaitTime: 4
   _vfxEventName: OnAttack
   _attackSound: {fileID: 0}
 --- !u!114 &6962793757786447197
@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 2
+  _hitsToStun: 1
   _hurtTime: 1
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}

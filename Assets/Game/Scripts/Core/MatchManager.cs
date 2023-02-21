@@ -150,9 +150,10 @@ namespace Game.Combat
 // [x] Sell unit
 // [x] Next level
 // [x] Main menu
+// [ ] Bozo explodir
+// [ ] Absorb tree indications / transition
 // [ ] Wave timer
 // [ ] Day / cycle
 // [ ] Block unit creation by level
-// [ ] Absorb tree indications / transition
 // [ ] Score
 // [x] SFX

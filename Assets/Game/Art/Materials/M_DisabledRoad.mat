@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Dirt
+  m_Name: M_DisabledRoad
   m_Shader: {fileID: -6465566751694194690, guid: 0dd834bd336b9bd41b085c218297e480,
     type: 3}
   m_Parent: {fileID: 0}
@@ -132,7 +132,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 0.5719339, b: 0.11792451, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 0.73, g: 0.3737231, b: 0.16571, a: 1}
+    - _Color: {r: 0.245403, g: 0.447, b: 0.26373, a: 1}
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
