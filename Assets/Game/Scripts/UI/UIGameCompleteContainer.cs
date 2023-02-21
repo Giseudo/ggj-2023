@@ -6,7 +6,7 @@ using DG.Tweening;
 
 namespace Game.UI
 {
-    public class UILevelCompleteContainer : MonoBehaviour
+    public class UIGameCompleteContainer : MonoBehaviour
     {
         private CanvasGroup _canvasGroup;
 
@@ -27,12 +27,12 @@ namespace Game.UI
 
         public void RestartGame()
         {
-            GameManager.Scenes.LoadNextLevel();
+            GameManager.Scenes.LoadMenuScene();
         }
 
         private void OnLevelComplete()
         {
-            if (GameManager.Scenes.CurrentLevel >= GameManager.Scenes.LevelScenes.Count - 1) return;
+            if (GameManager.Scenes.CurrentLevel < GameManager.Scenes.LevelScenes.Count - 1) return;
 
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;

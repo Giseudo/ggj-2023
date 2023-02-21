@@ -89,7 +89,10 @@ namespace Game.Combat
             _endedWavesCount++;
 
             if (_endedWavesCount >= _waveSpawners.Count)
+            {
+                _endedWavesCount = 0;
                 LevelCompleted.Invoke();
+            }
         }
 
         private void OnRoundOver()
@@ -146,7 +149,7 @@ namespace Game.Combat
 // [x] Seed hole improvements
 // [x] Sell unit
 // [x] Next level
-// [ ] Main menu
+// [x] Main menu
 // [ ] Wave timer
 // [ ] Day / cycle
 // [ ] Block unit creation by level

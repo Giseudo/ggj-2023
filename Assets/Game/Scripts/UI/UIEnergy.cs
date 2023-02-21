@@ -29,9 +29,6 @@ namespace Game.UI
         [SerializeField]
         private RectTransform _wrapperRect;
 
-        [SerializeField]
-        private RectTransform _mainCanvasRect;
-
         private Tree _tree;
         private Tween _tween;
         private RectTransform _rect;
@@ -45,22 +42,24 @@ namespace Game.UI
 
         public void Start()
         {
+            MatchManager.DroppedEnergy += OnDropEnergy;
+
             _tree = GameManager.MainTree;
 
             if (_tree == null) return;
 
             _text.text = $"{_tree.EnergyAmount}";
 
-            MatchManager.DroppedEnergy += OnDropEnergy;
             _tree.collectedEnergy += OnCollectEnergy;
             _tree.consumedEnergy += OnConsumeEnergy;
         }
 
         public void OnDestroy()
         {
+            MatchManager.DroppedEnergy -= OnDropEnergy;
+
             if (_tree == null) return;
 
-            MatchManager.DroppedEnergy -= OnDropEnergy;
             _tree.collectedEnergy -= OnCollectEnergy;
             _tree.consumedEnergy -= OnConsumeEnergy;
         }
@@ -98,10 +97,10 @@ namespace Game.UI
             Camera camera = GameManager.MainCamera;
             Vector2 adjustedPosition = camera.WorldToScreenPoint(worldPosition);
 
-            adjustedPosition.x *= _mainCanvasRect.rect.width / (float) camera.pixelWidth;
-            adjustedPosition.y *= _mainCanvasRect.rect.height / (float) camera.pixelHeight;
+            adjustedPosition.x *= UICanvas.Rect.rect.width / (float) camera.pixelWidth;
+            adjustedPosition.y *= UICanvas.Rect.rect.height / (float) camera.pixelHeight;
 
-            return adjustedPosition - _mainCanvasRect.sizeDelta / 2f;
+            return adjustedPosition - UICanvas.Rect.sizeDelta / 2f;
         }
     }
 }

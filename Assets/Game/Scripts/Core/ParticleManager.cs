@@ -22,7 +22,10 @@ namespace Game.Core
             Instance = this;
             _damageEventAttribute = _damageHitEffect.CreateVFXEventAttribute();
             _attackEventAttribute = _attackEffect.CreateVFXEventAttribute();
+        }
 
+        public void Start()
+        {
             GameManager.DamageableAdded += OnDamageableAdd;
             GameManager.DamageableRemoved += OnDamageableRemove;
 
