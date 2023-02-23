@@ -116,8 +116,11 @@ namespace Game.UI
                 return;
             }
 
-            _rootPoint.Rect.anchoredPosition = UICanvas.GetScreenPosition(closestNode.transform.position);
-            _rootPoint.ShowInner();
+            if (!_rootPoint.IsPulsing)
+            {
+                _rootPoint.Rect.anchoredPosition = UICanvas.GetScreenPosition(closestNode.transform.position);
+                _rootPoint.ShowInner();
+            }
 
             _rootActions.Rect.anchoredPosition = UICanvas.GetScreenPosition(closestNode.transform.position);
 
