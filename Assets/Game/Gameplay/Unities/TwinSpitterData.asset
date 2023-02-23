@@ -19,5 +19,5 @@ MonoBehaviour:
   _thumbnail: {fileID: 21300000, guid: b2a0f3973cbae9f46a1cd74ac293e018, type: 3}
   _rangeRadius: 30
   _requiredEnergy: 0
-  _sellPrice: 1000
+  _sellPrice: 950
   _upgradeCost: 0

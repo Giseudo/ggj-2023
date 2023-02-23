@@ -108,12 +108,18 @@ namespace Game.Combat
             WaveSpawner spawner = MatchManager.WaveSpawners?.Find(spawner => spawner.Spline == Spline);
             if (!spawner.Spawners.TryGetValue(parentCreep.Data.CreepDeathSpawn, out CreepSpawner creepSpawner)) return;
 
-            for (int i = 0; i < _prefab.Data.DeathSpawnCount; i++)
+            for (int i = 0; i < parentCreep.Data.DeathSpawnCount; i++)
             {
                 Creep spawnedCreep = creepSpawner.Spawn();
                 spawnedCreep.SetSpline(Spline, parentCreep.Displacement - ((i + 1) * 3));
 
                 if (!spawnedCreep.TryGetComponent<Damageable>(out Damageable damageable)) return;
+
+                if (spawnedCreep.Data.CreepDeathSpawn != null)
+                {
+                    SpawnChild(spawnedCreep, damageable);
+                    return;
+                }
 
                 void OnDie(Damageable damageable)
                 {
@@ -160,7 +166,24 @@ namespace Game.Combat
 
         public Creep Spawn()
         {
-            return _pool.Get();
+            Creep creep = _pool.Get();
+            WaveSpawner spawner = MatchManager.WaveSpawners?.Find(spawner => spawner.Spline == Spline);
+
+            if (creep.Data.CreepDeathSpawn)
+            {
+                if (!spawner.Spawners.TryGetValue(creep.Data.CreepDeathSpawn, out CreepSpawner creepSpawner))
+                {
+                    creepSpawner = GameObject.Instantiate<CreepSpawner>(spawner.CreepSpawnerPrefab, spawner.transform);
+                    creepSpawner.SetPrefab(creep.Data.CreepDeathSpawn.Prefab);
+                    creepSpawner.SetSpline(spawner.Spline);
+
+                    spawner.Spawners.Add(creep.Data.CreepDeathSpawn, creepSpawner);
+                }
+
+                creepSpawner.SetLimit(creepSpawner.Limit + creep.Data.DeathSpawnCount);
+            }
+
+            return creep;
         }
 
         public IEnumerator Spawn(float delay)

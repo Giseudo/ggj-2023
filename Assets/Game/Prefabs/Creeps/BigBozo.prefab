@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3258818763845735382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3642400101898875731}
@@ -47,9 +47,9 @@ GameObject:
   - component: {fileID: 5222931904874178254}
   - component: {fileID: 4754083429089196699}
   - component: {fileID: 2146907836897720715}
-  - component: {fileID: 983655052309558514}
+  - component: {fileID: 5147789785444428988}
   m_Layer: 7
-  m_Name: Bozo
+  m_Name: BigBozo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7944f7d695cda7f4f879f672729a4c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 75
+  _health: 100
   _hitsToStun: 3
   _hurtTime: 1
   _hitSound: {fileID: 0}
@@ -183,10 +183,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b7dfba006ecd740921b195c5d5fb13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: {fileID: 11400000, guid: 5a20aecab6bcc80499f890f0010ba1e8, type: 2}
+  _data: {fileID: 11400000, guid: 8bf90ac7f126efb43a8aa6ab601e570c, type: 2}
   _maxSpeed: 6
-  _energyDropAmount: 750
---- !u!114 &983655052309558514
+  _energyDropAmount: 1000
+--- !u!114 &5147789785444428988
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
