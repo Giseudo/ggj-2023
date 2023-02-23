@@ -3322,6 +3322,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 330585545}
+    - target: {fileID: 1578176760822007223, guid: 688d78697456b9a42a6bfc10c24818e1,
+        type: 3}
+      propertyPath: _highlightTree
+      value: 
+      objectReference: {fileID: 1744594487}
     m_RemovedComponents:
     - {fileID: 1267039786, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
     - {fileID: 7045795859999001420, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}

@@ -2218,7 +2218,7 @@ PrefabInstance:
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
       propertyPath: _rounds.Array.data[0]._waves.Array.data[1]._countLimit
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
@@ -2238,7 +2238,7 @@ PrefabInstance:
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
       propertyPath: _rounds.Array.data[0]._waves.Array.data[1]._spawnInterval
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
@@ -2401,11 +2401,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 881227646581875896, guid: 688d78697456b9a42a6bfc10c24818e1,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 103.100006
-      objectReference: {fileID: 0}
     - target: {fileID: 881227646722988384, guid: 688d78697456b9a42a6bfc10c24818e1,
         type: 3}
       propertyPath: m_Name
@@ -2465,11 +2460,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 881227646918690576, guid: 688d78697456b9a42a6bfc10c24818e1,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -12.799999
       objectReference: {fileID: 0}
     - target: {fileID: 881227647062226958, guid: 688d78697456b9a42a6bfc10c24818e1,
         type: 3}
