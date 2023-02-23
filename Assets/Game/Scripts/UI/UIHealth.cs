@@ -3,26 +3,22 @@ using UnityEngine.UI;
 using Game.Core;
 using Game.Combat;
 using TMPro;
+using DG.Tweening;
 
 public class UIHealth : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI _text;
+    private RectMask2D _heartMask;
 
     [SerializeField]
-    private RectMask2D _heartMask;
+    private RawImage _glowImage; 
 
     private RectTransform _rect;
     private Damageable _damageable;
-
-    public float Height => _heartMask.rectTransform.rect.height;
-
-    public void OnHurt(Damageable damageable)
-    {
-        float value = Height * (1f - ((float)damageable.Health / (float)damageable.MaxHealth));
-
-        _heartMask.padding = new Vector4(0f, 0f, 0f, value);
-    }
+    private Tween _hurtTween;
+    private Tween _glowTween;
+    private bool _isGlowing;
+    public float Height => _heartMask.rectTransform.rect.height * _rect.localScale.x;
 
     public void Start()
     {
@@ -33,8 +29,6 @@ public class UIHealth : MonoBehaviour
         if (_damageable == null) return;
 
         _damageable.hurted += OnHurt;
-
-        UpdateText();
     }
 
     public void OnDestroy()
@@ -44,10 +38,46 @@ public class UIHealth : MonoBehaviour
         _damageable.hurted -= OnHurt;
     }
 
-    public void UpdateText()
+    public void OnHurt(Damageable damageable)
     {
-        if (_damageable == null) return;
+        _hurtTween?.Kill();
+        _hurtTween = _rect.DOScale(Vector3.one * 1.2f, .2f)
+            .OnComplete(() => {
+                float health = (float)damageable.Health;
+                float maxHealth = (float)damageable.MaxHealth;
+                float value = Height * (1f - (health / maxHealth));
 
-        _text.text = $"{_damageable.Health}";
+                _heartMask.padding = new Vector4(0f, 0f, 0f, value);
+
+                _hurtTween?.Kill();
+                _hurtTween = _rect.DOScale(Vector3.one, .2f)
+                    .SetDelay(.5f);
+
+                if (health <= maxHealth / 2)
+                    Glow();
+            });
+        
+        GameManager.MainCamera?.DOShakePosition(.5f, 2f, 10);
+    }
+
+    public void Glow()
+    {
+        if (_isGlowing) return;
+
+        _isGlowing = true;
+
+        _glowTween?.Kill();
+        _glowTween = _glowImage.DOFade(.2f, .5f)
+            .SetUpdate(true)
+            .SetLoops(-1, LoopType.Yoyo);
+    }
+
+    public void StopGlow()
+    {
+        _isGlowing = false;
+
+        _glowTween?.Kill();
+        _glowTween = _glowImage.DOFade(0f, .5f)
+            .SetUpdate(true);
     }
 }

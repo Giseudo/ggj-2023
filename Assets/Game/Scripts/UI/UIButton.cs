@@ -14,6 +14,7 @@ namespace Game.UI
 
         private Button _button;
         private RectTransform _rect;
+        private Vector3 _initialScale;
 
         public Button Button => _button;
         public RectTransform Rect => _rect;
@@ -25,6 +26,8 @@ namespace Game.UI
         {
             TryGetComponent<Button>(out _button);
             TryGetComponent<RectTransform>(out _rect);
+
+            _initialScale = _rect.localScale;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -45,7 +48,7 @@ namespace Game.UI
         {
             exited.Invoke();
 
-            _rect.DOScale(Vector3.one, .5f)
+            _rect.DOScale(_initialScale, .5f)
                 .SetUpdate(true)
                 .SetEase(Ease.OutExpo);
         }

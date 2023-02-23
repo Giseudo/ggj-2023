@@ -1,9 +1,6 @@
-using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
-using Game.Combat;
 using Game.Core;
 using Game.Input;
 using DG.Tweening;
@@ -27,6 +24,10 @@ namespace Game.UI
         [SerializeField]
         private InputReader _inputReader;
 
+        private TimeState _previousState;
+        private TimeState _currentState;
+        private Tween _resizeTween;
+
         public void Awake()
         {
             _pauseButton.onClick.AddListener(OnPause);
@@ -43,6 +44,7 @@ namespace Game.UI
         public void Start()
         {
             TimeManager.StateChanged += OnStateChange;
+            UICanvas.ScreenResized += OnScreenResize;
         }
 
         public void OnDestroy()
@@ -58,6 +60,7 @@ namespace Game.UI
             _inputReader.toggledPlay -= OnTogglePlay;
 
             TimeManager.StateChanged -= OnStateChange;
+            UICanvas.ScreenResized -= OnScreenResize;
         }
 
         public void OnPause() {
@@ -112,7 +115,30 @@ namespace Game.UI
             _currentState = state;
         }
 
-        private TimeState _previousState;
-        private TimeState _currentState;
+        private void OnScreenResize(Vector2 size)
+        {
+            Button button = null;
+
+            if (TimeManager.State == TimeState.Paused)
+                button = _pauseButton;
+
+            if (TimeManager.State == TimeState.Playing)
+                button = _playButton;
+
+            if (TimeManager.State == TimeState.FastForwarding)
+                button = _fastForwardButton;
+
+            StopCoroutine(FollowSelected(button));
+            StartCoroutine(FollowSelected(button));
+        }
+
+        IEnumerator FollowSelected(Button button)
+        {
+            yield return new WaitForSecondsRealtime(.2f);
+
+            _resizeTween?.Kill();
+            _resizeTween = _selectionRect.DOMove(button.transform.position, .3f)
+                .SetUpdate(true);
+        }
     }
 }

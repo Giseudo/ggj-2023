@@ -23,9 +23,6 @@ namespace Game.Combat
         [SerializeField]
         private int _attackDamage = 1;
 
-        [SerializeField]
-        private float _targetAheadDistance = 5f;
-
         private float t;
 
         private Vector3 _initialPosition;
@@ -38,10 +35,6 @@ namespace Game.Combat
         public Action<IProjectile> died = delegate { };
         public Action<IProjectile> Died { get => died; set => died = value; }
         public GameObject GameObject => gameObject;
-
-        public void Awake()
-        {
-        }
 
         public void OnEnable()
         { }

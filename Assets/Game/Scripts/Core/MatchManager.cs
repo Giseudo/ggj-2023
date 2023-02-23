@@ -151,6 +151,7 @@ namespace Game.Combat
 // [x] Next level
 // [x] Main menu
 // [x] Bozo explodir
+// [ ] Fix bozo bug
 // [-] Absorb tree indications / transition
 // [ ] Wave timer
 // [ ] Day / cycle

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Game.Core;
 
@@ -8,12 +9,16 @@ namespace Game.UI
         public static UICanvas Instance;
         public static RectTransform Rect { get; private set; }
         public static Canvas MainCanvas { get; private set; }
+        public static Vector2 ScreenSize { get; private set; }
+        public static Action<Vector2> ScreenResized;
 
         public void Awake()
         {
             Instance = this;
             Rect = GetComponent<RectTransform>();
             MainCanvas = GetComponent<Canvas>();
+            ScreenSize = new Vector2(Screen.width, Screen.height);
+            ScreenResized = delegate { };
         }
 
         public static Vector2 GetScreenPosition(Vector3 worldPosition)
@@ -25,6 +30,21 @@ namespace Game.UI
             adjustedPosition.y *= Rect.rect.height / (float) camera.pixelHeight;
 
             return adjustedPosition - Rect.sizeDelta / 2f;
+        }
+
+        public void Update()
+        {
+            CheckScreenSize();
+        }
+
+        public void CheckScreenSize()
+        {
+            if (ScreenSize.x == Screen.width && ScreenSize.y == Screen.height)
+                return;
+
+            ScreenSize = new Vector2(Screen.width, Screen.height);
+
+            ScreenResized.Invoke(ScreenSize);
         }
     }
 }
