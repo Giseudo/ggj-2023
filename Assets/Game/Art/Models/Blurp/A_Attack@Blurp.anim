@@ -39,18 +39,18 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 1
-        value: {x: 0.92870355, y: 1.3560001, z: 0.92870355}
-        inSlope: {x: 1.2313212, y: 0, z: 1.2313212}
-        outSlope: {x: 1.2313212, y: 0, z: 1.2313212}
+        value: {x: 0.9287, y: 1.356, z: 0.9287}
+        inSlope: {x: 1.2314001, y: 0, z: 1.2314001}
+        outSlope: {x: 1.2314001, y: 0, z: 1.2314001}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 1.1666666
-        value: {x: 1.1831684, y: 1.256011, z: 1.1831684}
-        inSlope: {x: 0, y: -0.97090924, z: 0}
-        outSlope: {x: 0, y: -0.97090924, z: 0}
+        value: {x: 1.1832, y: 1.256, z: 1.1832}
+        inSlope: {x: 0, y: -0.97090894, z: 0}
+        outSlope: {x: 0, y: -0.97090894, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -67,7 +67,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: 
+    path: Mesh
   m_FloatCurves: []
   m_PPtrCurves: []
   m_SampleRate: 60
@@ -78,7 +78,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
+      path: 1096652136
       attribute: 3
       script: {fileID: 0}
       typeID: 4
@@ -132,16 +132,16 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.92870355
-        inSlope: 1.2313212
-        outSlope: 1.2313212
+        value: 0.9287
+        inSlope: 1.2314001
+        outSlope: 1.2314001
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1666666
-        value: 1.1831684
+        value: 1.1832
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -161,7 +161,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: 
+    path: Mesh
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -189,7 +189,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 1.3560001
+        value: 1.356
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -198,9 +198,9 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1666666
-        value: 1.256011
-        inSlope: -0.97090924
-        outSlope: -0.97090924
+        value: 1.256
+        inSlope: -0.97090894
+        outSlope: -0.97090894
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -218,7 +218,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: 
+    path: Mesh
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -246,16 +246,16 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.92870355
-        inSlope: 1.2313212
-        outSlope: 1.2313212
+        value: 0.9287
+        inSlope: 1.2314001
+        outSlope: 1.2314001
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1666666
-        value: 1.1831684
+        value: 1.1832
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -275,7 +275,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: 
+    path: Mesh
     classID: 4
     script: {fileID: 0}
     flags: 0

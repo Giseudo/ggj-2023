@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5963900956835209687}
   - component: {fileID: 5963900956835209686}
   m_Layer: 1
-  m_Name: PoisonSpores
+  m_Name: PoisonSpores 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &5963900956835209681
 VisualEffect:
@@ -66,7 +66,33 @@ VisualEffect:
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0.07111311
+            value: 9.61569
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1.0711131
+            value: 11.004137
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: Radius Over Time
+        m_Overridden: 1
     m_Gradient:
       m_Array: []
     m_NamedObject:
@@ -125,10 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d05f610e745e80f4ea9262fa82ddc9c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageAmount: 1
+  _damageAmount: 2
   _timeInterval: 2
-  _walkSpeedMultiplier: 0.5
-  _radius: 10
+  _walkSpeedMultiplier: 0.35
+  _radius: 15
 --- !u!114 &5963900956835209686
 MonoBehaviour:
   m_ObjectHideFlags: 0

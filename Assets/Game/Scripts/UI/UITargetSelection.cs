@@ -25,6 +25,9 @@ namespace Game.UI
         public Action closed = delegate { };
         public Action<Vector3> confirmed = delegate { };
         private Unit _activeUnit;
+        private bool _isOpened;
+
+        public bool IsOpened => _isOpened;
 
         public void Awake()
         {
@@ -36,6 +39,7 @@ namespace Game.UI
 
         public void Show(Unit unit)
         {
+            _isOpened = true;
             _activeUnit = unit;
             _targetRangeRadius.SetRadius(RADIUS);
             _fovRadius.SetRadius(unit.Data.RangeRadius);
@@ -47,6 +51,7 @@ namespace Game.UI
 
         public void Hide()
         {
+            _isOpened = false;
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
 

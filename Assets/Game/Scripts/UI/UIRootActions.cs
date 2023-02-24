@@ -170,6 +170,8 @@ namespace Game.UI
                 _upgradeButton.EnergyButton.SetText($"{GameManager.MainTree.UpgradeCost}");
             }
 
+            OnEnergyChange(GameManager.MainTree.EnergyAmount);
+
             if (_rect == null) return;
 
             _tween?.Kill();
@@ -331,6 +333,12 @@ namespace Game.UI
                 _activeNode.SetUnit(unit);
 
                 Hide();
+
+                if (unit.Data.Type != UnitType.Spawner) return;
+
+                _targetSelection.Show(unit);
+
+                TimeManager.SlowMotion();
             }
         }
 

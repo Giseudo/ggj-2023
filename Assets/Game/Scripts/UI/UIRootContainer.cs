@@ -88,6 +88,7 @@ namespace Game.UI
             
             if (_rootActions.IsOpened) return;
             if (_rootActions.UnitSelection.IsOpened) return;
+            if (_rootActions.TargetSelection.IsOpened) return;
             if (_rootCreation.IsDragging) return;
 
             Collider[] colliders = Physics.OverlapSphere(groundHit.point, 3f, 1 << LayerMask.NameToLayer("RootNode"));

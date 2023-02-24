@@ -152,9 +152,9 @@ namespace Game.Combat
 // [x] Main menu
 // [x] Bozo explodir
 // [ ] Fix bozo bug
-// [-] Absorb tree indications / transition
+// [x] Absorb tree indications / transition
 // [ ] Wave timer
 // [ ] Day / cycle
-// [ ] Block unit creation by level
+// [x] Block unit creation by level
 // [ ] Score
 // [x] SFX

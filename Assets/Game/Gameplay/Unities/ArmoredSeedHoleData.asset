@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e19904848e3a1c54c830ec88e59d0318, type: 3}
-  m_Name: SeedHoleData
+  m_Name: ArmoredSeedHoleData
   m_EditorClassIdentifier: 
-  _name: Buraco de Sementes
+  _name: Buraco de Sementes Cascudas
   _type: 2
-  _prefab: {fileID: 4961941754361416317, guid: a09112da17894a3428e2303761fefd10, type: 3}
-  _upgradePrefab: {fileID: 4961941754361416317, guid: cf747684debc69d4d9106605364477a6,
-    type: 3}
+  _prefab: {fileID: 4961941754361416317, guid: cf747684debc69d4d9106605364477a6, type: 3}
+  _upgradePrefab: {fileID: 0}
   _thumbnail: {fileID: 21300000, guid: 48cd39da8b3a8bb48b4ca7410af2c356, type: 3}
-  _rangeRadius: 15
-  _requiredEnergy: 2000
-  _sellPrice: 1000
-  _upgradeCost: 2000
+  _rangeRadius: 20
+  _requiredEnergy: 0
+  _sellPrice: 1500
+  _upgradeCost: 0

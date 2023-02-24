@@ -15,6 +15,8 @@ public class ControlUnitState : State
     private AttackState _attack = new AttackState();
     private float _startTime;
     private float _lastAttackTime;
+    private int _firstLaunchCount;
+    private float _firstLaunchTimer = .75f;
     private bool _changedTarget;
     private List<Unit> _children = new List<Unit>();
 
@@ -49,7 +51,7 @@ public class ControlUnitState : State
 
     protected override void OnUpdate()
     {
-        if (!_changedTarget) return;
+        if (FirstAttack()) return;
 
         bool reachedLimit = _launcher.Pool.CountActive >= _launcher.Limit;
 
@@ -58,6 +60,26 @@ public class ControlUnitState : State
             _attacker.Attack(null);
             _lastAttackTime = Time.time;
         }
+    }
+
+    private bool FirstAttack()
+    {
+        if (!_changedTarget)
+            return true;
+
+        if (_firstLaunchCount >= _launcher.Limit)
+            return false;
+
+        _firstLaunchTimer += Time.deltaTime;
+
+        if (_firstLaunchTimer > .75f)
+        {
+            _attacker.Attack(null, true);
+            _firstLaunchTimer = 0f;
+            _firstLaunchCount += 1;
+        }
+
+        return true;
     }
 
     private void OnLaunchUnit(IProjectile projectile)
@@ -77,20 +99,6 @@ public class ControlUnitState : State
             Unit unit = _children[i];
             unit.SetTargetPosition(position);
         }
-
-        if (_changedTarget) return;
-
-        float timer = 0f;
-
-        DOTween.To(() => 0f, x => {
-            timer += Time.deltaTime;
-
-            if (timer > .33f)
-            {
-                _attacker.Attack(null, true);
-                timer = 0f;
-            }
-        }, 1f, 2f);
 
         _changedTarget = true;
     }

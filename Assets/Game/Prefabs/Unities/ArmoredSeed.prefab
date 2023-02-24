@@ -136,6 +136,8 @@ GameObject:
   - component: {fileID: 8982555700671707414}
   - component: {fileID: 2456338998228164142}
   - component: {fileID: 344837404764300857}
+  - component: {fileID: -5715089474957096576}
+  - component: {fileID: 1479789313512369597}
   m_Layer: 9
   m_Name: ArmoredSeed
   m_TagString: Untagged
@@ -205,11 +207,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meleeDamage: 1
-  _fovRadius: 3
+  _fovRadius: 9
   _attackSpeed: 1
-  _attackWaitTime: 0
+  _attackWaitTime: 2
   _vfxEventName: OnAttack
-  _soundEffectClip: {fileID: 0}
+  _attackSound: {fileID: 0}
 --- !u!114 &8982555700671707414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,8 +237,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7944f7d695cda7f4f879f672729a4c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 10
-  _hurtTime: 1
+  _health: 6
+  _hitsToStun: 1
+  _hurtTime: 0.2
+  _hitSound: {fileID: 0}
+  _deathSound: {fileID: 0}
 --- !u!136 &344837404764300857
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -260,6 +265,37 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &-5715089474957096576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5747092003500395527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54cfd8536d09e547b552bd0957d8228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 0}
+  _height: 10
+  _hitTime: 1.5
+  _hitRadius: 2
+  _attackDamage: 1
+--- !u!114 &1479789313512369597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5747092003500395527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc046c68349a4fd4bbb0697b421b4a6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 10
+  _maxAcceleration: 15
 --- !u!1001 &5021706712589139294
 PrefabInstance:
   m_ObjectHideFlags: 0

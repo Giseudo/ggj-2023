@@ -11,12 +11,15 @@ namespace Game.UI
 {
     public class UIUnitCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        const float SELECTED_DISC_RADIUS = 63.2f;
-        const float SELECTED_DISC_THICKNESS = 24.6f;
+        const float SELECTED_DISC_RADIUS = 76.5f;
+        const float SELECTED_DISC_THICKNESS = 27.2f;
         const int DISABLED_ALPHA = 100;
 
         [SerializeField]
         private UnitData _data;
+
+        [SerializeField]
+        private bool _isAvailable;
 
         [SerializeField]
         private Image _thumbnail;
@@ -27,8 +30,6 @@ namespace Game.UI
         [SerializeField]
         private Disc _disc;
 
-        private bool _isDisabled;
-
         public UnitData Data => _data;
 
         public Action<UIUnitCard> clicked = delegate { };
@@ -38,12 +39,16 @@ namespace Game.UI
         private float _initialDiscRadius;
         private float _initialDiscThickness;
         private bool _isSelected;
+        private bool _isDisabled;
 
         public void Awake()
         {
             _initialDiscRadius = _disc.Radius;
             _initialDiscThickness = _disc.Thickness;
             _energyButton.SetText($"{_data.RequiredEnergy}");
+
+            if (!_isAvailable)
+                Disable();
         }
 
         public void Start()
@@ -66,9 +71,17 @@ namespace Game.UI
         public void OnPointerClick(PointerEventData evt) => Click();
         public void OnPointerEnter(PointerEventData evt) => Select();
         public void OnPointerExit(PointerEventData evt) => Deselect();
-        public void Click() => clicked.Invoke(this);
+        public void Click()
+        {
+            if (_isDisabled) return;
+
+            clicked.Invoke(this);
+        }
+
         public void Select()
         {
+            if (!_isAvailable) return;
+
             selected.Invoke(this);
             _isSelected = true;
 
@@ -84,6 +97,8 @@ namespace Game.UI
 
         public void Deselect()
         {
+            if (!_isAvailable) return;
+
             deselected.Invoke(this);
             _isSelected = false;
 
@@ -95,18 +110,28 @@ namespace Game.UI
 
             _thumbnail.rectTransform.DOScale(Vector3.one * 0.7f, .3f).SetUpdate(true);
             _energyButton.Rect.DOScale(Vector3.zero, .3f).SetUpdate(true);
+
+            if (_isAvailable) _thumbnail.DOFade(1f, .5f);
         }
 
         public void Disable() {
             _isDisabled = true;
             _energyButton.Disable();
 
-            Color color = _isSelected ? new Color32(185, 46, 49, 255) : new Color32(185, 46, 49, DISABLED_ALPHA);
+            Color color = _isSelected
+                ? new Color32(185, 46, 49, 255)
+                : !_isAvailable ? new Color32(100, 100, 100, DISABLED_ALPHA)
+                : new Color32(185, 46, 49, DISABLED_ALPHA);
+            
+            if (!_isAvailable)
+                _thumbnail.DOFade(.5f, .5f);
 
             DOTween.To(() => _disc.Color, x => _disc.Color = x, color, .3f).SetUpdate(true);
         }
 
         public void Enable() {
+            if (!_isAvailable) return;
+
             _isDisabled = false;
             _energyButton.Enable();
 

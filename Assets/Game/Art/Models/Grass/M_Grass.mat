@@ -111,8 +111,8 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _WindIntensity: 0.01
-    - _WindSpeed: 3.96
+    - _WindIntensity: 0.02
+    - _WindSpeed: 5
     - _Wind_Intensity: 0.01
     - _Wind_Speed: 4
     - _WorkflowMode: 1

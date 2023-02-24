@@ -988,7 +988,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":5.1295342445373539,"g":5.216475486755371,"b":0.0,"a":1.0},"time":0.0},{"color":{"r":9.184453964233399,"g":2.067704200744629,"b":0.0,"a":1.0},"time":0.5176470875740051}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":1.0,"time":0.1588311642408371},{"alpha":1.0,"time":0.6911726593971252},{"alpha":0.0,"time":0.8147097229957581}],"gradientMode":0}'
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":1.604073405265808,"g":1.629670262336731,"b":0.0,"a":1.0},"time":0.0},{"color":{"r":3.997401475906372,"g":0.8999385833740234,"b":0.0,"a":1.0},"time":0.5176470875740051}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":1.0,"time":0.1588311642408371},{"alpha":1.0,"time":0.6911726593971252},{"alpha":0.0,"time":0.8147097229957581}],"gradientMode":0}'
     m_Space: 2147483647
   m_Property:
     name: Color
@@ -3853,7 +3853,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":2.642828941345215,"g":0.5949824452400208,"b":0.0,"a":1.0},"time":0.0},{"color":{"r":2.642828941345215,"g":0.5949824452400208,"b":0.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":1.0,"time":0.10293736308813095},{"alpha":1.0,"time":0.5941252708435059},{"alpha":0.0,"time":0.994125247001648}],"gradientMode":0}'
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.22122524678707124,"g":0.04980463534593582,"b":0.0,"a":1.0},"time":0.0},{"color":{"r":1.1503580808639527,"g":0.2589811384677887,"b":0.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":1.0,"time":0.10293736308813095},{"alpha":1.0,"time":0.5941252708435059},{"alpha":0.0,"time":0.994125247001648}],"gradientMode":0}'
     m_Space: 2147483647
   m_Property:
     name: Color

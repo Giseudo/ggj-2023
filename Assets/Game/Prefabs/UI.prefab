@@ -2010,6 +2010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: b75aee6e234b819408a45786774606d4, type: 2}
+  _isAvailable: 1
   _thumbnail: {fileID: 86987758}
   _energyButton: {fileID: 930969207}
   _disc: {fileID: 730106994}
@@ -2722,7 +2723,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -100, y: 0}
+  m_AnchoredPosition: {x: -99.99994, y: 0}
   m_SizeDelta: {x: 35, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &943020051
@@ -3838,6 +3839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: b0b50cb3c6efa0340b8cfa74472c575f, type: 2}
+  _isAvailable: 1
   _thumbnail: {fileID: 1507712507}
   _energyButton: {fileID: 2043967112}
   _disc: {fileID: 110879344}
@@ -4718,6 +4720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: d86fc0bb420af2742bea650f49ed792e, type: 2}
+  _isAvailable: 1
   _thumbnail: {fileID: 1844326774}
   _energyButton: {fileID: 739027363}
   _disc: {fileID: 329265113}
@@ -5026,6 +5029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 216665d30be1fc944a8d00bdcbd68c82, type: 2}
+  _isAvailable: 1
   _thumbnail: {fileID: 1710694369}
   _energyButton: {fileID: 1212229425}
   _disc: {fileID: 2135163348}
