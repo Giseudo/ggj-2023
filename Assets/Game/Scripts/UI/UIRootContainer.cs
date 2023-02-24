@@ -66,6 +66,9 @@ namespace Game.UI
         {
             if (_rootActions.UnitSelection.IsOpened) return;
 
+            if (_rootPoint.IsPulsing)
+                _rootPoint.Pulse(false);
+
             _rootPoint.Hide();
             _rootCreation.StartDrag();
         }
@@ -80,6 +83,8 @@ namespace Game.UI
 
             if (!Physics.Raycast(ray, out RaycastHit groundHit, 100f, 1 << LayerMask.NameToLayer("Ground")))
                 return;
+
+            _rootCreation.UpdateRootLimitPosition((evt.position / UICanvas.MainCanvas.scaleFactor));
             
             if (_rootActions.IsOpened) return;
             if (_rootActions.UnitSelection.IsOpened) return;

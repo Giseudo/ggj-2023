@@ -26,6 +26,7 @@ namespace Game.Combat
         public RootNode Parent => _parent;
         public List<RootNode> Children => _children;
         public Tree Tree => _tree;
+        public void SetTree(Tree tree) => _tree = tree;
 
         public void Awake()
         {

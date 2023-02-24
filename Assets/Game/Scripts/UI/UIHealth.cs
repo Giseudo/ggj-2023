@@ -42,6 +42,7 @@ public class UIHealth : MonoBehaviour
     {
         _hurtTween?.Kill();
         _hurtTween = _rect.DOScale(Vector3.one * 1.2f, .2f)
+            .SetUpdate(true)
             .OnComplete(() => {
                 float health = (float)damageable.Health;
                 float maxHealth = (float)damageable.MaxHealth;
@@ -51,13 +52,15 @@ public class UIHealth : MonoBehaviour
 
                 _hurtTween?.Kill();
                 _hurtTween = _rect.DOScale(Vector3.one, .2f)
+                    .SetUpdate(true)
                     .SetDelay(.5f);
 
                 if (health <= maxHealth / 2)
                     Glow();
             });
         
-        GameManager.MainCamera?.DOShakePosition(.5f, 2f, 10);
+        GameManager.MainCamera?.DOShakePosition(.25f, 1f, 20)
+            .SetUpdate(true);
     }
 
     public void Glow()

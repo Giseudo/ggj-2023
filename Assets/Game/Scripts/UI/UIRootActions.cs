@@ -339,6 +339,8 @@ namespace Game.UI
             if (_activeNode == null) return;
             if (_activeNode.Unit == null) return;
 
+            Hide();
+
             _targetSelection.Show(_activeNode.Unit);
 
             TimeManager.SlowMotion();

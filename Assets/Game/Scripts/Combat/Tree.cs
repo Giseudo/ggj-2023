@@ -63,6 +63,7 @@ namespace Game.Combat
         public int UpgradeCost => _upgradeCost;
         public int MaxLevel => _levels.Count - 1;
         public int CurrentLevel => _currentLevel;
+        public int InitialRootSplitLimit => _initialRootSplitLimit;
 
         public void Awake()
         {
@@ -106,16 +107,23 @@ namespace Game.Combat
 
         public void AbsorbTree(Tree tree)
         {
+            _rootSplitLimit += tree.InitialRootSplitLimit;
             _absorvedTrees.Add(tree);
-            absorvedTree.Invoke(tree);
+
             tree.SetParentTree(this);
-            
+
             for (int i = 0; i < tree.NodeList.Count; i++)
             {
                 RootNode node = tree.NodeList[i];
 
                 node.gameObject.SetActive(true);
+                node.SetTree(this);
+
+                _nodeList.Add(node);
             }
+
+            levelUp.Invoke(_currentLevel);
+            absorvedTree.Invoke(tree);            
         }
 
         public void SplitRoot()

@@ -108,6 +108,11 @@ namespace Game.UI
             SplitRoot();
         }
 
+        public void UpdateRootLimitPosition(Vector2 position)
+        {
+            _rootLimit.Rect.anchoredPosition = position + new Vector2(-20f, 20f);
+        }
+
         private void DragRoot(PointerEventData evt)
         {
             if (ActiveNode == null) return;
@@ -117,8 +122,9 @@ namespace Game.UI
             if (!Physics.Raycast(ray, out RaycastHit groundHit, 100f, 1 << LayerMask.NameToLayer("Ground")))
                 return;
             
+            UpdateRootLimitPosition((evt.position / UICanvas.MainCanvas.scaleFactor));
+            
             _draggingPosition = groundHit.point;
-            _rootLimit.Rect.anchoredPosition = (evt.position / UICanvas.MainCanvas.scaleFactor) + new Vector2(-20f, 20f);
 
             // Root placement
             _isValidPlacement = true;
@@ -126,6 +132,13 @@ namespace Game.UI
 
             // Max root split
             if (_mainTree.RootSplitLimit == 0)
+            {
+                _isValidPlacement = false;
+                return;
+            }
+
+            // Max distance
+            if (Vector3.Distance(ActiveNode.transform.position, _draggingPosition) > ActiveNode.Tree.RootMaxDistance)
             {
                 _isValidPlacement = false;
                 return;
@@ -153,13 +166,6 @@ namespace Game.UI
 
                     return;
                 }
-            }
-
-            // Max distance
-            if (Vector3.Distance(ActiveNode.transform.position, _draggingPosition) > ActiveNode.Tree.RootMaxDistance)
-            {
-                _isValidPlacement = false;
-                return;
             }
 
             // Not enough energy

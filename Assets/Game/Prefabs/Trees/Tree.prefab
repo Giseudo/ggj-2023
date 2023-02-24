@@ -774,8 +774,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _energyAmount: 400
-  _rootEnergyCost: 20
-  _rootMaxDistance: 20
+  _initialRootSplitLimit: 2
+  _levels: []
 --- !u!4 &5288666936674880629 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3bf38a9ef3c58b54584cd6f8967d9809,

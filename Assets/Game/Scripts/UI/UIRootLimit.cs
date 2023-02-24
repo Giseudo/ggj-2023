@@ -16,13 +16,15 @@ public class UIRootLimit : MonoBehaviour
     public RectTransform Rect => _rect;
     private Tween _tween;
     private float _lastTextChangeTime;
+    private float _startTime;
 
     public void SetText(string value)
     {
         _lastTextChangeTime = Time.unscaledTime;
         _text.text = value;
 
-        if (!_isOpened) return;
+        if (_startTime + 1f > Time.time)
+            return;
 
         _tween = _rect.DOScale(Vector2.one * 1.5f, 1f)
             .SetUpdate(true)
@@ -33,6 +35,8 @@ public class UIRootLimit : MonoBehaviour
     public void Awake()
     {
         TryGetComponent<RectTransform>(out _rect);
+
+        _startTime = Time.time;
     }
 
     public void Hide()
