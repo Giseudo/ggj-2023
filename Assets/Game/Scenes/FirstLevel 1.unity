@@ -3271,6 +3271,10 @@ PrefabInstance:
       propertyPath: _isAvailable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 943020050, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 1261056117, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
       propertyPath: _isAvailable
       value: 0
@@ -3344,14 +3348,7 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 330585545}
-    - target: {fileID: 1578176760822007223, guid: 688d78697456b9a42a6bfc10c24818e1,
-        type: 3}
-      propertyPath: _highlightTree
-      value: 
-      objectReference: {fileID: 1744594487}
-    m_RemovedComponents:
-    - {fileID: 1267039786, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
-    - {fileID: 7045795859999001420, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3551,8 +3548,32 @@ PrefabInstance:
       value: 111
       objectReference: {fileID: 0}
     - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
+      propertyPath: m_isMeshLocked
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
+      propertyPath: m_lastLockedMeshMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: aa3abb328280b2a44af3a4061125359c, type: 2}
+    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
+      propertyPath: m_addedComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
+      propertyPath: m_addedComponents.Array.data[0]
+      value: UnityEngine.MeshFilter
+      objectReference: {fileID: 0}
+    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
+      propertyPath: m_addedComponents.Array.data[1]
+      value: UnityEngine.MeshRenderer
+      objectReference: {fileID: 0}
+    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
       propertyPath: AutoAdjustBudgetsToHighWaterMarks
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
+      propertyPath: MeshGenerationLockOnStartByEditor
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 192760989407497852, guid: 35457f1929fceb743a53b53c1c9974a2,
         type: 3}

@@ -46,9 +46,6 @@ namespace Game.UI
             _initialDiscRadius = _disc.Radius;
             _initialDiscThickness = _disc.Thickness;
             _energyButton.SetText($"{_data.RequiredEnergy}");
-
-            if (!_isAvailable)
-                Disable();
         }
 
         public void Start()
@@ -59,6 +56,9 @@ namespace Game.UI
             if (GameManager.MainTree.EnergyAmount >= _data.RequiredEnergy)
                 Enable();
             else
+                Disable();
+
+            if (!_isAvailable)
                 Disable();
         }
 
@@ -111,7 +111,8 @@ namespace Game.UI
             _thumbnail.rectTransform.DOScale(Vector3.one * 0.7f, .3f).SetUpdate(true);
             _energyButton.Rect.DOScale(Vector3.zero, .3f).SetUpdate(true);
 
-            if (_isAvailable) _thumbnail.DOFade(1f, .5f);
+            if (_isAvailable)
+                _thumbnail.DOFade(1f, .5f).SetUpdate(true);
         }
 
         public void Disable() {
@@ -124,9 +125,9 @@ namespace Game.UI
                 : new Color32(185, 46, 49, DISABLED_ALPHA);
             
             if (!_isAvailable)
-                _thumbnail.DOFade(.5f, .5f);
+                _thumbnail.DOFade(.5f, .5f).SetDelay(.5f).SetUpdate(true);
 
-            DOTween.To(() => _disc.Color, x => _disc.Color = x, color, .3f).SetUpdate(true);
+            DOTween.To(() => _disc.Color, x => _disc.Color = x, color, .3f).SetDelay(.5f).SetUpdate(true);
         }
 
         public void Enable() {
@@ -138,6 +139,7 @@ namespace Game.UI
             Color color = _isSelected ? new Color32(46, 185, 132, 255) : new Color32(46, 185, 132, DISABLED_ALPHA);
 
             DOTween.To(() => _disc.Color, x => _disc.Color = x, color, .3f).SetUpdate(true);
+            _thumbnail.DOFade(1f, .5f).SetUpdate(true);
         }
 
         private void OnEnergyChange(int amount)

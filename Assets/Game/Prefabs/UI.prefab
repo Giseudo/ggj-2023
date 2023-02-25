@@ -6385,6 +6385,7 @@ MonoBehaviour:
   _killButton: {fileID: 742846061}
   _splitButton: {fileID: 1563222650}
   _targetButton: {fileID: 607647169}
+  _inputReader: {fileID: 11400000, guid: 8ce3a66dc27f11b4d8e205f5bca932a4, type: 2}
   _unitCreationSound: {fileID: 8300000, guid: 8a57689f6af189c4f86c40921af49eb0, type: 3}
 --- !u!1 &881227646261922268
 GameObject:

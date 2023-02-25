@@ -68,8 +68,7 @@ namespace Game.UI
         {
             Vector3 targetPosition = GetScreenPosition(position);
 
-            _sparksVfx.SetVector3("TargetPosition_position", position);
-            _eventAttribute.SetVector3("TargetPosition_position", position);
+            _eventAttribute.SetVector3(Shader.PropertyToID("TargetPosition"), position);
             _sparksVfx.SendEvent("OnSpark", _eventAttribute);
         }
 

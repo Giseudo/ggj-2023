@@ -11,6 +11,7 @@ namespace Game.Input
         public Action<Vector2> looked = delegate { };
         public Action paused = delegate { };
         public Action played = delegate { };
+        public Action canceled = delegate { };
         public Action<float> changedTime = delegate { };
         public Action toggledPlay = delegate { };
         public Action fastForwarded = delegate { };
@@ -81,6 +82,12 @@ namespace Game.Input
         {
             if (context.phase == InputActionPhase.Performed)
                 changedTime.Invoke(context.ReadValue<float>());
+        }
+
+        public void OnCancel(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+                canceled.Invoke();
         }
     }
 }

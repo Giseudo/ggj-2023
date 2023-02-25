@@ -4,6 +4,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using Game.Combat;
 using Game.Core;
+using Game.Input;
 
 namespace Game.UI
 {
@@ -19,19 +20,22 @@ namespace Game.UI
         private UIRangeRadius _unitRangeRadius;
 
         [SerializeField]
-        public UIRootActionButton _addButton;
+        private UIRootActionButton _addButton;
 
         [SerializeField]
-        public UIRootActionButton _upgradeButton;
+        private UIRootActionButton _upgradeButton;
 
         [SerializeField]
-        public UIRootActionButton _killButton;
+        private UIRootActionButton _killButton;
 
         [SerializeField]
-        public UIRootActionButton _splitButton;
+        private UIRootActionButton _splitButton;
 
         [SerializeField]
-        public UIRootActionButton _targetButton;
+        private UIRootActionButton _targetButton;
+
+        [SerializeField]
+        private InputReader _inputReader;
 
         [SerializeField]
         private AudioClip _unitCreationSound;
@@ -73,12 +77,16 @@ namespace Game.UI
 
             GameManager.MainTree.collectedEnergy += OnEnergyChange;
             GameManager.MainTree.consumedEnergy += OnEnergyChange;
+
+            _inputReader.canceled += Hide;
         }
 
         public void OnDestroy()
         {
             GameManager.MainTree.collectedEnergy -= OnEnergyChange;
             GameManager.MainTree.consumedEnergy -= OnEnergyChange;
+
+            _inputReader.canceled -= Hide;
         }
 
         private void OnEnergyChange(int amount)

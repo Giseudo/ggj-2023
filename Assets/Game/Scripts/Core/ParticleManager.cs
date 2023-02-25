@@ -44,7 +44,6 @@ namespace Game.Core
 
         public void PlayHitParticles(Damageable damageable)
         {
-            _damageHitEffect.SetVector3("HitPoint", damageable.transform.position);
             _damageEventAttribute.SetVector3("HitPoint", damageable.transform.position);
 
             _damageHitEffect.SendEvent("OnHit", _damageEventAttribute);
@@ -52,10 +51,7 @@ namespace Game.Core
 
         public void PlayAttackParticles(Attacker attacker, string eventName)
         {
-            _attackEffect.SetVector3("AttackerPosition", attacker.transform.position);
             _attackEventAttribute.SetVector3("AttackerProsition", attacker.transform.position);
-
-            _attackEffect.SetVector3("TargetPosition", attacker.CurrentTarget.transform.position);
             _attackEventAttribute.SetVector3("TargetPosition", attacker.CurrentTarget.transform.position);
 
             _attackEffect.SendEvent(eventName, _attackEventAttribute);
