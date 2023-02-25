@@ -2213,7 +2213,7 @@ PrefabInstance:
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
       propertyPath: _rounds.Array.data[0]._waves.Array.data[0]._countLimit
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
@@ -2233,7 +2233,7 @@ PrefabInstance:
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
       propertyPath: _rounds.Array.data[0]._waves.Array.data[0]._spawnInterval
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}

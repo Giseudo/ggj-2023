@@ -47,9 +47,6 @@ namespace Game.Combat
                 () => {
                     Creep instance = GameObject.Instantiate<Creep>(_prefab);
 
-                    if (instance.TryGetComponent<Damageable>(out Damageable damageable))
-                        damageable.died += OnDie;
-
                     return instance;
                 },
                 (instance) => {
@@ -58,8 +55,6 @@ namespace Game.Combat
                     instance.SetSpline(_spline);
                     instance.transform.localScale = Vector3.one;
                     instance.gameObject.SetActive(true);
-
-                    _spawnedCount++;
                 },
                 (instance) => {
                     instance.transform.position = _spline.EvaluatePosition(0f);
@@ -68,9 +63,6 @@ namespace Game.Combat
                 },
                 (instance) => {
                     if (instance == null) return;
-
-                    if (instance.TryGetComponent<Damageable>(out Damageable damageable))
-                        damageable.died -= OnDie;
 
                     Destroy(instance);
                 },
@@ -86,13 +78,14 @@ namespace Game.Combat
 
         private void OnDie(Damageable damageable)
         {
+            damageable.died -= OnDie;
             damageable.TryGetComponent<Creep>(out Creep creep);
             damageable.transform.DOScale(Vector3.zero, .5f)
                 .OnComplete(() => _pool.Release(creep));
             
             if (creep.Data.CreepDeathSpawn != null)
             {
-                SpawnChild(creep, damageable);
+                SpawnChild(creep, damageable, new CreepChildDeath { totalCreepsToDie = creep.TotalCreepsToSpawn });
                 return;
             }
 
@@ -101,10 +94,8 @@ namespace Game.Combat
             CheckCreepsDeath(creep, damageable);
         }
 
-        private void SpawnChild(Creep parentCreep, Damageable parentDamageable)
+        private void SpawnChild(Creep parentCreep, Damageable parentDamageable, CreepChildDeath creepChildDeath)
         {
-            int childDeathCount = 0;
-
             WaveSpawner spawner = MatchManager.WaveSpawners?.Find(spawner => spawner.Spline == Spline);
             if (!spawner.Spawners.TryGetValue(parentCreep.Data.CreepDeathSpawn, out CreepSpawner creepSpawner)) return;
 
@@ -115,12 +106,16 @@ namespace Game.Combat
 
                 if (!spawnedCreep.TryGetComponent<Damageable>(out Damageable damageable)) return;
 
-                void OnDie(Damageable damageable)
+                void OnSpawnDeath(Damageable damageable)
                 {
-                    damageable.died -= OnDie;
-                    childDeathCount++;
+                    damageable.died -= OnSpawnDeath;
+                    creepChildDeath.Increase();
 
-                    if (childDeathCount >= parentCreep.Data.DeathSpawnCount && spawnedCreep.Data.CreepDeathSpawn == null)
+                    damageable.TryGetComponent<Creep>(out Creep creep);
+                    damageable.transform.DOScale(Vector3.zero, .5f)
+                        .OnComplete(() => creepSpawner.Pool.Release(spawnedCreep));
+
+                    if (creepChildDeath.ReachedLimit)
                     {
                         _deathCount++;
                         CheckCreepsDeath(parentCreep, parentDamageable);
@@ -130,14 +125,14 @@ namespace Game.Combat
 
                     if (spawnedCreep.Data.CreepDeathSpawn != null)
                     {
-                        SpawnChild(spawnedCreep, damageable);
+                        SpawnChild(spawnedCreep, damageable, creepChildDeath);
                         return;
                     }
 
                     spawner.OnCreepDeath(spawnedCreep);
                 }
 
-                damageable.died += OnDie;
+                damageable.died += OnSpawnDeath;
             }
 
             spawner.OnCreepDeath(parentCreep);
@@ -179,8 +174,6 @@ namespace Game.Combat
 
                     spawner.Spawners.Add(creep.Data.CreepDeathSpawn, creepSpawner);
                 }
-
-                creepSpawner.SetLimit(creepSpawner.Limit + creep.Data.DeathSpawnCount);
             }
 
             return creep;
@@ -192,10 +185,23 @@ namespace Game.Combat
 
             while (_spawnedCount < _limit)
             {
-                _pool.Get();
+                Creep creep = _pool.Get();
+
+                if (creep.TryGetComponent<Damageable>(out Damageable damageable))
+                    damageable.died += OnDie;
+
+                _spawnedCount++;
 
                 yield return new WaitForSeconds(_spawnInterval);
             }
         }
+    }
+
+    public class CreepChildDeath
+    {
+        public int count { get; set; }
+        public int totalCreepsToDie { get; set; }
+        public bool ReachedLimit => count >= totalCreepsToDie;
+        public void Increase() => count += 1;
     }
 }

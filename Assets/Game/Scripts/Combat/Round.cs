@@ -89,8 +89,6 @@ namespace Game.Combat
 
                         _waveSpawner.Spawners.Add(wave.CreepData.CreepDeathSpawn, creepSpawner);
                     }
-
-                    creepSpawner.SetLimit(creepSpawner.Limit + wave.CreepData.DeathSpawnCount);
                 }
 
                 spawner.creepDied += OnCreepDeath;
