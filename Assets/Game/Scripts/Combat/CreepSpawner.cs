@@ -115,24 +115,24 @@ namespace Game.Combat
 
                 if (!spawnedCreep.TryGetComponent<Damageable>(out Damageable damageable)) return;
 
-                if (spawnedCreep.Data.CreepDeathSpawn != null)
-                {
-                    SpawnChild(spawnedCreep, damageable);
-                    return;
-                }
-
                 void OnDie(Damageable damageable)
                 {
                     damageable.died -= OnDie;
                     childDeathCount++;
 
-                    if (childDeathCount >= parentCreep.Data.DeathSpawnCount)
+                    if (childDeathCount >= parentCreep.Data.DeathSpawnCount && spawnedCreep.Data.CreepDeathSpawn == null)
                     {
                         _deathCount++;
                         CheckCreepsDeath(parentCreep, parentDamageable);
                     }
 
                     if (damageable.Health > 0) return;
+
+                    if (spawnedCreep.Data.CreepDeathSpawn != null)
+                    {
+                        SpawnChild(spawnedCreep, damageable);
+                        return;
+                    }
 
                     spawner.OnCreepDeath(spawnedCreep);
                 }

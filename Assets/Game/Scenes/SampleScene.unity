@@ -2196,7 +2196,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _rounds.Array.data[0]._waves.Array.data[0]._creepData
       value: 
-      objectReference: {fileID: 11400000, guid: 5a20aecab6bcc80499f890f0010ba1e8,
+      objectReference: {fileID: 11400000, guid: 8bf90ac7f126efb43a8aa6ab601e570c,
         type: 2}
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
@@ -2213,7 +2213,7 @@ PrefabInstance:
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
       propertyPath: _rounds.Array.data[0]._waves.Array.data[0]._countLimit
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
