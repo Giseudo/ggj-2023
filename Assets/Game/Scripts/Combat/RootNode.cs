@@ -15,6 +15,9 @@ namespace Game.Combat
         private Transform _branch;
 
         [SerializeField]
+        private Transform _sphere;
+
+        [SerializeField]
         private Unit _unit;
 
         private SphereCollider _collider;
@@ -74,8 +77,12 @@ namespace Game.Combat
             _branch.localScale = new Vector3(1f, 1f, 1f);
             _branch.eulerAngles = new Vector3(0f, -angle, 90f);
 
+
             _branch.DOScaleY(length, 1f).SetUpdate(true);
             _branch.DOMove(transform.position, 1f).SetUpdate(true);
+
+            _sphere.position = _parent.transform.position;
+            _sphere.DOMove(transform.position, 1f).SetUpdate(true);
         }
 
         public void ShrinkBranch()

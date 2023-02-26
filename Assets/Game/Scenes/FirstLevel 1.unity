@@ -3267,6 +3267,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
+      propertyPath: _validColor.b
+      value: 0.5137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
+      propertyPath: _validColor.g
+      value: 0.7254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
+      propertyPath: _validColor.r
+      value: 0.1764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
+      propertyPath: _invalidColor.b
+      value: 0.23921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
+      propertyPath: _invalidColor.g
+      value: 0.21960784
+      objectReference: {fileID: 0}
+    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
+      propertyPath: _invalidColor.r
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
+      propertyPath: _validColor.rgba
+      value: 8632621
+      objectReference: {fileID: 0}
+    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
+      propertyPath: _invalidColor.rgba
+      value: 4012236
+      objectReference: {fileID: 0}
     - target: {fileID: 716089058, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
       propertyPath: _isAvailable
       value: 0
@@ -3544,42 +3576,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: MaxChunks
-      value: 149
-      objectReference: {fileID: 0}
-    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: MaxVoxelsK
-      value: 111
-      objectReference: {fileID: 0}
-    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: m_isMeshLocked
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: m_lastLockedMeshMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: aa3abb328280b2a44af3a4061125359c, type: 2}
-    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: m_addedComponents.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: m_addedComponents.Array.data[0]
-      value: UnityEngine.MeshFilter
-      objectReference: {fileID: 0}
-    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: m_addedComponents.Array.data[1]
-      value: UnityEngine.MeshRenderer
-      objectReference: {fileID: 0}
-    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: AutoAdjustBudgetsToHighWaterMarks
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 448638300, guid: 35457f1929fceb743a53b53c1c9974a2, type: 3}
-      propertyPath: MeshGenerationLockOnStartByEditor
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 192760989407497852, guid: 35457f1929fceb743a53b53c1c9974a2,
         type: 3}
       propertyPath: m_RootOrder

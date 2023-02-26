@@ -104,7 +104,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2093543462}
-  - {fileID: 865431620}
   m_Father: {fileID: 192760989407497852}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -115,7 +114,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 448638299}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1406bb0b613343248bba1c664e68d2b0, type: 3}
   m_Name: 
@@ -232,8 +231,8 @@ MonoBehaviour:
   GenerateMeshAssetByEditorName: Mud Renderer Mesh 4294095074
   RecursiveLockMeshByEditor: 1
   RememberLockedMeshMaterialByEditor: 1
-  MeshGenerationLockOnStartByEditor: 0
-  m_lastLockedMeshMaterial: {fileID: 2100000, guid: d5baa78db2c8dfc42aec4d0883fd659e,
+  MeshGenerationLockOnStartByEditor: 1
+  m_lastLockedMeshMaterial: {fileID: 2100000, guid: aa3abb328280b2a44af3a4061125359c,
     type: 2}
   m_aBrushTransformCache: []
   m_aNestedRendereTransformCache: []
@@ -253,7 +252,9 @@ MonoBehaviour:
   TimeSliceFramesOffset: 0
   TimeSlicePeriod: 0.05
   TimeSliceTimeOffset: 0
-  m_addedComponents: []
+  m_addedComponents:
+  - UnityEngine.MeshFilter
+  - UnityEngine.MeshRenderer
 --- !u!1 &578515356
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parent: {fileID: 2093543465}
   _branch: {fileID: 47019135}
+  _sphere: {fileID: 0}
   _unit: {fileID: 0}
 --- !u!135 &578515358
 SphereCollider:
@@ -324,80 +326,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &865431619
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 865431620}
-  - component: {fileID: 865431622}
-  - component: {fileID: 865431621}
-  m_Layer: 6
-  m_Name: Mask
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &865431620
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 865431619}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.12, z: 0}
-  m_LocalScale: {x: 46.28, y: 1, z: 38.97}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 448638301}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &865431622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 865431619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2390520846a478242a1b2271b4ddd597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_sharedMaterial: {fileID: 0}
-  m_color: {r: 0.582, g: 0.1455, b: 0, a: 1}
-  m_emission: {r: 0, g: 0, b: 0, a: 1}
-  m_metallic: 0
-  m_smoothness: 0
-  m_textureIndex: 0
-  m_splatSize: 1
-  m_blendTightness: 0
-  m_contributeMaterial: 0
---- !u!114 &865431621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 865431619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fa82bcebed5d9648a01985db77c76ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Hidden: 0
-  m_operator: 2
-  m_blend: 0
-  m_symmetry: 0
-  m_countAsBone: 0
-  m_canCountAsBone: 1
-  m_round: 0
-  PivotShift: 0
 --- !u!1 &2093543461
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,7 +370,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2093543461}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2390520846a478242a1b2271b4ddd597, type: 3}
   m_Name: 
@@ -463,7 +391,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2093543461}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba522f675f1c6d844920ea187d9340ff, type: 3}
   m_Name: 
@@ -488,6 +416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parent: {fileID: 0}
   _branch: {fileID: 0}
+  _sphere: {fileID: 0}
   _unit: {fileID: 0}
 --- !u!135 &2093543466
 SphereCollider:
@@ -632,6 +561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parent: {fileID: 2093543465}
   _branch: {fileID: 6056052734144656046}
+  _sphere: {fileID: 0}
   _unit: {fileID: 0}
 --- !u!135 &5777948079909391085
 SphereCollider:

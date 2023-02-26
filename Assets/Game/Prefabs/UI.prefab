@@ -1790,6 +1790,8 @@ MonoBehaviour:
     type: 3}
   _rootCreationSound: {fileID: 8300000, guid: 377841a747eb1a842892e76ee276f0a9, type: 3}
   _rootLimit: {fileID: 943020051}
+  _validColor: {r: 0, g: 1, b: 0, a: 1}
+  _invalidColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!222 &7598760462822078217
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5761,7 +5763,7 @@ GameObject:
   - component: {fileID: 6782496904488192899}
   - component: {fileID: 8657885988749376108}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5889,7 +5891,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &881227645948667569
 GameObject:

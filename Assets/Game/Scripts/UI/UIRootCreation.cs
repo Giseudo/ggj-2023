@@ -22,6 +22,12 @@ namespace Game.UI
         [SerializeField]
         private UIRootLimit _rootLimit;
 
+        [SerializeField]
+        private Color _validColor = Color.green;
+
+        [SerializeField]
+        private Color _invalidColor = Color.red;
+
         private UIRootContainer _rootContainer;
         private Vector3 _draggingPosition;
         private bool _isDragging = false;
@@ -273,7 +279,7 @@ namespace Game.UI
             Draw.LineGeometry = LineGeometry.Volumetric3D;
             Draw.ThicknessSpace = ThicknessSpace.Pixels;
             Draw.Thickness = 20;
-            Draw.Line(ActiveNode.transform.position, _draggingPosition, _isValidPlacement ? Color.green : Color.red);
+            Draw.Line(ActiveNode.transform.position, _draggingPosition, _isValidPlacement ? _validColor : _invalidColor);
         }
 
         private void CreateNode()
