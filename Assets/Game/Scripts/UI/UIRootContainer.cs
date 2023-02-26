@@ -20,6 +20,9 @@ namespace Game.UI
         [SerializeField]
         private UIRootCreation _rootCreation;
 
+        [SerializeField]
+        private UITreeHighlight _treeHighlight;
+
         private Tree _mainTree;
         private RootNode _activeNode;
 
@@ -39,8 +42,11 @@ namespace Game.UI
             _rootPoint.clicked += OnPointClick;
             _rootActions.opened += OnActionsOpen;
             _rootActions.closed += OnActionsClose;
+            _rootActions.canceled += OnActionsCancel;
             _rootCreation.nodeCreated += OnNodeCreation;
             _rootActions.SplitButton.clicked += OnSplitAction;
+            _rootActions.createdUnit += OnUnitCreation;
+            _treeHighlight.highlightChanged += OnTreeHighlightChange;
         }
 
         public void OnDisable()
@@ -48,8 +54,11 @@ namespace Game.UI
             _rootPoint.clicked -= OnPointClick;
             _rootActions.opened -= OnActionsOpen;
             _rootActions.closed -= OnActionsClose;
+            _rootActions.canceled -= OnActionsCancel;
             _rootCreation.nodeCreated -= OnNodeCreation;
             _rootActions.SplitButton.clicked -= OnSplitAction;
+            _rootActions.createdUnit -= OnUnitCreation;
+            _treeHighlight.highlightChanged -= OnTreeHighlightChange;
         }
 
         private void OnPointClick()
@@ -60,14 +69,44 @@ namespace Game.UI
         private void OnNodeCreation(RootNode node)
         {
             _activeNode = node;
+
+            if (_rootActions.HighlightingButton == _rootActions.SplitButton.Button)
+                _rootActions.Highlight(null);
+
+            if (_treeHighlight.IsHighlighting)
+                _treeHighlight.Highlight(false);
+
+            _rootPoint.Pulse(false);
+
+            if (GameManager.MainTree.Unities.Count > 0) return;
+
+            _rootPoint.Rect.anchoredPosition = UICanvas.GetScreenPosition(node.transform.position);
+            _rootPoint.Show();
+            _rootPoint.Pulse(true);
+            _rootActions.Highlight(_rootActions.AddButton.Button);
+        }
+
+        private void OnUnitCreation(Unit unit)
+        {
+            if (_rootActions.HighlightingButton == _rootActions.AddButton.Button)
+                _rootActions.Highlight(null);
+        }
+
+        private void OnTreeHighlightChange(bool value)
+        {
+            if (GameManager.MainTree.NodeList.Count > 1) return;
+
+            _rootActions.Highlight(_rootActions.SplitButton.Button);
+
+            _rootPoint.Rect.anchoredPosition = UICanvas.GetScreenPosition(GameManager.MainTree.transform.position);
+            _rootPoint.Show();
+            _rootPoint.Pulse(true);
         }
 
         public void OnBeginDrag(PointerEventData evt)
         {
             if (_rootActions.UnitSelection.IsOpened) return;
-
-            if (_rootPoint.IsPulsing)
-                _rootPoint.Pulse(false);
+            if (_rootActions.IsOpened) return;
 
             _rootPoint.Hide();
             _rootCreation.StartDrag();
@@ -117,7 +156,9 @@ namespace Game.UI
             if (closestNode == null)
             {
                 _activeNode = null;
-                _rootPoint.Hide();
+
+                if (!_rootPoint.IsPulsing)
+                    _rootPoint.Hide();
 
                 return;
             }
@@ -149,6 +190,9 @@ namespace Game.UI
 
         public void OnActionsOpen()
         {
+            if (_rootPoint.IsPulsing)
+                _rootPoint.Pulse(false);
+
             _rootPoint.Disable();
             _rootPoint.Hide();
 
@@ -163,6 +207,12 @@ namespace Game.UI
             if (_rootActions.UnitSelection.IsOpened) return;
 
             _rootSelector.Hide();
+        }
+
+        public void OnActionsCancel()
+        {
+            if (_rootCreation.IsDragging)
+                _rootCreation.Cancel();
         }
     }
 }

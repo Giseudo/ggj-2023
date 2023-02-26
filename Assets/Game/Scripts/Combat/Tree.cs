@@ -43,6 +43,7 @@ namespace Game.Combat
         private float _rootMaxDistance = 0;
         private int _upgradeCost = 0;
         private List<RootNode> _nodeList;
+        private List<Unit> _unities = new List<Unit>();
         private List<Tree> _absorvedTrees = new List<Tree>();
         private Tree _parentTree;
 
@@ -57,6 +58,7 @@ namespace Game.Combat
         public int EnergyAmount => _energyAmount;
         public bool HasEnergy(int value) => value >= _energyAmount;
         public List<RootNode> NodeList => _nodeList;
+        public List<Unit> Unities => _unities;
         public List<Tree> AbsorvedTrees => _absorvedTrees;
         public Tree ParentTree => _parentTree;
         public int RootSplitLimit => _rootSplitLimit;
@@ -98,6 +100,16 @@ namespace Game.Combat
         public void RemoveNode(RootNode node)
         {
             _nodeList.Remove(node);
+        }
+
+        public void AddUnit(Unit unit)
+        {
+            _unities.Add(unit);
+        }
+
+        public void RemoveUnit(Unit unit)
+        {
+            _unities.Remove(unit);
         }
 
         public void SetParentTree(Tree tree)

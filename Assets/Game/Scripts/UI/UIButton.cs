@@ -15,6 +15,8 @@ namespace Game.UI
         private Button _button;
         private RectTransform _rect;
         private Vector3 _initialScale;
+        private bool _isPulsing;
+        private Tween _pulseTween;
 
         public Button Button => _button;
         public RectTransform Rect => _rect;
@@ -30,6 +32,26 @@ namespace Game.UI
             _initialScale = _rect.localScale;
         }
 
+        public void Pulse(bool enable)
+        {
+            _isPulsing = enable;
+
+            _pulseTween?.Kill();
+
+            if (!enable)
+            {
+                _pulseTween = _rect.DOScale(_initialScale, .5f)
+                    .SetUpdate(true)
+                    .SetEase(Ease.OutExpo);
+                return;
+            }
+
+            _pulseTween = _rect.DOScale(Vector3.one * _hoverScale, .5f)
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetEase(Ease.InOutSine)
+                .SetUpdate(true);
+        }
+
         public void OnPointerClick(PointerEventData eventData)
         {
             clicked.Invoke();
@@ -39,6 +61,8 @@ namespace Game.UI
         {
             entered.Invoke();
 
+            if (_isPulsing) return;
+
             _rect.DOScale(Vector3.one * _hoverScale, .5f)
                 .SetUpdate(true)
                 .SetEase(Ease.OutExpo);
@@ -47,6 +71,8 @@ namespace Game.UI
         public void OnPointerExit(PointerEventData eventData)
         {
             exited.Invoke();
+
+            if (_isPulsing) return;
 
             _rect.DOScale(_initialScale, .5f)
                 .SetUpdate(true)

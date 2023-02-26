@@ -35,6 +35,9 @@ namespace Game.UI
         private UIRootActionButton _targetButton;
 
         [SerializeField]
+        private RawImage _glowImage;
+
+        [SerializeField]
         private InputReader _inputReader;
 
         [SerializeField]
@@ -44,7 +47,9 @@ namespace Game.UI
         private RectTransform _rect;
         private RootNode _activeNode;
         private Vector3 _initialCameraPosition;
+        private UIButton _highlightButton;
         private Tween _tween;
+        private Tween _glowTween;
         private Tween _cameraTween;
         private Tween _fovTween;
 
@@ -55,12 +60,15 @@ namespace Game.UI
 
         public Action opened = delegate { };
         public Action closed = delegate { };
+        public Action canceled = delegate { };
+        public Action<Unit> createdUnit = delegate { };
 
         public UIRootActionButton AddButton => _addButton;
         public UIRootActionButton KillButton => _killButton;
         public UIRootActionButton SplitButton => _splitButton;
         public UIRootActionButton TargetButton => _targetButton;
         public UIRootActionButton UpgradeButton => _upgradeButton;
+        public UIButton HighlightingButton => _highlightButton;
 
         public void Awake()
         {
@@ -78,7 +86,7 @@ namespace Game.UI
             GameManager.MainTree.collectedEnergy += OnEnergyChange;
             GameManager.MainTree.consumedEnergy += OnEnergyChange;
 
-            _inputReader.canceled += Hide;
+            _inputReader.canceled += OnCancel;
         }
 
         public void OnDestroy()
@@ -86,7 +94,7 @@ namespace Game.UI
             GameManager.MainTree.collectedEnergy -= OnEnergyChange;
             GameManager.MainTree.consumedEnergy -= OnEnergyChange;
 
-            _inputReader.canceled -= Hide;
+            _inputReader.canceled -= OnCancel;
         }
 
         private void OnEnergyChange(int amount)
@@ -141,6 +149,16 @@ namespace Game.UI
 
             _targetSelection.confirmed -= OnConfirmTarget;
             _targetSelection.closed -= OnTargetSelectionClose;
+        }
+
+        private void OnCancel()
+        {
+            Hide();
+
+            if (_unitSelection.IsOpened)
+                _unitSelection.Hide();
+
+            canceled.Invoke();
         }
 
         public void Show(RootNode node)
@@ -202,6 +220,32 @@ namespace Game.UI
                     _isOpened = false;
                     closed.Invoke();
                 });
+        }
+
+        public void Highlight(UIButton button)
+        {
+            _highlightButton?.Pulse(false);
+            _highlightButton = button;
+            _highlightButton?.Pulse(true);
+
+            _glowTween?.Kill();
+
+            if (!_highlightButton)
+            {
+                _glowTween = _glowImage.DOFade(0f, .5f).SetUpdate(true);
+                return;
+            }
+
+            Color32 color = _glowImage.color;
+            color.a = 100;
+            _glowImage.color = color;
+
+            _glowImage.rectTransform.anchoredPosition = _highlightButton.Rect.anchoredPosition;
+            _glowTween = _glowImage.DOFade(1f, .5f)
+                .SetDelay(.5f)
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetEase(Ease.InOutSine)
+                .SetUpdate(true);
         }
 
         private void OnAddUnit()
@@ -273,6 +317,7 @@ namespace Game.UI
             if (unit == null) return;
 
             _activeNode.SetUnit(unit);
+            createdUnit(unit);
 
             GameManager.MainTree.ConsumeEnergy(data.RequiredEnergy);
 

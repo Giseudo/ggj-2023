@@ -58,6 +58,9 @@ namespace Game.Combat
 
         public void SetUnit(Unit unit)
         {
+            if (_unit) _tree.RemoveUnit(_unit);
+            _tree.AddUnit(unit);
+
             _unit = unit;
         }
 

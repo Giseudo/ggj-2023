@@ -11,10 +11,17 @@ namespace Game.UI
         private UIEnergyButton _energyButton;
 
         private RectTransform _rect;
+        private UIButton _button;
 
         public Action clicked = delegate { };
 
+        public UIButton Button => _button;
         public UIEnergyButton EnergyButton => _energyButton;
+
+        public void Awake()
+        {
+            TryGetComponent<UIButton>(out _button);
+        }
 
         public void OnPointerClick(PointerEventData eventData)
         {
@@ -39,7 +46,6 @@ namespace Game.UI
             _energyButton?.Rect.DOScale(Vector3.zero, .5f)
                 .SetUpdate(true)
                 .SetEase(Ease.OutExpo);
-
         }
     }
 }

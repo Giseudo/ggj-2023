@@ -15,9 +15,6 @@ namespace Game.UI
         private bool _playAtStart;
 
         [SerializeField]
-        private UIRootPoint _rootPoint;
-
-        [SerializeField]
         private Tree _highlightTree;
 
         private Tween _tween;
@@ -25,7 +22,10 @@ namespace Game.UI
         private Renderer[] _renderers;
         private Material[] _materials;
 
+        private bool _isHighlighting = false;
         public Action<bool> highlightChanged = delegate { };
+
+        public bool IsHighlighting => _isHighlighting;
 
         public void Start()
         {
@@ -33,14 +33,10 @@ namespace Game.UI
                 Highlight(true);
 
             SetHighlightTree(_highlightTree);
-
-            _rootPoint.clicked += OnPointClick;
         }
 
         public void OnDestroy()
-        {
-            _rootPoint.clicked -= OnPointClick;
-        }
+        { }
 
         public void SetHighlightTree(Tree tree)
         {
@@ -59,14 +55,10 @@ namespace Game.UI
 
                 foreach (Material material in _materials)
                     material.SetFloat("_HighlightIntensity", value);
-                
-                highlightChanged.Invoke(enable);
             }, 1f, 1f);
 
-            _rootPoint.Rect.anchoredPosition = UICanvas.GetScreenPosition(_highlightTree.transform.position);
-            _rootPoint.Pulse(enable);
+            highlightChanged.Invoke(enable);
+            _isHighlighting = enable;
         }
-
-        private void OnPointClick() => Highlight(false);
     }
 }

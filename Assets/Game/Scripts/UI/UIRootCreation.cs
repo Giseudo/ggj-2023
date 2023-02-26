@@ -60,6 +60,13 @@ namespace Game.UI
             _rootContainer = rootContainer;
         }
 
+        public void Cancel()
+        {
+            _isDragging = false;
+            _rootLimit.Hide();
+            _draggingPosition = Vector3.zero;
+        }
+
         public void OnDestroy()
         {
             _mainTree.rootSplitted -= OnRootSplit;
