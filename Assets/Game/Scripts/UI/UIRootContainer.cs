@@ -94,6 +94,7 @@ namespace Game.UI
 
         private void OnTreeHighlightChange(bool value)
         {
+            if (value == false) return;
             if (GameManager.MainTree.NodeList.Count > 1) return;
 
             _rootActions.Highlight(_rootActions.SplitButton.Button);

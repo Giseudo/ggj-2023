@@ -10659,7 +10659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 897152accbd0ec24c907421f20ca9b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playAtStart: 1
+  _playAtStart: 0
   _highlightTree: {fileID: 0}
 --- !u!1 &8134101711732766526
 GameObject:

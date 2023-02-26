@@ -1756,7 +1756,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Opacity",
     "m_StageCapability": 3,
-    "m_Value": 1.0,
+    "m_Value": 0.25,
     "m_DefaultValue": 1.0,
     "m_Labels": []
 }
@@ -3834,7 +3834,7 @@
         "overwrite"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -7299,7 +7299,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -1195.0,
-            "y": 735.0,
+            "y": 720.0,
             "width": 212.0,
             "height": 142.0
         }
@@ -9300,10 +9300,10 @@
         "m_Expanded": false,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1195.0,
-            "y": 913.0,
-            "width": 245.99993896484376,
-            "height": 142.0
+            "x": -1229.0,
+            "y": 959.9999389648438,
+            "width": 246.0,
+            "height": 141.00006103515626
         }
     },
     "m_Slots": [
