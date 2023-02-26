@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Game.Combat;
+using Game.Core;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Splines;

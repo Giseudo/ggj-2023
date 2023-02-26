@@ -4,41 +4,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Core;
 using DG.Tweening;
+using Game.Combat;
 
-namespace Game.Combat
+namespace Game.Core
 {
     public class MatchManager : MonoBehaviour
     {
-        private int _endedWavesCount = 0;
-        private int _roundOverCount = 0;
+        public static int EndedWavesCount { get; private set; }
+        public static int RoundOverCount { get; private set; }
 
         private static List<WaveSpawner> _waveSpawners;
 
         public static MatchManager Instance { get; private set; }
         public static int RoundNumbers { get; private set; }
         public static List<WaveSpawner> WaveSpawners => _waveSpawners;
+        public static bool HasStarted { get; private set; }
 
         public static Action<WaveSpawner> WaveSpawnerAdded;
         public static Action<WaveSpawner> WaveSpawnerRemoved;
         public static Action<int, Vector3> DroppedEnergy;
         public static Action LevelCompleted;
+        public static Action<int> RoundStarted;
 
         public void Awake()
         {
             Instance = this;
 
+            EndedWavesCount = 0;
+            RoundOverCount = 0;
             WaveSpawnerAdded = delegate { };
             WaveSpawnerRemoved = delegate { };
             DroppedEnergy = delegate { };
             LevelCompleted = delegate { };
+            RoundStarted = delegate { };
+            HasStarted = false;
 
             _waveSpawners = new List<WaveSpawner>();
         }
 
         public void Start()
         {
-            StartCoroutine(StartRound());
-
             GameManager.Scenes.loadedLevel += OnLoadLevel;
         }
 
@@ -48,19 +53,32 @@ namespace Game.Combat
         }
 
         private void OnLoadLevel(int level)
-        {
-            StartCoroutine(StartRound());
-        }
+        { }
 
-        public IEnumerator StartRound()
+        public static void StartRound()
         {
-            yield return new WaitForSeconds(1f);
+            HasStarted = true;
+            RoundStarted.Invoke(RoundOverCount);
 
             for (int i = 0; i < _waveSpawners.Count; i++)
             {
                 WaveSpawner waveSpawner = _waveSpawners[i];
 
                 waveSpawner.StartRound();
+            }
+        }
+
+        public static void NextRound()
+        {
+            RoundStarted.Invoke(RoundOverCount + 1);
+
+            // TODO mark next round as started?
+
+            for (int i = 0; i < _waveSpawners.Count; i++)
+            {
+                WaveSpawner waveSpawner = _waveSpawners[i];
+
+                waveSpawner.NextRound();
             }
         }
 
@@ -86,24 +104,24 @@ namespace Game.Combat
 
         private void OnWaveFinish()
         {
-            _endedWavesCount++;
+            EndedWavesCount++;
 
-            if (_endedWavesCount >= _waveSpawners.Count)
+            if (EndedWavesCount >= _waveSpawners.Count)
             {
-                _endedWavesCount = 0;
+                EndedWavesCount = 0;
                 LevelCompleted.Invoke();
             }
         }
 
         private void OnRoundOver()
         {
-            _roundOverCount++;
+            RoundOverCount++;
 
-            if (_roundOverCount >= _waveSpawners.Count)
+            if (RoundOverCount >= _waveSpawners.Count)
             {
-                _roundOverCount = 0;
+                RoundOverCount = 0;
 
-                StartCoroutine(StartRound());
+                // TODO start next round if it's not started yet
             }
         }
 

@@ -2405,6 +2405,10 @@ PrefabInstance:
       propertyPath: _isDisabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 943020050, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -99.99994
+      objectReference: {fileID: 0}
     - target: {fileID: 1261056117, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
       propertyPath: _isDisabled
       value: 1
@@ -2483,6 +2487,16 @@ PrefabInstance:
       propertyPath: _highlightTree
       value: 
       objectReference: {fileID: 1744594487}
+    - target: {fileID: 4014980203951927527, guid: 688d78697456b9a42a6bfc10c24818e1,
+        type: 3}
+      propertyPath: _waitTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882951486307439699, guid: 688d78697456b9a42a6bfc10c24818e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

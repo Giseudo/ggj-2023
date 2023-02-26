@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
+using Game.Core;
 
 namespace Game.Combat
 {
@@ -71,6 +72,12 @@ namespace Game.Combat
             if (round == null) return;
 
             round.Start();
+        }
+
+        public void NextRound()
+        {
+            _currentRound++;
+            StartRound();
         }
 
         public void OnRoundOver()

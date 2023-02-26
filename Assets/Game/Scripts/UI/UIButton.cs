@@ -16,6 +16,7 @@ namespace Game.UI
         private RectTransform _rect;
         private Vector3 _initialScale;
         private bool _isPulsing;
+        private bool _isDisabled;
         private Tween _pulseTween;
 
         public Button Button => _button;
@@ -24,12 +25,15 @@ namespace Game.UI
         public Action entered = delegate { };
         public Action exited = delegate { };
 
+        public void Enable() => _isDisabled = false;
+        public void Disable() => _isDisabled = true;
+
         public void Awake()
         {
             TryGetComponent<Button>(out _button);
             TryGetComponent<RectTransform>(out _rect);
 
-            _initialScale = _rect.localScale;
+            _initialScale = _rect.localScale == Vector3.zero ? Vector3.one : _rect.localScale;
         }
 
         public void Pulse(bool enable)
@@ -62,6 +66,7 @@ namespace Game.UI
             entered.Invoke();
 
             if (_isPulsing) return;
+            if (_isDisabled) return;
 
             _rect.DOScale(Vector3.one * _hoverScale, .5f)
                 .SetUpdate(true)
@@ -73,6 +78,7 @@ namespace Game.UI
             exited.Invoke();
 
             if (_isPulsing) return;
+            if (_isDisabled) return;
 
             _rect.DOScale(_initialScale, .5f)
                 .SetUpdate(true)

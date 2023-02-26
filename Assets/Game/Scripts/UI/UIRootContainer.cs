@@ -78,7 +78,11 @@ namespace Game.UI
 
             _rootPoint.Pulse(false);
 
+            if (!MatchManager.HasStarted)
+                MatchManager.StartRound();
+
             if (GameManager.MainTree.Unities.Count > 0) return;
+            if (!_treeHighlight.PlayAtStart) return;
 
             _rootPoint.Rect.anchoredPosition = UICanvas.GetScreenPosition(node.transform.position);
             _rootPoint.Show();

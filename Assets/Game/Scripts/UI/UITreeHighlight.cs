@@ -25,6 +25,7 @@ namespace Game.UI
         private bool _isHighlighting = false;
         public Action<bool> highlightChanged = delegate { };
 
+        public bool PlayAtStart => _playAtStart;
         public bool IsHighlighting => _isHighlighting;
 
         public void Start()
