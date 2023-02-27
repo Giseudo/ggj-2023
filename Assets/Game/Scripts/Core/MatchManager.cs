@@ -162,7 +162,7 @@ namespace Game.Core
 // [x] Main menu
 // [x] Bozo explodir
 // [x] Absorb tree indications / transition
-// [ ] Wave timer
+// [x] Wave timer
 // [ ] Day / cycle
 // [x] Block unit creation by level
 // [ ] Score
