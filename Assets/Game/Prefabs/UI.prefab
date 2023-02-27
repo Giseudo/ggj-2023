@@ -5864,7 +5864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _progressDisc: {fileID: 8855904318811558833}
   _waitTime: 10
-  _earnEnergyAmount: 2000
+  _earnEnergyAmount: 1000
 --- !u!1 &647681220591377974
 GameObject:
   m_ObjectHideFlags: 0
