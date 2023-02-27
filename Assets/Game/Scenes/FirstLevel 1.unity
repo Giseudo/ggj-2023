@@ -3267,38 +3267,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
-      propertyPath: _validColor.b
-      value: 0.5137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
-      propertyPath: _validColor.g
-      value: 0.7254902
-      objectReference: {fileID: 0}
-    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
-      propertyPath: _validColor.r
-      value: 0.1764706
-      objectReference: {fileID: 0}
-    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
-      propertyPath: _invalidColor.b
-      value: 0.23921569
-      objectReference: {fileID: 0}
-    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
-      propertyPath: _invalidColor.g
-      value: 0.21960784
-      objectReference: {fileID: 0}
-    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
-      propertyPath: _invalidColor.r
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
-      propertyPath: _validColor.rgba
-      value: 8632621
-      objectReference: {fileID: 0}
-    - target: {fileID: 685485596, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
-      propertyPath: _invalidColor.rgba
-      value: 4012236
-      objectReference: {fileID: 0}
     - target: {fileID: 716089058, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
       propertyPath: _isAvailable
       value: 0

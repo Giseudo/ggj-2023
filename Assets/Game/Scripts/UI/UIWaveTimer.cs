@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Shapes;
 using DG.Tweening;
+using Game.Combat;
 using Game.Core;
 
 namespace Game.UI
@@ -35,7 +37,6 @@ namespace Game.UI
         {
             TryGetComponent<RectTransform>(out _rect);
             TryGetComponent<UIButton>(out _button);
-            CreateSequence();
 
             _button.Disable();
         }
@@ -52,15 +53,33 @@ namespace Game.UI
 
         private void OnRoundStart(int roundNumber)
         {
-            // TODO calculate time to start countdown
+            float longestTime = 20f;
+            int lastRound = 0;
 
-            StartCountdown();
+            MatchManager.WaveSpawners.ForEach(spawner => {
+                Round round = spawner.Rounds[roundNumber];
+                lastRound = spawner.Rounds.Count - 1;
+
+                if (round.RoundTime > longestTime)
+                    longestTime = round.RoundTime;
+            });
+
+            if (roundNumber >= lastRound)
+                return;
+
+            StartCoroutine(StartCountdown(longestTime));
         }
 
-        private void CreateSequence()
+        private IEnumerator StartCountdown(float delay)
         {
-            _sequence = DOTween.Sequence();
+            yield return new WaitForSeconds(delay);
 
+            countdownStarted.Invoke(Time.time);
+            _countdownTime = Time.time;
+            _button.Enable();
+            _isDisabled = false;
+
+            _sequence = DOTween.Sequence();
             _sequence.Append(_rect.DOScale(Vector3.one * 1.2f, .5f).SetEase(Ease.OutSine));
             _sequence.Append(_rect.DOScale(Vector3.one, .5f).SetEase(Ease.InSine));
             _sequence.Append(
@@ -74,27 +93,17 @@ namespace Game.UI
                     .OnComplete(() => timeOver.Invoke(Time.time) )
 
             );
-            _sequence.Append(_rect.DOScale(Vector3.one * 1.2f, .2f)
+            _sequence.Append(_rect.DOScale(Vector3.one * 1.2f, .3f)
                 .SetUpdate(true)
                 .SetEase(Ease.OutSine)
             );
             _sequence.Append(
-                _rect.DOScale(Vector3.zero, .3f)
+                _rect.DOScale(Vector3.zero, .2f)
                 .SetUpdate(true)
                 .SetEase(Ease.InExpo)
+                .OnComplete(() => _progressDisc.AngRadiansStart = START_ANGLE)
             );
             _sequence.OnComplete(MatchManager.NextRound);
-            _sequence.Pause();
-        }
-
-        public void StartCountdown()
-        {
-            _button.Enable();
-            _isDisabled = false;
-            _countdownTime = Time.time;
-            _sequence.Restart();
-
-            countdownStarted.Invoke(Time.time);
         }
 
         public void OnPointerClick(PointerEventData evt)
@@ -117,12 +126,13 @@ namespace Game.UI
 
             MatchManager.DropEnergy(_earnEnergyAmount, position);
 
-            _rect.DOScale(Vector3.one * 1.2f, .2f)
+            _rect.DOScale(Vector3.one * 1.5f, .3f)
                 .SetUpdate(true)
                 .SetEase(Ease.InSine)
-                .OnComplete(() => _rect.DOScale(Vector3.zero, .3f)
+                .OnComplete(() => _rect.DOScale(Vector3.zero, .2f)
                     .SetUpdate(true)
                     .SetEase(Ease.OutExpo)
+                        .OnComplete(() => _progressDisc.AngRadiansStart = START_ANGLE)
                 );
         }
     }

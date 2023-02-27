@@ -69,15 +69,16 @@ namespace Game.Combat
         {
             Round round = _rounds[_currentRound];
 
-            if (round == null) return;
-
-            round.Start();
+            round?.Start();
         }
 
-        public void NextRound()
+        public void NextRound(int roundNumber)
         {
-            _currentRound++;
-            StartRound();
+            if (roundNumber > _rounds.Count - 1)
+                return;
+
+            Round round = _rounds[roundNumber];
+            round?.Start();
         }
 
         public void OnRoundOver()
@@ -89,6 +90,7 @@ namespace Game.Combat
             }
 
             _currentRound++;
+
             roundOver.Invoke();
         }
     }

@@ -17,6 +17,7 @@ namespace Game.Core
 
         public static MatchManager Instance { get; private set; }
         public static int RoundNumbers { get; private set; }
+        public static int CurrentRound { get; private set; }
         public static List<WaveSpawner> WaveSpawners => _waveSpawners;
         public static bool HasStarted { get; private set; }
 
@@ -31,7 +32,7 @@ namespace Game.Core
             Instance = this;
 
             EndedWavesCount = 0;
-            RoundOverCount = 0;
+            CurrentRound = 0;
             WaveSpawnerAdded = delegate { };
             WaveSpawnerRemoved = delegate { };
             DroppedEnergy = delegate { };
@@ -53,12 +54,16 @@ namespace Game.Core
         }
 
         private void OnLoadLevel(int level)
-        { }
+        {
+            HasStarted = false;
+            CurrentRound = 0;
+            EndedWavesCount = 0;
+        }
 
         public static void StartRound()
         {
             HasStarted = true;
-            RoundStarted.Invoke(RoundOverCount);
+            RoundStarted.Invoke(CurrentRound);
 
             for (int i = 0; i < _waveSpawners.Count; i++)
             {
@@ -70,15 +75,14 @@ namespace Game.Core
 
         public static void NextRound()
         {
-            RoundStarted.Invoke(RoundOverCount + 1);
-
-            // TODO mark next round as started?
+            CurrentRound++;
+            RoundStarted.Invoke(CurrentRound);
 
             for (int i = 0; i < _waveSpawners.Count; i++)
             {
                 WaveSpawner waveSpawner = _waveSpawners[i];
 
-                waveSpawner.NextRound();
+                waveSpawner.NextRound(CurrentRound);
             }
         }
 
@@ -107,23 +111,11 @@ namespace Game.Core
             EndedWavesCount++;
 
             if (EndedWavesCount >= _waveSpawners.Count)
-            {
-                EndedWavesCount = 0;
                 LevelCompleted.Invoke();
-            }
         }
 
         private void OnRoundOver()
-        {
-            RoundOverCount++;
-
-            if (RoundOverCount >= _waveSpawners.Count)
-            {
-                RoundOverCount = 0;
-
-                // TODO start next round if it's not started yet
-            }
-        }
+        { }
 
         public void OnCreepDeath(Creep creep)
         {
