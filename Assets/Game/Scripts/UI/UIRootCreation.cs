@@ -32,7 +32,6 @@ namespace Game.UI
         private Vector3 _draggingPosition;
         private bool _isDragging = false;
         private bool _isValidPlacement = false;
-        private Tree _mainTree;
         private Tree _activeTree;
         private Image _image;
 
@@ -44,7 +43,8 @@ namespace Game.UI
 
         public RootNode ActiveNode => _rootContainer?.ActiveNode;
         public bool IsDragging => _isDragging;
-        private void OnTreeLevelUp(int level) => _rootLimit.SetText($"{_mainTree.RootSplitLimit}");
+        private void UpdateLimit() => _rootLimit.SetText($"{GameManager.MainTree.RootSplitLimit}");
+        private void OnTreeLevelUp(int level) => UpdateLimit();
 
         public void Awake()
         {
@@ -53,12 +53,27 @@ namespace Game.UI
 
         public void Start()
         {
-            _mainTree = GameManager.MainTree;
-            _mainTree.rootSplitted += OnRootSplit;
-            _mainTree.levelUp += OnTreeLevelUp;
+            GameManager.Scenes.loadedLevel += OnLevelLoad;
+
+            GameManager.MainTree.rootSplitted += OnRootSplit;
+            GameManager.MainTree.levelUp += OnTreeLevelUp;
 
             _image.enabled = false;
-            _rootLimit.SetText($"{_mainTree.RootSplitLimit}");
+
+            UpdateLimit();
+        }
+
+        public void OnDestroy()
+        {
+            GameManager.Scenes.loadedLevel -= OnLevelLoad;
+        }
+
+        private void OnLevelLoad(int level)
+        {
+            GameManager.MainTree.rootSplitted += OnRootSplit;
+            GameManager.MainTree.levelUp += OnTreeLevelUp;
+
+            UpdateLimit();
         }
 
         public void Init(UIRootContainer rootContainer)
@@ -71,12 +86,6 @@ namespace Game.UI
             _isDragging = false;
             _rootLimit.Hide();
             _draggingPosition = Vector3.zero;
-        }
-
-        public void OnDestroy()
-        {
-            _mainTree.rootSplitted -= OnRootSplit;
-            _mainTree.levelUp -= OnTreeLevelUp;
         }
 
         public void OnPointerClick(PointerEventData evt)
@@ -144,7 +153,7 @@ namespace Game.UI
             _activeTree = null;
 
             // Max root split
-            if (_mainTree.RootSplitLimit == 0)
+            if (GameManager.MainTree.RootSplitLimit == 0)
             {
                 _isValidPlacement = false;
                 return;
@@ -172,7 +181,7 @@ namespace Game.UI
                     if (node.Tree.ParentTree != null)
                         continue;
                     
-                    if (node.Tree == _mainTree)
+                    if (node.Tree == GameManager.MainTree)
                         continue;
 
                     _activeTree = node.Tree;
@@ -247,7 +256,7 @@ namespace Game.UI
         private void SplitRoot()
         {
             if (_isValidPlacement && _isDragging)
-                _mainTree.SplitRoot();
+                GameManager.MainTree.SplitRoot();
 
             _isDragging = false;
             _image.enabled = false;
@@ -259,7 +268,7 @@ namespace Game.UI
 
         private void OnRootSplit()
         {
-            _rootLimit.SetText($"{_mainTree.RootSplitLimit}");
+            UpdateLimit();
             CreateNode();
         }
 

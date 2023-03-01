@@ -7,6 +7,7 @@ namespace Game.UI
     public class UICanvas : MonoBehaviour
     {
         public static UICanvas Instance;
+        public static Canvas Canvas { get; private set; }
         public static RectTransform Rect { get; private set; }
         public static Canvas MainCanvas { get; private set; }
         public static Vector2 ScreenSize { get; private set; }
@@ -15,10 +16,27 @@ namespace Game.UI
         public void Awake()
         {
             Instance = this;
+            Canvas = GetComponent<Canvas>();
             Rect = GetComponent<RectTransform>();
             MainCanvas = GetComponent<Canvas>();
             ScreenSize = new Vector2(Screen.width, Screen.height);
             ScreenResized = delegate { };
+        }
+
+        public void Start()
+        {
+            GameManager.MainCameraChanged += OnCameraChange;
+            Canvas.worldCamera = GameManager.MainCamera;
+        }
+
+        public void OnDestroy()
+        {
+            GameManager.MainCameraChanged -= OnCameraChange;
+        }
+
+        private void OnCameraChange(Camera camera)
+        {
+            Canvas.worldCamera = camera;
         }
 
         public static Vector2 GetScreenPosition(Vector3 worldPosition)

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Game.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -71,7 +72,6 @@ namespace Game.Core
                     Scene currentScene = SceneManager.GetSceneByBuildIndex(_currentLevelIndex);
 
                     SceneManager.SetActiveScene(currentScene);
-                    GameManager.SetMainCamera(Camera.main);
                 };
 
             if (_currentLevelIndex >= 0)

@@ -8,6 +8,9 @@ namespace Game.UI
 {
     public class UIGameCompleteContainer : MonoBehaviour
     {
+        [SerializeField]
+        private UIButton _menuButton;
+
         private CanvasGroup _canvasGroup;
 
         public void Awake()
@@ -18,14 +21,16 @@ namespace Game.UI
         public void Start()
         {
             MatchManager.LevelCompleted += OnLevelComplete;
+            _menuButton.clicked += MainMenu;
         }
 
         public void OnDestroy()
         {
             MatchManager.LevelCompleted -= OnLevelComplete;
+            _menuButton.clicked -= MainMenu;
         }
 
-        public void RestartGame()
+        public void MainMenu()
         {
             GameManager.Scenes.LoadMenuScene();
         }

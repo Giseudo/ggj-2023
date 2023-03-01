@@ -14,28 +14,29 @@ public class UIHealth : MonoBehaviour
     private RawImage _glowImage; 
 
     private RectTransform _rect;
-    private Damageable _damageable;
     private Tween _hurtTween;
     private Tween _glowTween;
     private bool _isGlowing;
+    private bool _isOpened = true;
     public float Height => _heartMask.rectTransform.rect.height * _rect.localScale.x;
 
     public void Start()
     {
+        GameManager.Scenes.loadedLevel += OnLevelLoad;
         TryGetComponent<RectTransform>(out _rect);
 
-        GameManager.MainTree.TryGetComponent<Damageable>(out _damageable);
-
-        if (_damageable == null) return;
-
-        _damageable.hurted += OnHurt;
+        OnLevelLoad(0);
     }
 
     public void OnDestroy()
-    {
-        if (_damageable == null) return;
+    { }
 
-        _damageable.hurted -= OnHurt;
+    private void OnLevelLoad(int level)
+    {
+        if (!GameManager.MainTree.TryGetComponent<Damageable>(out Damageable damageable)) return;
+
+        damageable.hurted += OnHurt;
+        _heartMask.padding = new Vector4(0f, 0f, 0f, 0f);
     }
 
     public void OnHurt(Damageable damageable)
@@ -82,5 +83,23 @@ public class UIHealth : MonoBehaviour
         _glowTween?.Kill();
         _glowTween = _glowImage.DOFade(0f, .5f)
             .SetUpdate(true);
+    }
+
+    public void Show()
+    {
+        if (_isOpened)
+            return;
+
+        _isOpened = true;
+        _rect.DOAnchorPos(new Vector2(40f, _rect.anchoredPosition.y), 1f);
+    }
+
+    public void Hide()
+    {
+        if (!_isOpened)
+            return;
+
+        _isOpened = false;
+        _rect.DOAnchorPos(new Vector2(-80f, _rect.anchoredPosition.y), 1f);
     }
 }

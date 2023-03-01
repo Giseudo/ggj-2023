@@ -17,6 +17,7 @@ namespace Game.Core
         public static GameManager Instance { get; private set; }
         public static Camera MainCamera { get; private set; }
         public static Tree MainTree { get; private set; }
+        public static Light MainLight { get; private set; }
         public static GameScenes Scenes { get; private set; }
 
         public static Action<Damageable> DamageableAdded;
@@ -25,6 +26,7 @@ namespace Game.Core
         public static Action<Attacker> AttackerRemoved;
         public static Action<Tree> MainTreeChanged;
         public static Action<Camera> MainCameraChanged;
+        public static Action<Light> MainLightChanged;
 
         public void Awake()
         {
@@ -38,6 +40,7 @@ namespace Game.Core
             AttackerRemoved = delegate { };
             MainTreeChanged = delegate { };
             MainCameraChanged = delegate { };
+            MainLightChanged = delegate { };
 
             _damageables = new List<Damageable>();
             _attackers = new List<Attacker>();
@@ -77,6 +80,12 @@ namespace Game.Core
         {
             MainCamera = camera;
             MainCameraChanged.Invoke(camera);
+        }
+
+        public static void SetMainLight(Light light)
+        {
+            MainLight = light;
+            MainLightChanged.Invoke(light);
         }
     }
 }

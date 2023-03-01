@@ -31,5 +31,10 @@ namespace Game.Core
                     GameManager.Scenes.SetCurrentLevel(_level);
                 };
         }
+
+        public void Start()
+        {
+            GameManager.SetMainCamera(Camera.main);
+        }
     }
 }

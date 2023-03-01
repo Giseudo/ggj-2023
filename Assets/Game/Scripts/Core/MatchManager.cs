@@ -14,17 +14,19 @@ namespace Game.Core
         public static int RoundOverCount { get; private set; }
 
         private static List<WaveSpawner> _waveSpawners;
+        private Damageable _treeDamageable;
 
         public static MatchManager Instance { get; private set; }
         public static int RoundNumbers { get; private set; }
         public static int CurrentRound { get; private set; }
         public static List<WaveSpawner> WaveSpawners => _waveSpawners;
         public static bool HasStarted { get; private set; }
-
         public static Action<WaveSpawner> WaveSpawnerAdded;
         public static Action<WaveSpawner> WaveSpawnerRemoved;
         public static Action<int, Vector3> DroppedEnergy;
         public static Action LevelCompleted;
+        public static Action GameCompleted;
+        public static Action GameOver;
         public static Action<int> RoundStarted;
 
         public void Awake()
@@ -37,7 +39,9 @@ namespace Game.Core
             WaveSpawnerRemoved = delegate { };
             DroppedEnergy = delegate { };
             LevelCompleted = delegate { };
+            GameCompleted = delegate { };
             RoundStarted = delegate { };
+            GameOver = delegate { };
             HasStarted = false;
 
             _waveSpawners = new List<WaveSpawner>();
@@ -46,6 +50,7 @@ namespace Game.Core
         public void Start()
         {
             GameManager.Scenes.loadedLevel += OnLoadLevel;
+            OnLoadLevel(0);
         }
 
         public void OnDestroy()
@@ -58,6 +63,18 @@ namespace Game.Core
             HasStarted = false;
             CurrentRound = 0;
             EndedWavesCount = 0;
+
+            if (_treeDamageable)
+                _treeDamageable.died -= OnTreeDeath;
+
+            if (!GameManager.MainTree.TryGetComponent<Damageable>(out _treeDamageable)) return;
+
+            _treeDamageable.died += OnTreeDeath;
+        }
+
+        private void OnTreeDeath(Damageable damageable)
+        {
+            GameOver.Invoke();
         }
 
         public static void StartRound()
@@ -111,7 +128,15 @@ namespace Game.Core
             EndedWavesCount++;
 
             if (EndedWavesCount >= _waveSpawners.Count)
+            {
+                if (GameManager.Scenes.CurrentLevel >= GameManager.Scenes.LevelScenes.Count - 1)
+                {
+                    GameCompleted.Invoke();
+                    return;
+                }
+
                 LevelCompleted.Invoke();
+            }
         }
 
         private void OnRoundOver()
@@ -163,7 +188,8 @@ namespace Game.Core
 // [x] Bozo explodir
 // [x] Absorb tree indications / transition
 // [x] Wave timer
-// [ ] Day / cycle
+// [x] Day / cycle
 // [x] Block unit creation by level
+// [ ] Fix energy glow & stop gaining energy after death
 // [ ] Score
 // [x] SFX

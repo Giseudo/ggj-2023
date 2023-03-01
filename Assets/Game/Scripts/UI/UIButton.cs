@@ -7,7 +7,7 @@ using DG.Tweening;
 namespace Game.UI
 {
     [RequireComponent(typeof(Button))]
-    public class UIButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class UIButton : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField]
         private float _hoverScale = 1.2f;
@@ -18,6 +18,7 @@ namespace Game.UI
         private bool _isPulsing;
         private bool _isDisabled;
         private Tween _pulseTween;
+        private Tween _rectTween;
 
         public Button Button => _button;
         public RectTransform Rect => _rect;
@@ -56,6 +57,14 @@ namespace Game.UI
                 .SetUpdate(true);
         }
 
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            _rectTween?.Kill();
+            _rectTween = _rect.DOScale(Vector3.one * .95f, .5f)
+                .SetUpdate(true)
+                .SetEase(Ease.OutExpo);
+        }
+
         public void OnPointerClick(PointerEventData eventData)
         {
             clicked.Invoke();
@@ -68,7 +77,8 @@ namespace Game.UI
             if (_isPulsing) return;
             if (_isDisabled) return;
 
-            _rect.DOScale(Vector3.one * _hoverScale, .5f)
+            _rectTween?.Kill();
+            _rectTween = _rect.DOScale(Vector3.one * _hoverScale, .5f)
                 .SetUpdate(true)
                 .SetEase(Ease.OutExpo);
         }
@@ -80,7 +90,8 @@ namespace Game.UI
             if (_isPulsing) return;
             if (_isDisabled) return;
 
-            _rect.DOScale(_initialScale, .5f)
+            _rectTween?.Kill();
+            _rectTween = _rect.DOScale(_initialScale, .5f)
                 .SetUpdate(true)
                 .SetEase(Ease.OutExpo);
         }

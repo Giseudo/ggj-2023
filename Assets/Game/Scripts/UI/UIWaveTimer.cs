@@ -44,11 +44,17 @@ namespace Game.UI
         public void Start()
         {
             MatchManager.RoundStarted += OnRoundStart;
+            MatchManager.GameOver += ClearTimer;
+            MatchManager.GameCompleted += ClearTimer;
+            MatchManager.LevelCompleted += ClearTimer;
         }
 
         public void OnDestroy()
         {
             MatchManager.RoundStarted -= OnRoundStart;
+            MatchManager.GameOver -= ClearTimer;
+            MatchManager.GameCompleted -= ClearTimer;
+            MatchManager.LevelCompleted -= ClearTimer;
         }
 
         private void OnRoundStart(int roundNumber)
@@ -104,6 +110,15 @@ namespace Game.UI
                 .OnComplete(() => _progressDisc.AngRadiansStart = START_ANGLE)
             );
             _sequence.OnComplete(MatchManager.NextRound);
+        }
+
+        private void ClearTimer()
+        {
+            _button.Disable();
+            _isDisabled = true;
+            _sequence.Kill();
+
+            StopAllCoroutines();
         }
 
         public void OnPointerClick(PointerEventData evt)

@@ -31,12 +31,12 @@ public class UIEnergyButton : MonoBehaviour
     public void Disable()
     {
         _image.sprite = _disabledSprite;
-        _text.color = new Color32(248, 18, 62, 255);
+        // _text.color = new Color32(248, 18, 62, 255);
     }
 
     public void Enable()
     {
         _image.sprite = _defaultSprite;
-        _text.color = new Color32(255, 213, 4, 255);
+        // _text.color = new Color32(255, 213, 4, 255);
     }
 }

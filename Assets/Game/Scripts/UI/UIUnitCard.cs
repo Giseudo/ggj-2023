@@ -50,6 +50,8 @@ namespace Game.UI
 
         public void Start()
         {
+            GameManager.Scenes.loadedLevel += OnLevelLoad;
+
             GameManager.MainTree.collectedEnergy += OnEnergyChange;
             GameManager.MainTree.consumedEnergy += OnEnergyChange;
 
@@ -62,10 +64,10 @@ namespace Game.UI
                 Disable();
         }
 
-        public void OnDestroy()
+        private void OnLevelLoad(int level)
         {
-            GameManager.MainTree.collectedEnergy -= OnEnergyChange;
-            GameManager.MainTree.consumedEnergy -= OnEnergyChange;
+            GameManager.MainTree.collectedEnergy += OnEnergyChange;
+            GameManager.MainTree.consumedEnergy += OnEnergyChange;
         }
 
         public void OnPointerClick(PointerEventData evt) => Click();

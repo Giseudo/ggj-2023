@@ -24,12 +24,16 @@ namespace Game.UI
         [SerializeField]
         private InputReader _inputReader;
 
+        private RectTransform _rect;
         private TimeState _previousState;
         private TimeState _currentState;
         private Tween _resizeTween;
+        private bool _isOpened = true;
 
         public void Awake()
         {
+            TryGetComponent<RectTransform>(out _rect);
+
             _pauseButton.onClick.AddListener(OnPause);
             _playButton.onClick.AddListener(OnPlay);
             _fastForwardButton.onClick.AddListener(OnFastForward);
@@ -132,13 +136,31 @@ namespace Game.UI
             StartCoroutine(FollowSelected(button));
         }
 
-        IEnumerator FollowSelected(Button button)
+        private IEnumerator FollowSelected(Button button)
         {
             yield return new WaitForSecondsRealtime(.2f);
 
             _resizeTween?.Kill();
             _resizeTween = _selectionRect.DOMove(button.transform.position, .3f)
                 .SetUpdate(true);
+        }
+
+        public void Show()
+        {
+            if (_isOpened)
+                return;
+
+            _isOpened = true;
+            _rect.DOAnchorPos(new Vector2(20f, _rect.anchoredPosition.y), 1f);
+        }
+
+        public void Hide()
+        {
+            if (!_isOpened)
+                return;
+
+            _isOpened = false;
+            _rect.DOAnchorPos(new Vector2(-80f, _rect.anchoredPosition.y), 1f);
         }
     }
 }

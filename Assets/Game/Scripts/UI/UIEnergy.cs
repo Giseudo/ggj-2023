@@ -7,8 +7,6 @@ using DG.Tweening;
 
 namespace Game.UI
 {
-    using Game.Combat;
-
     public class UIEnergy : MonoBehaviour
     {
         [SerializeField]
@@ -29,10 +27,12 @@ namespace Game.UI
         [SerializeField]
         private RectTransform _wrapperRect;
 
-        private Tree _tree;
         private Tween _tween;
         private RectTransform _rect;
         private VFXEventAttribute _eventAttribute;
+
+        private void UpdateEnergy() => _text.text = $"{GameManager.MainTree.EnergyAmount}";
+        private void OnConsumeEnergy(int amount) => UpdateEnergy();
 
         public void Awake()
         {
@@ -42,26 +42,27 @@ namespace Game.UI
 
         public void Start()
         {
+            GameManager.Scenes.loadedLevel += OnLevelLoad;
             MatchManager.DroppedEnergy += OnDropEnergy;
 
-            _tree = GameManager.MainTree;
+            GameManager.MainTree.collectedEnergy += OnCollectEnergy;
+            GameManager.MainTree.consumedEnergy += OnConsumeEnergy;
 
-            if (_tree == null) return;
-
-            _text.text = $"{_tree.EnergyAmount}";
-
-            _tree.collectedEnergy += OnCollectEnergy;
-            _tree.consumedEnergy += OnConsumeEnergy;
+            UpdateEnergy();
         }
 
         public void OnDestroy()
         {
+            GameManager.Scenes.loadedLevel -= OnLevelLoad;
             MatchManager.DroppedEnergy -= OnDropEnergy;
+        }
 
-            if (_tree == null) return;
+        private void OnLevelLoad(int level)
+        {
+            GameManager.MainTree.collectedEnergy += OnCollectEnergy;
+            GameManager.MainTree.consumedEnergy += OnConsumeEnergy;
 
-            _tree.collectedEnergy -= OnCollectEnergy;
-            _tree.consumedEnergy -= OnConsumeEnergy;
+            UpdateEnergy();
         }
 
         private void OnDropEnergy(int amount, Vector3 position)
@@ -77,18 +78,13 @@ namespace Game.UI
             _wrapperRect.DOScale(Vector3.one * 1.2f, .2f)
                 .OnStart(() => {
                     _image.sprite = _happySprite;
-                    _text.text = $"{_tree.EnergyAmount}";
+                    UpdateEnergy();
                 })
                 .OnComplete(() => {
                     _wrapperRect.DOScale(Vector3.one, .2f)
                         .SetDelay(.5f)
                         .OnComplete(() => _image.sprite = _neutralSprite);
                 });
-        }
-
-        private void OnConsumeEnergy(int amount)
-        {
-            _text.text = $"{_tree.EnergyAmount}";
         }
 
         private Vector2 GetScreenPosition(Vector3 worldPosition)
