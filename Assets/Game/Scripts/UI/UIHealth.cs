@@ -85,21 +85,25 @@ public class UIHealth : MonoBehaviour
             .SetUpdate(true);
     }
 
-    public void Show()
+    public void Show(float delay = 0f)
     {
         if (_isOpened)
             return;
 
         _isOpened = true;
-        _rect.DOAnchorPos(new Vector2(40f, _rect.anchoredPosition.y), 1f);
+        _rect.DOAnchorPos(new Vector2(40f, _rect.anchoredPosition.y), 1f)
+            .SetUpdate(true)
+            .SetDelay(delay);
     }
 
-    public void Hide()
+    public void Hide(float delay = 0f)
     {
         if (!_isOpened)
             return;
 
         _isOpened = false;
-        _rect.DOAnchorPos(new Vector2(-80f, _rect.anchoredPosition.y), 1f);
+        _rect.DOAnchorPos(new Vector2(-80f, _rect.anchoredPosition.y), 1f)
+            .SetUpdate(true)
+            .SetDelay(delay);
     }
 }

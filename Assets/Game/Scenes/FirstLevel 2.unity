@@ -827,7 +827,7 @@ MonoBehaviour:
   _color: {r: 0.36078432, g: 0.5019608, b: 1, a: 1}
   _intensity: 0.5
   _rotation: {x: 42.1, y: -115.2, z: 0}
-  _transitionTime: 4
+  _transitionTime: 3
 --- !u!1001 &569682546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2276,7 +2276,7 @@ PrefabInstance:
     - target: {fileID: 1033187723024418570, guid: adacc02f196b034448c88ad2c9656e8c,
         type: 3}
       propertyPath: m_Intensity
-      value: 8.999735
+      value: 10.025324
       objectReference: {fileID: 0}
     - target: {fileID: 5015389007945671901, guid: adacc02f196b034448c88ad2c9656e8c,
         type: 3}

@@ -117,6 +117,8 @@ namespace Game.UI
             _button.Disable();
             _isDisabled = true;
             _sequence.Kill();
+            _rect.DOScale(Vector3.zero, .2f)
+                .SetUpdate(true);
 
             StopAllCoroutines();
         }

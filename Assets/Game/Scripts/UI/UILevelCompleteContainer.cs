@@ -118,22 +118,24 @@ namespace Game.UI
         {
             if (value)
             {
+                _blur.Show();
                 _canvasGroup.interactable = true;
                 _canvasGroup.blocksRaycasts = true;
                 _canvasGroup.DOFade(1f, .5f)
                     .SetUpdate(true)
                     .OnComplete(() => {
-                        _blur.Show();
                         _bodyCanvasGroup.DOFade(1f, .5f).SetUpdate(true);
                     });
 
                 return;
             }
 
-            _blur.Hide();
+            _blur.Hide(.5f);
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
-            _canvasGroup.DOFade(0f, .5f).SetUpdate(true);
+            _canvasGroup.DOFade(0f, .5f)
+                .SetDelay(.5f)
+                .SetUpdate(true);
         }
     }
 }

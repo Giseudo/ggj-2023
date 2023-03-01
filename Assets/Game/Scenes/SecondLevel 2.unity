@@ -870,7 +870,7 @@ MonoBehaviour:
   _color: {r: 1, g: 1, b: 1, a: 1}
   _intensity: 1
   _rotation: {x: 0, y: 0, z: 0}
-  _transitionTime: 4
+  _transitionTime: 3
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

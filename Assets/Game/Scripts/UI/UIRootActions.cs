@@ -83,6 +83,8 @@ namespace Game.UI
         {
             _initialCameraPosition = GameManager.MainCamera.transform.position;
 
+            MatchManager.LevelCompleted += OnCancel;
+            MatchManager.GameOver += OnCancel;
             GameManager.MainTree.collectedEnergy += OnEnergyChange;
             GameManager.MainTree.consumedEnergy += OnEnergyChange;
 
@@ -91,6 +93,8 @@ namespace Game.UI
 
         public void OnDestroy()
         {
+            MatchManager.LevelCompleted -= OnCancel;
+            MatchManager.GameOver -= OnCancel;
             GameManager.MainTree.collectedEnergy -= OnEnergyChange;
             GameManager.MainTree.consumedEnergy -= OnEnergyChange;
 

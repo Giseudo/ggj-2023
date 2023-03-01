@@ -30,8 +30,8 @@ namespace Game.UI
 
         private void OnLevelLoad(int level)
         {
-            _health.Show();
-            _time.Show();
+            _health.Show(1f);
+            _time.Show(1f);
         }
 
         private void OnLevelComplete()

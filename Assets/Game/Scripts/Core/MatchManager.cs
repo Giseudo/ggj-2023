@@ -12,6 +12,7 @@ namespace Game.Core
     {
         public static int EndedWavesCount { get; private set; }
         public static int RoundOverCount { get; private set; }
+        public static bool IsGameOver { get; private set; }
 
         private static List<WaveSpawner> _waveSpawners;
         private Damageable _treeDamageable;
@@ -35,6 +36,7 @@ namespace Game.Core
 
             EndedWavesCount = 0;
             CurrentRound = 0;
+            IsGameOver = false;
             WaveSpawnerAdded = delegate { };
             WaveSpawnerRemoved = delegate { };
             DroppedEnergy = delegate { };
@@ -63,6 +65,7 @@ namespace Game.Core
             HasStarted = false;
             CurrentRound = 0;
             EndedWavesCount = 0;
+            IsGameOver = false;
 
             if (_treeDamageable)
                 _treeDamageable.died -= OnTreeDeath;
@@ -74,6 +77,7 @@ namespace Game.Core
 
         private void OnTreeDeath(Damageable damageable)
         {
+            IsGameOver = true;
             GameOver.Invoke();
         }
 
@@ -129,6 +133,8 @@ namespace Game.Core
 
             if (EndedWavesCount >= _waveSpawners.Count)
             {
+                IsGameOver = true;
+
                 if (GameManager.Scenes.CurrentLevel >= GameManager.Scenes.LevelScenes.Count - 1)
                 {
                     GameCompleted.Invoke();
@@ -151,6 +157,8 @@ namespace Game.Core
 
         private void InternalDropEnergy(int amount, Vector3 position)
         {
+            if (IsGameOver) return;
+
             DroppedEnergy.Invoke(amount, position);
 
             StartCoroutine(CollectEnergy(amount));
@@ -190,6 +198,6 @@ namespace Game.Core
 // [x] Wave timer
 // [x] Day / cycle
 // [x] Block unit creation by level
-// [ ] Fix energy glow & stop gaining energy after death
+// [x] Fix energy glow & stop gaining energy after death
 // [ ] Score
 // [x] SFX

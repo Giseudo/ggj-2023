@@ -717,7 +717,7 @@ MonoBehaviour:
   _color: {r: 1, g: 0.52156866, b: 0, a: 0}
   _intensity: 0.5
   _rotation: {x: 20, y: -28.1, z: 0}
-  _transitionTime: 4
+  _transitionTime: 3
 --- !u!1001 &420165340
 PrefabInstance:
   m_ObjectHideFlags: 0
