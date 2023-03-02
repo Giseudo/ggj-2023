@@ -197,9 +197,9 @@ namespace Game.Core
 // [x] Bozo explodir
 // [x] Wave timer
 // [x] Day / cycle
-// [x] Block unit creation by level
 // [x] Fix energy glow & stop gaining energy after death
 // [x] Camera pan
+// [ ] Block unit creation by level
 // [ ] Spit & seed hole vfx
 // [ ] Spit audio
 // [ ] Area damage

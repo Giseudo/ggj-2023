@@ -40,16 +40,13 @@ namespace Game.UI
             if (_isDisabled) return;
 
             Camera camera = GameManager.MainCamera;
-            float delta = evt.delta.x / UICanvas.MainCanvas.scaleFactor;
+            Vector3 delta = camera.transform.right * (evt.delta.x / UICanvas.MainCanvas.scaleFactor) * Time.unscaledDeltaTime * _speed;
 
-            Vector3 previousPosition = camera.transform.position;
-            camera.transform.position -= camera.transform.right * delta * Time.unscaledDeltaTime * _speed;
+            Vector3 displacement = (camera.transform.position - delta) - _initialCameraPosition;
+            Vector3 position = _initialCameraPosition + Vector3.ClampMagnitude(displacement, _offsetLimit);
 
-            float displacement = (camera.transform.position - _initialCameraPosition).magnitude;
+            camera.transform.position = position;
 
-            if (displacement > _offsetLimit)
-                camera.transform.position = previousPosition;
-            
             updated.Invoke();
         }
 

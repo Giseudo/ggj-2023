@@ -103,7 +103,6 @@ namespace Game.UI
                 GameManager.Damageables.ForEach(damageable => {
                     if (damageable.gameObject == GameManager.MainTree.gameObject) return;
 
-                    damageable.Die();
                     damageable.transform.localScale = Vector3.one * x;
                 });
             }, 0f, 1f);
