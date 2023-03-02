@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Game.Combat;
+using Game.Core;
 
 namespace Game.UI
 {
@@ -32,6 +33,29 @@ namespace Game.UI
                 UIUnitCard card = cards[i];
 
                 AddCard(card);
+            }
+        }
+
+        public void Start()
+        {
+            UpdateCardsAvailability();
+            GameManager.Scenes.loadedLevel += OnLevelLoad;
+        }
+
+        public void OnDestroy()
+        {
+            GameManager.Scenes.loadedLevel -= OnLevelLoad;
+        }
+
+        private void OnLevelLoad(int level) => UpdateCardsAvailability();
+
+        private void UpdateCardsAvailability()
+        {
+            for (int i = 0; i < _cards.Count; i++)
+            {
+                UIUnitCard card = _cards[i];
+
+                card.SetAvailable(i <= GameManager.Scenes.CurrentLevel);
             }
         }
 

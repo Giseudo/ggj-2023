@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &330585544
 AudioListener:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ Camera:
   far clip plane: 100
   field of view: 35.1
   orthographic: 1
-  orthographic size: 25.3
+  orthographic size: 25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

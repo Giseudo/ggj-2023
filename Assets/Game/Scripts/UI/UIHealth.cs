@@ -35,8 +35,11 @@ public class UIHealth : MonoBehaviour
     {
         if (!GameManager.MainTree.TryGetComponent<Damageable>(out Damageable damageable)) return;
 
-        damageable.hurted += OnHurt;
         _heartMask.padding = new Vector4(0f, 0f, 0f, 0f);
+
+        damageable.hurted += OnHurt;
+
+        StopGlow();
     }
 
     public void OnHurt(Damageable damageable)

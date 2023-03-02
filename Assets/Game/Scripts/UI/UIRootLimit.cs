@@ -18,6 +18,8 @@ public class UIRootLimit : MonoBehaviour
     private float _lastTextChangeTime;
     private float _startTime;
 
+    public bool IsOpened => _isOpened;
+
     public void SetText(string value)
     {
         _lastTextChangeTime = Time.unscaledTime;

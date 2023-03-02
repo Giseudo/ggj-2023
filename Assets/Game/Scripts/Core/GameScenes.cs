@@ -57,7 +57,15 @@ namespace Game.Core
         {
             if (_currentLevelIndex < 0) return;
 
-            LoadScene(_currentLevelIndex);
+            SceneManager.UnloadSceneAsync(_currentLevelIndex)
+                .completed += (async) => {
+                    SceneManager.LoadSceneAsync(_currentLevelIndex, LoadSceneMode.Additive)
+                        .completed += (async) => {
+                            Scene currentScene = SceneManager.GetSceneByBuildIndex(_currentLevelIndex);
+                            SceneManager.SetActiveScene(currentScene);
+                            loadedLevel.Invoke(_currentLevel);
+                        };
+                };
         }
 
         public void LoadScene(int index)
@@ -67,8 +75,7 @@ namespace Game.Core
             SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive)
                 .completed += (async) => {
                     if (_currentLevelIndex >= 0)
-                        SceneManager.UnloadSceneAsync(_currentLevelIndex)
-                            .completed += (async) => GameManager.SetMainCamera(Camera.main);
+                        SceneManager.UnloadSceneAsync(_currentLevelIndex);
 
                     _currentLevelIndex = _levelScenesIndex[_currentLevel];
                     loadedLevel.Invoke(_currentLevel);

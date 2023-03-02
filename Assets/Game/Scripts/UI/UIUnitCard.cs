@@ -41,6 +41,17 @@ namespace Game.UI
         private bool _isSelected;
         private bool _isDisabled;
 
+        public void OnPointerClick(PointerEventData evt) => Click();
+        public void OnPointerEnter(PointerEventData evt) => Select();
+        public void OnPointerExit(PointerEventData evt) => Deselect();
+        public void SetAvailable(bool value)
+        {
+            _isAvailable = value;
+
+            if (value) Enable();
+            if (!value) Disable();
+        }
+
         public void Awake()
         {
             _initialDiscRadius = _disc.Radius;
@@ -70,9 +81,6 @@ namespace Game.UI
             GameManager.MainTree.consumedEnergy += OnEnergyChange;
         }
 
-        public void OnPointerClick(PointerEventData evt) => Click();
-        public void OnPointerEnter(PointerEventData evt) => Select();
-        public void OnPointerExit(PointerEventData evt) => Deselect();
         public void Click()
         {
             if (_isDisabled) return;

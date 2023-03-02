@@ -33,6 +33,7 @@ public class LightTransition : MonoBehaviour
 
     public void StartTransition(Action callback)
     {
+        _light.DOIntensity(_intensity, _transitionTime);
         _light.transform.DORotate(_rotation, _transitionTime);
         _light.DOColor(_color, _transitionTime)
             .OnComplete(() => {
