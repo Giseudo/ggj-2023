@@ -199,5 +199,6 @@ namespace Game.Core
 // [x] Day / cycle
 // [x] Block unit creation by level
 // [x] Fix energy glow & stop gaining energy after death
+// [ ] Improve tree looks
 // [ ] Score
 // [x] SFX
