@@ -40,8 +40,6 @@ namespace Game.Combat
                 {
                     spawner = GameObject.Instantiate<CreepSpawner>(_waveSpawner.CreepSpawnerPrefab, _waveSpawner.transform);
                     spawner.SetPrefab(wave.CreepData.Prefab);
-                    // spawner.SetInterval(wave.SpawnInterval);
-                    // spawner.SetLimit(wave.CountLimit);
                     spawner.SetSpline(_waveSpawner.Spline);
 
                     _waveSpawner.Spawners.Add(wave.CreepData, spawner);
@@ -66,7 +64,6 @@ namespace Game.Combat
 
         public void Start()
         {
-            Debug.Log($"{_waveSpawner.name}: started {_name}");
             if (_waves.Count <= 0)
             {
                 over.Invoke();
@@ -79,9 +76,6 @@ namespace Game.Combat
 
                 if (!_waveSpawner.Spawners.TryGetValue(wave.CreepData, out CreepSpawner spawner))
                     continue;
-
-                //spawner.SetInterval(wave.SpawnInterval);
-                //spawner.SetLimit(wave.CountLimit);
 
                 if (wave.CreepData.CreepDeathSpawn)
                 {
