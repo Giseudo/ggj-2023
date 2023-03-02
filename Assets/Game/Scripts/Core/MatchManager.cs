@@ -185,6 +185,7 @@ namespace Game.Core
 // [x] Root split obstacle
 // [x] Absorb tree
 // [x] Pause / play / fast forward
+// [x] SFX
 // [x] Keyboard commands
 // [x] Root limit
 // [x] Tree upgrade
@@ -194,11 +195,14 @@ namespace Game.Core
 // [x] Next level
 // [x] Main menu
 // [x] Bozo explodir
-// [x] Absorb tree indications / transition
 // [x] Wave timer
 // [x] Day / cycle
 // [x] Block unit creation by level
 // [x] Fix energy glow & stop gaining energy after death
-// [ ] Improve tree looks
+// [x] Camera pan
+// [ ] Spit & seed hole vfx
+// [ ] Spit audio
+// [ ] Area damage
+// [ ] Improve trees look
+// [ ] Absorb tree indications
 // [ ] Score
-// [x] SFX

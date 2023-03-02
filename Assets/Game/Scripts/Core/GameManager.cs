@@ -28,6 +28,8 @@ namespace Game.Core
         public static Action<Camera> MainCameraChanged;
         public static Action<Light> MainLightChanged;
 
+        public static List<Damageable> Damageables => _damageables;
+
         public void Awake()
         {
             Instance = this;

@@ -4,6 +4,7 @@ using Game.Core;
 
 namespace Game.UI
 {
+    using System;
     using Game.Combat;
 
     public class UIRootContainer : MonoBehaviour, IPointerMoveHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -23,19 +24,19 @@ namespace Game.UI
         [SerializeField]
         private UITreeHighlight _treeHighlight;
 
-        private Tree _mainTree;
+        [SerializeField]
+        private UICameraPan _cameraPan;
+
         private RootNode _activeNode;
 
         public RootNode ActiveNode => _activeNode;
 
-        public void Start()
-        {
-            _mainTree = GameManager.MainTree;
-            _rootCreation.Init(this);
-        }
-
-        public void OnDestroy()
-        { }
+        private void OnCameraPanStart() => _rootActions.KillCameraTween();
+        private void OnPointClick() => _rootActions.Show(_activeNode);
+        public void Start() => _rootCreation.Init(this);
+        private void OnSplitAction() => _rootCreation.StartDrag();
+        public void OnDrag(PointerEventData evt) => _rootCreation.Drag(evt);
+        public void OnEndDrag(PointerEventData evt) => _rootCreation.EndDrag();
 
         public void OnEnable()
         {
@@ -47,6 +48,7 @@ namespace Game.UI
             _rootActions.SplitButton.clicked += OnSplitAction;
             _rootActions.createdUnit += OnUnitCreation;
             _treeHighlight.highlightChanged += OnTreeHighlightChange;
+            _cameraPan.started += OnCameraPanStart;
         }
 
         public void OnDisable()
@@ -59,11 +61,7 @@ namespace Game.UI
             _rootActions.SplitButton.clicked -= OnSplitAction;
             _rootActions.createdUnit -= OnUnitCreation;
             _treeHighlight.highlightChanged -= OnTreeHighlightChange;
-        }
-
-        private void OnPointClick()
-        {
-            _rootActions.Show(_activeNode);
+            _cameraPan.started -= OnCameraPanStart;
         }
 
         private void OnNodeCreation(RootNode node)
@@ -116,10 +114,6 @@ namespace Game.UI
             _rootPoint.Hide();
             _rootCreation.StartDrag();
         }
-
-        private void OnSplitAction() => _rootCreation.StartDrag();
-        public void OnDrag(PointerEventData evt) => _rootCreation.Drag(evt);
-        public void OnEndDrag(PointerEventData evt) => _rootCreation.EndDrag();
 
         public void OnPointerMove(PointerEventData evt)
         {
@@ -198,6 +192,7 @@ namespace Game.UI
             if (_rootPoint.IsPulsing)
                 _rootPoint.Pulse(false);
 
+            _cameraPan.Disable();
             _rootPoint.Disable();
             _rootPoint.Hide();
 
@@ -211,6 +206,7 @@ namespace Game.UI
 
             if (_rootActions.UnitSelection.IsOpened) return;
 
+            _cameraPan.Enable();
             _rootSelector.Hide();
         }
 

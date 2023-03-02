@@ -99,6 +99,15 @@ namespace Game.UI
         {
             if (!GameManager.MainLight.TryGetComponent<LightTransition>(out LightTransition transition)) return;
 
+            DOTween.To(() => 1f, x => {
+                GameManager.Damageables.ForEach(damageable => {
+                    if (damageable.gameObject == GameManager.MainTree.gameObject) return;
+
+                    damageable.Die();
+                    damageable.transform.localScale = Vector3.one * x;
+                });
+            }, 0f, 1f);
+
             transition.StartTransition(GameManager.Scenes.LoadNextLevel);
             _bodyCanvasGroup.DOFade(0f, .5f).SetUpdate(true);
         }

@@ -70,6 +70,8 @@ namespace Game.UI
         public UIRootActionButton UpgradeButton => _upgradeButton;
         public UIButton HighlightingButton => _highlightButton;
 
+        public void KillCameraTween() => _cameraTween?.Kill();
+
         public void Awake()
         {
             TryGetComponent<RectTransform>(out _rect);
@@ -222,6 +224,9 @@ namespace Game.UI
                 .SetUpdate(true)
                 .OnComplete(() => {
                     _isOpened = false;
+
+                    if (_unitSelection.IsOpened) return;
+
                     closed.Invoke();
                 });
         }
