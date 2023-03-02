@@ -135,22 +135,23 @@ namespace Game.UI
 
             MatchManager.NextRound();
 
-            Ray ray = GameManager.MainCamera.ScreenPointToRay(evt.position);
-            Vector3 position = Vector3.zero;
-
-            if (Physics.Raycast(ray, out RaycastHit groundHit, 100f, 1 << LayerMask.NameToLayer("Ground")))
-                position = groundHit.point;
-
-            MatchManager.DropEnergy(_earnEnergyAmount, position);
-
-            _rect.DOScale(Vector3.one * 1.5f, .3f)
+            _rect.DOScale(Vector3.one * 1.5f, .2f)
                 .SetUpdate(true)
                 .SetEase(Ease.InSine)
-                .OnComplete(() => _rect.DOScale(Vector3.zero, .2f)
+                .OnComplete(() => {
+                    Ray ray = GameManager.MainCamera.ScreenPointToRay(evt.position);
+                    Vector3 position = Vector3.zero;
+
+                    if (Physics.Raycast(ray, out RaycastHit groundHit, 100f, 1 << LayerMask.NameToLayer("Ground")))
+                        position = groundHit.point;
+
+                    MatchManager.DropEnergy(_earnEnergyAmount, position);
+
+                    _rect.DOScale(Vector3.zero, .3f)
                     .SetUpdate(true)
                     .SetEase(Ease.OutExpo)
-                        .OnComplete(() => _progressDisc.AngRadiansStart = START_ANGLE)
-                );
+                        .OnComplete(() => _progressDisc.AngRadiansStart = START_ANGLE);
+                });
         }
     }
 }

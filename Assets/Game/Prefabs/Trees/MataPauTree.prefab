@@ -198,20 +198,24 @@ MonoBehaviour:
   _initialRootSplitLimit: 5
   _levels:
   - _rootEnergyCost: 200
-    _rootMaxDistance: 10
+    _rootMaxDistance: 12
     _upgradeCost: 2000
     _rootSplitBonus: 0
   - _rootEnergyCost: 200
-    _rootMaxDistance: 20
+    _rootMaxDistance: 15
     _upgradeCost: 4000
     _rootSplitBonus: 2
   - _rootEnergyCost: 200
-    _rootMaxDistance: 20
+    _rootMaxDistance: 18
     _upgradeCost: 8000
     _rootSplitBonus: 2
   - _rootEnergyCost: 200
-    _rootMaxDistance: 20
+    _rootMaxDistance: 22
     _upgradeCost: 16000
+    _rootSplitBonus: 2
+  - _rootEnergyCost: 200
+    _rootMaxDistance: 26
+    _upgradeCost: 32000
     _rootSplitBonus: 2
 --- !u!114 &927881622995399481
 MonoBehaviour:

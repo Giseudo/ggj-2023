@@ -928,7 +928,12 @@ PrefabInstance:
     - target: {fileID: 1033187723024418570, guid: adacc02f196b034448c88ad2c9656e8c,
         type: 3}
       propertyPath: m_Intensity
-      value: 12.613092
+      value: 8.18772
+      objectReference: {fileID: 0}
+    - target: {fileID: 1805537459574047358, guid: adacc02f196b034448c88ad2c9656e8c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5015389007945671901, guid: adacc02f196b034448c88ad2c9656e8c,
         type: 3}
@@ -990,10 +995,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstLevel Props
       objectReference: {fileID: 0}
+    - target: {fileID: 6260299852091469278, guid: adacc02f196b034448c88ad2c9656e8c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7110460693639918061, guid: adacc02f196b034448c88ad2c9656e8c,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7364070438477384965, guid: adacc02f196b034448c88ad2c9656e8c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7998854936438595668, guid: adacc02f196b034448c88ad2c9656e8c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3530,21 +3550,6 @@ PrefabInstance:
         type: 3}
       propertyPath: _energyAmount
       value: 2000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
-        type: 3}
-      propertyPath: _levels.Array.data[1]._upgradeCost
-      value: 4000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
-        type: 3}
-      propertyPath: _levels.Array.data[2]._upgradeCost
-      value: 8000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
-        type: 3}
-      propertyPath: _levels.Array.data[3]._upgradeCost
-      value: 16000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
