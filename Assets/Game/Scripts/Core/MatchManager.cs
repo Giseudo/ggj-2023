@@ -200,6 +200,7 @@ namespace Game.Core
 // [x] Fix energy glow & stop gaining energy after death
 // [x] Camera pan
 // [ ] Block unit creation by level
+// [ ] Fix restart game issue (creeps not dying)
 // [ ] Spit & seed hole vfx
 // [ ] Spit audio
 // [ ] Area damage
