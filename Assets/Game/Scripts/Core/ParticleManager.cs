@@ -51,7 +51,8 @@ namespace Game.Core
 
         public void PlayAttackParticles(Attacker attacker, string eventName)
         {
-            _attackEventAttribute.SetVector3("AttackerProsition", attacker.transform.position);
+            _attackEventAttribute.SetVector3("AttackerPosition", attacker.transform.position + attacker.transform.rotation * attacker.VFXOffset);
+            _attackEventAttribute.SetVector3("AttackerRotation", attacker.transform.eulerAngles);
             _attackEventAttribute.SetVector3("TargetPosition", attacker.CurrentTarget.transform.position);
 
             _attackEffect.SendEvent(eventName, _attackEventAttribute);

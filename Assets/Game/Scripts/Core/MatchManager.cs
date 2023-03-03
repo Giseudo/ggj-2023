@@ -199,8 +199,8 @@ namespace Game.Core
 // [x] Day / cycle
 // [x] Camera pan
 // [x] Block unit creation by level
-// [ ] Spit & seed hole vfx
-// [ ] Spit audio
+// [x] Spit & seed hole vfx
+// [x] Spit audio
 // [ ] Area damage
 // [ ] Improve trees look
 // [ ] Absorb tree indications

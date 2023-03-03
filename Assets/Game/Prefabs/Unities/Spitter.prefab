@@ -85,10 +85,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meleeDamage: 0
-  _fovRadius: 30
+  _fovRadius: 20
   _attackSpeed: 1
   _attackWaitTime: 0
   _vfxEventName: OnSpit
+  _vfxOffset: {x: 0, y: 3.5, z: 3.2}
   _attackSound: {fileID: 8300000, guid: 8a16806a5265ce846a07be8136ed7d67, type: 3}
 --- !u!114 &-8289212991549611212
 MonoBehaviour:
@@ -116,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 2
+  _hitsToStun: 1
   _hurtTime: 1
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
@@ -133,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 3687635261570001115, guid: 5414cc12cdae3fd49a0f4ffaeccede13, type: 3}
   _offset: {x: 0, y: 3.5, z: 0.5}
+  _limit: 5
   _target: {fileID: 0}
 --- !u!1 &5634176224217133591
 GameObject:

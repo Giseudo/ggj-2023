@@ -22,6 +22,9 @@ namespace Game.Combat
         private string _vfxEventName = "OnAttack";
 
         [SerializeField]
+        private Vector3 _vfxOffset;
+
+        [SerializeField]
         private AudioClip _attackSound;
 
         private float _lastAttackTime = float.MinValue;
@@ -34,6 +37,7 @@ namespace Game.Combat
         public float AttackWaitTime => _attackWaitTime;
         public bool IsAttacking => _isAttacking;
         public Damageable CurrentTarget => _currentTarget;
+        public Vector3 VFXOffset => _vfxOffset;
 
         public Action<Damageable> attacked = delegate { };
         public Action finishedAttack = delegate { };
