@@ -115,6 +115,8 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _HighlightIntensity: 0
+    - _HighlightSpeed: 0
     - _Intensity: 0.289
     - _LightingEnabled: 0
     - _Metallic: 0
@@ -134,6 +136,8 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _WindFrequency: 0.09
+    - _WindIntensity: 0.683
     - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
@@ -142,6 +146,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 6.887742, g: 6.887742, b: 6.887742, a: 1}
+    - _HighlightColor: {r: 0, g: 0, b: 0, a: 0}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

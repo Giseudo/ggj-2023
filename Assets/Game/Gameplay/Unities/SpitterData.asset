@@ -18,7 +18,7 @@ MonoBehaviour:
   _upgradePrefab: {fileID: 2981023404605713855, guid: 1501b834a1ebfca48a649ae369e2c571,
     type: 3}
   _thumbnail: {fileID: 21300000, guid: b2a0f3973cbae9f46a1cd74ac293e018, type: 3}
-  _rangeRadius: 30
+  _rangeRadius: 20
   _requiredEnergy: 400
   _sellPrice: 200
   _upgradeCost: 1500
