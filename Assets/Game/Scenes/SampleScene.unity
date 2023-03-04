@@ -2902,6 +2902,51 @@ PrefabInstance:
       propertyPath: _energyAmount
       value: 99999
       objectReference: {fileID: 0}
+    - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
+        type: 3}
+      propertyPath: _levels.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
+        type: 3}
+      propertyPath: _levels.Array.data[5]._upgradeCost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
+        type: 3}
+      propertyPath: _levels.Array.data[5]._rootEnergyCost
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
+        type: 3}
+      propertyPath: _levels.Array.data[5]._rootSplitBonus
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
+        type: 3}
+      propertyPath: _levels.Array.data[1]._rootMaxDistance
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
+        type: 3}
+      propertyPath: _levels.Array.data[2]._rootMaxDistance
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
+        type: 3}
+      propertyPath: _levels.Array.data[3]._rootMaxDistance
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
+        type: 3}
+      propertyPath: _levels.Array.data[4]._rootMaxDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
+        type: 3}
+      propertyPath: _levels.Array.data[5]._rootMaxDistance
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 8699698341434659032, guid: 35457f1929fceb743a53b53c1c9974a2,
         type: 3}
       propertyPath: m_IsActive

@@ -231,6 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _energyAmount: 1100
   _initialRootSplitLimit: 5
+  _mesh: {fileID: 6431742562865401259}
   _levels:
   - _rootEnergyCost: 200
     _rootMaxDistance: 12
@@ -269,3 +270,9 @@ MonoBehaviour:
   _hurtTime: 1
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
+--- !u!4 &6431742562865401259 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6657527156417553468, guid: 3bf38a9ef3c58b54584cd6f8967d9809,
+    type: 3}
+  m_PrefabInstance: {fileID: 371100998150826391}
+  m_PrefabAsset: {fileID: 0}

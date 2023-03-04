@@ -203,5 +203,5 @@ namespace Game.Core
 // [x] Spit audio
 // [x] Improve trees look
 // [x] Absorb tree indications
-// [ ] Area damage
+// [-] Area damage
 // [ ] Score

@@ -17,7 +17,7 @@ public class CreepHFSM : StateMachineAsset
     [SerializeField]
     private int _spawnDeathCount;
 
-    public override State Init(StateMachine context)
+    public override State Init(StateMachine origin)
     {
         State root = new RootState();
 
@@ -27,8 +27,6 @@ public class CreepHFSM : StateMachineAsset
         root.LoadSubState(_attack);
 
         LoadTransitions(root);
-
-        root.Start(context);
 
         return root;
     }
@@ -44,32 +42,5 @@ public class CreepHFSM : StateMachineAsset
         root.AddTransition(_attack, _die, new Condition[] { new HasDiedCondition { } });
 
         _hurt.finished += () => root.ChangeSubState(_march);
-        // _die.finished += () => {
-        //     if (_spawnCreepOnDeath == null) return;
-
-        //     root.StateMachine.TryGetComponent<Creep>(out Creep creep);
-
-        //     WaveSpawner spawner = MatchManager.WaveSpawners?.Find(spawner => spawner.Spline == creep.Spline);
-        //     if (!spawner.Spawners.TryGetValue(wave.CreepData.CreepDeathSpawn, out CreepSpawner creepSpawner)) return;
-
-        //     for (int i = 0; i < _spawnDeathCount; i++)
-        //     {
-        //         Creep spawnedCreep = creepSpawner.Spawn();
-        //         spawnedCreep.SetSpline(creep.Spline, creep.Displacement - ((i + 1) * 3));
-
-        //         if (!spawnedCreep.TryGetComponent<Damageable>(out Damageable damageable)) return;
-
-        //         void OnDie(Damageable damageable)
-        //         {
-        //             damageable.died -= OnDie;
-
-        //             if (damageable.Health > 0) return;
-
-        //             spawner.OnCreepDeath(spawnedCreep);
-        //         }
-
-        //         damageable.died += OnDie;
-        //     }
-        // };
     }
 }

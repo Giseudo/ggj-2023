@@ -8,7 +8,7 @@ public class UnitHFSM : StateMachineAsset
     private AttackState _attack = new AttackState();
     private DieState _die = new DieState();
 
-    public override State Init(StateMachine context)
+    public override State Init(StateMachine origin)
     {
         State root = new RootState();
 
@@ -17,8 +17,6 @@ public class UnitHFSM : StateMachineAsset
         root.LoadSubState(_die);
 
         LoadTransitions(root);
-
-        root.Start(context);
 
         return root;
     }

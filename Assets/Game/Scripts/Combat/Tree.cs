@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace Game.Combat
 {
@@ -35,6 +36,9 @@ namespace Game.Combat
         private int _initialRootSplitLimit = 3;
 
         [SerializeField]
+        private Transform _mesh;
+
+        [SerializeField]
         private List<TreeLevel> _levels = new List<TreeLevel>();
 
         private int _currentLevel = 1;
@@ -58,13 +62,14 @@ namespace Game.Combat
         public int RootEnergyCost => _rootEnergyCost;
         public int EnergyAmount => _energyAmount;
         public bool HasEnergy(int value) => value >= _energyAmount;
+        public Transform Mesh => _mesh;
         public List<RootNode> NodeList => _nodeList;
         public List<Unit> Unities => _unities;
         public List<Tree> AbsorvedTrees => _absorvedTrees;
         public Tree ParentTree => _parentTree;
         public int RootSplitLimit => _rootSplitLimit;
         public int UpgradeCost => _upgradeCost;
-        public int MaxLevel => _levels.Count + 1;
+        public int MaxLevel => _levels.Count;
         public int CurrentLevel => _currentLevel;
         public int InitialRootSplitLimit => _initialRootSplitLimit;
         public bool ReachedMaxLevel => _reachedMaxLevel;
@@ -153,17 +158,20 @@ namespace Game.Combat
             if (_reachedMaxLevel) return;
             if (_currentLevel >= MaxLevel) return;
 
+            _mesh?.DOScale(Vector3.one + Vector3.one * ((float)_currentLevel * .2f), 1f)
+                .SetEase(Ease.OutElastic);
+
             _currentLevel += 1;
+
+            UpdateStats();
+
+            levelUp.Invoke(_currentLevel);
 
             if (_currentLevel >= MaxLevel)
             {
                 _reachedMaxLevel = true;
                 return;
             }
-
-            UpdateStats();
-
-            levelUp.Invoke(_currentLevel);
         }
 
         public void UpdateStats()
