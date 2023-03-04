@@ -201,7 +201,7 @@ namespace Game.Core
 // [x] Block unit creation by level
 // [x] Spit & seed hole vfx
 // [x] Spit audio
+// [x] Improve trees look
+// [x] Absorb tree indications
 // [ ] Area damage
-// [ ] Improve trees look
-// [ ] Absorb tree indications
 // [ ] Score

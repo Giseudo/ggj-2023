@@ -12,11 +12,14 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField]
     private RectTransform _outerRect;
 
-    private RectTransform _rect;
-    private Button _button;
     private bool _isOpened;
     private bool _isEnabled;
     private bool _isPulsing;
+    private RectTransform _rect;
+    private Button _button;
+    private Tween _pulseTween;
+    private Tween _innerTween;
+    private Tween _outerTween;
 
     public bool IsOpened => _isOpened;
     public bool IsEnabled => _isEnabled;
@@ -75,10 +78,37 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         _isEnabled = false;
     }
 
-    public Tween ShowInner() => _innerRect.DOScale(Vector3.one, .3f).SetUpdate(true);
-    public Tween ShowOuter() => _outerRect.DOScale(Vector3.one, .3f).SetUpdate(true);
-    public Tween HideInner() => _innerRect.DOScale(Vector3.zero, .3f).SetUpdate(true);
-    public Tween HideOuter() => _outerRect.DOScale(Vector3.zero, .3f).SetUpdate(true);
+    public Tween ShowInner() 
+    {
+        _innerTween?.Kill();
+        _innerTween = _innerRect.DOScale(Vector3.one, .3f).SetUpdate(true);
+
+        return _innerTween;
+    }
+
+    public Tween ShowOuter()
+    {
+        _outerTween?.Kill();
+        _outerTween = _outerRect.DOScale(Vector3.one, .3f).SetUpdate(true);
+
+        return _outerTween;
+    }
+
+    public Tween HideInner()
+    {
+        _innerTween?.Kill();
+        _innerTween = _innerRect.DOScale(Vector3.zero, .3f).SetUpdate(true);
+
+        return _innerTween;
+    }
+
+    public Tween HideOuter()
+    {
+        _outerTween?.Kill();
+        _outerTween = _outerRect.DOScale(Vector3.zero, .3f).SetUpdate(true);
+
+        return _outerTween;
+    }
 
     public void OnPointerEnter(PointerEventData evt)
     {
@@ -100,8 +130,6 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         HideOuter();
     }
-
-    private Tween _pulseTween;
 
     public void Pulse(bool enable = true)
     {

@@ -196,7 +196,7 @@ namespace Game.UI
             {
                 _addButton.gameObject.SetActive(false);
                 _killButton.gameObject.SetActive(false);
-                _upgradeButton.gameObject.SetActive(GameManager.MainTree.CurrentLevel < GameManager.MainTree.MaxLevel);
+                _upgradeButton.gameObject.SetActive(!GameManager.MainTree.ReachedMaxLevel);
                 _targetButton.gameObject.SetActive(false);
 
                 _upgradeButton.EnergyButton.SetText($"{GameManager.MainTree.UpgradeCost}");

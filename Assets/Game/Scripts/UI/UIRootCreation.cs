@@ -23,6 +23,9 @@ namespace Game.UI
         private UIRootLimit _rootLimit;
 
         [SerializeField]
+        private UIRootPoint _rootPoint;
+
+        [SerializeField]
         private Color _validColor = Color.green;
 
         [SerializeField]
@@ -33,6 +36,7 @@ namespace Game.UI
         private bool _isDragging = false;
         private bool _isValidPlacement = false;
         private Tree _activeTree;
+        private Tree _nearbyTree;
         private Image _image;
 
         public Action<RootNode> nodeCreated = delegate { };
@@ -118,6 +122,31 @@ namespace Game.UI
             _image.enabled = true;
             _isDragging = true;
             _rootLimit.Show();
+
+            Collider[] treeColliders = Physics.OverlapSphere(ActiveNode.transform.position, GameManager.MainTree.RootMaxDistance, 1 << LayerMask.NameToLayer("RootNode"));
+
+            for (int i = 0; i < treeColliders.Length; i++)
+            {
+                Collider collider = treeColliders[i];
+
+                if (collider.TryGetComponent<RootNode>(out RootNode node))
+                {
+                    if (node.Parent)
+                        continue;
+                    
+                    if (node.Tree.ParentTree != null)
+                        continue;
+                    
+                    if (node.Tree == GameManager.MainTree)
+                        continue;
+
+                    _rootPoint.Rect.anchoredPosition = UICanvas.GetScreenPosition(node.transform.position);
+                    _rootPoint.Pulse(true);
+                    _nearbyTree = node.Tree;
+
+                    return;
+                }
+            }
         }
 
         public void Drag(PointerEventData evt)
@@ -128,6 +157,11 @@ namespace Game.UI
         public void EndDrag()
         {
             SplitRoot();
+
+            if (_nearbyTree == null) return;
+
+            _rootPoint.Pulse(false);
+            _nearbyTree = null;
         }
 
         public void UpdateRootLimitPosition(Vector2 position)

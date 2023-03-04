@@ -37,11 +37,12 @@ namespace Game.Combat
         [SerializeField]
         private List<TreeLevel> _levels = new List<TreeLevel>();
 
-        private int _currentLevel = 0;
+        private int _currentLevel = 1;
         private int _rootSplitLimit = 0;
         private int _rootEnergyCost = 0;
         private float _rootMaxDistance = 0;
         private int _upgradeCost = 0;
+        private bool _reachedMaxLevel = false;
         private List<RootNode> _nodeList;
         private List<Unit> _unities = new List<Unit>();
         private List<Tree> _absorvedTrees = new List<Tree>();
@@ -63,9 +64,10 @@ namespace Game.Combat
         public Tree ParentTree => _parentTree;
         public int RootSplitLimit => _rootSplitLimit;
         public int UpgradeCost => _upgradeCost;
-        public int MaxLevel => _levels.Count - 1;
+        public int MaxLevel => _levels.Count + 1;
         public int CurrentLevel => _currentLevel;
         public int InitialRootSplitLimit => _initialRootSplitLimit;
+        public bool ReachedMaxLevel => _reachedMaxLevel;
 
         public void Awake()
         {
@@ -148,10 +150,16 @@ namespace Game.Combat
 
         public void Upgrade()
         {
-            if (_currentLevel + 1 >= _levels.Count)
-                return;
+            if (_reachedMaxLevel) return;
+            if (_currentLevel >= MaxLevel) return;
 
             _currentLevel += 1;
+
+            if (_currentLevel >= MaxLevel)
+            {
+                _reachedMaxLevel = true;
+                return;
+            }
 
             UpdateStats();
 
@@ -161,8 +169,9 @@ namespace Game.Combat
         public void UpdateStats()
         {
             if (_levels.Count < 1) return;
+            if (_currentLevel - 1 < 0) return;
 
-            TreeLevel level = _levels[_currentLevel];
+            TreeLevel level = _levels[_currentLevel - 1];
 
             _rootEnergyCost = level.RootEnergyCost;
             _rootMaxDistance = level.RootMaxDistance;

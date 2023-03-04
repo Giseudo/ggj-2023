@@ -1389,6 +1389,7 @@ MonoBehaviour:
     type: 3}
   _rootCreationSound: {fileID: 8300000, guid: 377841a747eb1a842892e76ee276f0a9, type: 3}
   _rootLimit: {fileID: 943020051}
+  _rootPoint: {fileID: 881227647515456271}
   _validColor: {r: 0.1764706, g: 0.7254902, b: 0.5137255, a: 1}
   _invalidColor: {r: 0.8, g: 0.21960784, b: 0.23921569, a: 1}
 --- !u!222 &7598760462822078217
