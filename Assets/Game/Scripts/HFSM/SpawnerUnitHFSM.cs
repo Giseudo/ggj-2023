@@ -16,8 +16,6 @@ public class SpawnerUnitHFSM : StateMachineAsset
 
         LoadTransitions(root);
 
-        root.Start(context);
-
         return root;
     }
 

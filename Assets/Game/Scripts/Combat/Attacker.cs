@@ -1,9 +1,25 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Game.Core;
 
 namespace Game.Combat
 {
+    [Serializable]
+    public class CleaveAttack
+    {
+        [SerializeField]
+        private bool _enabled = false;
+        [SerializeField]
+        private int _maxTargets = 5;
+        [SerializeField]
+        private float _radius = 5f;
+
+        public bool Enabled => _enabled;
+        public int MaxTargets => _maxTargets;
+        public float Radius => _radius;
+    }
+
     public class Attacker : MonoBehaviour
     {
         [SerializeField]
@@ -27,9 +43,13 @@ namespace Game.Combat
         [SerializeField]
         private AudioClip _attackSound;
 
+        [SerializeField]
+        private CleaveAttack _cleaveAttack;
+
         private float _lastAttackTime = float.MinValue;
         private Damageable _currentTarget;
         private bool _isAttacking;
+        private LayerMask _enemyLayer;
 
         public int MeleeDamage => _meleeDamage;
         public float FovRadius => _fovRadius;
@@ -38,6 +58,8 @@ namespace Game.Combat
         public bool IsAttacking => _isAttacking;
         public Damageable CurrentTarget => _currentTarget;
         public Vector3 VFXOffset => _vfxOffset;
+        public CleaveAttack CleaveAttack => _cleaveAttack;
+        public LayerMask EnemyLayer => _enemyLayer;
 
         public Action<Damageable> attacked = delegate { };
         public Action finishedAttack = delegate { };
@@ -49,6 +71,13 @@ namespace Game.Combat
         {
             SoundManager.PlaySound(_attackSound);
             playedSound.Invoke(this, _attackSound);
+        }
+
+        public void Awake()
+        {
+            _enemyLayer = 1 << (gameObject.layer == LayerMask.NameToLayer("Creep")
+                ? LayerMask.NameToLayer("GroundUnit")
+                : LayerMask.NameToLayer("Creep"));
         }
 
         public void Start()
@@ -90,6 +119,25 @@ namespace Game.Combat
             if (!_currentTarget.gameObject.activeInHierarchy) return;
 
             _currentTarget.Hurt(_meleeDamage);
+
+            if (!_cleaveAttack.Enabled) return;
+
+            Collider[] colliders = Physics.OverlapSphere(_currentTarget.transform.position, _cleaveAttack.Radius, _enemyLayer);
+
+            List<Damageable> cleaveTargets = new List<Damageable>();
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                Collider collider = colliders[i];
+
+                if (cleaveTargets.Count >= _cleaveAttack.MaxTargets) continue;
+                if (!collider.TryGetComponent<Damageable>(out Damageable targetDamageable)) continue;
+                if (_currentTarget == targetDamageable) continue;
+
+                cleaveTargets.Add(targetDamageable);
+            }
+
+            cleaveTargets.ForEach(target => target.Hurt(_meleeDamage));
         }
 
         public void OnDrawGizmosSelected()

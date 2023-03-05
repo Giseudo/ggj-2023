@@ -31,12 +31,17 @@ PrefabInstance:
     - target: {fileID: 2750848493931223576, guid: 0292939d9cdb18946ac5c822136b9429,
         type: 3}
       propertyPath: _attackSpeed
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2750848493931223576, guid: 0292939d9cdb18946ac5c822136b9429,
         type: 3}
       propertyPath: _attackDamage
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750848493931223576, guid: 0292939d9cdb18946ac5c822136b9429,
+        type: 3}
+      propertyPath: _cleaveAttack._enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2898595844843678093, guid: 0292939d9cdb18946ac5c822136b9429,
         type: 3}

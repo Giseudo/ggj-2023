@@ -10,16 +10,11 @@ public class DetectTargetState : State
     private Attacker _attacker;
     private Damageable _closestTarget;
     private ProjectileLauncher _projectileLauncher;
-    private LayerMask _enemyLayer;
 
     protected override void OnStart()
     {
         _attacker = StateMachine.GetComponent<Attacker>();
         _projectileLauncher = StateMachine.GetComponent<ProjectileLauncher>();
-
-        _enemyLayer = 1 << (StateMachine.gameObject.layer == LayerMask.NameToLayer("Creep")
-            ? LayerMask.NameToLayer("GroundUnit")
-            : LayerMask.NameToLayer("Creep"));
     }
 
     protected override void OnUpdate()
@@ -56,7 +51,7 @@ public class DetectTargetState : State
         _closestTarget = null;
 
         Collider closestCollider = null;
-        Collider[] colliders = Physics.OverlapSphere(_attacker.transform.position, _attacker.FovRadius, _enemyLayer);
+        Collider[] colliders = Physics.OverlapSphere(_attacker.transform.position, _attacker.FovRadius, _attacker.EnemyLayer);
 
         if (colliders.Length == 0) return;
 
@@ -94,7 +89,6 @@ public class DetectTargetState : State
         _projectileLauncher?.SetTarget(_closestTarget?.transform);
 
         Vector3 targetPosition = damageable.transform.position;
-
         targetPosition.y = _attacker.transform.position.y;
 
         _attacker.transform.LookAt(targetPosition);

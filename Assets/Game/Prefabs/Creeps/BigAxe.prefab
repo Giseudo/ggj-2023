@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 2534417883579263025}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: d5b6904e0623f054d863f430bc34d434, type: 2}
+  m_Controller: {fileID: 22100000, guid: dc000676c815cf84293bc331747c00a1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -171,7 +171,12 @@ MonoBehaviour:
   _attackSpeed: 1
   _attackWaitTime: 0
   _vfxEventName: OnAttack
+  _vfxOffset: {x: 0, y: 0, z: 0}
   _attackSound: {fileID: 0}
+  _cleaveAttack:
+    _enabled: 1
+    _maxTargets: 3
+    _radius: 7
 --- !u!1001 &2534417883504426971
 PrefabInstance:
   m_ObjectHideFlags: 0

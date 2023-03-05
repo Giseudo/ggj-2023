@@ -25,8 +25,6 @@ public class GroundUnitHFSM : StateMachineAsset
 
         LoadTransitions(root);
 
-        root.Start(context);
-
         return root;
     }
 
