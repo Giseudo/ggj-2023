@@ -28,7 +28,8 @@ public class MarchState : State
 
     protected override void OnEnter()
     {
-        GameManager.MainTree?.TryGetComponent<Damageable>(out _treeDamageable);
+        if (Application.isPlaying)
+            GameManager.MainTree?.TryGetComponent<Damageable>(out _treeDamageable);
 
         if (_creep == null) return;
 
