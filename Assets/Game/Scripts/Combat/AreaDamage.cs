@@ -31,7 +31,7 @@ public class AreaDamage : MonoBehaviour
 
     private IEnumerator IntervalDamage()
     {
-        while (gameObject.activeInHierarchy)
+        while (gameObject.activeInHierarchy && _damageAmount > 0)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, _radius, 1 << LayerMask.NameToLayer("Creep"));
 
@@ -58,7 +58,7 @@ public class AreaDamage : MonoBehaviour
                 Collider collider = colliders[i];
 
                 if (collider.TryGetComponent<Creep>(out Creep creep))
-                    creep.SlowDown(_walkSpeedMultiplier, 2f);
+                    creep.SlowDown(_walkSpeedMultiplier, _timeInterval);
             }
 
             yield return new WaitForSeconds(.5f);
