@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -51,6 +52,7 @@ namespace Game.Combat
         private List<Unit> _unities = new List<Unit>();
         private List<Tree> _absorvedTrees = new List<Tree>();
         private Tree _parentTree;
+        private Animator _animator;
 
         public Action<int> collectedEnergy = delegate { };
         public Action<int> consumedEnergy = delegate { };
@@ -73,11 +75,13 @@ namespace Game.Combat
         public int CurrentLevel => _currentLevel;
         public int InitialRootSplitLimit => _initialRootSplitLimit;
         public bool ReachedMaxLevel => _reachedMaxLevel;
+        public Animator Animator => _animator;
 
         public void Awake()
         {
             _rootSplitLimit = _initialRootSplitLimit;
             _nodeList = GetComponentsInChildren<RootNode>(true).ToList();
+            TryGetComponent<Animator>(out _animator);
 
             UpdateStats();
         }
@@ -131,10 +135,20 @@ namespace Game.Combat
 
             tree.SetParentTree(this);
 
+            StartCoroutine(Absorb(tree));
+        }
+
+        private IEnumerator Absorb(Tree tree)
+        {
+            tree.Animator?.SetBool("Absorbed", true);
+
+            yield return new WaitForSeconds(2f);
+
             for (int i = 0; i < tree.NodeList.Count; i++)
             {
                 RootNode node = tree.NodeList[i];
 
+                node.GrowBranch();
                 node.gameObject.SetActive(true);
                 node.SetTree(this);
 

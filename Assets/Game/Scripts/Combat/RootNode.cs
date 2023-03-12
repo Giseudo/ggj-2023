@@ -69,6 +69,8 @@ namespace Game.Combat
 
         public void GrowBranch()
         {
+            if (_parent == null) return;
+
             Vector2 direction = (_parent.transform.position.XZ() - transform.position.XZ()).normalized;
             float angle = Mathf.Rad2Deg * Mathfs.DirToAng(direction);
             float length = Vector3.Distance(transform.position, _parent.transform.position);
@@ -76,7 +78,6 @@ namespace Game.Combat
             _branch.position = _parent.transform.position;
             _branch.localScale = new Vector3(1f, 1f, 1f);
             _branch.eulerAngles = new Vector3(0f, -angle, 90f);
-
 
             _branch.DOScaleY(length, 1f).SetUpdate(true);
             _branch.DOMove(transform.position, 1f).SetUpdate(true);

@@ -3606,6 +3606,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8343501274452310840, guid: adacc02f196b034448c88ad2c9656e8c,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5285911408296180715, guid: adacc02f196b034448c88ad2c9656e8c, type: 3}
@@ -3691,6 +3696,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MataPauTree
+      objectReference: {fileID: 0}
+    - target: {fileID: 1765551595223309843, guid: 35457f1929fceb743a53b53c1c9974a2,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7009567515083593875, guid: 35457f1929fceb743a53b53c1c9974a2,
         type: 3}
