@@ -140,6 +140,9 @@ namespace Game.UI
                     if (node.Tree == GameManager.MainTree)
                         continue;
 
+                    if (GameManager.MainTree.EnergyAmount < GameManager.MainTree.RootEnergyCost)
+                        continue;
+
                     _rootPoint.Rect.anchoredPosition = UICanvas.GetScreenPosition(node.transform.position);
                     _rootPoint.Pulse(true);
                     _nearbyTree = node.Tree;
@@ -216,6 +219,9 @@ namespace Game.UI
                         continue;
                     
                     if (node.Tree == GameManager.MainTree)
+                        continue;
+
+                    if (GameManager.MainTree.EnergyAmount < GameManager.MainTree.RootEnergyCost)
                         continue;
 
                     _activeTree = node.Tree;

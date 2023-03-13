@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Tree
+  m_Name: M_TreeDisabled
   m_Shader: {fileID: -6465566751694194690, guid: 57e5f3048fa9ea947ac892aa2ba40565,
     type: 3}
   m_Parent: {fileID: 0}
@@ -99,7 +99,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 1
+    - _Alpha: 0.6
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
