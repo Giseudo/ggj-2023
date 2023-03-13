@@ -14,6 +14,9 @@ namespace Game.Combat
         [SerializeField]
         private int _energyDropAmount = 50;
 
+        [SerializeField]
+        private bool _ignoreSpeedChange = false;
+
         public CreepData Data => _data;
         public float MaxSpeed => _maxSpeed;
         public float SpeedMultiplier => _speedMultiplier;
@@ -72,6 +75,8 @@ namespace Game.Combat
 
         public void SlowDown(float speedMultipler, float duration)
         {
+            if (_ignoreSpeedChange) return;
+
             _speedMultiplier = speedMultipler;
             _lastSlowDownTime = Time.time;
             _slowDownDuration = duration;
