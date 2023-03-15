@@ -838,6 +838,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4820482911091623536, guid: a66161c94f132514688a9ca3a31ac8ac,
         type: 3}
+      propertyPath: _bgm
+      value: 
+      objectReference: {fileID: 8300000, guid: f9660ba355b7d8c4499346b3e330b8be, type: 3}
+    - target: {fileID: 4820482911091623536, guid: a66161c94f132514688a9ca3a31ac8ac,
+        type: 3}
       propertyPath: _level
       value: 1
       objectReference: {fileID: 0}
@@ -2276,7 +2281,7 @@ PrefabInstance:
     - target: {fileID: 1033187723024418570, guid: adacc02f196b034448c88ad2c9656e8c,
         type: 3}
       propertyPath: m_Intensity
-      value: 8.930644
+      value: 11.213624
       objectReference: {fileID: 0}
     - target: {fileID: 2342892641586435851, guid: adacc02f196b034448c88ad2c9656e8c,
         type: 3}

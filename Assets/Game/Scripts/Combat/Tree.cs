@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Game.Core;
 
 namespace Game.Combat
 {
@@ -38,6 +39,9 @@ namespace Game.Combat
 
         [SerializeField]
         private Transform _mesh;
+
+        [SerializeField]
+        private AudioClip _absorbClip;
 
         [SerializeField]
         private List<TreeLevel> _levels = new List<TreeLevel>();
@@ -76,6 +80,7 @@ namespace Game.Combat
         public int InitialRootSplitLimit => _initialRootSplitLimit;
         public bool ReachedMaxLevel => _reachedMaxLevel;
         public Animator Animator => _animator;
+        public AudioClip AbsorbClip => _absorbClip;
 
         public void Awake()
         {
@@ -134,6 +139,7 @@ namespace Game.Combat
             _absorvedTrees.Add(tree);
 
             tree.SetParentTree(this);
+            SoundManager.PlaySound(tree.AbsorbClip, 1f);
 
             StartCoroutine(Absorb(tree));
         }

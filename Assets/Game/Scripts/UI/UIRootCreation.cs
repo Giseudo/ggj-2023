@@ -357,7 +357,7 @@ namespace Game.UI
             }
 
             GameManager.MainTree.ConsumeEnergy(GameManager.MainTree.RootEnergyCost);
-            SoundManager.PlaySound(_rootCreationSound);
+            SoundManager.PlaySound(_rootCreationSound, 1f);
             Physics.SyncTransforms();
 
             node.GrowBranch();

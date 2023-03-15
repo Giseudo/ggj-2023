@@ -2042,6 +2042,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4820482911091623536, guid: a66161c94f132514688a9ca3a31ac8ac,
         type: 3}
+      propertyPath: _bgm
+      value: 
+      objectReference: {fileID: 8300000, guid: f9660ba355b7d8c4499346b3e330b8be, type: 3}
+    - target: {fileID: 4820482911091623536, guid: a66161c94f132514688a9ca3a31ac8ac,
+        type: 3}
       propertyPath: _level
       value: 4
       objectReference: {fileID: 0}
@@ -2371,7 +2376,7 @@ PrefabInstance:
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
       propertyPath: _rounds.Array.data[0]._waves.Array.data[1]._countLimit
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
@@ -2416,7 +2421,7 @@ PrefabInstance:
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
       propertyPath: _rounds.Array.data[0]._waves.Array.data[1]._spawnInterval
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1821489950432336661, guid: f3bf8c51b76e6564c89d64c4504fd02c,
         type: 3}
@@ -3032,6 +3037,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6001523990053198874, guid: 82c5401e716e07f489ed69cfdd23923e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fb2c6f723b9468c469d56ba3766d4e34, type: 2}
+    - target: {fileID: 7995748624587887799, guid: 82c5401e716e07f489ed69cfdd23923e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fb2c6f723b9468c469d56ba3766d4e34, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

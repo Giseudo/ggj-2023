@@ -449,6 +449,7 @@ GameObject:
   - component: {fileID: 1893456958}
   - component: {fileID: 1893456957}
   - component: {fileID: 455430488423878154}
+  - component: {fileID: 1061585804961912143}
   m_Layer: 7
   m_Name: Furious
   m_TagString: Untagged
@@ -473,7 +474,7 @@ Transform:
   - {fileID: 752687936}
   - {fileID: 887389595}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1893456956
 Rigidbody:
@@ -574,7 +575,7 @@ MonoBehaviour:
   _hitsToStun: 10
   _hurtTime: 0
   _hitSound: {fileID: 0}
-  _deathSound: {fileID: 0}
+  _deathSound: {fileID: 8300000, guid: 91ccd7745feb93a46a1c051d92134d8e, type: 3}
 --- !u!114 &1893456957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,6 +608,22 @@ MonoBehaviour:
   _offset: {x: 0, y: 0, z: 0}
   _limit: 1
   _target: {fileID: 5881550171862661007}
+--- !u!114 &1061585804961912143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5881550171862661004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727bdba407051aa4499ed61d7bb71b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clips:
+  - {fileID: 8300000, guid: ecfc57f0be938824eac6e15282a9a52a, type: 3}
+  - {fileID: 8300000, guid: db48d8016daf96e4c8ac06984d28f173, type: 3}
+  _intervalTime: 2
 --- !u!1 &5881550172822569649
 GameObject:
   m_ObjectHideFlags: 0

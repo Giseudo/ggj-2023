@@ -1387,7 +1387,7 @@ MonoBehaviour:
   useCullingMasks: 0
   _rootPrefab: {fileID: 1677633249960956306, guid: 1baedb0fc8fd92b41b07a0b08a30f743,
     type: 3}
-  _rootCreationSound: {fileID: 8300000, guid: 377841a747eb1a842892e76ee276f0a9, type: 3}
+  _rootCreationSound: {fileID: 8300000, guid: 05eb7449b221e8f4dad17fa6a189899c, type: 3}
   _rootLimit: {fileID: 943020051}
   _rootPoint: {fileID: 881227647515456271}
   _validColor: {r: 0.1764706, g: 0.7254902, b: 0.5137255, a: 1}
@@ -6056,6 +6056,7 @@ MonoBehaviour:
   _happySprite: {fileID: 21300000, guid: db472c06d34edb640bbd72e9d5ec8f68, type: 3}
   _sparksVfx: {fileID: 703851090}
   _wrapperRect: {fileID: 5453260507703317807}
+  _collectClip: {fileID: 8300000, guid: c12187eec54079c4e8becbb7e7c6c6b6, type: 3}
 --- !u!1 &881227647062226953
 GameObject:
   m_ObjectHideFlags: 0

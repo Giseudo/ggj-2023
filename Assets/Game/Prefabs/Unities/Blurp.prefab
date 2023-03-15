@@ -88,7 +88,12 @@ MonoBehaviour:
   _attackSpeed: 1
   _attackWaitTime: 6
   _vfxEventName: OnAttack
-  _attackSound: {fileID: 0}
+  _vfxOffset: {x: 0, y: 0, z: 0}
+  _attackSound: {fileID: 8300000, guid: 377841a747eb1a842892e76ee276f0a9, type: 3}
+  _cleaveAttack:
+    _enabled: 0
+    _maxTargets: 5
+    _radius: 5
 --- !u!114 &6484948780894355959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 2
+  _hitsToStun: 1
   _hurtTime: 1
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
@@ -132,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 5963900956835209682, guid: d362591ccf556f24991da9d769c23ebe, type: 3}
   _offset: {x: 0, y: 0, z: 0}
+  _limit: 5
   _target: {fileID: 0}
 --- !u!1001 &5992220321047095517
 PrefabInstance:

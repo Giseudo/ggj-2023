@@ -211,7 +211,12 @@ MonoBehaviour:
   _attackSpeed: 1
   _attackWaitTime: 2
   _vfxEventName: OnAttack
-  _attackSound: {fileID: 0}
+  _vfxOffset: {x: 0, y: 0, z: 0}
+  _attackSound: {fileID: 8300000, guid: 8a16806a5265ce846a07be8136ed7d67, type: 3}
+  _cleaveAttack:
+    _enabled: 0
+    _maxTargets: 5
+    _radius: 5
 --- !u!114 &8982555700671707414
 MonoBehaviour:
   m_ObjectHideFlags: 0

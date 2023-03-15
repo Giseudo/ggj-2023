@@ -3440,6 +3440,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4820482911091623536, guid: a66161c94f132514688a9ca3a31ac8ac,
         type: 3}
+      propertyPath: _bgm
+      value: 
+      objectReference: {fileID: 8300000, guid: 4c1d2f67b75041f4cade3a1ac1a6a97c, type: 3}
+    - target: {fileID: 4820482911091623536, guid: a66161c94f132514688a9ca3a31ac8ac,
+        type: 3}
       propertyPath: _level
       value: 3
       objectReference: {fileID: 0}

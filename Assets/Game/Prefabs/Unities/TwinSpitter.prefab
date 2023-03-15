@@ -91,7 +91,11 @@ MonoBehaviour:
   _attackWaitTime: 0.25
   _vfxEventName: OnSpit
   _vfxOffset: {x: 0, y: 3.5, z: 3.2}
-  _attackSound: {fileID: 8300000, guid: 8a16806a5265ce846a07be8136ed7d67, type: 3}
+  _attackSound: {fileID: 8300000, guid: b8c18447d8148144f8f2d26528aa0bd4, type: 3}
+  _cleaveAttack:
+    _enabled: 0
+    _maxTargets: 5
+    _radius: 5
 --- !u!114 &7753203088014047696
 MonoBehaviour:
   m_ObjectHideFlags: 0

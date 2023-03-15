@@ -614,6 +614,7 @@ MonoBehaviour:
   _energyAmount: 400
   _initialRootSplitLimit: 2
   _mesh: {fileID: 0}
+  _absorbClip: {fileID: 8300000, guid: b15ba40422f71e547ac423caa101959f, type: 3}
   _levels: []
 --- !u!95 &1804309469
 Animator:

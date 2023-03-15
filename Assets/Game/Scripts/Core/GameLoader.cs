@@ -15,6 +15,9 @@ namespace Game.Core
         [SerializeField]
         private int _level;
 
+        [SerializeField]
+        private AudioClip _bgm;
+
         public void Awake()
         {
             bool initialized = GameManager.Instance != null;
@@ -30,6 +33,11 @@ namespace Game.Core
                     GameManager.SetMainTree(_mainTree);
                     GameManager.Scenes.SetCurrentLevel(_level);
                 };
+        }
+
+        public void Start()
+        {
+            SoundManager.PlayMusic(_bgm);
         }
     }
 }

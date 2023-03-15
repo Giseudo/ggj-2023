@@ -346,7 +346,7 @@ namespace Game.UI
                 .SetUpdate(true)
                 .SetEase(Ease.OutElastic);
 
-            SoundManager.PlaySound(_unitCreationSound);
+            SoundManager.PlaySound(_unitCreationSound, .75f);
 
             instance.TryGetComponent<Unit>(out Unit unit);
 

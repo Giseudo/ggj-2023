@@ -27,6 +27,9 @@ namespace Game.UI
         [SerializeField]
         private RectTransform _wrapperRect;
 
+        [SerializeField]
+        private AudioClip _collectClip;
+
         private Tween _tween;
         private RectTransform _rect;
         private VFXEventAttribute _eventAttribute;
@@ -65,9 +68,17 @@ namespace Game.UI
             UpdateEnergy();
         }
 
+        private float _lastPlaySoundTime;
+
         private void OnDropEnergy(int amount, Vector3 position)
         {
             Vector3 targetPosition = GetScreenPosition(position);
+
+            if (_lastPlaySoundTime + .5f < Time.unscaledTime)
+            {
+                SoundManager.PlaySound(_collectClip, .5f);
+                _lastPlaySoundTime = Time.unscaledTime;
+            }
 
             _eventAttribute.SetVector3(Shader.PropertyToID("TargetPosition"), position);
             _sparksVfx.SendEvent("OnSpark", _eventAttribute);
