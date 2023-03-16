@@ -204,4 +204,5 @@ namespace Game.Core
 // [x] Improve trees look
 // [x] Absorb tree indications
 // [x] Area damage
+// [x] Intro
 // [ ] Score
