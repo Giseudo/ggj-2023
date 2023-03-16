@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using Game.Core;
+using DG.Tweening;
 
 namespace Game.UI
 {
@@ -11,7 +13,11 @@ namespace Game.UI
         public static RectTransform Rect { get; private set; }
         public static Canvas MainCanvas { get; private set; }
         public static Vector2 ScreenSize { get; private set; }
+        public static Image OverlayImage { get; private set; }
         public static Action<Vector2> ScreenResized;
+
+        [SerializeField]
+        private Image _overlayImage;
 
         public void Awake()
         {
@@ -19,6 +25,7 @@ namespace Game.UI
             Canvas = GetComponent<Canvas>();
             Rect = GetComponent<RectTransform>();
             MainCanvas = GetComponent<Canvas>();
+            OverlayImage = _overlayImage;
             ScreenSize = new Vector2(Screen.width, Screen.height);
             ScreenResized = delegate { };
         }
@@ -27,6 +34,9 @@ namespace Game.UI
         {
             GameManager.MainCameraChanged += OnCameraChange;
             Canvas.worldCamera = GameManager.MainCamera;
+
+            _overlayImage.color = Color.black;
+            _overlayImage.DOFade(0f, 2f);
         }
 
         public void OnDestroy()

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Game.Core;
 
 namespace Game.UI
 {
@@ -11,9 +12,6 @@ namespace Game.UI
 
     public class UITreeHighlight : MonoBehaviour
     {
-        [SerializeField]
-        private bool _playAtStart;
-
         [SerializeField]
         private Tree _highlightTree;
 
@@ -25,15 +23,14 @@ namespace Game.UI
         private bool _isHighlighting = false;
         public Action<bool> highlightChanged = delegate { };
 
-        public bool PlayAtStart => _playAtStart;
         public bool IsHighlighting => _isHighlighting;
 
         public void Start()
         {
-            if (_playAtStart)
-                Highlight(true);
-
             SetHighlightTree(_highlightTree);
+
+            if (GameManager.Scenes.CurrentLevel == 0)
+                Highlight(true);
         }
 
         public void OnDestroy()

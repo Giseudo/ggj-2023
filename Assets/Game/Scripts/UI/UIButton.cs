@@ -78,14 +78,14 @@ namespace Game.UI
         {
             entered.Invoke();
 
-            if (_isPulsing) return;
-            if (_isDisabled) return;
-
             Grow();
         }
 
         private void Grow()
         {
+            if (_isPulsing) return;
+            if (_isDisabled) return;
+
             _rectTween?.Kill();
             _rectTween = _rect.DOScale(Vector3.one * _hoverScale, .5f)
                 .SetUpdate(true)
@@ -94,6 +94,9 @@ namespace Game.UI
 
         private void Shrink()
         {
+            if (_isPulsing) return;
+            if (_isDisabled) return;
+
             _rectTween?.Kill();
             _rectTween = _rect.DOScale(_initialScale, .5f)
                 .SetUpdate(true)
@@ -103,9 +106,6 @@ namespace Game.UI
         public void OnPointerExit(PointerEventData eventData)
         {
             exited.Invoke();
-
-            if (_isPulsing) return;
-            if (_isDisabled) return;
 
             Shrink();
         }

@@ -13,13 +13,13 @@ namespace Game.UI
         private RectTransform _selectionRect;
 
         [SerializeField]
-        private Button _pauseButton;
+        private UIButton _pauseButton;
 
         [SerializeField]
-        private Button _playButton;
+        private UIButton _playButton;
 
         [SerializeField]
-        private Button _fastForwardButton;
+        private UIButton _fastForwardButton;
 
         [SerializeField]
         private InputReader _inputReader;
@@ -34,9 +34,9 @@ namespace Game.UI
         {
             TryGetComponent<RectTransform>(out _rect);
 
-            _pauseButton.onClick.AddListener(OnPause);
-            _playButton.onClick.AddListener(OnPlay);
-            _fastForwardButton.onClick.AddListener(OnFastForward);
+            _pauseButton.clicked += OnPause;
+            _playButton.clicked += OnPlay;
+            _fastForwardButton.clicked += OnFastForward;
 
             _inputReader.paused += OnPause;
             _inputReader.played += OnPlay;
@@ -53,9 +53,9 @@ namespace Game.UI
 
         public void OnDestroy()
         {
-            _pauseButton.onClick.RemoveListener(OnPause);
-            _playButton.onClick.RemoveListener(OnPlay);
-            _fastForwardButton.onClick.RemoveListener(OnFastForward);
+            _pauseButton.clicked -= OnPause;
+            _playButton.clicked -= OnPlay;
+            _fastForwardButton.clicked -= OnFastForward;
 
             _inputReader.paused -= OnPause;
             _inputReader.played -= OnPlay;
@@ -70,19 +70,19 @@ namespace Game.UI
         public void OnPause() {
             TimeManager.Pause();
 
-            _selectionRect.DOMove(_pauseButton.transform.position, .3f)
+            _selectionRect.DOAnchorPosY(_pauseButton.Rect.anchoredPosition.y, .3f)
                 .SetUpdate(true);
         }
         public void OnPlay() {
             TimeManager.Play();
 
-            _selectionRect.DOMove(_playButton.transform.position, .3f)
+            _selectionRect.DOAnchorPosY(_playButton.Rect.anchoredPosition.y, .3f)
                 .SetUpdate(true);
         }
         public void OnFastForward() {
             TimeManager.FastForward();
 
-            _selectionRect.DOMove(_fastForwardButton.transform.position, .3f)
+            _selectionRect.DOAnchorPosY(_fastForwardButton.Rect.anchoredPosition.y, .3f)
                 .SetUpdate(true);
         }
 
@@ -121,7 +121,7 @@ namespace Game.UI
 
         private void OnScreenResize(Vector2 size)
         {
-            Button button = null;
+            UIButton button = null;
 
             if (TimeManager.State == TimeState.Paused)
                 button = _pauseButton;
@@ -131,18 +131,6 @@ namespace Game.UI
 
             if (TimeManager.State == TimeState.FastForwarding)
                 button = _fastForwardButton;
-
-            StopCoroutine(FollowSelected(button));
-            StartCoroutine(FollowSelected(button));
-        }
-
-        private IEnumerator FollowSelected(Button button)
-        {
-            yield return new WaitForSecondsRealtime(.2f);
-
-            _resizeTween?.Kill();
-            _resizeTween = _selectionRect.DOMove(button.transform.position, .3f)
-                .SetUpdate(true);
         }
 
         public void Show(float delay = 0f)
