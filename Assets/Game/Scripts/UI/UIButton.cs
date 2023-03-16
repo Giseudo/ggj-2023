@@ -7,7 +7,7 @@ using DG.Tweening;
 namespace Game.UI
 {
     [RequireComponent(typeof(Button))]
-    public class UIButton : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
+    public class UIButton : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
     {
         [SerializeField]
         private float _hoverScale = 1.2f;
@@ -35,6 +35,10 @@ namespace Game.UI
             TryGetComponent<RectTransform>(out _rect);
 
             _initialScale = _rect.localScale == Vector3.zero ? Vector3.one : _rect.localScale;
+        }
+
+        public void OnEnable()
+        {
         }
 
         public void Pulse(bool enable)
@@ -77,8 +81,21 @@ namespace Game.UI
             if (_isPulsing) return;
             if (_isDisabled) return;
 
+            Grow();
+        }
+
+        private void Grow()
+        {
             _rectTween?.Kill();
             _rectTween = _rect.DOScale(Vector3.one * _hoverScale, .5f)
+                .SetUpdate(true)
+                .SetEase(Ease.OutExpo);
+        }
+
+        private void Shrink()
+        {
+            _rectTween?.Kill();
+            _rectTween = _rect.DOScale(_initialScale, .5f)
                 .SetUpdate(true)
                 .SetEase(Ease.OutExpo);
         }
@@ -90,10 +107,10 @@ namespace Game.UI
             if (_isPulsing) return;
             if (_isDisabled) return;
 
-            _rectTween?.Kill();
-            _rectTween = _rect.DOScale(_initialScale, .5f)
-                .SetUpdate(true)
-                .SetEase(Ease.OutExpo);
+            Shrink();
         }
+
+        public void OnSelect(BaseEventData eventData) => Grow();
+        public void OnDeselect(BaseEventData eventData) => Shrink();
     }
 }
