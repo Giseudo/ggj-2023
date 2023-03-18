@@ -127,6 +127,10 @@ namespace Game.UI
             if (value)
             {
                 _blur.Show();
+
+                DOTween.To(() => _titleText.characterSpacing, x => _titleText.characterSpacing = x, 7f, 3f)
+                    .SetUpdate(true);
+
                 _canvasGroup.interactable = true;
                 _canvasGroup.blocksRaycasts = true;
                 _canvasGroup.DOFade(1f, .5f)
@@ -139,11 +143,13 @@ namespace Game.UI
             }
 
             _blur.Hide(.5f);
+
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
             _canvasGroup.DOFade(0f, .5f)
                 .SetDelay(.5f)
-                .SetUpdate(true);
+                .SetUpdate(true)
+                .OnComplete(() => _titleText.characterSpacing = 0f);
         }
     }
 }

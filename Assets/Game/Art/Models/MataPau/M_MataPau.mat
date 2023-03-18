@@ -99,6 +99,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha: 1
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
@@ -135,7 +136,7 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _WindFrequency: 0.09
-    - _WindIntensity: 0
+    - _WindIntensity: 0.494
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:

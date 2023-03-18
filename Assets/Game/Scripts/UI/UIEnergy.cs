@@ -34,6 +34,8 @@ namespace Game.UI
         private RectTransform _rect;
         private VFXEventAttribute _eventAttribute;
 
+        public RectTransform Rect => _rect;
+
         private void UpdateEnergy() => _text.text = $"{GameManager.MainTree.EnergyAmount}";
         private void OnConsumeEnergy(int amount) => UpdateEnergy();
 

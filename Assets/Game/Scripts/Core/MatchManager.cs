@@ -53,6 +53,8 @@ namespace Game.Core
         {
             GameManager.Scenes.loadedLevel += OnLoadLevel;
             OnLoadLevel(0);
+
+            LevelCompleted.Invoke();
         }
 
         public void OnDestroy()

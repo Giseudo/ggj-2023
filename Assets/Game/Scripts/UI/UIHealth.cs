@@ -18,7 +18,9 @@ public class UIHealth : MonoBehaviour
     private Tween _glowTween;
     private bool _isGlowing;
     private bool _isOpened = true;
+
     public float Height => _heartMask.rectTransform.rect.height * _rect.localScale.x;
+    public RectTransform Rect => _rect;
 
     public void Start()
     {
