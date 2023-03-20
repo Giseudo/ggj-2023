@@ -60,6 +60,7 @@ namespace Game.Combat
 
         public Action<int> collectedEnergy = delegate { };
         public Action<int> consumedEnergy = delegate { };
+        public Action<int> energyChanged = delegate { };
         public Action<Tree> absorvedTree = delegate { };
         public Action rootSplitted = delegate { };
         public Action<int> levelUp = delegate { };
@@ -131,6 +132,16 @@ namespace Game.Combat
         public void SetParentTree(Tree tree)
         {
             _parentTree = tree;
+        }
+
+        public void SetEnergy(int value)
+        {
+            _energyAmount = value;
+
+            if (_energyAmount < 0)
+                _energyAmount = 0;
+            
+            energyChanged.Invoke(value);
         }
 
         public void AbsorbTree(Tree tree)

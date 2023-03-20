@@ -4,6 +4,7 @@ using UnityEngine.VFX;
 using TMPro;
 using Game.Core;
 using DG.Tweening;
+using System;
 
 namespace Game.UI
 {
@@ -52,6 +53,7 @@ namespace Game.UI
 
             GameManager.MainTree.collectedEnergy += OnCollectEnergy;
             GameManager.MainTree.consumedEnergy += OnConsumeEnergy;
+            GameManager.MainTree.energyChanged += OnConsumeEnergy;
 
             UpdateEnergy();
         }
@@ -66,6 +68,7 @@ namespace Game.UI
         {
             GameManager.MainTree.collectedEnergy += OnCollectEnergy;
             GameManager.MainTree.consumedEnergy += OnConsumeEnergy;
+            GameManager.MainTree.energyChanged += OnConsumeEnergy;
 
             UpdateEnergy();
         }

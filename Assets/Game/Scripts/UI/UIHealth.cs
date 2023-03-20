@@ -40,6 +40,7 @@ public class UIHealth : MonoBehaviour
         _heartMask.padding = new Vector4(0f, 0f, 0f, 0f);
 
         damageable.hurted += OnHurt;
+        damageable.healthChanged += OnHealthChange;
 
         StopGlow();
     }
@@ -67,6 +68,14 @@ public class UIHealth : MonoBehaviour
         
         GameManager.MainCamera?.DOShakePosition(.25f, 1f, 20)
             .SetUpdate(true);
+    }
+
+    private void OnHealthChange(Damageable damageable, int health)
+    {
+        float maxHealth = (float)damageable.MaxHealth;
+        float value = Height * (1f - (health / maxHealth));
+
+        _heartMask.padding = new Vector4(0f, 0f, 0f, value);
     }
 
     public void Glow()

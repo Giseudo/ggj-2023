@@ -20,6 +20,7 @@ namespace Game.Core
         public static MatchManager Instance { get; private set; }
         public static int RoundNumbers { get; private set; }
         public static int CurrentRound { get; private set; }
+        public static int CurrentScore { get; private set; }
         public static List<WaveSpawner> WaveSpawners => _waveSpawners;
         public static bool HasStarted { get; private set; }
         public static Action<WaveSpawner> WaveSpawnerAdded;
@@ -29,6 +30,7 @@ namespace Game.Core
         public static Action GameCompleted;
         public static Action GameOver;
         public static Action<int> RoundStarted;
+        public static Action<int> ScoreChanged;
 
         public void Awake()
         {
@@ -43,6 +45,7 @@ namespace Game.Core
             LevelCompleted = delegate { };
             GameCompleted = delegate { };
             RoundStarted = delegate { };
+            ScoreChanged = delegate { };
             GameOver = delegate { };
             HasStarted = false;
 
@@ -54,7 +57,7 @@ namespace Game.Core
             GameManager.Scenes.loadedLevel += OnLoadLevel;
             OnLoadLevel(0);
 
-            LevelCompleted.Invoke();
+            // LevelCompleted.Invoke();
         }
 
         public void OnDestroy()
@@ -173,6 +176,18 @@ namespace Game.Core
             yield return new WaitForSeconds(1.5f);
 
             GameManager.MainTree.CollectEnergy(amount);
+        }
+
+        public static void SetScore(int value)
+        {
+            CurrentScore = value;
+            ScoreChanged.Invoke(CurrentScore);
+        }
+
+        public static void AddScore(int value)
+        {
+            CurrentScore += value;
+            ScoreChanged.Invoke(CurrentScore);
         }
     }
 }

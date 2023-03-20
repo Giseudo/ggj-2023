@@ -27,12 +27,12 @@ namespace Game.Combat
         private CapsuleCollider _collider;
 
         public float HurtTime => _hurtTime;
-        public void SetHealth(int value) => _health = value;
         public int Health => _health;
         public int MaxHealth => _maxHealth;
         public bool IsDead => _isDead;
 
         public Action<Damageable> hurted = delegate { };
+        public Action<Damageable, int> healthChanged = delegate { };
         public Action<Damageable> died = delegate { };
 
         public void Awake()
@@ -91,6 +91,12 @@ namespace Game.Combat
             if (!_collider) return;
 
             _collider.enabled = false;
+        }
+
+        public void SetHealth(int value)
+        {
+            _health = value;
+            healthChanged.Invoke(this, _health);
         }
 
         public void Revive()
