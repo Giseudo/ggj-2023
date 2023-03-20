@@ -75,7 +75,7 @@ namespace Game.Combat
 
         public void SlowDown(float speedMultipler, float duration)
         {
-            if (_ignoreSpeedChange) return;
+            if (_ignoreSpeedChange && speedMultipler > 1f) return;
 
             _speedMultiplier = speedMultipler;
             _lastSlowDownTime = Time.time;

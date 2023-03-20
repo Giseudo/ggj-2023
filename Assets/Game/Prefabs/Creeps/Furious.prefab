@@ -266,7 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageAmount: 0
   _timeInterval: 0.5
-  _walkSpeedMultiplier: 4
+  _walkSpeedMultiplier: 2
   _radius: 15
 --- !u!114 &887389598
 MonoBehaviour:
@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7944f7d695cda7f4f879f672729a4c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 25
+  _health: 30
   _hitsToStun: 10
   _hurtTime: 0
   _hitSound: {fileID: 0}
@@ -589,8 +589,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: a798b282128fb3042b39c5246ab5f94e, type: 2}
-  _maxSpeed: 20
-  _energyDropAmount: 5000
+  _maxSpeed: 15
+  _energyDropAmount: 2000
   _ignoreSpeedChange: 1
 --- !u!114 &455430488423878154
 MonoBehaviour:

@@ -21,4 +21,4 @@ MonoBehaviour:
   _rangeRadius: 15
   _requiredEnergy: 2000
   _sellPrice: 1000
-  _upgradeCost: 2000
+  _upgradeCost: 5000
