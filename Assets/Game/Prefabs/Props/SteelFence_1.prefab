@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3945829320804403597}
   - component: {fileID: 1424206519114508966}
   m_Layer: 10
-  m_Name: SteelFence
+  m_Name: SteelFence_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
