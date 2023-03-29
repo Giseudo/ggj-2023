@@ -29,8 +29,13 @@ namespace Game.Core
         public static Action LevelCompleted;
         public static Action GameCompleted;
         public static Action GameOver;
+        public static Action DrainScoreHealth;
+        public static Action DrainScoreEnergy;
+        public static Action ScoreFinished;
         public static Action<int> RoundStarted;
         public static Action<int> ScoreChanged;
+
+        private void OnLevelComplete() => StartCoroutine(AbsorbHealth());
 
         public void Awake()
         {
@@ -46,6 +51,9 @@ namespace Game.Core
             GameCompleted = delegate { };
             RoundStarted = delegate { };
             ScoreChanged = delegate { };
+            DrainScoreHealth = delegate { };
+            DrainScoreEnergy = delegate { };
+            ScoreFinished = delegate { };
             GameOver = delegate { };
             HasStarted = false;
 
@@ -55,14 +63,16 @@ namespace Game.Core
         public void Start()
         {
             GameManager.Scenes.loadedLevel += OnLoadLevel;
+            LevelCompleted += OnLevelComplete;
             OnLoadLevel(0);
 
-            // LevelCompleted.Invoke();
+            LevelCompleted.Invoke();
         }
 
         public void OnDestroy()
         {
             GameManager.Scenes.loadedLevel -= OnLoadLevel;
+            LevelCompleted -= OnLevelComplete;
         }
 
         private void OnLoadLevel(int level)
@@ -176,6 +186,42 @@ namespace Game.Core
             yield return new WaitForSeconds(1.5f);
 
             GameManager.MainTree.CollectEnergy(amount);
+        }
+
+        private IEnumerator AbsorbHealth()
+        {
+            if (!GameManager.MainTree.TryGetComponent<Damageable>(out Damageable damageable)) yield return null;
+
+            yield return new WaitForSeconds(1f);
+
+            while (damageable.Health > 0)
+            {
+                damageable.SetHealth(damageable.Health - 1);
+
+                MatchManager.AddScore(10000);
+                DrainScoreHealth.Invoke();
+
+                yield return new WaitForSeconds(.25f);
+            }
+
+            StartCoroutine(AbsorbEnergy());
+        }
+
+        private IEnumerator AbsorbEnergy()
+        {
+            while (GameManager.MainTree.EnergyAmount > 0)
+            {
+                int score = 10000;
+
+                MatchManager.AddScore(score * 10);
+                DrainScoreEnergy.Invoke();
+
+                GameManager.MainTree.SetEnergy(GameManager.MainTree.EnergyAmount - score);
+
+                yield return new WaitForSeconds(.25f);
+            }
+
+            ScoreFinished.Invoke();
         }
 
         public static void SetScore(int value)

@@ -35,9 +35,17 @@ namespace Game.UI
         private CanvasGroup _bodyCanvasGroup;
 
         [SerializeField]
+        private CanvasGroup _buttonsCanvasGroup;
+
+        [SerializeField]
         private TextMeshProUGUI _titleText;
 
         private CanvasGroup _canvasGroup;
+
+        private void OnLevelLoad(int level) => Animate(false);
+        private void OnVictory() => Animate(true);
+        private void OnGameOver() => Animate(true);
+        private void OnGameComplete() => Animate(true);
 
         public void Awake()
         {
@@ -47,6 +55,7 @@ namespace Game.UI
         public void Start()
         {
             GameManager.Scenes.loadedLevel += OnLevelLoad;
+            MatchManager.ScoreFinished += OnScoreFinish;
 
             if (_state == LevelState.Defeat)
                 MatchManager.GameOver += OnGameOver;
@@ -70,6 +79,7 @@ namespace Game.UI
         public void OnDestroy()
         {
             GameManager.Scenes.loadedLevel -= OnLevelLoad;
+            MatchManager.ScoreFinished -= OnScoreFinish;
 
             if (_state == LevelState.Defeat)
                 MatchManager.GameOver -= OnGameOver;
@@ -97,30 +107,42 @@ namespace Game.UI
 
         public void NextLevel()
         {
-            if (!GameManager.MainLight.TryGetComponent<LightTransition>(out LightTransition transition)) return;
-
-            DOTween.To(() => 1f, x => {
-                GameManager.Damageables.ForEach(damageable => {
-                    if (damageable.gameObject == GameManager.MainTree.gameObject) return;
-
-                    damageable.transform.localScale = Vector3.one * x;
-                });
-            }, 0f, 1f);
-
-            transition.StartTransition(GameManager.Scenes.LoadNextLevel);
             _bodyCanvasGroup.DOFade(0f, .5f).SetUpdate(true);
+            _buttonsCanvasGroup.DOFade(0f, .5f).SetUpdate(true);
+
+            _buttonsCanvasGroup.interactable = false;
+            _buttonsCanvasGroup.blocksRaycasts = false;
+
+            GameManager.Scenes.LoadNextLevel();
+        }
+
+        private void OnSceneTransitionEnd()
+        {
+            _buttonsCanvasGroup.DOFade(1f, .5f)
+                .SetUpdate(true)
+                .OnComplete(() => {
+                    _buttonsCanvasGroup.interactable = true;
+                    _buttonsCanvasGroup.blocksRaycasts = true;
+                });
         }
 
         private void RestartLevel()
         {
             GameManager.Scenes.RestartLevel();
+
             _bodyCanvasGroup.DOFade(0f, .5f).SetUpdate(true);
+            _buttonsCanvasGroup.DOFade(0f, .5f).SetUpdate(true);
+
+            _buttonsCanvasGroup.interactable = false;
+            _buttonsCanvasGroup.blocksRaycasts = false;
         }
 
-        private void OnLevelLoad(int level) => Animate(false);
-        private void OnVictory() => Animate(true);
-        private void OnGameOver() => Animate(true);
-        private void OnGameComplete() => Animate(true);
+        private void OnScoreFinish()
+        {
+            GameManager.MainLight.TryGetComponent<SceneTransition>(out SceneTransition transition);
+
+            transition.StartTransition(OnSceneTransitionEnd);
+        }
 
         private void Animate(bool value)
         {

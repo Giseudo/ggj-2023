@@ -24,6 +24,10 @@ namespace Game.UI
         private Vector2 _initialHealthPosition;
         private Vector2 _initialEnergyPosition;
 
+        private void OnHealthDrain() => _score.SetOriginPosition(_health.Rect.position);
+
+        private void OnEnergyDrain() => _score.SetOriginPosition(_energy.Rect.position);
+
         void Awake()
         {
             TryGetComponent<RectTransform>(out _rect);
@@ -34,6 +38,8 @@ namespace Game.UI
             GameManager.Scenes.loadedLevel += OnLevelLoad;
             MatchManager.LevelCompleted += OnLevelComplete;
             MatchManager.GameOver += OnLevelComplete;
+            MatchManager.DrainScoreHealth += OnHealthDrain;
+            MatchManager.DrainScoreEnergy += OnEnergyDrain;
 
             _initialHealthPosition = _health.Rect.anchoredPosition;
             _initialEnergyPosition = _energy.Rect.anchoredPosition;
@@ -44,6 +50,8 @@ namespace Game.UI
             GameManager.Scenes.loadedLevel -= OnLevelLoad;
             MatchManager.LevelCompleted -= OnLevelComplete;
             MatchManager.GameOver -= OnLevelComplete;
+            MatchManager.DrainScoreHealth -= OnHealthDrain;
+            MatchManager.DrainScoreEnergy -= OnEnergyDrain;
         }
 
         private void OnLevelLoad(int level)
@@ -85,42 +93,6 @@ namespace Game.UI
 
             _time.Hide();
             _score.Show();
-
-            StartCoroutine(AbsorbHealth());
-        }
-
-        private IEnumerator AbsorbHealth()
-        {
-            if (!GameManager.MainTree.TryGetComponent<Damageable>(out Damageable damageable)) yield return null;
-
-            while (damageable.Health > 0)
-            {
-                _score.SetOriginPosition(_health.Rect.position);
-
-                damageable.SetHealth(damageable.Health - 1);
-
-                MatchManager.AddScore(10000);
-
-                yield return new WaitForSeconds(.25f);
-            }
-
-            StartCoroutine(AbsorbEnergy());
-        }
-
-        private IEnumerator AbsorbEnergy()
-        {
-            while (GameManager.MainTree.EnergyAmount > 0)
-            {
-                _score.SetOriginPosition(_energy.Rect.position);
-
-                int score = 10000;
-
-                MatchManager.AddScore(score * 10);
-
-                GameManager.MainTree.SetEnergy(GameManager.MainTree.EnergyAmount - score);
-
-                yield return new WaitForSeconds(.25f);
-            }
         }
     }
 }

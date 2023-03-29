@@ -3,7 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using Game.Core;
 
-public class LightTransition : MonoBehaviour
+public class SceneTransition : MonoBehaviour
 {
     [SerializeField]
     private Color _color = Color.white;
@@ -33,6 +33,14 @@ public class LightTransition : MonoBehaviour
 
     public void StartTransition(Action callback)
     {
+        DOTween.To(() => 1f, x => {
+            GameManager.Damageables.ForEach(damageable => {
+                if (damageable.gameObject == GameManager.MainTree.gameObject) return;
+
+                damageable.transform.localScale = Vector3.one * x;
+            });
+        }, 0f, 1f);
+
         _light.DOIntensity(_intensity, _transitionTime);
         _light.transform.DORotate(_rotation, _transitionTime);
         _light.DOColor(_color, _transitionTime)
