@@ -8381,6 +8381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _valueText: {fileID: 8346453886553639892}
   _sparksVfx: {fileID: 6673024651556666108}
+  _collectClip: {fileID: 8300000, guid: c12187eec54079c4e8becbb7e7c6c6b6, type: 3}
 --- !u!1 &4507707845089166847
 GameObject:
   m_ObjectHideFlags: 0

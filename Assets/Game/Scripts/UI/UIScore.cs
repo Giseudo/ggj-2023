@@ -15,6 +15,9 @@ namespace Game.UI
         [SerializeField]
         private VisualEffect _sparksVfx;
 
+        [SerializeField]
+        private AudioClip _collectClip;
+
         private RectTransform _rect;
         private VFXEventAttribute _eventAttribute;
 
@@ -50,7 +53,7 @@ namespace Game.UI
         {
             SetValue(value);
 
-            // SoundManager.PlaySound(_collectClip, .5f);
+            SoundManager.PlaySound(_collectClip, .5f);
 
             _eventAttribute.SetVector3(Shader.PropertyToID("TargetPosition"), _originPosition + transform.up * -2f + transform.forward * 10f);
             _sparksVfx.SendEvent("OnSpark", _eventAttribute);
