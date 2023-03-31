@@ -30,6 +30,8 @@ namespace Game.UI
         public void Start()
         {
             MatchManager.ScoreChanged += OnScoreChange;
+
+            SetValue(0);
         }
 
         public void OnDestroy()

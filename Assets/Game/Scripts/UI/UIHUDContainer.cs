@@ -43,6 +43,8 @@ namespace Game.UI
 
             _initialHealthPosition = _health.Rect.anchoredPosition;
             _initialEnergyPosition = _energy.Rect.anchoredPosition;
+
+            _score.SetOriginPosition(_health.Rect.position);
         }
 
         public void OnDestroy()
