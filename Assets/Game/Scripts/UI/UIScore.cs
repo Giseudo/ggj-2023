@@ -41,7 +41,7 @@ namespace Game.UI
 
         public void SetValue(int value)
         {
-            _valueText.text = String.Format("{0:#,##0}", value).Replace(",", ".");
+            _valueText.text = $"{value:N0}".Replace(",", ".");
         }
 
         private Vector3 _originPosition;
