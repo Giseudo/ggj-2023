@@ -945,6 +945,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4225592162603062811, guid: adacc02f196b034448c88ad2c9656e8c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5015389007945671901, guid: adacc02f196b034448c88ad2c9656e8c,
         type: 3}
       propertyPath: m_RootOrder
@@ -2211,7 +2216,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _bgm
       value: 
-      objectReference: {fileID: 8300000, guid: 4c1d2f67b75041f4cade3a1ac1a6a97c, type: 3}
+      objectReference: {fileID: 8300000, guid: bc52a122a1c77164fa05e614777b9566, type: 3}
     - target: {fileID: 4820482911091623536, guid: a66161c94f132514688a9ca3a31ac8ac,
         type: 3}
       propertyPath: _level

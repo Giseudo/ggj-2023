@@ -66,7 +66,7 @@ namespace Game.Core
             LevelCompleted += OnLevelComplete;
             OnLoadLevel(0);
 
-            LevelCompleted.Invoke();
+            // LevelCompleted.Invoke();
         }
 
         public void OnDestroy()
