@@ -89,5 +89,10 @@ namespace Game.Core
             MainLight = light;
             MainLightChanged.Invoke(light);
         }
+
+        private void OnApplicationQuit()
+        {
+            // DataHandler.SaveGameData();
+        }
     }
 }

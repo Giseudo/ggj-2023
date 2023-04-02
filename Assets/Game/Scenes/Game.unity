@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 104838206}
   - component: {fileID: 104838205}
   m_Layer: 5
-  m_Name: Number
+  m_Name: Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -713,8 +713,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 406384290}
+  - component: {fileID: 406384291}
   m_Layer: 5
-  m_Name: Row
+  m_Name: RankRow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -743,6 +744,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 51}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &406384291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406384289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b951cb4705111428485a64d1498ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: {fileID: 760454136}
+  input: {fileID: 412322925}
+  score: {fileID: 1763187948}
+  activatedColor: {r: 1, g: 0.8352942, b: 0, a: 1}
+  deactivatedColor: {r: 0.98823535, g: 1, b: 0.35686275, a: 1}
 --- !u!1 &412322923
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,7 +840,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_TextViewport: {fileID: 0}
   m_TextComponent: {fileID: 1922973392}
@@ -1034,8 +1052,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 605000079}
+  - component: {fileID: 605000080}
   m_Layer: 5
-  m_Name: Row
+  m_Name: RankRow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1064,6 +1083,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0.0000102350405, y: -98.999985}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &605000080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605000078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b951cb4705111428485a64d1498ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: {fileID: 104838205}
+  input: {fileID: 1970255131}
+  score: {fileID: 798859006}
+  activatedColor: {r: 1, g: 0.8352941, b: 0, a: 1}
+  deactivatedColor: {r: 0.9882353, g: 1, b: 0.35686275, a: 1}
 --- !u!1 &618898905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,7 +1248,7 @@ GameObject:
   - component: {fileID: 760454137}
   - component: {fileID: 760454136}
   m_Layer: 5
-  m_Name: Number
+  m_Name: Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1348,7 +1384,7 @@ GameObject:
   - component: {fileID: 792825804}
   - component: {fileID: 792825803}
   m_Layer: 5
-  m_Name: Number
+  m_Name: Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1756,7 +1792,7 @@ GameObject:
   - component: {fileID: 870112080}
   - component: {fileID: 870112079}
   m_Layer: 5
-  m_Name: Number
+  m_Name: Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1959,7 +1995,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_TextViewport: {fileID: 0}
   m_TextComponent: {fileID: 1462078198}
@@ -2770,8 +2806,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1357686340}
+  - component: {fileID: 1357686341}
   m_Layer: 5
-  m_Name: Row
+  m_Name: RankRow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2800,6 +2837,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000012232361, y: 1.0000124}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1357686341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357686339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b951cb4705111428485a64d1498ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: {fileID: 1888774297}
+  input: {fileID: 362183006}
+  score: {fileID: 618898907}
+  activatedColor: {r: 1, g: 0.8352942, b: 0, a: 1}
+  deactivatedColor: {r: 0.98823535, g: 1, b: 0.35686275, a: 1}
 --- !u!1 &1425505874 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 881227646343990821, guid: 688d78697456b9a42a6bfc10c24818e1,
@@ -3442,8 +3496,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1659379526}
+  - component: {fileID: 1659379527}
   m_Layer: 5
-  m_Name: Row
+  m_Name: RankRow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3472,6 +3527,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000009236471, y: -148.99998}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1659379527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659379525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b951cb4705111428485a64d1498ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: {fileID: 870112079}
+  input: {fileID: 889289604}
+  score: {fileID: 1557282131}
+  activatedColor: {r: 1, g: 0.8352941, b: 0, a: 1}
+  deactivatedColor: {r: 0.9882353, g: 1, b: 0.35686275, a: 1}
 --- !u!1 &1738965389
 GameObject:
   m_ObjectHideFlags: 0
@@ -3754,7 +3826,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 703851089, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 622913242950159531, guid: 688d78697456b9a42a6bfc10c24818e1,
         type: 3}
@@ -3834,32 +3906,32 @@ PrefabInstance:
     - target: {fileID: 881227647114238566, guid: 688d78697456b9a42a6bfc10c24818e1,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2414506944200885023, guid: 688d78697456b9a42a6bfc10c24818e1,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3716397186386718403, guid: 688d78697456b9a42a6bfc10c24818e1,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4289113212418116835, guid: 688d78697456b9a42a6bfc10c24818e1,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4774318706272136384, guid: 688d78697456b9a42a6bfc10c24818e1,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8657885988749376108, guid: 688d78697456b9a42a6bfc10c24818e1,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 881227646343990820, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
@@ -3893,7 +3965,7 @@ GameObject:
   - component: {fileID: 1888774298}
   - component: {fileID: 1888774297}
   m_Layer: 5
-  m_Name: Number
+  m_Name: Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4232,7 +4304,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_TextViewport: {fileID: 0}
   m_TextComponent: {fileID: 601491798}
@@ -4308,8 +4380,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2006644815}
+  - component: {fileID: 2006644816}
   m_Layer: 5
-  m_Name: Row
+  m_Name: RankRow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4338,6 +4411,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0.00002721066, y: -48.99999}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2006644816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006644814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b951cb4705111428485a64d1498ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: {fileID: 792825803}
+  input: {fileID: 2052164578}
+  score: {fileID: 1738965391}
+  activatedColor: {r: 1, g: 0.8352942, b: 0, a: 1}
+  deactivatedColor: {r: 0.98823535, g: 1, b: 0.35686275, a: 1}
 --- !u!1 &2052164576
 GameObject:
   m_ObjectHideFlags: 0
@@ -4417,7 +4507,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_TextViewport: {fileID: 0}
   m_TextComponent: {fileID: 1267469663}
@@ -4494,13 +4584,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2061162812}
   - component: {fileID: 2061162813}
+  - component: {fileID: 2061162814}
   m_Layer: 5
   m_Name: LeaderboardContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2061162812
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4541,6 +4632,25 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &2061162814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061162811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d42bb74f6a393d746806699b52bb01fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: def2a5628d537084785badcd249d92d1, type: 2}
+  _rows:
+  - {fileID: 406384291}
+  - {fileID: 1357686341}
+  - {fileID: 2006644816}
+  - {fileID: 605000080}
+  - {fileID: 1659379527}
 --- !u!114 &2922681309937311849
 MonoBehaviour:
   m_ObjectHideFlags: 0

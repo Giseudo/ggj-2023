@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11f442b7b1c66249bf5e8cae3f6d9e0, type: 3}
+  m_Name: Leaderboard
+  m_EditorClassIdentifier: 
+  _first:
+    name: 
+    score: 0
+  _second:
+    name: 
+    score: 0
+  _third:
+    name: 
+    score: 0
+  _fourth:
+    name: 
+    score: 0
+  _fifth:
+    name: 
+    score: 0
