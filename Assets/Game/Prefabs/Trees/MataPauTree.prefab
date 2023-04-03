@@ -188,6 +188,36 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6657527156417553468, guid: 3bf38a9ef3c58b54584cd6f8967d9809,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.01355747
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657527156417553468, guid: 3bf38a9ef3c58b54584cd6f8967d9809,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.008344497
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657527156417553468, guid: 3bf38a9ef3c58b54584cd6f8967d9809,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99896705
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657527156417553468, guid: 3bf38a9ef3c58b54584cd6f8967d9809,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657527156417553468, guid: 3bf38a9ef3c58b54584cd6f8967d9809,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.04544133
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657527156417553468, guid: 3bf38a9ef3c58b54584cd6f8967d9809,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -5.209
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -232,6 +262,7 @@ MonoBehaviour:
   _energyAmount: 1100
   _initialRootSplitLimit: 5
   _mesh: {fileID: 6431742562865401259}
+  _absorbClip: {fileID: 0}
   _levels:
   - _rootEnergyCost: 200
     _rootMaxDistance: 12
