@@ -46,6 +46,9 @@ namespace Game.Core
 
             _damageables = new List<Damageable>();
             _attackers = new List<Attacker>();
+
+            DataHandler.LoadGameData();
+            DataHandler.SaveGameData();
         }
 
         public static void AddDamageable(Damageable damageable)
@@ -92,7 +95,7 @@ namespace Game.Core
 
         private void OnApplicationQuit()
         {
-            // DataHandler.SaveGameData();
+            DataHandler.SaveGameData();
         }
     }
 }

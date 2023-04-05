@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Leaderboard
   m_EditorClassIdentifier: 
   _first:
-    name: 
-    score: 0
+    name: dek
+    score: 99999999
   _second:
-    name: 
-    score: 0
+    name: mim
+    score: 9999999
   _third:
-    name: 
-    score: 0
+    name: kik
+    score: 999999
   _fourth:
-    name: 
-    score: 0
+    name: vic
+    score: 99999
   _fifth:
-    name: 
-    score: 0
+    name: luc
+    score: 9999

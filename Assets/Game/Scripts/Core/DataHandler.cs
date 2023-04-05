@@ -7,17 +7,17 @@ namespace Game.Core
     {
         public static void LoadGameData()
         {
-            // load game parameters
-            LeaderboardData[] gameParametersList = Resources.LoadAll<LeaderboardData>("ScriptableObjects/Parameters");
-            foreach (LeaderboardData parameters in gameParametersList)
+            LeaderboardData[] leaderboards = Resources.LoadAll<LeaderboardData>("ScriptableObjects");
+
+            foreach (LeaderboardData parameters in leaderboards)
                 parameters.LoadFromFile();
         }
 
         public static void SaveGameData()
         {
-            // save game parameters
-            LeaderboardData[] gameParametersList = Resources.LoadAll<LeaderboardData>("ScriptableObjects/Leaderboard");
-            foreach (LeaderboardData parameters in gameParametersList)
+            LeaderboardData[] leaderboards = Resources.LoadAll<LeaderboardData>("ScriptableObjects");
+
+            foreach (LeaderboardData parameters in leaderboards)
                 parameters.SaveToFile();
         }
     }

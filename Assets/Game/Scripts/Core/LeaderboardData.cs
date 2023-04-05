@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game.Core
 {
     [Serializable]
-    public class LeaderboardRow
+    public class LeaderboardPosition
     {
         public string name;
         public int score;
@@ -15,18 +15,24 @@ namespace Game.Core
     public class LeaderboardData : JSONSerializableScriptableObject
     {
         [SerializeField]
-        private LeaderboardRow _first;
+        private LeaderboardPosition _first;
 
         [SerializeField]
-        private LeaderboardRow _second;
+        private LeaderboardPosition _second;
 
         [SerializeField]
-        private LeaderboardRow _third;
+        private LeaderboardPosition _third;
 
         [SerializeField]
-        private LeaderboardRow _fourth;
+        private LeaderboardPosition _fourth;
 
         [SerializeField]
-        private LeaderboardRow _fifth;
+        private LeaderboardPosition _fifth;
+
+        public LeaderboardPosition First => _first;
+        public LeaderboardPosition Second => _second;
+        public LeaderboardPosition Third => _third;
+        public LeaderboardPosition Fourth => _fourth;
+        public LeaderboardPosition Fifth => _fifth;
     }
 }
