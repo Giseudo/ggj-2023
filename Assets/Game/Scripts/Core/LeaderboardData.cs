@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Core
@@ -6,8 +7,19 @@ namespace Game.Core
     [Serializable]
     public class LeaderboardPosition
     {
-        public string name;
-        public int score;
+        [SerializeField]
+        private string _name;
+        [SerializeField]
+        private int _score;
+        
+        public int Score { get => _score; set => _score = value; }
+        public string Name { get => _name; set => _name = value; }
+
+        public LeaderboardPosition(int score = 0, string name = "")
+        {
+            Score = score;
+            Name = name;
+        }
     }
 
     [Serializable]
@@ -15,24 +27,31 @@ namespace Game.Core
     public class LeaderboardData : JSONSerializableScriptableObject
     {
         [SerializeField]
-        private LeaderboardPosition _first;
+        private List<LeaderboardPosition> _positions = new List<LeaderboardPosition>();
 
-        [SerializeField]
-        private LeaderboardPosition _second;
+        public List<LeaderboardPosition> Positions => _positions;
 
-        [SerializeField]
-        private LeaderboardPosition _third;
+        public LeaderboardPosition GetPosition(int index)
+        {
+            if (index >= _positions.Count)
+                return AddScore(index);
 
-        [SerializeField]
-        private LeaderboardPosition _fourth;
+            return _positions[index];
+        }
 
-        [SerializeField]
-        private LeaderboardPosition _fifth;
+        public LeaderboardPosition AddScore(int index, int score = 0, string name = "")
+        {
+            _positions.Insert(index, new LeaderboardPosition(score, name));
 
-        public LeaderboardPosition First => _first;
-        public LeaderboardPosition Second => _second;
-        public LeaderboardPosition Third => _third;
-        public LeaderboardPosition Fourth => _fourth;
-        public LeaderboardPosition Fifth => _fifth;
+            return _positions[index];
+        }
+
+        public void SetScore(int index, int score = 0, string name = "")
+        {
+            if (index >= _positions.Count) return;
+
+            _positions[index].Score = score;
+            _positions[index].Name = name;
+        }
     }
 }

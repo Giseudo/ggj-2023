@@ -24,6 +24,7 @@ namespace Game.UI
         private Color _deactivatedColor;
 
         private LeaderboardPosition _data;
+        private RectTransform _rect;
 
         public Action<UIRankRow> activated = delegate { };
         public Action<UIRankRow> deactivated = delegate { };
@@ -31,10 +32,12 @@ namespace Game.UI
 
         public string Name => _input.text;
         public int Score => Int32.Parse(_score.text.Replace(".", ""));
+        public RectTransform Rect => _rect;
 
         public void Awake()
         {
             _input.onEndEdit.AddListener(OnSubmit);
+            TryGetComponent<RectTransform>(out _rect);
         }
 
         public void OnDestroy()
@@ -46,7 +49,7 @@ namespace Game.UI
         {
             submitted.Invoke(this);
 
-            _data.name = value;
+            _data.Name = value;
         }
 
         public void SetActive(bool value)
@@ -79,8 +82,8 @@ namespace Game.UI
 
         public void SetData(LeaderboardPosition data)
         {
-            _input.text = $"{data.name.Substring(0, 3)}";
-            _score.text = $"{data.score:N0}".Replace(",", ".");
+            _input.text = $"{data.Name.Substring(0, Math.Min(3, data.Name.Length))}";
+            _score.text = $"{data.Score:N0}".Replace(",", ".");
             _data = data;
         }
     }

@@ -12,18 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11f442b7b1c66249bf5e8cae3f6d9e0, type: 3}
   m_Name: Leaderboard
   m_EditorClassIdentifier: 
-  _first:
-    name: dek
-    score: 99999999
-  _second:
-    name: mim
-    score: 9999999
-  _third:
-    name: kik
-    score: 999999
-  _fourth:
-    name: vic
-    score: 99999
-  _fifth:
-    name: luc
-    score: 9999
+  _positions:
+  - _name: pau
+    _score: 99999999
+  - _name: lay
+    _score: 9999999
+  - _name: mil
+    _score: 999999
+  - _name: lau
+    _score: 99999
+  - _name: gis
+    _score: 9999

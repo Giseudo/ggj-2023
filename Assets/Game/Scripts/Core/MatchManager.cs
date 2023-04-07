@@ -10,19 +10,22 @@ namespace Game.Core
 {
     public class MatchManager : MonoBehaviour
     {
-        public static int EndedWavesCount { get; private set; }
-        public static int RoundOverCount { get; private set; }
-        public static bool IsGameOver { get; private set; }
+        [SerializeField]
+        private LeaderboardData _leaderboard;
 
         private static List<WaveSpawner> _waveSpawners;
         private Damageable _treeDamageable;
 
         public static MatchManager Instance { get; private set; }
+        public static int EndedWavesCount { get; private set; }
+        public static int RoundOverCount { get; private set; }
+        public static bool IsGameOver { get; private set; }
         public static int RoundNumbers { get; private set; }
         public static int CurrentRound { get; private set; }
         public static int CurrentScore { get; private set; }
-        public static List<WaveSpawner> WaveSpawners => _waveSpawners;
         public static bool HasStarted { get; private set; }
+        public static LeaderboardData Leaderboard { get; private set; }
+        public static List<WaveSpawner> WaveSpawners => _waveSpawners;
         public static Action<WaveSpawner> WaveSpawnerAdded;
         public static Action<WaveSpawner> WaveSpawnerRemoved;
         public static Action<int, Vector3> DroppedEnergy;
@@ -34,6 +37,7 @@ namespace Game.Core
         public static Action ScoreFinished;
         public static Action<int> RoundStarted;
         public static Action<int> ScoreChanged;
+        public static Action<int> NewHighScore;
 
         private void OnLevelComplete() => StartCoroutine(AbsorbHealth());
 
@@ -41,8 +45,10 @@ namespace Game.Core
         {
             Instance = this;
 
+            Leaderboard = _leaderboard;
             EndedWavesCount = 0;
             CurrentRound = 0;
+            CurrentScore = 500000000;
             IsGameOver = false;
             WaveSpawnerAdded = delegate { };
             WaveSpawnerRemoved = delegate { };
@@ -54,6 +60,7 @@ namespace Game.Core
             DrainScoreHealth = delegate { };
             DrainScoreEnergy = delegate { };
             ScoreFinished = delegate { };
+            NewHighScore = delegate { };
             GameOver = delegate { };
             HasStarted = false;
 
@@ -64,15 +71,18 @@ namespace Game.Core
         {
             GameManager.Scenes.loadedLevel += OnLoadLevel;
             LevelCompleted += OnLevelComplete;
+            GameCompleted += OnGameComplete;
             OnLoadLevel(0);
 
             // LevelCompleted.Invoke();
+            GameCompleted.Invoke();
         }
 
         public void OnDestroy()
         {
             GameManager.Scenes.loadedLevel -= OnLoadLevel;
             LevelCompleted -= OnLevelComplete;
+            GameCompleted += OnGameComplete;
         }
 
         private void OnLoadLevel(int level)
@@ -84,7 +94,8 @@ namespace Game.Core
 
             if (_treeDamageable)
                 _treeDamageable.died -= OnTreeDeath;
-
+            
+            if (!GameManager.MainTree) return;
             if (!GameManager.MainTree.TryGetComponent<Damageable>(out _treeDamageable)) return;
 
             _treeDamageable.died += OnTreeDeath;
@@ -235,6 +246,23 @@ namespace Game.Core
             CurrentScore += value;
             ScoreChanged.Invoke(CurrentScore);
         }
+
+        private void OnGameComplete()
+        {
+            for (int i = 0; i < _leaderboard.Positions.Count; i++)
+            {
+                LeaderboardPosition position = _leaderboard.GetPosition(i);
+
+                if (CurrentScore >= position.Score)
+                {
+                    _leaderboard.AddScore(i, CurrentScore);
+
+                    if (i < 5) NewHighScore.Invoke(i);
+
+                    break;
+                }
+            }
+        }
     }
 }
 
@@ -268,4 +296,5 @@ namespace Game.Core
 // [x] Absorb tree indications
 // [x] Area damage
 // [x] Intro
-// [ ] Score
+// [x] Score
+// [ ] Credits
