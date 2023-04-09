@@ -21,6 +21,7 @@ namespace Game.UI
         private UIScore _score;
 
         private RectTransform _rect;
+        private CanvasGroup _canvasGroup;
         private Vector2 _initialHealthPosition;
         private Vector2 _initialEnergyPosition;
 
@@ -31,6 +32,7 @@ namespace Game.UI
         void Awake()
         {
             TryGetComponent<RectTransform>(out _rect);
+            TryGetComponent<CanvasGroup>(out _canvasGroup);
         }
 
         void Start()
@@ -38,6 +40,7 @@ namespace Game.UI
             GameManager.Scenes.loadedLevel += OnLevelLoad;
             MatchManager.LevelCompleted += OnLevelComplete;
             MatchManager.GameOver += OnLevelComplete;
+            MatchManager.GameCompleted += OnGameComplete;
             MatchManager.DrainScoreHealth += OnHealthDrain;
             MatchManager.DrainScoreEnergy += OnEnergyDrain;
 
@@ -52,8 +55,17 @@ namespace Game.UI
             GameManager.Scenes.loadedLevel -= OnLevelLoad;
             MatchManager.LevelCompleted -= OnLevelComplete;
             MatchManager.GameOver -= OnLevelComplete;
+            MatchManager.GameCompleted -= OnGameComplete;
             MatchManager.DrainScoreHealth -= OnHealthDrain;
             MatchManager.DrainScoreEnergy -= OnEnergyDrain;
+        }
+
+        private void OnGameComplete()
+        {
+            _canvasGroup.DOFade(0f, 1f).SetUpdate(true);
+            _score.Hide();
+            _energy.Hide();
+            _health.Hide();
         }
 
         private void OnLevelLoad(int level)

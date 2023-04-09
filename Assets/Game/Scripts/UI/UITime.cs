@@ -68,18 +68,24 @@ namespace Game.UI
         }
 
         public void OnPause() {
+            if (!_isOpened) return;
+
             TimeManager.Pause();
 
             _selectionRect.DOAnchorPosY(_pauseButton.Rect.anchoredPosition.y, .3f)
                 .SetUpdate(true);
         }
         public void OnPlay() {
+            if (!_isOpened) return;
+
             TimeManager.Play();
 
             _selectionRect.DOAnchorPosY(_playButton.Rect.anchoredPosition.y, .3f)
                 .SetUpdate(true);
         }
         public void OnFastForward() {
+            if (!_isOpened) return;
+
             TimeManager.FastForward();
 
             _selectionRect.DOAnchorPosY(_fastForwardButton.Rect.anchoredPosition.y, .3f)
@@ -88,6 +94,8 @@ namespace Game.UI
 
         private void OnChangeTime(float value)
         {
+            if (!_isOpened) return;
+
             if (TimeManager.State == TimeState.Playing && value == -1)
                 OnPause();
 
@@ -103,6 +111,8 @@ namespace Game.UI
 
         private void OnTogglePlay()
         {
+            if (!_isOpened) return;
+
             if (TimeManager.State == TimeState.Playing || TimeManager.State == TimeState.FastForwarding)
                 OnPause();
 

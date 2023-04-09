@@ -27,6 +27,7 @@ namespace Game.Core
         public static Action<Tree> MainTreeChanged;
         public static Action<Camera> MainCameraChanged;
         public static Action<Light> MainLightChanged;
+        public static Action GameEnded;
 
         public static List<Damageable> Damageables => _damageables;
 
@@ -43,6 +44,7 @@ namespace Game.Core
             MainTreeChanged = delegate { };
             MainCameraChanged = delegate { };
             MainLightChanged = delegate { };
+            GameEnded = delegate { };
 
             _damageables = new List<Damageable>();
             _attackers = new List<Attacker>();
@@ -92,6 +94,11 @@ namespace Game.Core
         {
             MainLight = light;
             MainLightChanged.Invoke(light);
+        }
+
+        public static void GameOver()
+        {
+            GameEnded.Invoke();
         }
 
         private void OnApplicationQuit()

@@ -972,7 +972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _color: {r: 1, g: 1, b: 1, a: 1}
-  _intensity: 1
+  _intensity: 0.5
   _rotation: {x: 0, y: 0, z: 0}
   _transitionTime: 3
 --- !u!1 &832575517

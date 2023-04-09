@@ -13,7 +13,6 @@ namespace Game.UI
         {
             Victory,
             Defeat,
-            Finished,
         }
 
         [SerializeField]
@@ -45,7 +44,6 @@ namespace Game.UI
         private void OnLevelLoad(int level) => Animate(false);
         private void OnVictory() => Animate(true);
         private void OnGameOver() => Animate(true);
-        private void OnGameComplete() => Animate(true);
 
         public void Awake()
         {
@@ -62,9 +60,6 @@ namespace Game.UI
 
             if (_state == LevelState.Victory)
                 MatchManager.LevelCompleted += OnVictory;
-            
-            if (_state == LevelState.Finished)
-                MatchManager.GameCompleted += OnGameComplete;
 
             if (_menuButton)
                 _menuButton.clicked += MainMenu;
@@ -86,9 +81,6 @@ namespace Game.UI
 
             if (_state == LevelState.Victory)
                 MatchManager.LevelCompleted -= OnVictory;
-            
-            if (_state == LevelState.Finished)
-                MatchManager.GameCompleted -= OnGameComplete;
 
             if (_menuButton)
                 _menuButton.clicked -= MainMenu;
@@ -108,12 +100,11 @@ namespace Game.UI
         public void NextLevel()
         {
             _bodyCanvasGroup.DOFade(0f, .5f).SetUpdate(true);
-            _buttonsCanvasGroup.DOFade(0f, .5f).SetUpdate(true);
+            _buttonsCanvasGroup.DOFade(0f, .5f).SetUpdate(true)
+                .OnComplete(GameManager.Scenes.LoadNextLevel);
 
             _buttonsCanvasGroup.interactable = false;
             _buttonsCanvasGroup.blocksRaycasts = false;
-
-            GameManager.Scenes.LoadNextLevel();
         }
 
         private void OnSceneTransitionEnd()
@@ -139,6 +130,12 @@ namespace Game.UI
 
         private void OnScoreFinish()
         {
+            if (GameManager.Scenes.IsLastLevel)
+            {
+                OnSceneTransitionEnd();
+                return;
+            }
+
             GameManager.MainLight.TryGetComponent<SceneTransition>(out SceneTransition transition);
 
             transition.StartTransition(OnSceneTransitionEnd);
@@ -146,11 +143,21 @@ namespace Game.UI
 
         private void Animate(bool value)
         {
+            _menuButton.gameObject.SetActive(true);
+            _continueButton.Rect.anchoredPosition = new Vector2(160f, _continueButton.Rect.anchoredPosition.y);
+
             if (value)
             {
+                if (GameManager.Scenes.IsLastLevel)
+                {
+                    _titleText.text = "Fim de jogo !!";
+                    _menuButton.gameObject.SetActive(false);
+                    _continueButton.Rect.anchoredPosition = new Vector2(0f, _continueButton.Rect.anchoredPosition.y);
+                }
+
                 _blur.Show();
 
-                DOTween.To(() => _titleText.characterSpacing, x => _titleText.characterSpacing = x, 7f, 3f)
+                DOTween.To(() => _titleText.characterSpacing, x => _titleText.characterSpacing = x, 7f, 6f)
                     .SetUpdate(true);
 
                 _canvasGroup.interactable = true;

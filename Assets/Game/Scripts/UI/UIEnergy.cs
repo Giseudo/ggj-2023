@@ -31,6 +31,7 @@ namespace Game.UI
         [SerializeField]
         private AudioClip _collectClip;
 
+        private bool _isOpened = true;
         private Tween _tween;
         private RectTransform _rect;
         private VFXEventAttribute _eventAttribute;
@@ -112,6 +113,28 @@ namespace Game.UI
             adjustedPosition.y *= UICanvas.Rect.rect.height / (float) camera.pixelHeight;
 
             return adjustedPosition - UICanvas.Rect.sizeDelta / 2f;
+        }
+
+        public void Show(float delay = 0f)
+        {
+            if (_isOpened)
+                return;
+
+            _isOpened = true;
+            _rect.DOAnchorPos(new Vector2(-50f, _rect.anchoredPosition.y), 1f)
+                .SetUpdate(true)
+                .SetDelay(delay);
+        }
+
+        public void Hide(float delay = 0f)
+        {
+            if (!_isOpened)
+                return;
+
+            _isOpened = false;
+            _rect.DOAnchorPos(new Vector2(80f, _rect.anchoredPosition.y), 1f)
+                .SetUpdate(true)
+                .SetDelay(delay);
         }
     }
 }

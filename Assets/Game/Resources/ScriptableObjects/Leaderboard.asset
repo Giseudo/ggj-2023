@@ -16,10 +16,10 @@ MonoBehaviour:
   - _name: pau
     _score: 99999999
   - _name: lay
-    _score: 9999999
+    _score: 50000000
   - _name: mil
-    _score: 999999
+    _score: 40000000
   - _name: lau
-    _score: 99999
+    _score: 5000000
   - _name: gis
-    _score: 9999
+    _score: 4000000

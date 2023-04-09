@@ -19,6 +19,9 @@ namespace Game.UI
         [SerializeField]
         private RectTransform _selector;
 
+        [SerializeField]
+        private UIButton _closeButton;
+
         private CanvasGroup _canvasGroup;
         private LeaderboardData _data;
         private Tween _titleTween;
@@ -36,6 +39,7 @@ namespace Game.UI
             MatchManager.NewHighScore += OnNewHighScore;
 
             _rows.ForEach(row => row.activated += OnRowActivate);
+            _closeButton.clicked += OnClose;
 
             _data = MatchManager.Leaderboard;
             _canvasGroup = GetComponent<CanvasGroup>();
@@ -49,11 +53,7 @@ namespace Game.UI
             MatchManager.NewHighScore -= OnNewHighScore;
 
             _rows.ForEach(row => row.activated -= OnRowActivate);
-        }
-
-        public void OnGameComplete()
-        {
-            Show();
+            _closeButton.clicked -= OnClose;
         }
 
         public void Show()
@@ -108,7 +108,7 @@ namespace Game.UI
 
             UIRankRow row = _rows[position];
 
-            row.Activate();
+            StartCoroutine(ActivateRow(row));
         }
 
         private void OnRowActivate(UIRankRow row)
@@ -128,6 +128,34 @@ namespace Game.UI
                 .SetUpdate(true)
                 .SetEase(Ease.Linear)
                 .SetLoops(-1);
+        }
+
+        private void OnClose()
+        {
+            Hide();
+
+            if (GameManager.Instance == null) return;
+
+            GameManager.GameOver();
+        }
+
+        public void OnGameComplete()
+        {
+            StartCoroutine(DelayedShow(1f));
+        }
+
+        private IEnumerator DelayedShow(float waitTime)
+        {
+            yield return new WaitForSecondsRealtime(waitTime);
+
+            Show();
+        }
+
+        private IEnumerator ActivateRow(UIRankRow row)
+        {
+            yield return new WaitForSecondsRealtime(1f);
+
+            row.Activate();
         }
     }
 }

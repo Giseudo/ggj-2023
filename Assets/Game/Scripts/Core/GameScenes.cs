@@ -18,6 +18,8 @@ namespace Game.Core
         public int CurrentLevel => _currentLevel;
         public List<int> LevelScenes => _levelScenesIndex;
 
+        public bool IsLastLevel => _currentLevel + 1 >= _levelScenesIndex.Count;
+
         public Action<int> loadedLevel = delegate { };
 
         public void LoadMenuScene()
@@ -44,7 +46,10 @@ namespace Game.Core
         public void LoadNextLevel()
         {
             if (_currentLevel + 1 >= _levelScenesIndex.Count)
+            {
+                MatchManager.EndGame();
                 return;
+            }
 
             _currentLevel++;
 

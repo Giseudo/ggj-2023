@@ -48,13 +48,12 @@ namespace Game.Core
             Leaderboard = _leaderboard;
             EndedWavesCount = 0;
             CurrentRound = 0;
-            CurrentScore = 500000000;
+            CurrentScore = 0;
             IsGameOver = false;
             WaveSpawnerAdded = delegate { };
             WaveSpawnerRemoved = delegate { };
             DroppedEnergy = delegate { };
             LevelCompleted = delegate { };
-            GameCompleted = delegate { };
             RoundStarted = delegate { };
             ScoreChanged = delegate { };
             DrainScoreHealth = delegate { };
@@ -71,18 +70,16 @@ namespace Game.Core
         {
             GameManager.Scenes.loadedLevel += OnLoadLevel;
             LevelCompleted += OnLevelComplete;
-            GameCompleted += OnGameComplete;
             OnLoadLevel(0);
 
-            // LevelCompleted.Invoke();
-            GameCompleted.Invoke();
+            LevelCompleted.Invoke();
+            // GameCompleted.Invoke();
         }
 
         public void OnDestroy()
         {
             GameManager.Scenes.loadedLevel -= OnLoadLevel;
             LevelCompleted -= OnLevelComplete;
-            GameCompleted += OnGameComplete;
         }
 
         private void OnLoadLevel(int level)
@@ -157,15 +154,11 @@ namespace Game.Core
         {
             EndedWavesCount++;
 
+            if (IsGameOver) return;
+
             if (EndedWavesCount >= _waveSpawners.Count)
             {
                 IsGameOver = true;
-
-                if (GameManager.Scenes.CurrentLevel >= GameManager.Scenes.LevelScenes.Count - 1)
-                {
-                    GameCompleted.Invoke();
-                    return;
-                }
 
                 LevelCompleted.Invoke();
             }
@@ -246,16 +239,18 @@ namespace Game.Core
             CurrentScore += value;
             ScoreChanged.Invoke(CurrentScore);
         }
-
-        private void OnGameComplete()
+        
+        public static void EndGame()
         {
-            for (int i = 0; i < _leaderboard.Positions.Count; i++)
+            GameCompleted.Invoke();
+
+            for (int i = 0; i < Leaderboard.Positions.Count; i++)
             {
-                LeaderboardPosition position = _leaderboard.GetPosition(i);
+                LeaderboardPosition position = Leaderboard.GetPosition(i);
 
                 if (CurrentScore >= position.Score)
                 {
-                    _leaderboard.AddScore(i, CurrentScore);
+                    Leaderboard.AddScore(i, CurrentScore);
 
                     if (i < 5) NewHighScore.Invoke(i);
 
