@@ -107,7 +107,7 @@ namespace Game.UI
             _buttonsCanvasGroup.blocksRaycasts = false;
         }
 
-        private void OnSceneTransitionEnd()
+        private void ShowActions()
         {
             _buttonsCanvasGroup.DOFade(1f, .5f)
                 .SetUpdate(true)
@@ -132,23 +132,25 @@ namespace Game.UI
         {
             if (GameManager.Scenes.IsLastLevel)
             {
-                OnSceneTransitionEnd();
+                ShowActions();
                 return;
             }
 
             GameManager.MainLight.TryGetComponent<SceneTransition>(out SceneTransition transition);
 
-            transition.StartTransition(OnSceneTransitionEnd);
+            transition.StartTransition(ShowActions);
         }
 
         private void Animate(bool value)
         {
             _menuButton.gameObject.SetActive(true);
-            _continueButton.Rect.anchoredPosition = new Vector2(160f, _continueButton.Rect.anchoredPosition.y);
+
+            if (_state == LevelState.Victory)
+                _continueButton.Rect.anchoredPosition = new Vector2(160f, _continueButton.Rect.anchoredPosition.y);
 
             if (value)
             {
-                if (GameManager.Scenes.IsLastLevel)
+                if (GameManager.Scenes.IsLastLevel && _state == LevelState.Victory)
                 {
                     _titleText.text = "Fim de jogo !!";
                     _menuButton.gameObject.SetActive(false);
@@ -166,6 +168,10 @@ namespace Game.UI
                     .SetUpdate(true)
                     .OnComplete(() => {
                         _bodyCanvasGroup.DOFade(1f, .5f).SetUpdate(true);
+
+                        if (_state == LevelState.Victory) return;
+
+                        ShowActions();
                     });
 
                 return;

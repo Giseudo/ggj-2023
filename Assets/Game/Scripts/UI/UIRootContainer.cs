@@ -28,10 +28,10 @@ namespace Game.UI
         private UICameraPan _cameraPan;
 
         private RootNode _activeNode;
+        private Vector2 _rootPointAnchoredPos;
 
         public RootNode ActiveNode => _activeNode;
 
-        private void OnCameraPanStart() => _rootActions.KillCameraTween();
         private void OnPointClick() => _rootActions.Show(_activeNode);
         public void Start() => _rootCreation.Init(this);
         private void OnSplitAction() => _rootCreation.StartDrag();
@@ -49,6 +49,7 @@ namespace Game.UI
             _rootActions.createdUnit += OnUnitCreation;
             _treeHighlight.highlightChanged += OnTreeHighlightChange;
             _cameraPan.started += OnCameraPanStart;
+            _cameraPan.updated += OnCameraPanDrag;
         }
 
         public void OnDisable()
@@ -62,6 +63,7 @@ namespace Game.UI
             _rootActions.createdUnit -= OnUnitCreation;
             _treeHighlight.highlightChanged -= OnTreeHighlightChange;
             _cameraPan.started -= OnCameraPanStart;
+            _cameraPan.updated -= OnCameraPanDrag;
         }
 
         private void OnNodeCreation(RootNode node)
@@ -104,6 +106,17 @@ namespace Game.UI
             _rootPoint.Rect.anchoredPosition = UICanvas.GetScreenPosition(GameManager.MainTree.transform.position);
             _rootPoint.Show();
             _rootPoint.Pulse(true);
+        }
+
+        private void OnCameraPanStart() {
+            _rootPointAnchoredPos = _rootPoint.Rect.anchoredPosition;
+            _rootActions.KillCameraTween();
+        }
+
+        private void OnCameraPanDrag(Vector3 displacement)
+        {
+            _rootPoint.Rect.anchoredPosition = _rootPointAnchoredPos;
+            _rootPoint.Rect.position -= displacement;
         }
 
         public void OnBeginDrag(PointerEventData evt)

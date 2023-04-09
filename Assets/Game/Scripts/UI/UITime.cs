@@ -47,6 +47,7 @@ namespace Game.UI
 
         public void Start()
         {
+            MatchManager.LevelCompleted += OnPlay;
             TimeManager.StateChanged += OnStateChange;
             UICanvas.ScreenResized += OnScreenResize;
         }
@@ -63,6 +64,7 @@ namespace Game.UI
             _inputReader.changedTime -= OnChangeTime;
             _inputReader.toggledPlay -= OnTogglePlay;
 
+            MatchManager.LevelCompleted -= OnPlay;
             TimeManager.StateChanged -= OnStateChange;
             UICanvas.ScreenResized -= OnScreenResize;
         }
@@ -76,8 +78,6 @@ namespace Game.UI
                 .SetUpdate(true);
         }
         public void OnPlay() {
-            if (!_isOpened) return;
-
             TimeManager.Play();
 
             _selectionRect.DOAnchorPosY(_playButton.Rect.anchoredPosition.y, .3f)

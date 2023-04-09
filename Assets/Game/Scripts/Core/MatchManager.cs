@@ -20,6 +20,7 @@ namespace Game.Core
         public static int EndedWavesCount { get; private set; }
         public static int RoundOverCount { get; private set; }
         public static bool IsGameOver { get; private set; }
+        public static bool IsTreeDead { get; private set; }
         public static int RoundNumbers { get; private set; }
         public static int CurrentRound { get; private set; }
         public static int CurrentScore { get; private set; }
@@ -50,6 +51,8 @@ namespace Game.Core
             CurrentRound = 0;
             CurrentScore = 0;
             IsGameOver = false;
+            IsTreeDead = false;
+            HasStarted = false;
             WaveSpawnerAdded = delegate { };
             WaveSpawnerRemoved = delegate { };
             DroppedEnergy = delegate { };
@@ -61,7 +64,6 @@ namespace Game.Core
             ScoreFinished = delegate { };
             NewHighScore = delegate { };
             GameOver = delegate { };
-            HasStarted = false;
 
             _waveSpawners = new List<WaveSpawner>();
         }
@@ -74,6 +76,9 @@ namespace Game.Core
 
             LevelCompleted.Invoke();
             // GameCompleted.Invoke();
+
+            // if (GameManager.MainTree.TryGetComponent<Damageable>(out Damageable damageable))
+            //     damageable.Die();
         }
 
         public void OnDestroy()
@@ -87,6 +92,7 @@ namespace Game.Core
             HasStarted = false;
             CurrentRound = 0;
             EndedWavesCount = 0;
+            IsTreeDead = false;
             IsGameOver = false;
 
             if (_treeDamageable)
@@ -100,6 +106,7 @@ namespace Game.Core
 
         private void OnTreeDeath(Damageable damageable)
         {
+            IsTreeDead = true;
             IsGameOver = true;
             GameOver.Invoke();
         }

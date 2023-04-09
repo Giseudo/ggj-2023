@@ -40,7 +40,7 @@ namespace Game.UI
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            _energyButton?.Rect.DOLocalMoveY(0f, .5f)
+            _energyButton?.Rect.DOLocalMoveY(30f, .5f)
                 .SetUpdate(true)
                 .SetEase(Ease.OutExpo);
             _energyButton?.Rect.DOScale(Vector3.zero, .5f)

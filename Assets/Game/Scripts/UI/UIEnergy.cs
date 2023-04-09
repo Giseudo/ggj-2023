@@ -23,6 +23,9 @@ namespace Game.UI
         private Sprite _happySprite;
 
         [SerializeField]
+        private Sprite _sadSprite;
+
+        [SerializeField]
         private VisualEffect _sparksVfx;
 
         [SerializeField]
@@ -40,6 +43,9 @@ namespace Game.UI
 
         private void UpdateEnergy() => _text.text = $"{GameManager.MainTree.EnergyAmount}";
         private void OnConsumeEnergy(int amount) => UpdateEnergy();
+        public void SetNeutralSprite() => _image.sprite = _neutralSprite;
+        public void SetHappySprite() => _image.sprite = _happySprite;
+        public void SetSadSprite() => _image.sprite = _sadSprite;
 
         public void Awake()
         {
@@ -94,13 +100,13 @@ namespace Game.UI
         {
             _wrapperRect.DOScale(Vector3.one * 1.2f, .2f)
                 .OnStart(() => {
-                    _image.sprite = _happySprite;
+                    SetHappySprite();
                     UpdateEnergy();
                 })
                 .OnComplete(() => {
                     _wrapperRect.DOScale(Vector3.one, .2f)
                         .SetDelay(.5f)
-                        .OnComplete(() => _image.sprite = _neutralSprite);
+                        .OnComplete(SetNeutralSprite);
                 });
         }
 

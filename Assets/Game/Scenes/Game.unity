@@ -275,12 +275,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 943020050, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -99.99991
+      value: -99.99994
+      objectReference: {fileID: 0}
+    - target: {fileID: 1217782376, guid: 688d78697456b9a42a6bfc10c24818e1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -140
+      objectReference: {fileID: 0}
+    - target: {fileID: 568273093389394722, guid: 688d78697456b9a42a6bfc10c24818e1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -140
       objectReference: {fileID: 0}
     - target: {fileID: 622913242950159531, guid: 688d78697456b9a42a6bfc10c24818e1,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 80.000015
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 881227646722988384, guid: 688d78697456b9a42a6bfc10c24818e1,
         type: 3}
@@ -347,20 +356,15 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 371834073}
-    - target: {fileID: 6492380616273377080, guid: 688d78697456b9a42a6bfc10c24818e1,
+    - target: {fileID: 965018352539269680, guid: 688d78697456b9a42a6bfc10c24818e1,
         type: 3}
-      propertyPath: m_Color.b
-      value: 0.09957236
+      propertyPath: m_AnchoredPosition.y
+      value: -140
       objectReference: {fileID: 0}
-    - target: {fileID: 6492380616273377080, guid: 688d78697456b9a42a6bfc10c24818e1,
+    - target: {fileID: 1063074897703250663, guid: 688d78697456b9a42a6bfc10c24818e1,
         type: 3}
-      propertyPath: m_Color.g
-      value: 0.018865015
-      objectReference: {fileID: 0}
-    - target: {fileID: 6492380616273377080, guid: 688d78697456b9a42a6bfc10c24818e1,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.53900003
+      propertyPath: m_AnchoredPosition.y
+      value: -140
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

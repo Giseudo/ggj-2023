@@ -186,6 +186,7 @@ namespace Game.UI
                 _addButton.gameObject.SetActive(false);
                 _killButton.gameObject.SetActive(true);
                 _upgradeButton.gameObject.SetActive(node.Unit.Data.UpgradePrefab);
+                _upgradeButton.Button.Button.interactable = true;
                 _targetButton.gameObject.SetActive(node.Unit.Data.Type == UnitType.Spawner);
 
                 _killButton.EnergyButton.SetText($"{node.Unit.Data.SellPrice}");
@@ -197,6 +198,7 @@ namespace Game.UI
                 _addButton.gameObject.SetActive(false);
                 _killButton.gameObject.SetActive(false);
                 _upgradeButton.gameObject.SetActive(!GameManager.MainTree.ReachedMaxLevel);
+                _upgradeButton.Button.Button.interactable = GameManager.MainTree.Unities.Count > 0;
                 _targetButton.gameObject.SetActive(false);
 
                 _upgradeButton.EnergyButton.SetText($"{GameManager.MainTree.UpgradeCost}");

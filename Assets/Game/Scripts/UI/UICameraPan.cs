@@ -18,7 +18,7 @@ namespace Game.UI
         private Tween _tween;
         private bool _isDisabled;
         public Action started = delegate { };
-        public Action updated = delegate { };
+        public Action<Vector3> updated = delegate { };
         public Action finished = delegate { };
 
         public void Start()
@@ -47,7 +47,7 @@ namespace Game.UI
 
             camera.transform.position = position;
 
-            updated.Invoke();
+            updated.Invoke(displacement);
         }
 
         public void OnEndDrag(PointerEventData evt)
@@ -57,6 +57,7 @@ namespace Game.UI
             Camera camera = GameManager.MainCamera;
 
             _tween = camera.transform.DOMove(_initialCameraPosition, .5f)
+                .OnUpdate(() => updated.Invoke(camera.transform.position - _initialCameraPosition))
                 .SetUpdate(true);
 
             finished.Invoke();

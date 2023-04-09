@@ -71,11 +71,15 @@ namespace Game.UI
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (!_button.interactable) return;
+
             clicked.Invoke();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (!_button.interactable) return;
+
             entered.Invoke();
 
             Grow();

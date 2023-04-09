@@ -76,17 +76,18 @@ namespace Game.UI
             _health.Rect.anchorMin = new Vector2(0f, 1f);
             _health.Rect.anchorMax = new Vector2(0f, 1f);
             _health.Rect.localPosition = localPosition;
-            _health.Rect.DOAnchorPos(_initialHealthPosition, 2f);
+            _health.Rect.DOAnchorPos(_initialHealthPosition, 1.5f);
 
             localPosition = _energy.Rect.localPosition;
 
             _energy.Rect.anchorMin = new Vector2(1f, 1f);
             _energy.Rect.anchorMax = new Vector2(1f, 1f);
             _energy.Rect.localPosition = localPosition;
-            _energy.Rect.DOAnchorPos(_initialEnergyPosition, 2f);
+            _energy.Rect.DOAnchorPos(_initialEnergyPosition, 1.5f);
 
             _time.Show(1f);
             _score.Hide();
+            _energy.SetNeutralSprite();
         }
 
         private void OnLevelComplete()
@@ -96,14 +97,19 @@ namespace Game.UI
             _health.Rect.anchorMin = new Vector2(0.5f, 1f);
             _health.Rect.anchorMax = new Vector2(0.5f, 1f);
             _health.Rect.localPosition = localPosition;
-            _health.Rect.DOAnchorPosX(-40f, 2f);
+            _health.Rect.DOAnchorPos(new Vector2(-40f, -100f), 1.5f);
 
             localPosition = _energy.Rect.localPosition;
 
             _energy.Rect.anchorMin = new Vector2(0.5f, 1f);
             _energy.Rect.anchorMax = new Vector2(0.5f, 1f);
             _energy.Rect.localPosition = localPosition;
-            _energy.Rect.DOAnchorPosX(40f, 2f);
+            _energy.Rect.DOAnchorPos(new Vector2(40f, -100f), 1.5f);
+
+            if (MatchManager.IsTreeDead)
+                _energy.SetSadSprite();
+            else
+                _energy.SetHappySprite();
 
             _time.Hide();
             _score.Show();
