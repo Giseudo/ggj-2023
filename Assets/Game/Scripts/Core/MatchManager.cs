@@ -7,9 +7,11 @@ using DG.Tweening;
 using Game.Combat;
 
 namespace Game.Core
-{
-    public class MatchManager : MonoBehaviour
+{    public class MatchManager : MonoBehaviour
     {
+        const int SCORE_HEALTH_MULTIPLIER = 35000;
+        const int SCORE_ENERGY_MULTIPLIER = 10;
+
         [SerializeField]
         private LeaderboardData _leaderboard;
 
@@ -74,7 +76,7 @@ namespace Game.Core
             LevelCompleted += OnLevelComplete;
             OnLoadLevel(0);
 
-            LevelCompleted.Invoke();
+            // LevelCompleted.Invoke();
             // GameCompleted.Invoke();
 
             // if (GameManager.MainTree.TryGetComponent<Damageable>(out Damageable damageable))
@@ -203,19 +205,54 @@ namespace Game.Core
         {
             if (!GameManager.MainTree.TryGetComponent<Damageable>(out Damageable damageable)) yield return null;
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.5f);
 
             while (damageable.Health > 0)
             {
                 damageable.SetHealth(damageable.Health - 1);
 
-                MatchManager.AddScore(10000);
+                MatchManager.AddScore(SCORE_HEALTH_MULTIPLIER);
                 DrainScoreHealth.Invoke();
 
                 yield return new WaitForSeconds(.25f);
             }
 
-            StartCoroutine(AbsorbEnergy());
+            float total = (float)GameManager.MainTree.EnergyAmount;
+            float interval = .05f;
+            float elapsed = 0f;
+            int previous = 0;
+
+            DOTween.To(
+                () => 0f,
+                t => {
+                    if (interval >= .05f)
+                    {
+                        int absorbed = (int)Math.Round(total * t);
+
+                        interval = 0f;
+
+                        GameManager.MainTree.SetEnergy((int)total - absorbed);
+                        MatchManager.AddScore((absorbed - previous) * SCORE_ENERGY_MULTIPLIER);
+
+                        DrainScoreEnergy.Invoke();
+                        previous = absorbed;
+                    }
+
+                    interval += t - elapsed;
+                    elapsed = t;
+                },
+                1f, 3f
+            )
+                .SetUpdate(true)
+                .SetEase(Ease.InSine)
+                .OnComplete(() => {
+                    int remaining = GameManager.MainTree.EnergyAmount;
+                    MatchManager.AddScore(remaining * SCORE_ENERGY_MULTIPLIER);
+                    GameManager.MainTree.SetEnergy(0);
+
+                    DrainScoreEnergy.Invoke();
+                    ScoreFinished.Invoke();
+                });
         }
 
         private IEnumerator AbsorbEnergy()
