@@ -22,11 +22,15 @@ namespace Game.UI
         [SerializeField]
         private UIButton _closeButton;
 
-        private CanvasGroup _canvasGroup;
+        [SerializeField]
         private LeaderboardData _data;
+
+        private CanvasGroup _canvasGroup;
         private Tween _titleTween;
         private Tween _scaleTween;
         private Tween _rotationTween;
+
+        public void OnSubmit(UIRankRow row) => DataHandler.SaveGameData();
 
         public void Awake()
         {
@@ -38,11 +42,16 @@ namespace Game.UI
             MatchManager.GameCompleted += OnGameComplete;
             MatchManager.NewHighScore += OnNewHighScore;
 
-            _rows.ForEach(row => row.activated += OnRowActivate);
             _closeButton.clicked += OnClose;
+            _rows.ForEach(row => {
+                row.activated += OnRowActivate;
+                row.submitted += OnSubmit;
+            });
 
-            _data = MatchManager.Leaderboard;
             _canvasGroup = GetComponent<CanvasGroup>();
+
+            if (_data == null)
+                _data = MatchManager.Leaderboard;
 
             UpdateRows();
         }
@@ -52,8 +61,11 @@ namespace Game.UI
             MatchManager.GameCompleted -= OnGameComplete;
             MatchManager.NewHighScore -= OnNewHighScore;
 
-            _rows.ForEach(row => row.activated -= OnRowActivate);
             _closeButton.clicked -= OnClose;
+            _rows.ForEach(row => {
+                row.activated -= OnRowActivate;
+                row.submitted -= OnSubmit;
+            });
         }
 
         public void Show()
