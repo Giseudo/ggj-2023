@@ -218,14 +218,14 @@ namespace Game.Core
             }
 
             float total = (float)GameManager.MainTree.EnergyAmount;
-            float interval = .05f;
+            float interval = .1f;
             float elapsed = 0f;
             int previous = 0;
 
             DOTween.To(
                 () => 0f,
                 t => {
-                    if (interval >= .05f)
+                    if (interval >= .1f)
                     {
                         int absorbed = (int)Math.Round(total * t);
 
@@ -241,7 +241,7 @@ namespace Game.Core
                     interval += t - elapsed;
                     elapsed = t;
                 },
-                1f, 3f
+                1f, 2f
             )
                 .SetUpdate(true)
                 .SetEase(Ease.InSine)
