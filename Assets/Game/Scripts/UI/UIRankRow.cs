@@ -47,9 +47,9 @@ namespace Game.UI
 
         private void OnSubmit(string value)
         {
-            submitted.Invoke(this);
-
             _data.Name = value;
+
+            submitted.Invoke(this);
         }
 
         public void SetActive(bool value)

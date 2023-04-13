@@ -75,7 +75,7 @@ namespace Game.UI
 
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
-            _canvasGroup.DOFade(1f, 1f)
+            _canvasGroup.DOFade(1f, .5f)
                 .SetUpdate(true);
         }
 
@@ -83,7 +83,7 @@ namespace Game.UI
         {
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
-            _canvasGroup.DOFade(0f, 1f)
+            _canvasGroup.DOFade(0f, .5f)
                 .SetUpdate(true)
                 .OnComplete(() => _titleText.characterSpacing = 0f);
             

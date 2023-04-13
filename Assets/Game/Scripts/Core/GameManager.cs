@@ -100,12 +100,5 @@ namespace Game.Core
         {
             GameEnded.Invoke();
         }
-
-        private void OnApplicationQuit()
-        {
-#if !UNITY_EDITOR
-            DataHandler.SaveGameData();
-#endif
-        }
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
+using Game.Core;
 using DG.Tweening;
 
 public class UIMenuContainer : MonoBehaviour
@@ -13,6 +14,11 @@ public class UIMenuContainer : MonoBehaviour
     private VideoPlayer _videoPlayer;
 
     private CanvasGroup _canvasGroup;
+
+    public void Awake()
+    {
+        DataHandler.LoadGameData();
+    }
 
     public void Start()
     {
