@@ -964,7 +964,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 517784833}
   m_OnClick:
     m_PersistentCalls:
@@ -1120,6 +1120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 1.2
+  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!1 &659811597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1465,6 +1467,8 @@ MonoBehaviour:
   _rootPrefab: {fileID: 1677633249960956306, guid: 1baedb0fc8fd92b41b07a0b08a30f743,
     type: 3}
   _rootCreationSound: {fileID: 8300000, guid: 05eb7449b221e8f4dad17fa6a189899c, type: 3}
+  _invalidCreationSound: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924,
+    type: 3}
   _rootLimit: {fileID: 943020051}
   _rootPoint: {fileID: 881227647515456271}
   _validColor: {r: 0.1764706, g: 0.7254902, b: 0.5137255, a: 1}
@@ -1693,6 +1697,8 @@ MonoBehaviour:
   _thumbnail: {fileID: 86987758}
   _energyButton: {fileID: 5604931893640206530}
   _disc: {fileID: 730106994}
+  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!114 &716089059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2479,6 +2485,7 @@ GameObject:
   - component: {fileID: 1184306409}
   - component: {fileID: 1184306408}
   - component: {fileID: 1184306407}
+  - component: {fileID: 4077516924762716914}
   m_Layer: 5
   m_Name: CancelButton
   m_TagString: Untagged
@@ -2519,7 +2526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -2583,14 +2590,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: dbf208595d7a6aa4faf4608c2819a66e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2600,6 +2607,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4077516924762716914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184306405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f0df66bbf84fbf4794eed37cc1ea2bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverScale: 1.2
+  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!1 &1207601399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2874,6 +2896,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 1.2
+  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!1 &1261056115
 GameObject:
   m_ObjectHideFlags: 0
@@ -2941,6 +2965,8 @@ MonoBehaviour:
   _thumbnail: {fileID: 1507712507}
   _energyButton: {fileID: 8291219420021559985}
   _disc: {fileID: 110879344}
+  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!114 &1261056118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3700,6 +3726,8 @@ MonoBehaviour:
   _thumbnail: {fileID: 1844326774}
   _energyButton: {fileID: 6632744934612664439}
   _disc: {fileID: 329265113}
+  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!114 &1815631782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4009,6 +4037,8 @@ MonoBehaviour:
   _thumbnail: {fileID: 1710694369}
   _energyButton: {fileID: 1212229425}
   _disc: {fileID: 2135163348}
+  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!114 &1976058701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4463,6 +4493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 1.2
+  _clickClip: {fileID: 0}
+  _disabledClip: {fileID: 0}
 --- !u!114 &4014980203951927527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4796,6 +4828,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 1.2
+  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!1 &881227645964655472
 GameObject:
   m_ObjectHideFlags: 0
@@ -5105,6 +5139,9 @@ MonoBehaviour:
   _playButton: {fileID: 6639166737805366036}
   _fastForwardButton: {fileID: 2358609757560175122}
   _inputReader: {fileID: 11400000, guid: 8ce3a66dc27f11b4d8e205f5bca932a4, type: 2}
+  _pauseClip: {fileID: 8300000, guid: 6d43da8a724920040bf2d70c10f81904, type: 3}
+  _playClip: {fileID: 8300000, guid: 974d4dd9e05b2b14d839b026470c61dc, type: 3}
+  _fastForwardClip: {fileID: 8300000, guid: 3fa71881d15352c48811e51dbdd18e8d, type: 3}
 --- !u!1 &881227646246933964
 GameObject:
   m_ObjectHideFlags: 0
@@ -5135,12 +5172,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7181209269893650892}
+  - {fileID: 7408971936873217130}
   - {fileID: 881227647332023964}
   - {fileID: 608979397}
   - {fileID: 881227647503718218}
   - {fileID: 881227645948667568}
   - {fileID: 1230456401}
-  - {fileID: 7408971936873217130}
   m_Father: {fileID: 881227645964655479}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5520,6 +5557,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 0.8
+  _clickClip: {fileID: 0}
+  _disabledClip: {fileID: 0}
 --- !u!1 &881227646722988384
 GameObject:
   m_ObjectHideFlags: 0
@@ -5962,6 +6001,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 0.8
+  _clickClip: {fileID: 0}
+  _disabledClip: {fileID: 0}
 --- !u!1 &881227646918690577
 GameObject:
   m_ObjectHideFlags: 0
@@ -6097,6 +6138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 0.8
+  _clickClip: {fileID: 0}
+  _disabledClip: {fileID: 0}
 --- !u!1 &881227646994012939
 GameObject:
   m_ObjectHideFlags: 0
@@ -6502,6 +6545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _heartMask: {fileID: 7626441946437754435}
   _glowImage: {fileID: 250724369743007346}
+  _hurtClip: {fileID: 8300000, guid: c43a3a7009789ca4db82d179c6d3244d, type: 3}
 --- !u!1 &881227647186498551
 GameObject:
   m_ObjectHideFlags: 0
@@ -6876,6 +6920,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 1.2
+  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!1 &881227647362198787
 GameObject:
   m_ObjectHideFlags: 0
@@ -7103,6 +7149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 1.2
+  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!1 &881227647515456308
 GameObject:
   m_ObjectHideFlags: 0
@@ -7804,7 +7852,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dbf208595d7a6aa4faf4608c2819a66e, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

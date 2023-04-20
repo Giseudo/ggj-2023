@@ -30,6 +30,12 @@ namespace Game.UI
         [SerializeField]
         private Disc _disc;
 
+        [SerializeField]
+        private AudioClip _clickClip;
+
+        [SerializeField]
+        private AudioClip _disabledClip;
+
         public UnitData Data => _data;
 
         public Action<UIUnitCard> clicked = delegate { };
@@ -83,7 +89,14 @@ namespace Game.UI
 
         public void Click()
         {
-            if (_isDisabled) return;
+            if (_isDisabled)
+            {
+                SoundManager.PlaySound(_disabledClip, 0.5f);
+
+                return;
+            }
+
+            SoundManager.PlaySound(_clickClip, 1f);
 
             clicked.Invoke(this);
         }

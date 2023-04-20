@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using Game.Core;
 
 namespace Game.UI
 {
@@ -11,6 +12,12 @@ namespace Game.UI
     {
         [SerializeField]
         private float _hoverScale = 1.2f;
+
+        [SerializeField]
+        private AudioClip _clickClip;
+
+        [SerializeField]
+        private AudioClip _disabledClip;
 
         private Button _button;
         private RectTransform _rect;
@@ -71,7 +78,14 @@ namespace Game.UI
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (!_button.interactable) return;
+            if (!_button.interactable)
+            {
+                SoundManager.PlaySound(_disabledClip, 0.5f);
+
+                return;
+            }
+
+            SoundManager.PlaySound(_clickClip, 1f);
 
             clicked.Invoke();
         }

@@ -25,6 +25,8 @@ namespace Game.UI
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (!_button.Button.interactable) return;
+
             clicked.Invoke();
         }
 

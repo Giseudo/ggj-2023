@@ -928,7 +928,7 @@ PrefabInstance:
     - target: {fileID: 1033187723024418570, guid: adacc02f196b034448c88ad2c9656e8c,
         type: 3}
       propertyPath: m_Intensity
-      value: 19.866245
+      value: 19.706247
       objectReference: {fileID: 0}
     - target: {fileID: 1805537459574047358, guid: adacc02f196b034448c88ad2c9656e8c,
         type: 3}
@@ -1011,6 +1011,11 @@ PrefabInstance:
       value: FirstLevel Props
       objectReference: {fileID: 0}
     - target: {fileID: 6260299852091469278, guid: adacc02f196b034448c88ad2c9656e8c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6382190884385646785, guid: adacc02f196b034448c88ad2c9656e8c,
         type: 3}
       propertyPath: m_IsActive
       value: 1

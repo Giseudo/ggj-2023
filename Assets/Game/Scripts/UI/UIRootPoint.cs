@@ -20,6 +20,7 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private Tween _pulseTween;
     private Tween _innerTween;
     private Tween _outerTween;
+    private Image _image;
 
     public bool IsOpened => _isOpened;
     public bool IsEnabled => _isEnabled;
@@ -31,6 +32,7 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         TryGetComponent<RectTransform>(out _rect);
         TryGetComponent<Button>(out _button);
+        TryGetComponent<Image>(out _image);
     }
 
     public void Show()
@@ -71,11 +73,13 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void Enable()
     {
         _isEnabled = true;
+        _image.raycastTarget = true;
     }
 
     public void Disable()
     {
         _isEnabled = false;
+        _image.raycastTarget = false;
     }
 
     public Tween ShowInner() 
@@ -120,7 +124,11 @@ public class UIRootPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         ShowOuter();
     }
 
-    public void OnPointerClick(PointerEventData evt) => clicked.Invoke();
+    public void OnPointerClick(PointerEventData evt) {
+        if (!_isEnabled) return;
+
+        clicked.Invoke();
+    }
 
     public void OnPointerExit(PointerEventData evt)
     {

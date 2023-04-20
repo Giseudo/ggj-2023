@@ -20,6 +20,9 @@ namespace Game.UI
         private AudioClip _rootCreationSound;
 
         [SerializeField]
+        private AudioClip _invalidCreationSound;
+
+        [SerializeField]
         private UIRootLimit _rootLimit;
 
         [SerializeField]
@@ -105,6 +108,8 @@ namespace Game.UI
                 _rootLimit.Hide();
                 _isDragging = false;
             }
+
+            _rootPoint.Enable();
         }
 
         public void OnPointerMove(PointerEventData evt)
@@ -160,6 +165,7 @@ namespace Game.UI
         public void EndDrag()
         {
             SplitRoot();
+            _rootPoint.Enable();
 
             if (_nearbyTree == null) return;
 
@@ -175,6 +181,8 @@ namespace Game.UI
         private void DragRoot(PointerEventData evt)
         {
             if (ActiveNode == null) return;
+
+            _rootPoint.Disable();
 
             Ray ray = GameManager.MainCamera.ScreenPointToRay(evt.position);
 
@@ -238,7 +246,7 @@ namespace Game.UI
             }
 
             // Obstacles
-            Collider[] obstaclesColliders = Physics.OverlapSphere(_draggingPosition, 2f, 1 << LayerMask.NameToLayer("Obstacle"));
+            Collider[] obstaclesColliders = Physics.OverlapSphere(_draggingPosition, 1f, 1 << LayerMask.NameToLayer("Obstacle"));
 
             if (obstaclesColliders.Length > 0)
             {
@@ -253,7 +261,7 @@ namespace Game.UI
 
                 if (node.Parent == null) continue;
 
-                if (Vector3.Distance(_draggingPosition, FindNearestPointOnLine(node.transform.position, node.Parent.transform.position, _draggingPosition)) < 5f)
+                if (Vector3.Distance(_draggingPosition, FindNearestPointOnLine(node.transform.position, node.Parent.transform.position, _draggingPosition)) < 3f)
                 {
                     _isValidPlacement = false;
                     return;
@@ -297,6 +305,8 @@ namespace Game.UI
         {
             if (_isValidPlacement && _isDragging)
                 GameManager.MainTree.SplitRoot();
+            else
+                SoundManager.PlaySound(_invalidCreationSound, 0.5f);
 
             _isDragging = false;
             _image.enabled = false;

@@ -24,6 +24,15 @@ namespace Game.UI
         [SerializeField]
         private InputReader _inputReader;
 
+        [SerializeField]
+        private AudioClip _pauseClip;
+
+        [SerializeField]
+        private AudioClip _playClip;
+
+        [SerializeField]
+        private AudioClip _fastForwardClip;
+
         private RectTransform _rect;
         private TimeState _previousState;
         private TimeState _currentState;
@@ -71,22 +80,29 @@ namespace Game.UI
 
         public void OnPause() {
             if (!_isOpened) return;
+            if (_currentState == TimeState.Paused) return;
 
             TimeManager.Pause();
+            SoundManager.PlaySound(_pauseClip, 1f);
 
             _selectionRect.DOAnchorPosY(_pauseButton.Rect.anchoredPosition.y, .3f)
                 .SetUpdate(true);
         }
         public void OnPlay() {
+            if (_currentState == TimeState.Playing) return;
+
             TimeManager.Play();
+            SoundManager.PlaySound(_playClip, 1f);
 
             _selectionRect.DOAnchorPosY(_playButton.Rect.anchoredPosition.y, .3f)
                 .SetUpdate(true);
         }
         public void OnFastForward() {
             if (!_isOpened) return;
+            if (_currentState == TimeState.FastForwarding) return;
 
             TimeManager.FastForward();
+            SoundManager.PlaySound(_fastForwardClip, 1f);
 
             _selectionRect.DOAnchorPosY(_fastForwardButton.Rect.anchoredPosition.y, .3f)
                 .SetUpdate(true);

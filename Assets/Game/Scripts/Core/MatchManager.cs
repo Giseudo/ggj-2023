@@ -9,7 +9,7 @@ using Game.Combat;
 namespace Game.Core
 {    public class MatchManager : MonoBehaviour
     {
-        const int SCORE_HEALTH_MULTIPLIER = 35000;
+        const int SCORE_HEALTH_MULTIPLIER = 50000;
         const int SCORE_ENERGY_MULTIPLIER = 10;
 
         [SerializeField]

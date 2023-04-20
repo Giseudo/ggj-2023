@@ -13,6 +13,9 @@ public class UIHealth : MonoBehaviour
     [SerializeField]
     private RawImage _glowImage; 
 
+    [SerializeField]
+    private AudioClip _hurtClip;
+
     private RectTransform _rect;
     private Tween _hurtTween;
     private Tween _glowTween;
@@ -66,6 +69,7 @@ public class UIHealth : MonoBehaviour
                     Glow();
             });
         
+        SoundManager.PlaySound(_hurtClip, 1f);
         GameManager.MainCamera?.DOShakePosition(.25f, 1f, 20)
             .SetUpdate(true);
     }

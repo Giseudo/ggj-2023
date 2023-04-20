@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positions:
   - _name: pau
-    _score: 99999999
+    _score: 8000000
   - _name: lay
-    _score: 50000000
+    _score: 7000000
   - _name: mil
-    _score: 40000000
+    _score: 6000000
   - _name: lau
     _score: 5000000
   - _name: gis
