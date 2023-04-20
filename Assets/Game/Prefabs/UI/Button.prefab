@@ -272,5 +272,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 1.05
-  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _clickClip: {fileID: 8300000, guid: fec0fb8fb8211b841b68753a87b11001, type: 3}
   _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}

@@ -1120,7 +1120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 1.2
-  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _clickClip: {fileID: 8300000, guid: fec0fb8fb8211b841b68753a87b11001, type: 3}
   _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!1 &659811597
 GameObject:
@@ -1697,7 +1697,7 @@ MonoBehaviour:
   _thumbnail: {fileID: 86987758}
   _energyButton: {fileID: 5604931893640206530}
   _disc: {fileID: 730106994}
-  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _clickClip: {fileID: 8300000, guid: fec0fb8fb8211b841b68753a87b11001, type: 3}
   _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!114 &716089059
 MonoBehaviour:
@@ -2620,7 +2620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 1.2
-  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _clickClip: {fileID: 8300000, guid: fec0fb8fb8211b841b68753a87b11001, type: 3}
   _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!1 &1207601399
 GameObject:
@@ -2896,7 +2896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 1.2
-  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _clickClip: {fileID: 8300000, guid: fec0fb8fb8211b841b68753a87b11001, type: 3}
   _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!1 &1261056115
 GameObject:
@@ -2965,7 +2965,7 @@ MonoBehaviour:
   _thumbnail: {fileID: 1507712507}
   _energyButton: {fileID: 8291219420021559985}
   _disc: {fileID: 110879344}
-  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _clickClip: {fileID: 8300000, guid: fec0fb8fb8211b841b68753a87b11001, type: 3}
   _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!114 &1261056118
 MonoBehaviour:
@@ -3726,7 +3726,7 @@ MonoBehaviour:
   _thumbnail: {fileID: 1844326774}
   _energyButton: {fileID: 6632744934612664439}
   _disc: {fileID: 329265113}
-  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _clickClip: {fileID: 8300000, guid: fec0fb8fb8211b841b68753a87b11001, type: 3}
   _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!114 &1815631782
 MonoBehaviour:
@@ -4037,7 +4037,7 @@ MonoBehaviour:
   _thumbnail: {fileID: 1710694369}
   _energyButton: {fileID: 1212229425}
   _disc: {fileID: 2135163348}
-  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _clickClip: {fileID: 8300000, guid: fec0fb8fb8211b841b68753a87b11001, type: 3}
   _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!114 &1976058701
 MonoBehaviour:
@@ -4828,7 +4828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 1.2
-  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _clickClip: {fileID: 8300000, guid: fec0fb8fb8211b841b68753a87b11001, type: 3}
   _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!1 &881227645964655472
 GameObject:
@@ -6920,7 +6920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 1.2
-  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _clickClip: {fileID: 8300000, guid: fec0fb8fb8211b841b68753a87b11001, type: 3}
   _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!1 &881227647362198787
 GameObject:
@@ -7149,7 +7149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverScale: 1.2
-  _clickClip: {fileID: 8300000, guid: 5903f36c72803474c89b2751f8fb74d3, type: 3}
+  _clickClip: {fileID: 8300000, guid: fec0fb8fb8211b841b68753a87b11001, type: 3}
   _disabledClip: {fileID: 8300000, guid: 2684044d6fd3b5e4a9642b04f44ef924, type: 3}
 --- !u!1 &881227647515456308
 GameObject:

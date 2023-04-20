@@ -306,7 +306,7 @@ namespace Game.UI
             if (_isValidPlacement && _isDragging)
                 GameManager.MainTree.SplitRoot();
             else
-                SoundManager.PlaySound(_invalidCreationSound, 0.5f);
+                SoundManager.PlaySound(_invalidCreationSound, 0.35f);
 
             _isDragging = false;
             _image.enabled = false;

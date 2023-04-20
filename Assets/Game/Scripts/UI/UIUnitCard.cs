@@ -91,12 +91,12 @@ namespace Game.UI
         {
             if (_isDisabled)
             {
-                SoundManager.PlaySound(_disabledClip, 0.5f);
+                SoundManager.PlaySound(_disabledClip, 0.35f);
 
                 return;
             }
 
-            SoundManager.PlaySound(_clickClip, 1f);
+            SoundManager.PlaySound(_clickClip, .75f);
 
             clicked.Invoke(this);
         }
