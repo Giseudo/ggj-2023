@@ -15,6 +15,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af92a9bf7e4b23a4abdea3db13878b95,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.49
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: af92a9bf7e4b23a4abdea3db13878b95,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.49
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: af92a9bf7e4b23a4abdea3db13878b95,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.49
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: af92a9bf7e4b23a4abdea3db13878b95,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.617924
       objectReference: {fileID: 0}
@@ -66,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: af92a9bf7e4b23a4abdea3db13878b95,
         type: 3}
       propertyPath: m_Name
-      value: SM_Vegetable_3
+      value: Vegetable_3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
